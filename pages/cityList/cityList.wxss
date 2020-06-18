@@ -1,0 +1,11 @@
+.popupLetter {
+  font-size: 80rpx;
+  width: 160rpx;
+  height: 160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+  box-shadow:2px 2px 20px 20px rgba(0, 0, 0, 0.1); 
+  
+}

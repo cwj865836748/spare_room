@@ -1,0 +1,12 @@
+<!--components/navbar/index.wxml-->
+<view class="navbar" style='height:{{navHeight}}px;background-color:{{headColor}};'>
+  <view style='height:{{statusBarHeight}}px;background-color:{{headColor}};'/>
+  <view class="title-container" style='height:{{navHeight-statusBarHeight}}px;'>
+     <van-icon name="arrow-left" wx:if='{{back}}' bindtap="goBack"/>
+     <van-icon name="wap-home-o" wx:if='{{home}}' bindtap="goHome"/>
+    <view class="title_head">{{title}}</view>
+  </view>
+  </view>
+<view style='padding-top:{{navHeight}}px;'></view>
+
+ 

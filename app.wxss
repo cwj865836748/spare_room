@@ -1,0 +1,79 @@
+/**app.wxss**/
+page, block, view, scroll-view, swiper, movable-view, icon, text, progress,
+button, checkbox, form, input, label, picker, picker-view, radio, slider, switch,
+textarea, navigator, audio, image, video, map, canvas, contact-button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+ page{
+   /* 定义主题颜色 */
+   /* --themeColor:#eb4450;
+   color: var(--themeColor) */
+   /*
+    定义统一字体大小  假设设计稿 大小是 375px 
+    1px= 2rpx
+    14px = 28rpx
+     */
+     width: 100%;
+     height: 100%;
+     background: #f8f8f8;
+     font-family: Source Han Sans SC;
+     font-size: 28rpx;
+ }
+ image{
+   width: 100%;
+ }
+ .flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.flex-x-center {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.flex-y-center {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  -ms-grid-row-align: center;
+  align-items: center;
+}
+
+.flex-y-bottom {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  -ms-grid-row-align: flex-end;
+  align-items: flex-end;
+}
+
+/* 单行省略 */
+
+.text-more-single {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* 多行省略 */
+.text-more {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}

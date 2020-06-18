@@ -1,0 +1,108 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.11.0",
+	"appid": "wx6a5654216935e847",
+	"projectname": "%E9%97%B2%E6%88%BF",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "城市列表",
+					"pathName": "pages/cityList/cityList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "关键词搜索",
+					"pathName": "pages/keywordSearch/keywordSearch",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "酒店列表",
+					"pathName": "pages/hotelList/hotelList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "酒店详情介绍",
+					"pathName": "pages/hotelIntroduction/hotelIntroduction",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "房间预订",
+					"pathName": "pages/roomReservation/roomReservation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "发票信息",
+					"pathName": "pages/invoiceMessage/invoiceMessage",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

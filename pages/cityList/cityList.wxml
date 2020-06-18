@@ -1,0 +1,11 @@
+<view>
+<navbar title="选择城市" ></navbar>
+
+<van-index-bar sticky-offset-top='{{offsetTop}}' bind:select="letterSelect"> 
+  <view wx:for="{{cityList}}" wx:key="index" >
+    <van-index-anchor index="{{item.firstLetter}}"/>
+      <van-cell wx:for="{{item.list}}" wx:key="index" title="{{item.name}}" bindtap="chooseCity" />
+  </view>
+</van-index-bar>
+<van-popup show="{{ popupShow }}" custom-class='popupLetter' overlay='{{false}}'>{{showLetter}}</van-popup>
+</view>

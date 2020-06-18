@@ -1,0 +1,26 @@
+/* components/navbar/index.wxss */
+.navbar {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.title-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.title-container>van-icon {
+  font-size: 22px;
+  margin-left: 10px;
+}
+.title_head {
+  position: absolute; 
+  transform: translate(-50%, -50%); 
+  left: 50%; 
+  top: 50%; 
+  font-size: 17px; 
+  font-weight: bold;
+}

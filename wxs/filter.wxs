@@ -1,0 +1,110 @@
+var orderStatus = function (status) {
+   switch(status){
+       case 0:
+           return '待支付'
+       case 1:
+           return '待配送'
+       case 2:
+           return '待收货'
+       case 3:
+           return '待评价'
+       case 4:
+           return '已完成'
+       case 5:
+           return '已取消'
+       case 6:
+           return '待结账'
+       case 7:
+           return '已结账'
+   }
+  }
+  var payStatus = function (status) {
+    switch(status){
+        case 0:
+            return '待支付倒计时'
+        case 1:
+            return '订单提交成功'
+        case 2:
+            return '订单已发货'
+        case 3:
+            return '订单已完成'
+        case 4:
+            return '交易成功'
+        case 5:
+            return '交易取消'
+        case 6:
+            return '配送已完成'
+        case 7:
+            return '交易成功'
+    }
+   }
+   var payMethods = function (methods) {
+    switch(methods){
+        case 0:
+            return '微信支付'
+        case 1:
+            return '线下结算'
+            case '0':
+                return '微信支付'
+            case '1':
+                return '线下结算'
+    }
+   }
+
+  var orderPhone = function (cellValue) {
+	var tel = "" + cellValue;
+	// replace()方法在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
+	return tel.replace(tel.substring(3,7), "****")
+   }
+
+   var orderMinutes = function (time) {
+    if (time) {
+        if (time > 60 && time < 60 * 60) {
+            var min = parseInt(time / 60.0)
+            var second=parseInt((parseFloat(time / 60.0) - parseInt(time / 60.0)) * 60)
+            min=min < 9?'0' + min : min
+            second=second< 9?'0' + second : second
+            
+            time = '00:'+ min + ':' + second
+        } else if (time >= 60 * 60 && time < 60 * 60 * 24) {
+            var hour =parseInt(time / 3600.0)
+            var min =parseInt((parseFloat(time / 3600.0) -
+            parseInt(time / 3600.0)) * 60)
+            var second = parseInt((parseFloat((parseFloat(time / 3600.0) - parseInt(time / 3600.0)) * 60) -
+              parseInt((parseFloat(time / 3600.0) - parseInt(time / 3600.0)) * 60)) * 60)
+              hour=hour< 9?'0' + hour : hour
+              min=min< 9?'0' + min : min
+              second=second< 9?'0' + second : second
+            
+              time = hour+':'+ min + ':' + second
+        } else {
+           var second=parseInt(time)
+            second=second< 9?'0' + second : second
+            time = '00：'+'00：'+second
+        }
+      } else {
+        time = ''
+      }
+      return time
+   }
+
+   var getTime = function (timestamp) {
+    var date = getDate(parseInt(timestamp*1000));
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+    
+      return year + '-' + month + '-' + day;
+     
+  
+}
+
+   
+  module.exports = {
+    orderStatus: orderStatus,
+    orderPhone:orderPhone,
+    payStatus:payStatus,
+    orderMinutes:orderMinutes,
+    payMethods:payMethods,
+    getTime:getTime
+  };
