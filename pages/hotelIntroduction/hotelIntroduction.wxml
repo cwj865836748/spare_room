@@ -1,2 +1,59 @@
 <!--pages/hotelIntroduction/hotelIntroduction.wxml-->
-<navbar title="酒店详情介绍" ></navbar>
+<wxs src="../../wxs/filter.wxs" module="filter"/>
+<navbar title="{{hotelDetail.name}}">
+<view class="hotelIntro">
+	<view class="hotelDetail">
+		<view class="name">
+			<text class="text-more">{{hotelDetail.name}}</text>
+			<van-rate value="{{hotelDetail.star}}" count="{{hotelDetail.star}}" readonly size="12" />
+		</view>
+		<view class="EnglishName text-more">{{hotelDetail.name_en}} </view>
+		<view class="time flex-y-center">
+			<view class="flex-y-center">
+				<text>{{hotelDetail.open_time}}</text>
+				年开业
+			</view>
+			<view class="flex-y-center">
+				<text>{{hotelDetail.renovation_time}}</text>
+				年装修
+			</view>
+			<view class="flex-y-center">
+				<text>{{hotelDetail.room_num}}</text>
+				间房
+			</view>
+		</view>
+		<view class="phone flex-y-center flex-x-between">
+			<view>
+				联系电话
+				<text>{{hotelDetail.phone}}</text>
+			</view>
+			<image src="../../images/tel@2x.png" bindtap="toPhone"></image>
+		</view>
+	</view>
+	<view class="hotelAll">
+		<view class="hotelSetting">
+			<view class="title">酒店设施</view>
+			<include src="/components/hotelFacilities/hotelFacilities.wxml"></include>
+		</view>
+
+		<view class="hotelSetting">
+			<view class="title">酒店介绍</view>
+			<rich-text nodes="{{hotelDetail.description}}"></rich-text>
+		</view>
+
+		<view class="hotelSetting">
+			<view class="title">酒店政策</view>
+			<rich-text nodes="{{hotelDetail.policy}}"></rich-text>
+		</view>
+
+		<view class="hotelSetting">
+			<view class="title">订房必读</view>
+			<rich-text nodes="{{hotelDetail.reservation_description}}"></rich-text>
+		</view>
+		<view class="hotelSetting">
+			<view class="title">图文详情</view>
+			<rich-text nodes="{{hotelDetail.content}}"></rich-text>
+		</view>
+	</view>
+</view>
+</navbar>

@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "AppealStatus":"/components/AppealStatus/AppealStatus",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "serviceCustomer": "/components/serviceCustomer/serviceCustomer"
+
+  },
+  "disableScroll":true
+}

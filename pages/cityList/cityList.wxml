@@ -1,11 +1,27 @@
-<view>
-<navbar title="选择城市" ></navbar>
+<navbar title="选择城市" navbarType="2">
+	<view class="chooseCity flex-y-between" wx:if="{{defaultCity}}">
+		<text class="title">当前位置</text>
+		<view class="flex">
+			<view class="city text-more-single">{{defaultCity.name}}</view>
+		</view>
+	</view>
+	<view class="chooseHotCity flex-y-between">
+		<text class="title">热门城市</text>
+		<view class="hot flex-wrap">
+			<block wx:for="{{hotCityList}}" wx:key="index">
+				<view class="hotcity flex-xy-center" bindtap="chooseCity" data-city="{{item}}">{{item.name}}</view>
+			</block>
+		</view>
 
-<van-index-bar sticky-offset-top='{{offsetTop}}' bind:select="letterSelect"> 
-  <view wx:for="{{cityList}}" wx:key="index" >
-    <van-index-anchor index="{{item.firstLetter}}"/>
-      <van-cell wx:for="{{item.list}}" wx:key="index" title="{{item.name}}" bindtap="chooseCity" />
-  </view>
-</van-index-bar>
-<van-popup show="{{ popupShow }}" custom-class='popupLetter' overlay='{{false}}'>{{showLetter}}</van-popup>
-</view>
+	</view>
+
+	<van-index-bar highlight-color="#73009D" sticky-offset-top='{{offsetTop}}' bind:select="letterSelect" index-list="{{ indexList }}">
+		<view wx:for="{{cityList}}" wx:key="index">
+			<van-index-anchor index="{{item.first}}" />
+			<block wx:for="{{item.list}}" wx:key="index">
+				<van-cell title="{{item.name}}" bindtap="chooseCity" data-city="{{item}}" />
+			</block>
+		</view>
+	</van-index-bar>
+
+</navbar>

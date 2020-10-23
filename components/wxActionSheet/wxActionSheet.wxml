@@ -1,0 +1,47 @@
+<!--components/wxActionSheet/wxActionSheet.wxml-->
+<!--分享弹框-->
+<van-action-sheet show="{{ shareShow }}" close-on-click-overlay bind:click-overlay="openOrCancelShare" data-show="{{false}}">
+	<view class="actionSheet">
+		<view class="shareIcon flex-x-around">
+			<button open-type='share' class="flex-col flex-y-center" hover-class="none">
+				<image src="../../images/wechat@2x.png"></image>
+				<text>微信好友</text>
+			</button>
+			<button class="flex-col flex-y-center" hover-class="none" bindtap="shareFriendsSquare" data-show="{{true}}">
+				<image src="../../images/circle_of_friends@2x.png"></image>
+				<view>朋友圈</view>
+			</button>
+		</view>
+		<view class="cancel" bindtap="openOrCancelShare" data-show="{{false}}">
+			取消
+		</view>
+	</view>
+</van-action-sheet>
+<van-overlay show="{{ shareFriendsShow }}" bind:click="shareFriendsSquare" data-show="{{false}}">
+ <scroll-view scroll-y style="height:100%">
+	<view class="haiBao">
+		<view class="haiBaoPic">
+			<image src="{{slideshowList[0]}}"></image>
+			<image src="{{hotelDetail.qrcode}}"></image>
+		</view>
+		<view class="haiBaoHotel">
+			<view class="name">{{hotelDetail.name}} </view>
+			<van-rate value="{{hotelDetail.star}}" count="{{hotelDetail.star}}" readonly size="12" />
+			<view class="EnglishName">{{hotelDetail.name_en}} </view>
+			<view class="address">{{hotelDetail.city}} {{hotelDetail.county}} {{hotelDetail.address}}</view>
+			<view class="time flex-y-center">
+				<view class="flex-y-center">
+					<text>{{hotelDetail.open_time}}</text>
+					年开业
+				</view>
+				<view class="flex-y-center">
+					<text>{{hotelDetail.room_num}}</text>
+					间房
+				</view>
+			</view>
+		</view>
+		<view class="haibaoBtn flex-xy-center" bindtap="saveCavans"> 保存至本地</view>
+		<view class="haibaoContent flex-xy-center">保存图片到手机后,可以到朋友圈分享该酒店</view>
+	</view>
+	</scroll-view>
+</van-overlay>

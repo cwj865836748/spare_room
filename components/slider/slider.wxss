@@ -1,52 +1,40 @@
-/* component/zyslider.wxss */
 .container {
   /*height: 100%;*/
   width: 100%;
-  position: relative;
+  position:relative;
+  height: 52rpx;
 }
 
 .slider-body {
-  height: 2rpx;
+  height: 6rpx;
   background-color: #ddd;
-  position: relative;
+  position: absolute;
 }
 
 .body {
-  bottom: 60rpx;
-  background-color: #19896f;
+  top: 50%;
+  background-color: #810dd4;
   z-index: 0.3;
 }
 
 .left {
-  bottom: 58rpx;
+  top: 50%;
   z-index: 0.1;
 }
 
 .right {
   z-index: 0.2;
-  bottom: 62rpx;
+  top: 50%;
 }
 
 .slider-item {
-  border-radius: 50%;
-  width: 40rpx;
-  height: 40rpx;
-  background-color: #19896f;
+  width: 52rpx;
+  height: 52rpx;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAAAXNSR0IArs4c6QAAAxNJREFUaAXtmk9rE1EUxZOKqGjRgkKr0LisUv91UVtdtK5cVYJfQVx1o2s3LrpR8Eu4dWFaqQtdtIpiDaRWUSrFjSIqKIgKRdQSfyfNDDPTl4jJZOa9oRdO37z7Zu49J/dOMjOdfC5Gq1arPYQrgqOgr4799ZEh9xF8qI/afgFK+Xz+K6MdhogCuAzmwR/wv6Zj5sAlUEhNFckPgzsgblPMwcSEkawf3ARroFOm2MpxsKPCSHARrIKkTLkuxC6KoDvB7aRUGPLcwrcrFmEEGgJvDEmSdq2QsL1ziwD69vqVNPMm+f7ZgvlGZSToCGsPwdZG+6Tk/03eM/x2PTblNwpCzAF2XgJ7TQdZ4PsMhyFEvY9y6Yo6ENON7y6wVYwo7wMzcN2uSdA2CGLxCtCli+12AoJXoyRDLYfifnZYAduiO1o6/wmvAVrvrccvWqHrLLgiRhrUcte04ZlfIapzEueCt+DYOEiVXolzsEIhpY4JuuHxrVWI6gzgWPacjo6HqNJrr0K6KXPdahpiEVSpVHJCI2t3vVHciH9dEO3Wy8JwZNHF6TBa+lQhKfO/7VxUUucsDWcl6LjDIqLURyRILZcV690UZHkp92SyQrpizYypQp8yowYtm4Isr2Y2K+TqTZ2pWRZ0DukJT9W06phPGma7uCn6zkbZMfImumW0/FCFZKX1wem/NQ2ZE+TfB3FzNE99xhyt0QPabVzcg4JOM38kp4N2CkFPxNtruRwOPc2fdlDMtCdG3P0KaULb6R9KS2CL5g7YGhyPIaj2kFF8/QppwsJLhiltO2JTQTHiHKqQHFRJPrXehOYW2yzcJhAUuijYIEgCELWb4TkoaG6hvYPTEcTooiBkoZbzVtjxG9vnwarns2gUp6JJjDgaBWmBAxYZJrVtmU3C7VnLnGi/UfAFpG3iMNqykOCBBCqAZZCWLZI43vOZgN2glIIi5dwR/IBj3Sb4OfA0AWFlchRjJd8sGMnGwD0Qt90n4Hiz3B1dI3kB6OW9OdDqC4B6eVCv4bR9nhh/WFv9BCDUw7Fqk9Re0fwL7CRtO+N3fdoAAAAASUVORK5CYII=") no-repeat;
+  background-size: 100% 100%;
   z-index: 2;
-}
-
-.min {
-  position: relative;
+  position: absolute;
   top: 0rpx;
-  /*left: 100rpx;*/
 }
 
-.max {
-  position: relative;
-  bottom: 40rpx;
-  /*left: 600rpx;*/
-}
 
-.hide{
-display: none;
-}

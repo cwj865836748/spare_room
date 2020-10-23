@@ -1,0 +1,28 @@
+<!--pages/address/address.wxml-->
+<navbar title="地址">
+	<view class="invoiceContent">
+		<view class="invoiceOne flex-y-center">
+			<text>收件人</text>
+			<van-field disabled="{{isDisable}}" placeholder="请填写收件人" value="{{address.consignee}}" bind:change="onChange" data-key="consignee" clearable class="flex-grow-1" style="padding-left:26rpx" />
+		</view>
+		<view class="invoiceOne flex-y-center">
+			<text>手机号码</text>
+			<van-field disabled="{{isDisable}}" placeholder="请填写手机号码" value="{{address.phone}}" bind:change="onChange" data-key="phone" clearable class="flex-grow-1" />
+		</view>
+		<view class="invoiceOne flex-y-center flex-x-between">
+			<text>所在城市</text>
+			<van-field placeholder="省/市/县" value="{{address.province}}{{address.city}}{{address.county}}" class="flex-grow-1" disabled bindtap="addressChoose" />
+			<image src="/images/right_black@2x.png"></image>
+		</view>
+		<view class="invoiceOne flex-y-center">
+			<text>详细地址</text>
+			<van-field disabled="{{isDisable}}" placeholder="小区/门牌号" value="{{address.detail}}" bind:change="onChange" data-key="detail" clearable class="flex-grow-1" />
+		</view>
+		<view class="btn flex-xy-center" bindtap="saveAddress" wx:if="{{!isDisable}}">
+			保存
+		</view>
+	</view>
+
+	<cityPicker addressChooseShow="{{addressChooseShow}}" />
+
+</navbar>

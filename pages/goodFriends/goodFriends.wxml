@@ -1,0 +1,25 @@
+<!--pages/goodFriends/goodFriends.wxml-->
+<wxs src ="../../wxs/filter.wxs" module="filter"/>
+<navbar title="好友列表">
+	<scroll-view scroll-y="true" style="height:100%" bindscrolltolower="onReachBottom">
+		<view class="goodFriendsList">
+			<block wx:for="{{list}}" wx:key="index">
+				<view class="goodFriendsDetail">
+					<view class="flex-x-between flex-y-center goodFriendsHead">
+						<view>
+							<text>用户ID</text>
+							<text>{{item.id}}</text>
+						</view>
+						<view>返佣收益</view>
+					</view>
+					<view class="flex-x-between flex-y-center goodFriendsPirce">
+						<text>邀请时间 {{filter.getTime2(item.child_time)}}</text>
+						<text>￥{{item.parent_commission}}</text>
+					</view>
+				</view>
+			</block>
+		</view>
+		<include src="/components/noData/noData.wxml"/>
+	</scroll-view>
+		<serviceCustomer/>
+</navbar>

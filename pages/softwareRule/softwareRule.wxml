@@ -1,0 +1,18 @@
+<!--pages/softwareRule/softwareRule.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
+<navbar title="软件许可及服务协议" headColor="#780acc" titleColor="#fff">
+	<van-tabs active="{{ active }}" sticky swipeable bind:change="onChange">
+		<van-tab title="服务条款" />
+		<van-tab title="隐私条款" />
+		<van-tab title="免责说明" />
+	</van-tabs>
+
+    <scroll-view scroll-y style="height: calc(100% - 88rpx);">
+    <view class="vanTabContent">
+		<template is="wxParse" data="{{wxParseData:service.nodes}}" wx:if="{{!active}}"/>
+		<template is="wxParse" data="{{wxParseData:privacy.nodes}}" wx:if="{{active==1}}"/>
+		<template is="wxParse" data="{{wxParseData:instructions.nodes}}" wx:if="{{active==2}}"/>
+    </view>
+    </scroll-view>
+	
+</navbar>

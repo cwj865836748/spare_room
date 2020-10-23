@@ -1,2 +1,193 @@
 <!--pages/hotelList/hotelList.wxml-->
-<navbar title="酒店列表" ></navbar>
+<wxs src="../../wxs/filter.wxs" module="filter" />
+<navbar title="酒店列表">
+	<view class="hotelHead">
+		<!--日期、关键词搜索-->
+		<view class="hotelSearch flex-y-center">
+			<view class="dateTime flex-y-center">
+				<view class="date" bindtap="openCalendar">
+					<view>住<text class="text1">{{filter.getLiveDate(defaultDate).startTime}}</text></view>
+					<view>离<text class="text1">{{filter.getLiveDate(defaultDate).endTime}}</text></view>
+				</view>
+				<view class="date">
+					共<text class="text2">{{filter.getLiveDate(defaultDate).allDay}}晚</text>
+				</view>
+			</view>
+			<navigator url="/pages/keywordSearch/keywordSearch" hover-class="none" class="serach flex-y-center">
+				<image src="../../images/search@2x.png"></image>
+				<input type="text" placeholder="关键字/位置/酒店" disabled value="{{query.name}}" placeholder-style="color: #aaaaaa; font-size: 24rpx;"></input>
+				<image src="../../images/text_delete@2x.png" catchtap="clearKeyWord" wx:if="{{query.name.length}}"></image>
+			</navigator>
+			<navigator url="/pages/cityList/cityList" hover-class="none" class="city flex-y-center">
+				<image src="../../images/home_place@2x.png"></image>
+				<view class="text-more-single">{{defaultCity.name}}</view>
+			</navigator>
+		</view>
+		<view class="hotelChoose">
+			<block wx:for="{{sortList}}" wx:key="index">
+				<view class="one" bindtap="showSort" data-index="{{index}}">
+					<text class="text-more-single {{index===sortNumber?'violetSize':''}}">{{item}}</text>
+					<image src="../../images/search_page_down-1@2x.png" wx:if="{{index==sortNumber}}"></image>
+					<image src="../../images/search_page_down@2x.png" wx:else></image>
+				</view>
+			</block>
+		</view>
+		<!--推荐排序-->
+		<view class="hotelChooseList sort" wx:if="{{sortNumber===0}}">
+			<block wx:for="{{sortDetailList}}" wx:key="index">
+				<view class="flex-y-center" bindtap="sortOne" data-type="{{item.type}}" data-name="{{item.name}}">
+				<text class="{{item.type==query.order_sort?'violetSize':''}}">{{item.name}}</text>
+				<view class="chooseIcon flex-grow-1 flex-x-bottom" wx:if="{{item.type==query.order_sort}}">
+				<image src="/images/choose@2x.png" ></image>
+				</view>
+				</view>
+			</block>
+		</view>
+
+		<!--价格/星级-->
+		<view class="hotelChooseList price" wx:if="{{sortNumber===1}}">
+			<view class="between">
+				<view class="priceNumber">
+					<text>价格</text>
+					<text>{{filter.priceDuring(silderValue)}}</text>
+				</view>
+				<!--双向slider-->
+				<view class="slider">
+					<view class="money flex-x-between">
+						<text>￥0</text>
+						<text>￥1000以上</text>
+					</view>
+					<wux-slider value="{{silderValue}}" controlled min="0" max="1000" step="{{100}}" railStyle="background-color: #ddd" tipFormatter="" trackStyle="background-color: #810DD4" bind:change="sliderChange"></wux-slider>
+				</view>
+				<view class="priceBetween flex">
+				<block wx:for="{{silderPriceList}}" wx:key="index">
+					<view class="flex-xy-center {{silderPriceChoose==item.type?'chooseOne':''}}" bindtap="priceChoose" data-type="{{item.type}}">{{item.price}}</view>
+				</block>
+				</view>
+			</view>
+			<!--星级-->
+			<view class="starLevel flex-y-between">
+				<text>星级</text>
+				<view class="sortStyle flex">
+				 <block wx:for="{{starList}}" wx:key="index">
+					<view class="flex-xy-center {{filter.isMultipleChooseChoose(starChooseList,item.id)?'chooseOne':''}}" bindtap="multipleChoose" data-id="{{item.id}}" data-key="starChooseList">{{item.name}}</view>
+				 </block>
+				</view>
+			</view>
+			<view class="btn flex-x-between">
+				<view class="flex-xy-center" bindtap="resetSearchHotel" data-type="1">重置</view>
+				<view class="flex-xy-center" bindtap="goSearchHotel" data-type="1">完成</view>
+			</view>
+		</view>
+    <!--位置距离——直线距离-->
+		<view class="hotelChooseList distance" wx:if="{{sortNumber===2&&chooseDistan==1}}">
+			<view class="disContent flex-x-between">
+				<view class="linearRegion">
+					<view class="linearTitle flex-xy-center {{chooseDistan==1? 'titleActive' : ''}}" bindtap="distanChange" data-choose='1'>直线距离</view>
+					<view class="linearTitle flex-xy-center {{chooseDistan==2? 'titleActive' : ''}}" bindtap="distanChange" data-choose='2'>行政区</view>
+				</view>
+				<view class="meter">
+				 <block wx:for="{{meterList}}" wx:key="index">
+					<view class="flex-y-center flex-x-between" data-id="{{item.id}}" data-key="meterChooseOne" bindtap="chooseHotelOne">
+					  <text class="{{item.id==meterChooseOne?'violetSize':''}}">{{item.name}}</text>
+						<view class="chooseIcon" wx:if="{{item.id==meterChooseOne}}">
+				      <image src="/images/choose@2x.png" ></image>
+			     	</view>
+					</view>
+					</block>
+				</view>
+			</view>
+			<view class="btn flex-x-between piao">
+				<view class="flex-xy-center" bindtap="resetSearchHotel" data-type="2">重置</view>
+				<view class="flex-xy-center" bindtap="goSearchHotel" data-type="2">完成</view>
+			</view>
+		</view>
+
+
+		<view class="hotelChooseList district" wx:if="{{sortNumber===2&&chooseDistan==2}}">
+			<view class="disContent flex-x-between">
+				<view class="linearRegion">
+					<view class="linearTitle flex-xy-center {{chooseDistan==1? 'titleActive' : ''}}" bindtap="distanChange" data-choose='1'>直线距离</view>
+					<view class="linearTitle flex-xy-center {{chooseDistan==2? 'titleActive' : ''}}" bindtap="distanChange" data-choose='2'>行政区</view>
+				</view>
+				<view class="area flex-wrap">
+				  <block wx:for="{{areaList}}" wx:key="index">
+					<view class="text-more-single chooseView {{item.id==areaChooseOne?'chooseOne':''}}" bindtap="chooseHotelOne" data-id="{{item.id}}" data-key="areaChooseOne">
+						{{item.name}}
+					</view>
+					</block>
+				</view>
+			</view>
+			<view class="btn flex-x-between" style="padding:0 30rpx">
+				<view class="flex-xy-center" bindtap="resetSearchHotel" data-type="2">重置</view>
+				<view class="flex-xy-center" bindtap="goSearchHotel" data-type="2">完成</view>
+			</view>
+		</view>
+
+		<view class="hotelChooseList comprehensive" wx:if="{{sortNumber===3}}">
+			<view class="disContent flex-x-between">
+				<view class="linearRegion">
+					<view class="linearTitle flex-xy-center {{chooseDistan==1? 'titleActive' : ''}}" bindtap="distanChange" data-choose='1'>集团</view>
+					<view class="linearTitle flex-xy-center {{chooseDistan==2? 'titleActive' : ''}}" bindtap="distanChange" data-choose='2'>房型早餐</view>
+					<view class="linearTitle flex-xy-center {{chooseDistan==3? 'titleActive' : ''}}" bindtap="distanChange" data-choose='3'>优惠促销</view>
+				</view>
+
+				<view class="group" wx:if="{{chooseDistan==1}}">
+					<view class='title'>集团</view>
+					<scroll-view style="height:400rpx" scroll-y>
+					<view class="hotel flex-wrap">
+					 <block wx:for="{{groupList}}" wx:key="index">
+						 <view class="chooseView text-more-single {{filter.isMultipleChooseChoose(groupChooseList,item.id)?'chooseOne':''}}" bindtap="multipleChoose" data-id="{{item.id}}" data-key="groupChooseList">
+							{{item.name}}
+						</view>
+					 </block>
+					</view>
+					</scroll-view>
+				</view>
+
+				<view class="group" wx:if="{{chooseDistan==2}}">
+					<view class='title'>房型</view>
+					<scroll-view style="height:320rpx" scroll-y>
+					<view class="hotel flex-wrap">
+					  <block wx:for="{{roomList}}" wx:key="index">
+						<view class="chooseView text-more-single {{item.id==roomChooseOne?'chooseOne':''}}" bindtap="chooseHotelOne" data-id="{{item.id}}" data-key="roomChooseOne">
+							{{item.room_name}}
+						</view>
+						</block>
+					</view>
+					</scroll-view>
+					<view class='title' style="margin-top:28rpx">早餐</view>
+					<view class="hotel flex-wrap">
+					 <block wx:for="{{breakfastList}}" wx:key="index">
+						<view class="chooseView text-more-single {{item.id==breakfastChooseOne?'chooseOne':''}}" bindtap="chooseHotelOne" data-id="{{item.id}}" data-key="breakfastChooseOne" >
+							{{item.name}}
+						</view>
+					 </block>
+					</view>
+				</view>
+
+				<view class="group" wx:if="{{chooseDistan==3}}">
+				<view class='title'>优惠促销</view>
+				  <view class="hotel flex-wrap">
+					<block wx:for="{{promotionList}}" wx:key="index">
+						<view class="chooseView text-more-single {{filter.isMultipleChooseChoose(promotionChooseList,item.id)?'chooseOne':''}}" bindtap="multipleChoose" data-id="{{item.id}}" data-key="promotionChooseList" >
+							{{item.name}}
+						</view>
+					</block>
+					</view>
+				</view>
+
+			</view>
+			<view class="btn flex-x-between" style="padding:0 30rpx">
+				<view class="flex-xy-center" bindtap="resetSearchHotel" data-type="3">重置</view>
+				<view class="flex-xy-center" bindtap="goSearchHotel" data-type="3">完成</view>
+			</view>
+		</view>
+	</view>
+	<!--酒店列表-->
+	<include src="/components/hotelList/hotelList.wxml" wx:if="{{hotelList.length}}"/>
+  <!-- 需求弹窗 -->
+	<hotelRequire wx:else/>
+	<!-- 日历弹窗 -->
+   <calendar calendarShow="{{calendarShow}}" bind:closeCalendar="closeCalendar"/>
+</navbar>

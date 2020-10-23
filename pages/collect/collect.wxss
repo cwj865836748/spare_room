@@ -1,0 +1,140 @@
+/* pages/collect/collect.wxss */
+@import "/components/noData/noData.wxss";
+.collectTitle {
+  height: 100rpx;
+  font-size: 36rpx;
+  color: #333333;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+  padding: 0 30rpx;
+  position: fixed;
+  left: 0;
+  z-index: 99;
+  background: #fff;
+  width: 100%;
+
+}
+
+.collectTitle>text:last-child {
+  font-size: 30rpx;
+  letter-spacing: 2rpx;
+}
+
+.collectList {
+  padding: 120rpx 0rpx 98rpx 20rpx;
+}
+.collectListNo {
+  padding: 120rpx 30rpx 28rpx ;
+}
+
+.collectOne {
+  height: 240rpx;
+  margin-bottom: 28rpx;
+}
+
+.collectOne:last-child {
+
+  margin-bottom: 0rpx;
+}
+
+.hotelDetail>.hotelPic {
+  height: 250rpx;
+  width: 250rpx;
+  min-width: 250rpx;
+  margin-right: 24rpx;
+  background: #f2f2f2;
+  border-radius: 8rpx;
+  overflow: hidden;
+
+}
+
+.hotelDetail>.hotelPic>image {
+  height: 100%;
+  width: 100%;
+}
+
+
+
+.hotelDetail>.hotelRight>.hotelName>.hotelCnName {
+  color: #333333;
+  letter-spacing: 1rpx;
+  font-size: 34rpx;
+  margin-bottom: 4rpx;
+  font-weight: bold;
+}
+
+.hotelDetail>.hotelRight>.hotelName>.hotelEnglishName {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.hotelDetail>.hotelRight>.hotelPrice>text:first-child {
+  text-decoration: line-through;
+  color: #999999;
+  font-size: 24rpx;
+  margin-right: 4rpx;
+  padding-top: 8rpx;
+
+}
+
+.hotelDetail>.hotelRight>.hotelPrice>text:nth-child(2) {
+  font-size: 24rpx;
+  color: #e3311a;
+  padding-top: 8rpx;
+
+}
+
+.hotelDetail>.hotelRight>.hotelPrice>text:nth-child(3) {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #e3311a;
+  letter-spacing: 1rpx;
+}
+.hotelDetail>.hotelRight>.hotelPrice>text:last-child {
+  font-size: 26rpx;
+  color: #666;
+  letter-spacing: 1rpx;
+  padding: 8rpx 0 0 2rpx 
+}
+
+.bottomCollect {
+  padding: 0 30rpx;
+  height: 98rpx;
+  background: #ffffff;
+  box-shadow: 0rpx -2rpx 0rpx 0rpx #f8f8f8;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  font-size: 26rpx;
+  color: #9a9a9a;
+  letter-spacing: 1rpx;
+  width: 100%;
+}
+
+.deleteBtn {
+  width: 192rpx;
+  height: 80rpx;
+  background: #f7ebff;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #7a0dcb;
+  letter-spacing: 1rpx;
+}
+
+.cancelCollect {
+  padding: 20rpx 0 0;
+}
+
+.cancelCollect>.title {
+  color: #333333;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.cancelCollect>.content {
+  text-align: center;
+  padding: 52rpx 0 70rpx;
+  font-size: 28rpx;
+  color: #666666;
+  letter-spacing: 1rpx;
+}

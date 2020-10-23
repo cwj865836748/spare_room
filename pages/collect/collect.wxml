@@ -1,0 +1,60 @@
+<!--pages/collect/collect.wxml-->
+<navbar title="我的收藏">
+	<view class="collectTitle flex-x-between flex-y-center">
+		<text>收藏</text>
+		<text bindtap="getManage">{{isManage?'完成':'管理'}}</text>
+	</view>
+	<scroll-view scroll-y="true" style="height:100%" bindscrolltolower="onReachBottom">
+		<view class="collectList {{isManage?'':'collectListNo'}}">
+			<van-checkbox-group value="{{ collectCheckList }}" data-key="collectCheckList" bind:change="onChange">
+				<block wx:for="{{collectList}}" wx:key="index">
+			
+					<view class="collectOne flex-y-center">
+						<van-checkbox name="{{item.id}}" icon-size="18px" checked-color="#7a0dcb" style="margin-right:20rpx" wx:if="{{isManage}}"/>
+						<navigator hover-class="none" url="/pages/hotelDetail/hotelDetail?id={{item.hotel.id}}&longitude={{defaultCity.lng}}&latitude={{defaultCity.lat}}" class="hotelDetail flex-grow-1 flex">
+							<view class="hotelPic flex-xy-center">
+								<image src="{{item.hotel.img_url?item.hotel.img_url:'/images/default_pic.png'}}" class="{{item.hotel.img_url?'':'noDefaultPic'}}"></image>
+							</view>
+							<view class="hotelRight flex-y-between flex-grow-1">
+								<view class="hotelName">
+									<view class="hotelCnName">
+										<text class="text-more">{{item.hotel.name}}</text>
+										<van-rate size="9" value="{{item.hotel.star}}" count="{{item.hotel.star}}" readonly  />
+									</view>
+									<view class="hotelEnglishName text-more">
+										{{item.hotel.name_en}}
+									</view>
+								</view>
+								<view class="hotelPrice flex-x-bottom flex-y-center">
+									<text>￥{{item.hotel.storeroom.original_price}}</text>
+									<text>￥</text>
+									<text>{{item.hotel.storeroom.price}}</text>
+									<text>起</text>
+								</view>
+							</view>
+						</navigator>
+					</view>
+				</block>
+			</van-checkbox-group>
+
+			<include src="/components/noData/noData.wxml" />
+		</view>
+	</scroll-view>
+	<view class="bottomCollect flex-y-center flex-x-between" wx:if="{{isManage}}">
+		<view class='checkAll flex-y-center'>
+			<van-checkbox value="{{ isCheckedAll }}" bind:change="onChange" icon-size="18px" checked-color="#7a0dcb" data-key="isCheckedAll" style="margin-right:12rpx"></van-checkbox>
+			<text>全选</text>
+		</view>
+		<view class="deleteBtn flex-xy-center" bindtap="delCollect">删除</view>
+	</view>
+
+	<van-dialog use-slot show="{{ delCollectShow }}" show-cancel-button confirmButtonText="删除" cancelButtonText="取消" 
+	bind:cancel="closeDelCollect"
+	bind:confirm="delCollectOK"
+	confirm-button-color="#8c42ad" cancel-button-color="#666666">
+		<view class='cancelCollect'>
+			<view class="title">是否删除收藏</view>
+			<view class="content">删除收藏后,无法进行找回</view>
+		</view>
+	</van-dialog>
+</navbar>

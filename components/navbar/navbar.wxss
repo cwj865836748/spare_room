@@ -1,11 +1,15 @@
 /* components/navbar/index.wxss */
 .navbar {
   width: 100%;
-  overflow: hidden;
+  position: relative;
+  z-index: 5;
+}
+.navbarFixed {
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 5;
 }
 .title-container {
   display: flex;
@@ -23,4 +27,9 @@
   top: 50%; 
   font-size: 17px; 
   font-weight: bold;
+}
+.content {
+  overflow: auto;
+  position: relative;
+  
 }

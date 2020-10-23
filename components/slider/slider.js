@@ -53,7 +53,8 @@ Component({
     ratio: 0.5,
     sliderLength: 40,
     containerLeft: 0, //标识整个组件，距离屏幕左边的距离
-    hideOption: '', //初始状态为显示组件
+    hideOption: '', //初始状态为显示组件,
+    length:20,
   },
 
   /**
@@ -94,7 +95,7 @@ Component({
       } else if (pagex <= 0) {
         pagex = 0
       }
-
+      console.log(pagex)
       this.setData({
         leftValue: pagex
       })
@@ -125,23 +126,6 @@ Component({
 
       var myEventDetail = { heighValue: heighValue }
       this.triggerEvent('heighValueChange', myEventDetail)
-    },
-
-    /**
-     * 隐藏组件
-     */
-    hide: function () {
-      this.setData({
-        hideOption: 'hide',
-      })
-    },
-    /**
-     * 显示组件
-     */
-    show: function () {
-      this.setData({
-        hideOption: '',
-      })
     },
     /**
     * 重置
@@ -185,3 +169,4 @@ Component({
       })
   }
 })
+

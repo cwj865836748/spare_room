@@ -1,0 +1,20 @@
+<!--pages/cancleOrder/cancleOrder.wxml-->
+<navbar title="取消订单">
+	<view class="cancelContent">
+		<view class="cancelReason flex-y-center flex-x-between">
+			<text>取消原因</text>
+			<view class="flex-y-center flex-x-between" bindtap="cancelReason" data-show="{{true}}">
+				<text>{{query.cancel_reason?query.cancel_reason:"请选择取消原因"}}</text>
+				<image src="/images/search_page_down@2x.png"></image>
+			</view>
+		</view>
+
+		<van-field wx:if="{{!reasonShow&&!cancelShow}}" value="{{ query.cancel_remark }}" type="textarea" placeholder="请输入您的备注内容" border="{{ false }}" class="textareaStyle" bind:change="onChange"/>
+	 <view wx:else class="formTextarea">{{query.cancel_remark?query.cancel_remark:'请输入您的备注内容'}}</view>
+		<view class="cancelBtn flex-xy-center" bindtap="closeOrder">确定</view>
+	</view>
+	<van-dialog use-slot show="{{ cancelShow }}" confirm-button-color="#5302ad">
+		<view class="cancelOrder flex-xy-center">{{jumpStatus==0?'订单已成功取消.':'订单已申请取消，请等待商家审核.'}}</view>
+	</van-dialog>
+	<van-action-sheet show="{{ reasonShow }}" actions="{{ actions }}"  bind:select="onSelect" bind:click-overlay="cancelReason" data-show="{{false}}"/>
+</navbar>

@@ -1,0 +1,226 @@
+/* pages/myScore/myScore.wxss */
+@import "/components/noData/noData.wxss";
+@import "../../wxParse/wxParse.wxss";
+.scoreDetail {
+  padding: 194rpx 30rpx 0rpx;
+}
+
+.scoreDetailBg {
+  width: 750rpx;
+  height: 620rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.Bg2 {
+  height: 520rpx;
+}
+
+.scoreHead {
+  height: 202rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  box-shadow: 0rpx 6rpx 20rpx 0rpx rgba(77, 0, 168, 0.06);
+  padding: 30rpx 30rpx 0;
+  color: #aaaaaa;
+  font-size: 26rpx;
+  letter-spacing: 2rpx;
+}
+
+.scoreHead>.score {
+  font-size: 48rpx;
+  font-family: DIN Alternate, DIN Alternate-Bold;
+  color: #6707be;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+  margin-top: 30rpx;
+}
+
+.scoreHead>.score>view {
+  width: 136rpx;
+  height: 56rpx;
+  background: linear-gradient(204deg, #810dd4 -38%, #4d00a8 165%);
+  border-radius: 8rpx;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+  font-size: 24rpx;
+}
+
+.scoreThing {
+
+  background: #ffffff;
+  border-radius: 8rpx;
+  box-shadow: 0rpx 6rpx 20rpx 0rpx rgba(77, 0, 168, 0.06);
+  overflow: hidden;
+  margin-top: 20rpx;
+}
+
+.scoreRich {
+  height: 150rpx;
+  background: linear-gradient(345deg, #ff8c38 -128%, #ffbc00 315%);
+  padding: 17rpx 20rpx 0 18rpx;
+}
+
+.scoreRich>.scoreRichLeft>view:first-child {
+  font-family: HelloFont WenYiHei, HelloFont WenYiHei-Regular;
+  font-size: 60rpx;
+  color: #ffffff;
+  letter-spacing: 4rpx;
+}
+
+.scoreRich>.scoreRichLeft>view:last-child {
+  font-size: 22rpx;
+  color: #fff8e3;
+  letter-spacing: 1rpx;
+}
+
+.scoreRich>.scoreRichright {
+  color: #fff8e3;
+  letter-spacing: 1rpx;
+  font-size: 22rpx;
+  padding-top: 42rpx;
+}
+
+.scoreRich>.scoreRichright>image {
+  width: 13rpx;
+  height: 23rpx;
+  margin-left: 17rpx;
+}
+
+.scoreThingDetail {
+  padding: 78rpx 20rpx 62rpx;
+}
+
+.scoreThingDetail>.scoreThingOne {
+  width: 190rpx;
+  height: 190rpx;
+  background: #ffffff;
+  border: 2rpx solid #eeeeee;
+  border-radius: 16rpx;
+  margin-right: 38rpx;
+  position: relative;
+  color: #333333;
+  letter-spacing: 1rpx;
+  font-size: 26rpx;
+  padding-top: 90rpx;
+  margin-bottom: 72rpx;
+}
+
+.scoreThingDetail>.scoreThingOne:nth-last-child(-n+3) {
+  margin-bottom: 0rpx;
+}
+.scoreThingDetail>.scoreThingOne:nth-child(3n) {
+  margin-right: 0rpx;
+}
+
+.scoreThingDetail>.scoreThingOne>image {
+  width: 112rpx;
+  height: 112rpx;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -40rpx;
+  border-radius: 8rpx;
+}
+
+.thingScore {
+  margin-bottom: 8rpx;
+}
+
+.thingScore>text:first-child {
+  color: #e3311a;
+  letter-spacing: 1rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-right: 6rpx;
+
+}
+
+.thingScore>text:last-child {
+  color: rgba(2, 2, 2, 0.5);
+  letter-spacing: 1rpx;
+  font-size: 24rpx
+}
+
+.scoreList {
+  color: #333333;
+  letter-spacing: 2rpx;
+  margin-top: 36rpx;
+  font-weight: bold;
+}
+
+.scoreList>.scoreListTitle::after {
+  content: '';
+  width: 24rpx;
+  height: 8rpx;
+  background: #780acc;
+  border-radius: 4rpx;
+  position: absolute;
+  left: 48rpx;
+  bottom: -12rpx;
+}
+
+.scoreRecord {
+  border-bottom: 2rpx solid #f6f6f6;
+  height: 154rpx;
+  padding: 40rpx 0 24rpx;
+}
+
+.scoreRecord:first-child {
+  margin-top: 12rpx;
+}
+
+.scoreRecord>.scoreRecordLeft>.orderNumber>text:first-child {
+  font-size: 26rpx;
+  letter-spacing: 2rpx;
+  color: rgba(11, 0, 22, 0.7);
+}
+
+.scoreRecord>.scoreRecordLeft>.orderNumber>text:last-child {
+  font-size: 26rpx;
+  color: #333333;
+  letter-spacing: 2rpx;
+  margin-left: 10rpx;
+}
+
+.scoreRecord>.scoreRecordLeft>.orderDate {
+  font-size: 24rpx;
+  letter-spacing: 1rpx;
+  color: rgba(11, 0, 22, 0.4);
+  margin-top: 16rpx;
+}
+
+.scoreRecord>.scoreRecordRight {
+  font-size: 34rpx;
+  color: #333;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+}
+.purpleSize {
+  color: #7a0dcb!important;
+}
+.actionTitle {
+  padding: 22rpx 0 30rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #333333;
+  position: relative;
+}
+
+.actionTitle>image {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  right: 32rpx;
+  top: 32rpx;
+}
+
+.actionContent {
+
+  padding: 0 36rpx 0 38rpx;
+  font-size: 28rpx;
+  color: #666666;
+  letter-spacing: 1rpx;
+}

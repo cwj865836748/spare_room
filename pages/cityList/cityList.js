@@ -1,101 +1,61 @@
 // pages/cityList/cityList.js
-const App = getApp();
-
+const App =getApp()
+import api from '../../request/api.js'
+import {request} from '../../request/index.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    cityList: [
-      {
-        firstLetter: "A",
-        list: [
-          { code: "AB01", name: "A1客户" },
-          { code: "AB02", name: "A2客户" },
-          { code: "AB03", name: "A3客户" },
-        ],
-      },
-      {
-        firstLetter: "B",
-        list: [
-          { code: "BB01", name: "B1客户" },
-          { code: "BB02", name: "B2客户" },
-          { code: "BB03", name: "B3客户" },
-          { code: "BB04", name: "B4客户" },
-        ],
-      },
-      {
-        firstLetter: "C",
-        list: [
-          { code: "CB01", name: "C1客户" },
-          { code: "CB02", name: "C2客户" },
-          { code: "CB03", name: "C3客户" },
-          { code: "CB04", name: "C4客户" },
-          { code: "CB05", name: "C5客户" },
-          { code: "CB01", name: "C1客户" },
-          { code: "CB02", name: "C2客户" },
-          { code: "CB03", name: "C3客户" },
-          { code: "CB04", name: "C4客户" },
-          { code: "CB05", name: "C5客户" },
-        ],
-      },
-      {
-        firstLetter: "D",
-        list: [
-          { code: "DB01", name: "D1客户" },
-          { code: "DB02", name: "D2客户" },
-          { code: "DB03", name: "D3客户" },
-          { code: "DB04", name: "D4客户" },
-          { code: "DB05", name: "D5客户" },
-          { code: "DB06", name: "D6客户" },
-          { code: "DB01", name: "D1客户" },
-          { code: "DB02", name: "D2客户" },
-          { code: "DB03", name: "D3客户" },
-          { code: "DB04", name: "D4客户" },
-          { code: "DB05", name: "D5客户" },
-          { code: "DB06", name: "D6客户" },
-          { code: "DB06", name: "D6客户" },
-          { code: "DB01", name: "D1客户" },
-          { code: "DB02", name: "D2客户" },
-          { code: "DB03", name: "D3客户" },
-          { code: "DB04", name: "D4客户" },
-          { code: "DB05", name: "D5客户" },
-          { code: "DB06", name: "D6客户" },
-        ],
-      },
-    ],
+    cityList: [],
+    hotCityList:[],
     offsetTop:null,
-    popupShow:false,
-    showLetter:null
+    indexList: [],
+    defaultCity:null
   },
 
+ 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(getCurrentPages)
+    const {navBar,cityData,defaultCity} = App.globalData
     this.setData({
-      offsetTop:App.globalData.navBar.navHeight
+      offsetTop:navBar.navHeight,
+      cityList:cityData.cityList,
+      indexList:cityData.indexList,
+      defaultCity
+    })
+    this.getHotCity()
+  },
+  getHotCity(){
+    request({url:api.config.hotcity}).then(res=>{
+      this.setData({
+        hotCityList:res.data.list
+      })
     })
   },
 
 
  /**选择城市 */
  chooseCity(e) {
-  console.log(123)
+  const {city} = e.currentTarget.dataset
+  App.globalData.defaultCity=city
+  App.getAreaAndRoom().then(res=>{
+  //获取上一页信息
+   let p=getCurrentPages();
+   let pages = p[p.length-2]
+   pages.route=='pages/hotelList/hotelList'&& pages.clearAll()
+   wx.navigateBack({
+     delta:1
+   })
+  })
+ 
 },
 /**选择字母 */
 letterSelect(e){
-  this.setData({
-    popupShow:true,
-    showLetter:e.detail
-  })
-  setTimeout(()=>{
-    this.setData({
-      popupShow:false
-    })
-  },500)
+ 
 },
 
   /**

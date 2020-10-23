@@ -1,0 +1,40 @@
+<!--pages/evaluation/evaluation.wxml-->
+<navbar title="评价">
+	<view class="appealForm">
+		<view class="star flex-x-between flex-y-center">
+			<text>商户服务态度</text>
+			<view class="starNum flex-y-center">
+				<van-rate value="{{service_attitude_score}}" bind:change="onChange" data-key="service_attitude_score" style="padding-top:8rpx" size="{{ 16 }}" color="#F5A44F" void-color="#CCCCCC" />
+				<text>{{service_attitude_score}}分</text>
+			</view>
+		</view>
+		<view class="star flex-x-between flex-y-center">
+			<text>房间安排效率</text>
+			<view class="starNum flex-y-center">
+				<van-rate value="{{room_arrange_score}}" bind:change="onChange"  data-key="room_arrange_score" style="padding-top:8rpx" size="{{ 16 }}" color="#F5A44F" void-color="#CCCCCC" />
+				<text>{{room_arrange_score}}分</text>
+			</view>
+		</view>
+		<view class="appealFont">评价</view>
+		<van-field value="{{ content }}" wx:if="{{!isShow}}"  type="textarea" placeholder="为了提高服务质量,请认证填写一经提交,无法更改" border="{{ false }}" bind:change="onChange" data-key="content" />
+		<view wx:else class="formTextarea">{{content?content:'为了提高服务质量,请认证填写一经提交,无法更改'}}</view>
+		<view class="appealFont">支付凭证（仅支持.jpg等格式）</view>
+		<view class="picList flex-wrap">
+			<block wx:for="{{img_url}}" wx:key="index">
+				<view class="picDetail">
+					<image mode="aspectFill" src="{{item}}" catchtap="previewImg" data-current="{{item}}"></image>
+					<view class="closeIcon flex-xy-center" bindtap="delImage" data-index="{{index}}">
+						<van-icon name="cross" color="#fff" size="12px" />
+					</view>
+				</view>
+			</block>
+			<view class="picDetail" bindtap="uploadImage" wx:if="{{count>img_url.length}}">
+				<image src="/images/upload_pictures@2x.png"></image>
+			</view>
+		</view>
+		<view class="submitBtn flex-xy-center" bindtap="submit">确认</view>
+	</view>
+	<van-dialog use-slot show="{{ isShow }}" confirm-button-color="#5302ad">
+		<view class="submitOk flex-xy-center">感谢您的评价,祝你生活愉快!</view>
+	</van-dialog>
+</navbar>

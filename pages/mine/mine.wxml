@@ -1,2 +1,87 @@
 <!--pages/mine/mine.wxml-->
-<text>我的</text>
+<view class="mine">
+	<view class="mineHead por flex-col flex-y-center">
+
+		<view class="mineAvatar">
+			<image src="/images/mine/default_avatar@2x.png"></image>
+		</view>
+		<view class="mineLevel" wx:if="{{mine.level==0}}">
+			<image src="/images/mine/vip_one@2x.png" class="line"></image>
+			<image src="/images/recommend/domestic_consumer@2x.png" class="user"></image>
+			<text class="goldName">普通用户</text>
+		</view>
+		<view class="mineLevel" wx:if="{{mine.level==1}}">
+			<image src="/images/mine/vip_two@2x.png" class="line"></image>
+			<image src="/images/recommend/bronze_member@2x.png" class="qingTong"></image>
+			<text class="goldName">青铜会员</text>
+		</view>
+		<view class="mineLevel" wx:if="{{mine.level==2}}">
+			<image src="/images/mine/vip_three@2x.png" class="line"></image>
+			<image src="/images/recommend/silver_members@2x.png" class="baiYing"></image>
+			<text class="goldName">白银会员</text>
+		</view>
+		<view class="mineLevel" wx:if="{{mine.level==3}}">
+			<image src="/images/mine/vip_four@2x.png" class="line"></image>
+			<image src="/images/mine/gold_members@2x.png" class="gold"></image>
+			<text class="goldName">黄金会员</text>
+		</view>
+		<view class="mineLevel" wx:if="{{mine.level==4}}">
+			<image src="/images/mine/vip_five@2x.png" class="line"></image>
+			<image src="/images/recommend/platinum_member@2x.png" class="baiJing"></image>
+			<text class="goldName">白金会员</text>
+		</view>
+		<view class="mineLevel" style="bottom:20rpx" wx:if="{{mine.level==5}}">
+			<image src="/images/mine/vip_six@2x.png" class="line2"></image>
+			<image src="/images/recommend/diamond_member@2x.png" class="zuanShi"></image>
+			<image src="/images/vip_six_crown@2x.png" class="zuanShiHG"></image>
+			<text class="goldName2">钻石会员</text>
+		</view>
+		<!--您还未登录,请先登录-->
+		<view class="mineName">尊贵的会员</view>
+	</view>
+	<view class="mineDetail">
+		<navigator url="/pages/myScore/myScore?score={{mine.score}}" hover-class="none" class="mineDetailTop">
+			<view class="mineDetailTile">闲分</view>
+			<view class="mineDetailContent flex-x-between flex-y-center">
+				<view>{{mine.score}}</view>
+				<view class="flex-y-center">查看明细
+					<van-icon name="arrow" color="#cccccc" />
+				</view>
+			</view>
+		</navigator>
+		<navigator url="/pages/inComeDetail/inComeDetail" hover-class="none" class="mineDetailTop">
+			<view class="mineDetailTile">总返佣(元)</view>
+			<view class="mineDetailContent flex-x-between flex-y-center">
+				<view>{{mine.all_commission}}</view>
+				<view class="flex-y-center">查看明细
+					<van-icon name="arrow" color="#cccccc" />
+				</view>
+			</view>
+		</navigator>
+	</view>
+	<navigator hover-class="none" url="/pages/order/order" class="mineOrder flex-x-between flex-y-center">
+		<view>我的订单</view>
+		<view class="flex-y-center">查看所有订单
+			<van-icon name="arrow" color="#cccccc" />
+		</view>
+	</navigator>
+	<view class="mineMenu flex-x-between flex-y-center">
+		<navigator url="/pages/releaseRequirements/releaseRequirements" hover-class="none" class="menuDetail flex-col flex-y-center">
+			<image src="/images/mine/mine_demand_center@2x.png"></image>
+			<view>需求中心</view>
+		</navigator>
+		<navigator url="/pages/collect/collect" hover-class="none" class="menuDetail flex-col flex-y-center">
+			<image src="/images/mine/mine_collection@2x.png"></image>
+			<view>我的收藏</view>
+		</navigator>
+		<navigator url="/pages/Feedback/Feedback" hover-class="none" class="menuDetail flex-col flex-y-center">
+			<image src="/images/mine/mine_feedback@2x.png"></image>
+			<view>意见反馈</view>
+		</navigator>
+		<button open-type="contact" hover-class="none" class="menuDetail flex-col flex-y-center">
+			<image src="/images/mine/mine_tenants@2x.png"></image>
+			<view>商家入驻</view>
+		</button>
+	</view>
+	<view class="loginOut flex-xy-center" bindtap="loginOut">退出登录</view>
+</view>

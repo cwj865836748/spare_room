@@ -1,1 +1,109 @@
 /* pages/hotelIntroduction/hotelIntroduction.wxss */
+@import "/components/hotelFacilities/hotelFacilities.wxss";
+.hotelIntro {
+  width: 100%;
+  padding: 20rpx 30rpx 0;
+}
+
+.hotelIntro>.hotelDetail {
+  width: 100%;
+  padding: 26rpx 30rpx 0rpx;
+  background: #f8f8f8;
+  border-radius: 8rpx;
+  height: 322;
+}
+
+.hotelIntro>.hotelDetail>.name>text {
+  font-size: 34rpx;
+  color: #333333;
+  letter-spacing: 1rpx;
+  font-weight: bold;
+}
+
+.hotelIntro>.hotelDetail>.EnglishName {
+  font-size: 26rpx;
+  color: #999999;
+  margin: 10rpx 0 30rpx;
+}
+
+.hotelIntro>.hotelDetail>.time {
+  width: 100%;
+  height: 84rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  padding: 0 30rpx;
+  white-space: nowrap;
+}
+.hotelIntro>.hotelDetail>.time>view {
+  color:#999999;
+  font-size: 24rpx;
+  margin-right: 88rpx;
+}
+.hotelIntro>.hotelDetail>.time>view:last-child {
+  margin-right: 0;
+}
+.hotelIntro>.hotelDetail>.time>view:nth-child(-n+2) {
+  position: relative;
+}
+.hotelIntro>.hotelDetail>.time>view:nth-child(-n+2)::after{
+  content: '';
+  width: 4rpx;
+height: 20rpx;
+background:  #cccccc;
+position: absolute;
+right: -40rpx;
+top: 10rpx;
+}
+.hotelIntro>.hotelDetail>.time>view>text {
+  font-family: DIN Alternate, DIN Alternate-Bold;
+  font-size: 28rpx;
+  color: #333333;
+  letter-spacing: 1rpx;
+  font-weight: bold;
+}
+.hotelIntro>.hotelDetail>.phone {
+ margin-top: 20rpx;
+ height: 72rpx;
+ background: #f8f8f8;
+ border-radius: 8rpx;
+ padding-left:4rpx;
+ font-size: 24rpx;
+ color: #666666;
+}
+.hotelIntro>.hotelDetail>.phone>view>text {
+  font-family: DIN Alternate, DIN Alternate-Bold;
+  font-size: 26rpx;
+  color: #ff9d00;
+  letter-spacing: 1rpx;
+  box-sizing: content-box;
+  padding-left: 32rpx;
+  font-weight: bold;
+ }
+ .hotelIntro>.hotelDetail>.phone>image {
+   width: 27rpx;
+   height: 33rpx;
+ }
+ .hotelIntro>.hotelAll {
+   margin-top: 48rpx;
+ }
+ .hotelIntro>.hotelAll>.hotelSetting:nth-child(n+2) {
+  box-sizing: content-box;
+  padding-bottom: 30rpx;
+}
+ .hotelIntro>.hotelAll>.hotelSetting>.title {
+  margin: 0 0 30rpx 16rpx;
+  color: #333333;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+  position: relative;
+}
+.hotelIntro>.hotelAll>.hotelSetting>.title::before {
+  content: '';
+  position: absolute;
+  top: 8rpx;
+  left: -16rpx;
+  width: 8rpx;
+height: 24rpx;
+background: #780acc;
+border-radius: 4rpx;
+}

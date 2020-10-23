@@ -1,0 +1,6 @@
+/* pages/todayIncome/todayIncome.wxss */
+@import "/components/inCome/inCome.wxss";
+@import "/components/noData/noData.wxss";
+.inComeList {
+  padding: 28rpx 30rpx;
+}

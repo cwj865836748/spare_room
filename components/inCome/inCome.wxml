@@ -1,0 +1,20 @@
+<!--components/inCome/inCome.wxml-->
+<!-- <wxs src="../../wxs/filter.wxs" module="filter"/> -->
+<block wx:for="{{recommendRecordList}}" wx:key="index">
+	<view class="recommendRecord flex-x-between flex-y-center">
+		<view>
+			<text>{{filter.getMoneyLogType(item.type).idName}}</text>
+			<text wx:if="{{item.associated_id}}">{{filter.orderPhone(item.associated_id)}}</text><!--已提现/提现中无id-->
+		</view>
+		<text>{{filter.getTime2(item.create_time)}}</text>
+	</view>
+	<view class="recommendOne flex-x-between flex-y-center">
+		<view>
+			<text>{{filter.getMoneyLogType(item.type).content}}</text>
+			<!--提现失败、不通过-->
+			<text class="redSize" wx:if="{{item.type==5||item.status==2}}">({{item.remark}})</text>
+		</view>
+		<!--支出、审核中、审核通过、已提现为‘-’，其他都是‘+’-->
+		<text class="{{item.status==0||item.status==1||item.in_out==2||inComeTabIndex==2?'blackSize':''}}">{{item.status==0||item.status==1||item.in_out==2||inComeTabIndex==2?'-':'+'}}￥{{item.money}}</text>
+	</view>
+</block>

@@ -1,1 +1,365 @@
 /* pages/recommend/recommend.wxss */
+@import "/components/wxActionSheet/wxActionSheet.wxss";
+@import "/components/inCome/inCome.wxss";
+
+.recommendHead {
+  margin: 30rpx 0 124rpx;
+  text-align: center;
+}
+
+.recommendHead>image {
+  width: 156rpx;
+  height: 156rpx;
+}
+
+.mySwiper {
+  height: 417rpx;
+}
+
+.cardMember {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 36rpx 20rpx 0 30rpx;
+  box-shadow: 0rpx 8rpx 16rpx 0rpx rgba(0, 0, 0, 0.17);
+
+}
+
+.cardMember>.slide-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.cardMember>.cardMemberName {
+  padding-left: 120rpx;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.cardMember>.cardMemberName>view:nth-child(2) {
+  margin: 0 12rpx;
+  width: 142rpx;
+  height: 46rpx;
+  border-radius: 24rpx;
+  box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(0, 0, 0, 0.12);
+  font-size: 22rpx;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+}
+
+.cardMember>.cardMemberName>view:nth-child(2)>image {
+  width: 21rpx;
+  height: 20rpx;
+  margin-right: 4rpx;
+  margin-top: 4rpx;
+
+}
+
+.cardMember>.cardMemberName>view:nth-child(3) {
+  font-size: 22rpx;
+  text-align: center;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+}
+
+.zoom-out {
+  transform: scale(0.95);
+  transition: all 0.7s ease-out 0s;
+}
+
+.zoom-in {
+  transform: scale(1);
+  transition: all 0.7s ease-in 0s;
+}
+
+.cardAvatr>image {
+  width: 114rpx;
+  height: 114rpx;
+  margin-right: 12rpx;
+  margin-top: 28rpx;
+
+}
+
+.cardAvatr>.cardLine {
+  width: 338rpx;
+  margin-top: 40rpx;
+}
+
+.cardAvatr>.cardLine>.cardLineLevel:first-child {
+  margin-bottom: 52rpx;
+}
+
+.cardAvatr>.cardLine>.cardLineLevel>.cardLineStatus {
+  margin-top: 8rpx;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+}
+
+.cardAvatr>.cardLine>.cardLineLevel>.cardLineStatus>text:last-child {
+  font-size: 24rpx;
+  letter-spacing: 1rpx;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+.cardAvatr>.cardBtn {
+  /* margin-top: 8rpx; */
+  margin-left: 54rpx;
+}
+
+.cardAvatr>.cardBtn>view {
+  width: 116rpx;
+  height: 64rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(6, 0, 31, 0.16);
+  font-size: 24rpx;
+}
+
+.cardAvatr>.cardBtn>view {
+  margin-bottom: 36rpx;
+}
+
+.cardAvatr>.cardBtn>view:last-child {
+  margin-bottom: 0rpx;
+}
+
+.cardTitle {
+  margin-top: 16rpx;
+}
+
+.cardTitle>.cardTitleOne {
+  font-size: 24rpx;
+  color: #ffffff;
+}
+
+.cardTitle>.cardTitleOne>.cardPrice {
+  font-size: 40rpx;
+  color: #ff6c00;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.cardTitle>.cardTitleOne>image {
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.cardHead {
+  border-radius: 8rpx;
+  width: 688rpx;
+  height: 88rpx;
+  padding: 0 32rpx 0 30rpx;
+  color: #333333;
+  letter-spacing: 1rpx;
+  position: absolute;
+  left: 32rpx;
+  top: -82rpx;
+}
+
+.putongHeadCard {
+  background: rgba(190, 148, 208, .2);
+}
+
+.qintongHeadCard {
+  background: rgba(107, 162, 150, .2);
+}
+
+.baiyinHeadCard {
+  background: rgba(190, 190, 190, .2);
+
+}
+
+.huangjinHeadCard {
+  background: rgba(238, 177, 40, .2);
+}
+
+.baijinHeadCard {
+  background: rgba(222, 222, 222, .2);
+
+}
+
+.zuanshiHeadCard {
+  background: rgba(160, 160, 160, .2);
+}
+
+.cardHead>.zeng {
+  width: 60rpx;
+  height: 60rpx;
+  background: #ff8c38;
+  border-radius: 50%;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-right: 24rpx;
+
+}
+
+.cardHead>.goZeng {
+  font-size: 26rpx;
+  color: #ff8c38;
+  letter-spacing: 1rpx;
+}
+
+.greenBg {
+  background: #88bc92 !important;
+}
+
+.greenSize {
+  color: #63a297 !important;
+}
+
+.pinkBg {
+  background: #8264a0 !important;
+}
+
+.pinkSize {
+  color: #644a7d !important;
+}
+
+.whiteGoldBg {
+  background: #b3b3b3 !important;
+
+}
+
+.whiteGoldSize {
+  color: #6d6d6d !important;
+
+}
+
+.yellowBg {
+  background: #ffca31 !important;
+
+}
+
+.yellowSize {
+  color: #db9f29 !important;
+}
+
+.whiteBlackSize {
+  color: #787877 !important;
+}
+
+.blackBg {
+  background: #373737;
+}
+
+.whiteGoldBgSize {
+  color: #b3b3b3 !important;
+
+}
+
+.recommendPrice {
+  height: 378rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  padding: 0 30rpx 0;
+  color: #aaaaaa;
+  letter-spacing: 2rpx;
+
+
+}
+
+.recommendPrice>.recommendPriceOne {
+  padding: 22rpx 0rpx 36rpx;
+  border-bottom: 2rpx solid #f6f6f6;
+}
+
+.recommendPrice>.recommendPriceOne:last-child {
+
+  border-bottom: none;
+}
+
+.recommendPrice>.recommendPriceOne>.recommendMoney {
+  font-size: 60rpx;
+  color: #333333;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+  margin-top: 16rpx;
+
+}
+
+.recommendPriceImg {
+  width: 29rpx;
+  height: 29rpx;
+  margin-left: 8rpx;
+}
+
+.recommendPrice>.recommendPriceOne>.recommendMoney>view>text {
+  font-size: 24rpx;
+  color: #cccccc;
+  letter-spacing: 1rpx;
+  margin-right: 13rpx;
+}
+
+.recommendBottom {
+  background: #F9F9F9;
+  padding: 30rpx 30rpx 96rpx;
+  /* padding-bottom: 96rpx; */
+}
+
+.recommendDetail>.recommendDetailTitle {
+  height: 110rpx;
+  font-size: 30rpx;
+  color: #333333;
+  letter-spacing: 2rpx;
+  padding: 0 28rpx;
+}
+
+.recommendDetail>.recommendDetailTitle>view>text {
+  font-size: 24rpx;
+  color: #cccccc;
+  letter-spacing: 1rpx;
+  margin-right: 11rpx;
+}
+
+
+
+.recommendInvite {
+  height: 96rpx;
+  background: #ffffff;
+  box-shadow: 0rpx -2rpx 0rpx 0rpx #f8f8f8;
+  width: 100%;
+  color: #333333;
+  letter-spacing: 2rpx;
+  font-size: 32rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.recommendInvite::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2rpx;
+  height: 40rpx;
+  background: #aaaaaa;
+
+}
+
+.myDialog {
+  height: 198rpx;
+  font-size: 32rpx;
+  letter-spacing: 1rpx;
+  color: #333333;
+  position: relative;
+}
+
+.myDialog>image {
+  position: absolute;
+  right: 28rpx;
+  top: 28rpx;
+  width: 30rpx;
+  height: 30rpx;
+}

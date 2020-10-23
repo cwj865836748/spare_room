@@ -16,6 +16,22 @@ export const login=()=>{
   })
 }
 /**
+ * promise 形式  authorize 授权
+ */
+export const authorize = (scope) =>{
+  return new Promise((resolve,reject)=>{
+    wx.authorize({
+      scope,
+      success: (result) => {
+        resolve(result);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+  })
+}
+/**
  * promise 形式  getSystemInfo设备信息
  */
 export const getSystemInfo = () => {
@@ -65,11 +81,11 @@ export const getSetting=()=>{
  *  promise 形式  showModal
  * @param {object} param0 参数
  */
-export const showModal=({title,content})=>{
+export const showModal=(Object)=>{
+  //title,content.....
   return new Promise((resolve,reject)=>{
     wx.showModal({
-      title: title,
-      content: content,
+      ...Object,
       success :(res) =>{
         resolve(res);
       },
@@ -86,6 +102,7 @@ export const showModal=({title,content})=>{
  * @param {object} param0 参数
  */
 export const showToast=(Object)=>{
+   //title,icon,duration,image
   return new Promise((resolve,reject)=>{
     wx.showToast({
       icon: 'none',
@@ -131,6 +148,22 @@ export const chooseAddress=(location)=>{
       },
       fail: (err) => {
         reject(err);
+      }
+    });
+  })
+}
+/**
+ * promise 形式  chooseAddress
+ */
+export const chooseLocation=()=>{
+  //latitude,longitude
+  return new Promise((resolve,reject)=>{
+    wx.chooseLocation({
+      success: (result) => {
+        resolve(result);
+      },
+      fail: (err) => {
+        
       }
     });
   })
@@ -245,6 +278,103 @@ export const setNavigationBarTitle = (title) => {
 export const getUserInfo = () => {
   return new Promise((resolve, reject) => {
     wx.getUserInfo({
+      success: (result) => {
+        resolve(result);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+  })
+}
+/**
+ * promise 形式  pageScrollTo滚动
+ */
+export const pageScrollTo = (object) => {
+  //scrollTop,duration,selector
+  return new Promise((resolve, reject) => {
+    wx.pageScrollTo({
+      scrollTop:0,
+      ...object,
+      success: (result) => {
+        resolve(result);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+  })
+}
+/**
+ * promise 形式  下载本地资源
+ */
+export const downloadFile = (object) => {
+  //url,header,timeout，filePath
+  return new Promise((resolve, reject) => {
+    wx.downloadFile({
+      timeout:5000,
+      ...object,
+      success: (result) => {
+        resolve(result);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+  })
+}
+/**
+ * promise 形式  上传本地资源
+ */
+export const uploadFile = (object) => {
+  //url,header,timeout，filePath，formData
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      timeout:5000,
+      name: 'files',
+      header: { 
+            'Content-Type': 'multipart/form-data'
+          },
+      ...object,
+      success: (result) => {
+        resolve(JSON.parse(result.data).data);
+      },
+      fail: (err) => {
+        showToast({
+          title: '图片上传失败',
+        })
+      }
+    });
+  })
+}
+/**
+ * promise 形式  预览图片
+ */
+export const previewImage = (object) => {
+  //urls,current
+  return new Promise((resolve, reject) => {
+    wx.previewImage({
+      ...object,
+      success: (result) => {
+        resolve(result);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+  })
+}
+/**
+ * promise 形式  选择图片
+ */
+export const chooseImage = (object) => {
+  //count,sizeType,sourceType
+  return new Promise((resolve, reject) => {
+    wx.chooseImage({
+      count: object.count, // 默认
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      ...object,
       success: (result) => {
         resolve(result);
       },

@@ -1,0 +1,91 @@
+<wxs src="../../wxs/filter.wxs" module="filter" />
+<view class="requireBody flex-col flex-y-center" wx:if="{{isHotelList}}">
+	<image src="/images/nodate@2x.png"></image>
+	<view class="requireTitle">抱歉，没有搜索到相关酒店，请点击发布需求，我们将尽快为您上架</view>
+	<view class="requireBtns flex-xy-center" catchtap="openRequire">发布需求</view>
+</view>
+<!--满房发布需求-->
+<view class="release flex-xy-center" wx:else catchtap="openRequire">
+			<view class='flex-xy-center'>发布需求</view>
+</view>
+<!--发布需求弹框-->
+<van-action-sheet show="{{requireShow}}" z-index="100">
+	<view class="require">
+		<view class="name">
+			<text>编辑需求</text>
+		</view>
+		<view class="title">没有找到想要的房型?发布需求获取更多房型</view>
+		<image src="../../images/close_gary@2x.png" bindtap="closeRequire" bindtap="closeRequire"></image>
+	</view>
+	<scroll-view scroll-y="{{isScroll}}" style="max-height:460px">
+		<view class="requireContent" bindtap="hiddenHotelList">
+			<van-cell-group>
+				<view class="myCellGroup">
+					<van-field value="{{ requireForm.country }}" clearable label="国家" placeholder="请输入国家" bind:change="onChange" data-key="country" bind:focus="inPutControl" bind:blur="inPutControl"/>
+
+					<van-field value="{{ requireForm.province }}" clearable label="省份" placeholder="请输入省份" bind:change="onChange" data-key="province" bind:focus="inPutControl" bind:blur="inPutControl"/>
+
+					<van-field value="{{ requireForm.city }}" clearable label="城市" placeholder="请输入城市" bind:change="onChange" data-key="city" bind:focus="inPutControl" bind:blur="inPutControl"/>
+				</view>
+			</van-cell-group>
+			<van-cell-group>
+				<view class="myCellGroup">
+					<view class="searchInput por">
+						<van-field value="{{ requireForm.hotel_name }}" label="酒店名称" placeholder="请输入酒店名称" bind:change="onChange" bind:input="searchHotel" data-key="hotel_name" bind:blur="inPutControl" bind:focus="inPutControl"/>
+						<image src="/images/search@2x.png"></image>
+						<view class="select" wx:if="{{selectListShow}}" catchtap="hiddenHotelList">
+							<block wx:for="{{selectList}}" wx:key="index" wx:if="{{selectList.length &&!loadingShow}}">
+								<view data-name="{{item.name}}" catchtap="chooseCityName">{{item.name}}</view>
+							</block>
+							<block wx:if="{{!selectList.length&&!loadingShow}}">
+								<view class="seleceNone">抱歉,没有搜索到相关酒店,可直接填写酒店名称</view>
+							</block>
+							<van-loading type="spinner" size="24px" color="#8c42ad" wx:if="{{loadingShow}}"/>
+						</view>
+					</view>
+					<van-field label-class="van-field__label" value="{{ requireForm.room_name }}" clearable label="房型名称" placeholder="请输入房型名称" bind:change="onChange" data-key="room_name" bind:focus="inPutControl" bind:blur="inPutControl" cursor-spacing="100"/>
+					<van-field label-class="van-field__label" value="{{ requireForm.start_time }}" label="入住日期" placeholder="请选择入住日期" disabled right-icon="/images/start_end@2x.png" bind:click-icon="openCalendar" />
+					<van-field value="{{ requireForm.end_time }}" label="离店时间" placeholder="请选择离店时间" disabled right-icon="/images/start_time@2x.png" bind:click-icon="openCalendar" />
+				</view>
+			</van-cell-group>
+			<van-cell-group>
+				<view class="myCellGroup">
+					<view class="van-cell flex-x-between">
+						<view class="van-cell__title">房间数</view>
+						<van-stepper value="{{ requireForm.room_num }}" bind:change="onChange" data-key="room_num" max="20" />
+					</view>
+					<view class="van-cell flex-x-between">
+						<view class="van-cell__title">早餐</view>
+						<!-- <van-dropdown-menu direction="up" active-color="#55059e">
+							<van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+						</van-dropdown-menu> -->
+						<view class="myBreadfast flex-x-between flex-y-center" catchtap="openBreakFast">
+							<span>{{filter.breakfastType(requireForm.breakfast)}}</span>
+							<image src="/images/search_page_down@2x.png"></image>
+						</view>
+					</view>
+					<van-field value="{{ requireForm.remark }}" label="备注" placeholder=" 请输入备注内容" bind:change="onChange" data-key="remark" bind:focus="inPutControl" bind:blur="inPutControl"/>
+				</view>
+			</van-cell-group>
+			<view class="requireBtn flex-xy-center" catchtap="toRequire">发布需求</view>
+		</view>
+
+	</scroll-view>
+
+</van-action-sheet>
+<!--早餐弹框-->
+<van-action-sheet show="{{ requireBreakFastShow }}" actions="{{ breakFastList }}"  bind:select="onChange" bind:close="closeBreakFast" data-key="breakfast"  z-index="101" close-on-click-overlay/>
+<!--确认需求-->
+<van-overlay show="{{ requireCertainShow }}" z-index="102">
+	<view class="overlay">
+		<view class="msg">
+			已成功发布需求，请等待上架消息通知，
+		</view>
+		<view class="msg">
+			需求保留3天，如无报价将自动消失。
+		</view>
+		<view class="msg msg-grey">(如不需要可去需求中心取消需求)</view>
+		<view bindtap="requireOk">确定</view>
+	</view>
+</van-overlay>
+<calendar calendarShow="{{calendarShow}}" isEditRequire="{{isEditRequire}}" bind:setRequireTime="setRequireTime" bind:closeCalendar="closeCalendar" />

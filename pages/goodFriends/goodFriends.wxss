@@ -1,0 +1,41 @@
+/* pages/goodFriends/goodFriends.wxss */
+@import '/components/noData/noData.wxss';
+.goodFriendsList {
+  padding: 28rpx 30rpx 0;
+}
+
+.goodFriendsList>.goodFriendsDetail {
+  height: 160rpx;
+  background: #fdfdfd;
+  border-bottom: 2rpx solid #f6f6f6;
+  margin-bottom: 30rpx;
+}
+
+.goodFriendsList>.goodFriendsDetail:last-child {
+  margin-bottom: 0rpx;
+}
+
+.goodFriendsList>.goodFriendsDetail>.goodFriendsHead {
+  height: 88rpx;
+  letter-spacing: 2rpx;
+  font-size: 26rpx;
+  color: #333333;
+
+}
+
+.goodFriendsList>.goodFriendsDetail>.goodFriendsHead>.view:first-child>text:last-child {
+  margin-left: 12rpx;
+  color: rgba(11, 0, 22, 0.7);
+}
+
+.goodFriendsList>.goodFriendsDetail>.goodFriendsPirce {
+  color: rgba(11, 0, 22, 0.4);
+  letter-spacing: 1rpx;
+  font-size: 24rpx;
+}
+.goodFriendsList>.goodFriendsDetail>.goodFriendsPirce>text:last-child {
+  font-size: 34rpx;
+  color: #7a0dcb;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+}

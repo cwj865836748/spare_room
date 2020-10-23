@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-rate": "@vant/weapp/rate/index",
+    "van-dialog": "@vant/weapp/dialog/index"
+  },
+  "disableScroll":true
+}

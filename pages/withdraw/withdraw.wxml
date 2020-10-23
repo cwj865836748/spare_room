@@ -1,0 +1,27 @@
+<!--pages/withdraw/withdraw.wxml-->
+<navbar title="提现">
+	<view class="warn flex-xy-center">
+		<image src="/images/hotel_detail_information@2x.png"></image>
+		<text>提现无需手续费</text>
+	</view>
+	<view class="withdrawContent">
+		<view class="goWithdraw flex-y-center flex-x-between">
+			<text>提现金额</text>
+			<view class="money flex-y-center">
+				<text>￥</text>
+				<van-field class="flex-grow-1" type="digit" value="{{ withdrawMoney }}" placeholder="请输入提现金额" border="{{ false }}" bind:change="onChange" />
+			</view>
+       <text bindtap="withdrawAll">全部</text>
+		</view>
+    <view class="moneyOut">可提现:￥{{allMoney}}</view>
+    <view class="moneyBtn flex-xy-center" bindtap="goWithdraw">确定</view>
+	</view>
+	<van-dialog
+  use-slot
+  show="{{ show }}"
+	confirm-button-color="#5302ad"
+>
+  <view class="dialog flex-xy-center">提现成功，请您留意账单记录变化哦！</view>
+</van-dialog>
+<serviceCustomer/>
+</navbar>

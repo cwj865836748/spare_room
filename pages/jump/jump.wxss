@@ -1,0 +1,6 @@
+/* pages/jump/jump.wxss */
+@import '/components/jumpService/jumpService.wxss';
+.jumpContent {
+  height: 100%;
+  background: #F8F8F8;
+}

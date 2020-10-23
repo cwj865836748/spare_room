@@ -21,6 +21,18 @@ Component({
       home: {
         type: Boolean,  
         value: false
+      },
+      titleColor: {
+        type: String, 
+        value: '#333333'
+      },
+      navbarType:{
+        type: Number, 
+        value: 1
+      },
+      backgroundColor:{
+        type: String, 
+        value: '#fff'
       }
   },
 
@@ -29,7 +41,7 @@ Component({
    */
   data: {
     navHeight:null,
-    statusBarHeight:null
+    statusBarHeight:null,
   },
   
  attached() {
@@ -46,6 +58,7 @@ Component({
           })
         }
       } 
+      this.triggerEvent('getNavHeight', { navHeight:this.data.navHeight}); 
     },
   /**
    * 组件的方法列表
@@ -55,9 +68,20 @@ Component({
       navigateBack(1)
     },
     goHome(){
-      let pages =getCurrentPages()
-      navigateBack(pages.length)
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
     },
-
-  }
+    scroll(e){
+      const {scrollTop} =e.detail
+      this.setData({
+        headColor:scrollTop>100?'#fff':'transparent',
+        titleColor:scrollTop>100?'#333333':'#fff'
+      })
+    },
+    scrolltolower(e){
+      this.triggerEvent('onReachBottom')
+    }
+  },
+   
 })

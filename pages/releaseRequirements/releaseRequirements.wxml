@@ -1,0 +1,91 @@
+<!--pages/releaseRequirements/releaseRequirements.wxml-->
+<wxs src="../../wxs/filter.wxs" module="filter" />
+<navbar title="已发布需求" backgroundColor="#F9F9F9">
+	<scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="onReachBottom">
+		<view class="requireList">
+			<block wx:for="{{requireList}}" wx:key="index">
+				<view class="requireOne">
+					<view class="hotelName flex-x-between">
+						<text>{{item.hotel_name}}</text>
+						<image src="/images/delete_published_information@2x.png" bindtap="delDemandOne" data-index="{{index}}" data-id="{{item.id}}"></image>
+					</view>
+					<view class="hotelDate">
+						入住日期：{{filter.getTime(item.start_time)}}-离店日期：{{filter.getTime(item.end_time)}}
+					</view>
+					<view class="hotelType flex-y-center flex-x-between {{item.status?'':'mt40'}}">
+						<text>{{item.room_name}}</text>
+						<view class="hotelTypeBtn flex-xy-center" bindtap="openDemandOneDetail" data-id="{{item.id}}" wx:if="{{item.status}}">点击进入</view>
+						<view class="noMessage" wx:else>暂无信息</view>
+					</view>
+				</view>
+			</block>
+		</view>
+		<van-dialog use-slot show="{{ delShow }}" show-cancel-button confirmButtonText="删除" cancelButtonText="取消" confirm-button-color="#8c42ad" cancel-button-color="#666666" bind:confirm="delConfirm" bind:cancel	="delDemandClose">
+			<view class='cancelCollect'>
+				<view class="title">是否删除此需求</view>
+				<view class="content">删除需求后,无法进行找回</view>
+			</view>
+		</van-dialog>
+		
+		<include src="/components/noData/noData.wxml"/>
+	</scroll-view>
+	<van-action-sheet show="{{demandOneDetailShow}}" z-index="100">
+			<view class="actionRequire">
+				<view class="actionTitle">
+					<text>已发布需求</text>
+					<image src="/images/close_gary@2x.png" bindtap="closeDemandOneDetail"></image>
+				</view>
+				<view class="actionName">{{demandOneDetail.hotel_name}}</view>
+			</view>
+			<scroll-view style="height:460px;" scroll-y>
+				<view class="actionMsg">
+					<view class="actionBg">
+						<view class="actionMsgOne borderB2 flex-y-center">
+							<text>国家</text>
+							<text>{{demandOneDetail.country}}</text>
+						</view>
+						<view class="actionMsgOne borderB2 flex-y-center">
+							<text>省份</text>
+							<text>{{demandOneDetail.province}}</text>
+						</view>
+						<view class="actionMsgOne flex-y-center">
+							<text>城市</text>
+							<text>{{demandOneDetail.city}}</text>
+						</view>
+					</view>
+					<view class="actionBg">
+						<view class="actionMsgOne borderB2 flex-y-center">
+							<text>酒店名称</text>
+							<text>{{demandOneDetail.hotel_name}}</text>
+						</view>
+						<view class="actionMsgOne borderB2 flex-y-center">
+							<text>房型名称</text>
+							<text>{{demandOneDetail.room_name}}</text>
+						</view>
+						<view class="actionMsgOne borderB2 flex-y-center">
+							<text>入住日期</text>
+							<text>{{filter.getTime2(demandOneDetail.start_time)}}</text>
+						</view>
+						<view class="actionMsgOne flex-y-center">
+							<text>离店时间</text>
+							<text>{{filter.getTime2(demandOneDetail.end_time)}}</text>
+						</view>
+					</view>
+					<view class="actionBg">
+						<view class="actionMsgOne borderB2 flex-y-center">
+							<text>房间数</text>
+							<text>{{demandOneDetail.room_num}}</text>
+						</view>
+						<view class="actionMsgOne borderB2 flex-y-center">
+							<text>早餐</text>
+							<text>{{filter.breakfastType(demandOneDetail.breakfast)}}</text>
+						</view>
+						<view class="actionMsgOne flex-y-center">
+							<text>备注</text>
+							<text>{{demandOneDetail.remark}}</text>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</van-action-sheet>
+</navbar>

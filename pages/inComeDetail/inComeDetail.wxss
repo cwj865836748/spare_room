@@ -1,0 +1,86 @@
+/* pages/inComeDetail/inComeDetail.wxss */
+@import "/components/inCome/inCome.wxss";
+@import "/components/noData/noData.wxss";
+.inComeDetail {
+  padding: 194rpx 30rpx 30rpx;
+}
+
+.inComeDetailBg {
+  width: 750rpx;
+  height: 620rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+
+}
+
+.inComeSort {
+  height: 500rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  box-shadow: 0rpx 6rpx 20rpx 0rpx rgba(77, 0, 168, 0.06);
+  font-size: 26rpx;
+  color: #aaaaaa;
+  letter-spacing: 2rpx;
+  padding: 30rpx 30rpx 0;
+
+}
+
+.inComeSort>.inComeTop {
+  align-content: flex-start;
+  margin-bottom: 48rpx;
+}
+
+.inComeSort>.inComeTop>.inComeSortOne:nth-child(odd) {
+  width: 346rpx;
+}
+
+.inComeSort>.inComeTop>.inComeSortOne:first-child {
+  margin-bottom: 40rpx;
+}
+
+.inComeSort>.inComeTop>.inComeSortOne>.inComeMoney {
+  color: #6707be;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+  margin-top: 24rpx;
+}
+
+.inComeSort>.inComeTop>.inComeSortOne>.inComeMoney>text:last-child {
+  font-size: 44rpx;
+  letter-spacing: 1rpx;
+  padding-top: 16rpx;
+}
+
+.inComeSort>.inComeBtn {
+  border-radius: 8rpx;
+  height: 88rpx;
+  background: var(--buttonColor);
+  font-size: 32rpx;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+}
+
+.inComeList>.inComeTab {
+  padding: 36rpx 30rpx 44rpx;
+  color: #999999;
+  letter-spacing: 2rpx;
+}
+
+.activeInCome {
+  color: #333333;
+  position: relative;
+}
+
+.activeInCome::after {
+  width: 24rpx;
+  height: 8rpx;
+  background: #780acc;
+  border-radius: 4rpx;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -12rpx;
+  content: '';
+}

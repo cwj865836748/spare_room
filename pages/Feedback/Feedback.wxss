@@ -1,0 +1,64 @@
+/* pages/Feedback/Feedback.wxss */
+/* pages/Appeal/Appeal.wxss */
+.appealForm {
+  padding: 56rpx 30rpx 0;
+}
+
+.appealForm>.appealFont {
+  font-size: 28rpx;
+  color: #999999;
+  letter-spacing: 2rpx;
+}
+
+.van-cell {
+  border-radius: 8rpx;
+  height: 256rpx;
+  background: #f9f9f9 !important;
+  margin: 0rpx 0 34rpx;
+}
+
+.picList {
+  margin: 30rpx 0 42rpx;
+}
+
+.picList>.picDetail {
+  width: 172rpx;
+  height: 172rpx;
+  margin-right: 24rpx;
+  margin-bottom: 24rpx;
+  position: relative;
+}
+
+.picList>.picDetail:last-child {
+  margin-right: 0;
+}
+
+.picList>.picDetail>image {
+  width: 100%;
+  height: 100%;
+}
+
+.picList>.picDetail>.closeIcon {
+  width: 36rpx;
+  height: 36rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: rgba(0,0,0,.1);
+
+}
+
+.submitBtn {
+  background: var(--buttonColor);
+  height: 88rpx;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+}
+.submitOk {
+  height: 130rpx;
+  color: #333333;
+  font-size: 28rpx;
+  letter-spacing: 1rpx;
+}

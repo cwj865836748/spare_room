@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navbar":"/components/navbar/navbar",
+    "serviceCustomer": "/components/serviceCustomer/serviceCustomer"
+  },
+  "disableScroll":true
+}

@@ -1,1 +1,128 @@
 /* pages/invoiceMessage/invoiceMessage.wxss */
+.invoiceContent {
+  padding: 20rpx 30rpx;
+}
+
+.invoiceOne {
+  padding: 0rpx 28rpx;
+  height: 100rpx;
+  width: 100%;
+  background: rgba(249, 249, 249, 0);
+  color: #333333;
+  letter-spacing: 2rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  border-bottom: 2rpx solid #f9f9f9;
+  margin-bottom: 4rpx;
+}
+.boderNo {
+  border: none;
+}
+
+.invoiceName {
+  width: 222rpx;
+  height: 60rpx;
+  background: rgba(51, 51, 51, .06);
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  color: #333333;
+  letter-spacing: 1rpx;
+  font-weight: bold;
+}
+
+.invoiceOne>.invoiceWho {
+  width: 120rpx;
+  height: 60rpx;
+  background: rgba(51, 51, 51, .06);
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  color: #333333;
+  letter-spacing: 1rpx;
+  font-weight: bold;
+  margin-left: 30rpx;
+}
+
+.invoiceOne>.invoiceWho:last-child {
+  margin-left: 24rpx;
+}
+
+.invoicePurple {
+  background: #f4eff9 !important;
+  border: 2rpx solid #7a0dcb;
+  color: #7a0dcb !important;
+}
+
+.invoiceOne>input {
+  color: rgba(51, 51, 51, .5);
+  letter-spacing: 2rpx;
+  font-weight: bold;
+  font-size: 24rpx;
+  margin-left: 52rpx;
+}
+.distance {
+  margin-bottom: 54rpx;
+  position: relative;
+}
+.distance::after {
+  content: '';
+ position: absolute;
+ left: -30rpx;
+ bottom: -48rpx;
+ width: 750rpx;
+height: 12rpx;
+background: #f2f2f2;
+}
+.invoiceOne>image {
+  width: 13rpx;
+  height: 23rpx;
+}
+.purpleSize {
+  color: #8c42ad !important;
+}
+.explanation {
+  padding-left: 32rpx;
+  font-size: 26rpx;
+  color: #999999;
+  letter-spacing: 2rpx;
+}
+.btn {
+  background: var(--buttonColor);
+  height: 88rpx;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+  margin-top: 158rpx;
+}
+.invoiceType {
+  height: 230rpx;
+  padding: 24rpx 230rpx 30rpx 28rpx;
+}
+.invoiceType>view {
+  height: 100%;
+}
+.invoiceType>text {
+  padding-top: 12rpx;
+  box-sizing: content-box;
+}
+.invoiceTitle {
+  height: 54rpx;
+background: #ffe8e5;
+width: 100%;
+color: #e3311a;
+letter-spacing: 2rpx;
+font-size: 26rpx;
+}
+.invoiceTitle>image {
+   width: 31rpx;
+   height: 31rpx;
+   margin-right: 4rpx;
+}
+.van-cell:after {
+
+  border: none !important;
+}
+.opacity {
+  opacity: 0.5;
+}

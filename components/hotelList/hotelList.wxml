@@ -1,0 +1,32 @@
+<scroll-view scroll-y="true" style="height:100%" bindscrolltolower="onReachBottom">
+	<view class="hotelList" bindtap="showSort" data-index="{{sortNumber}}">
+		<block wx:for="{{hotelList}}" wx:key="index">
+			<navigator url="/pages/hotelDetail/hotelDetail?id={{item.id}}&longitude={{query.longitude}}&latitude={{query.latitude}}" hover-class="none" class="hotelDetail flex">
+				<image src="{{item.img_url}}"></image>
+				<view class="hotelMsg flex-y-between">
+					<view class="">
+						<view class="name">
+							<text class="text-more ">{{item.name}}</text>
+							<van-rate value="{{item.star}}" count="{{item.star}}" readonly size="12" />
+						</view>
+						<view class="EnglishName text-more">{{item.name_en}}</view>
+						<view class="label flex flex-wrap">
+							<view class="violet" wx:if="{{item.is_score}}">可闲分兑换</view>
+							<!-- <view class="grey" wx:if="{{item.is_invoice}}">可开发票</view> -->
+							<view class="orange" wx:if="{{item.is_gift}}">礼包</view>
+							<view class="yellow" wx:if="{{item.is_discount}}">{{filter.level(item.level)}}{{item.discount}}折</view>
+							<view class="orange" wx:if="{{item.is_continuous}}">连住优惠</view>
+						</view>
+					</view>
+					<view class=" distanceAndPdirce flex-x-between flex-y-center">
+						<view>距离{{filter.distance(item.distance)}}</view>
+						<view>
+							<text>￥{{item.original_price}}</text>
+							<text>￥{{item.price}}</text>
+						</view>
+					</view>
+				</view>
+			</navigator>
+		</block>
+	</view>
+</scroll-view>

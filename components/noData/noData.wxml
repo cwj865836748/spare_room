@@ -1,0 +1,40 @@
+<!--components/noData/noData.wxml-->
+<view class="noData">
+	<view class="qz-noda-box" wx:if="{{noData}}">
+	<image src="/images/nodate@2x.png" class="a-image"></image>
+		<view class="a-title">暂无数据</view>
+	</view>
+
+	<view class="qz-noda-box" wx:if="{{noOrder}}">
+		<view class="a-title">暂无相关订单</view>
+	</view>
+
+	<view class="qz-noda-box" wx:if="{{noInternet}}">
+		<image mode="cover" src="/images/nodata/empty_no_network@2x.png" class="a-image"></image>
+		<view class="a-title">暂无网络，点击页面刷新</view>
+	</view>
+
+	<view class="qz-noda-box" wx:if="{{noContent}}">
+		<image mode="cover" src="/images/nodata/empty_no_content@2x.png" class="a-image"></image>
+		<view class="a-title">未找到相关内容</view>
+	</view>
+
+	<view>
+		<view class="foot-layout" wx:if="{{noMore}}">
+			<view class="foot-divider">
+			</view>
+			<view class="foot-text">
+				没有更多了
+			</view>
+			<view class="foot-divider">
+			</view>
+		</view>
+		<view class="foot-layout" wx:if="{{loading}}">
+			<view class="foot-text">
+				<view class="loading">
+				</view>加载中
+			</view>
+		</view>
+	</view>
+</view>
+

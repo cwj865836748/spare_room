@@ -1,0 +1,5 @@
+/* pages/address/address.wxss */
+@import '/pages/invoiceMessage/invoiceMessage.wxss';
+.van-cell {
+  font-size: 26rpx !important;
+}

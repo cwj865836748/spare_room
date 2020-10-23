@@ -1,18 +1,33 @@
 // pages/mine/mine.js
+import api from '../../request/api.js'
+import {request} from '../../request/index.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    mine:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+     
+  },
+  getMine(){
+    request({url:api.mine.index}).then(res=>{
+       this.setData({
+        mine:res.data.info
+       })
+    })
+  },
+  loginOut(){
+    wx.clearStorageSync();
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
   },
 
   /**
@@ -26,7 +41,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getMine()
   },
 
   /**

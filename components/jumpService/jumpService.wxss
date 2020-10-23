@@ -1,0 +1,25 @@
+/* components/jumpService/jumpService.wxss */
+.service {
+  height: 236rpx;
+  position: relative;
+}
+
+.serviceTitle {
+  text-align: center;
+  color: #333333;
+  font-size: 32rpx;
+  padding: 38rpx 0 34rpx;
+}
+.serviceContent {
+  font-size: 28rpx;
+  text-align: center;
+  color: #666666;
+  letter-spacing: 1rpx;
+}
+.service>image {
+  position: absolute;
+  top:32rpx;
+  right: 32rpx;
+  width: 26rpx;
+  height: 26rpx;
+}

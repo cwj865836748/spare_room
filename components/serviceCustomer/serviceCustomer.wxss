@@ -1,1 +1,29 @@
 /* components/serviceCustomer/serviceCustomer.wxss */
+.movableArea {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+  background-color:transparent;
+}
+.movableView {
+  pointer-events: auto;
+  width: 194rpx;
+  height: 92rpx;
+  background-color:transparent;
+}
+
+
+.servicePerson>image {
+  width: 147rpx;
+ height: 147rpx;
+  /* margin-right: 8rpx; */
+}
+button {
+  border:none;
+  background-color:transparent;
+}
+button::after{
+  border:none;
+}

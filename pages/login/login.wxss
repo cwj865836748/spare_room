@@ -1,1 +1,102 @@
 /* pages/login/login.wxss */
+.login_bg {
+  height: 100%;
+  background: linear-gradient(#8c42ad, #7212a5 35%, #34244f);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.login {
+  height: 100%;
+}
+
+.login>.logo {
+  box-sizing: content-box;
+  padding: 198rpx 298rpx 134rpx;
+}
+
+.login>.logo image {
+  width: 156rpx;
+  height: 156rpx;
+}
+
+.btn {
+  width: 630rpx;
+  height: 100rpx;
+  background: #9200c7;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+  margin: 0rpx 60rpx;
+}
+
+.btn2 {
+  background: #4c1c71;
+  margin: 38rpx 60rpx 0;
+}
+
+.rule {
+  font-size: 24rpx;
+  color: #ffffff;
+  letter-spacing: 0rpx;
+  position: absolute;
+  bottom: 92rpx;
+}
+
+.rule>image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 8rpx;
+  vertical-align: top;
+}
+.rule>.ruleContent>navigator {
+  text-decoration: underline;
+}
+
+.loginSheet {
+  padding: 22rpx 30rpx 40rpx;
+
+}
+
+.loginSheet>.name {
+  color: #333333;
+  text-align: center;
+  font-weight: bold;
+  font-size: 32rpx;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+
+.loginSheet>.name>image {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  right: 0rpx;
+  top: 10rpx;
+
+}
+
+.phoneLogin {
+  width: 100%;
+  height: 84rpx;
+  background: var(--buttonColor);
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+  margin-top: 32rpx;
+}
+
+.van-button {
+
+  border: 2rpx solid #7a0dcb !important;
+  color: #7a0dcb !important;
+  letter-spacing: 1rpx;
+  border-radius: 8rpx !important;
+}

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "AppealStatus":"/components/AppealStatus/AppealStatus",
+    "serviceCustomer": "/components/serviceCustomer/serviceCustomer"
+  },
+  "disableScroll":true
+}

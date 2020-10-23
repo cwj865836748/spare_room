@@ -1,60 +1,8 @@
-var orderStatus = function (status) {
-   switch(status){
-       case 0:
-           return '待支付'
-       case 1:
-           return '待配送'
-       case 2:
-           return '待收货'
-       case 3:
-           return '待评价'
-       case 4:
-           return '已完成'
-       case 5:
-           return '已取消'
-       case 6:
-           return '待结账'
-       case 7:
-           return '已结账'
-   }
-  }
-  var payStatus = function (status) {
-    switch(status){
-        case 0:
-            return '待支付倒计时'
-        case 1:
-            return '订单提交成功'
-        case 2:
-            return '订单已发货'
-        case 3:
-            return '订单已完成'
-        case 4:
-            return '交易成功'
-        case 5:
-            return '交易取消'
-        case 6:
-            return '配送已完成'
-        case 7:
-            return '交易成功'
-    }
-   }
-   var payMethods = function (methods) {
-    switch(methods){
-        case 0:
-            return '微信支付'
-        case 1:
-            return '线下结算'
-            case '0':
-                return '微信支付'
-            case '1':
-                return '线下结算'
-    }
-   }
-
-  var orderPhone = function (cellValue) {
-	var tel = "" + cellValue;
+ var orderPhone = function (cellValue) {
+  var tel = "" + cellValue;
+  
 	// replace()方法在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
-	return tel.replace(tel.substring(3,7), "****")
+	return tel.length>3?tel.replace(tel.substring(3,tel.length-1), "****"):tel
    }
 
    var orderMinutes = function (time) {
@@ -65,7 +13,7 @@ var orderStatus = function (status) {
             min=min < 9?'0' + min : min
             second=second< 9?'0' + second : second
             
-            time = '00:'+ min + ':' + second
+            time =  min + ':' + second
         } else if (time >= 60 * 60 && time < 60 * 60 * 24) {
             var hour =parseInt(time / 3600.0)
             var min =parseInt((parseFloat(time / 3600.0) -
@@ -93,18 +41,303 @@ var orderStatus = function (status) {
     var year = date.getFullYear()
     var month = date.getMonth() + 1
     var day = date.getDate()
-    
-      return year + '-' + month + '-' + day;
-     
-  
+    return year + '.' + month + '.' + day;
 }
+var getTime2 = function (timestamp) {
+  var date = getDate(parseInt(timestamp*1000));
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+  return year + '-' + month + '-' + day;
+}
+var getTime3 = function (timestamp) {
+  var date = getDate(parseInt(timestamp*1000));
+  var hour = date.getHours().toString()
+  var min = date.getMinutes().toString()
+  hour=hour.length>1?hour:'0'+hour
+  min=min.length>1?min:'0'+min
+  return hour + ':' + min 
+}
+var getLiveDate = function(timestampArr) {
+  var startMonth = getDate(timestampArr[0]).getMonth() + 1
+  var startDay = getDate(timestampArr[0]).getDate()
+  var endMonth = getDate(timestampArr[1]).getMonth() + 1
+  var endDay = getDate(timestampArr[1]).getDate()
+  
+  var nowMonth = getDate().getMonth() + 1
+  var nowDate = getDate().getDate()
+  var tomorrowDate= getDate().getDate() + 1
 
+  var dateTitle = startMonth==nowMonth&&startDay==nowDate?'今天':getWeek(getDate(timestampArr[0]))
+  var dateTitle2 = endMonth==nowMonth&&endDay==tomorrowDate?'明天':getWeek(getDate(timestampArr[1]))
+
+  var allDay = parseInt((timestampArr[1] - timestampArr[0])/86400000)
+  return  {
+    startTime:formatNumber(startMonth)+'月'+formatNumber(startDay)+'日',
+    endTime:formatNumber(endMonth)+'月'+formatNumber(endDay)+'日',
+    dateTitle:dateTitle,
+    dateTitle2:dateTitle2,
+    allDay:allDay
+  }
+}
+var getWeek = function(date) {
+   var week = date.getDay()
+   switch(week){
+     case 0 :
+       return '星期日'
+       case 1 :
+       return '星期一'
+       case 2 :
+       return '星期二'
+       case 3 :
+       return '星期三'
+       case 4 :
+       return '星期四'
+       case 5 :
+       return '星期五'
+       case 6 :
+       return '星期六'
+   }
+}
+var formatNumber = function(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+  var breakfastType =function(type) {
+    switch(type){
+      case 0:
+        return '无早';
+        case 1:
+          return '单份早餐';
+          case 2:
+            return '双份早餐';
+            case 3:
+              return '免费早餐';
+              default:
+                return '请选择';
+    }
+  }
+  var vipColor = function(index){
+    switch(index){
+      case 0:
+        return 'pinkSize';
+        case 1:
+          return 'greenSize';
+          case 2:
+            return 'whiteGoldSize';
+            case 3:
+              return 'yellowSize';
+              case 4:
+                return 'whiteBlackSize'
+                case 5:
+                  return 'whiteBlackSize'
+    }
+  }
+  var getMoneyLogType=function(type) {
+    switch(type){
+        case 1:
+          return {idName:'订单ID',content:'订单退款'};
+          case 2:
+            return {idName:'订单ID',content:'申诉补偿'};
+            case 3:
+              return {idName:'好友ID',content:'推荐返佣'};
+              case 4:
+                return  {idName:'提现到微信',content:'提现'};
+                case 5:
+                  return  {idName:'提现到微信',content:'提现失败'};
+                default:
+                return  {idName:'提现到微信',content:'提现'};
+    }
+  }
+  var turnArray=function(isLong,array){
+   return isLong||array.length<=3? array:array.slice(0,3)
+  }
+  var priceDuring =function(array){
+     var min_price=array[0]
+     var max_price=array[1]
+     if(min_price==0&&max_price==1000){
+       return '不限'
+     }else if(min_price!=0&&max_price==1000){
+       return '￥'+min_price+'以上'
+     }else if(min_price==0&&max_price!=1000){
+       return '￥'+max_price+'以下'
+     }else {
+       return '￥'+min_price+'~'+max_price
+     }
+  }
+  var isMultipleChooseChoose = function(list,id){
+    return list.indexOf(parseInt(id))!=-1
+  }
+  var distance = function(meter){
+    var meters = parseInt(meter*1000)
+     var m = meter&&(meter.toString()).split('.')[0]
+     return m?meter.toFixed(1)+'公里':meters+'米'
+  }
+  var cancelRule = function(rule){
+    switch(rule){
+      case 0:
+        return "免费取消"
+        case 1:
+        return "不可取消"
+        case 2:
+        return "限时取消"
+    }
+  }
+  var network = function(wifi){
+    switch(wifi){
+      case 1:
+        return "WIFI免费"
+        case 2:
+        return "优先宽带免费"
+        case 3:
+        return "无网络"
+    }
+  }
+  var picType = function(type){
+    switch(type){
+      case 1:
+        return "外观"
+        case 2:
+        return "房间"
+        case 3:
+        return "餐饮"
+        case 4:
+        return "休闲"
+        case 5:
+        return "商务"
+        case 6:
+        return "公告区域"
+        case 7:
+        return "周边"
+        case 8:
+        return "其他"  
+    }
+  }
+  var canlcelRule =function(type){
+    switch(type){
+      case 0:
+        return "入住前免费取消，入住当天不可取消"
+        case 1:
+        return "下单之后不可取消"
+        case 2:
+        return "入住前1天18点前免费取消，18点后收取10%违约金取消"
+    }
+  }
+  var invoice = function(type){
+    type =parseInt(type)
+    switch(type){
+      case 1:
+        return "普通(电子)"
+        case 2:
+        return "普通(纸质)"
+        case 3:
+        return "专票(纸质)"
+    }
+  }
+  var level = function(level) {
+    switch(level){
+      case 0:
+        return "普通用户"
+        case 1:
+        return "青铜"
+        case 2:
+        return "白银"
+        case 3:
+        return "黄金"
+        case 4:
+        return "白金"
+        case 5:
+        return "钻石"
+    }
+  }
+  var refundStatus = function(type){
+    switch(type){
+      case 1:
+        return {size:"退款中",font:'purpleSize'}
+        case 2:
+          return {size:"退款成功",font:'greenSize'}
+        case 3:
+          return {size:"退款失败",font:'redSize'}
+    }
+  }
+  var orderStatus = function(type){
+    switch(type){
+      case 0:
+        return {size:"待支付",font:'purpleSize'}
+        case 1:
+        return {size:"待确认",font:'purpleSize'}
+        case 2:
+        return {size:"已确认",font:'greySize'}
+        case 3:
+          return {size:"已完成",font:'greenSize'}
+        case 4:
+          return {size:"已取消",font:'greySize'}
+        case 5:
+          return {size:"已关闭",font:'greySize'}
+    }
+  }
+  var onlyTime = function(time){
+    var baseTime = time - parseInt(getDate().getTime()/1000)
    
+    if (baseTime>0) {
+      if (baseTime > 60 ) {
+          baseTime = '剩余'+parseInt(baseTime / 60)+'分钟'
+      } else {
+          baseTime="少于一分钟"
+      }
+    } else {
+      baseTime = ''
+    }
+    return baseTime   
+  }
+  var percentage = function(ok,will){
+    var num = ok>=will?100:(ok/will)*100
+    return num.toFixed(0)
+  }
+  var toFix = function(money){
+    return money&&money.toFixed(2)
+  }
+  var getCardHead = function(index){
+    switch(index) {
+      case 0:
+        return 'putongHeadCard'
+        case 1:
+          return 'qintongHeadCard'
+          case 2:
+            return 'baiyinHeadCard'
+            case 3:
+              return 'huangjinHeadCard'
+              case 4:
+                return 'baijinHeadCard'
+                case 5:
+                  return 'zuanshiHeadCard'
+    }
+  }
+  
   module.exports = {
-    orderStatus: orderStatus,
     orderPhone:orderPhone,
-    payStatus:payStatus,
     orderMinutes:orderMinutes,
-    payMethods:payMethods,
-    getTime:getTime
+    getTime:getTime,
+    getTime2:getTime2,
+    breakfastType:breakfastType,
+    vipColor:vipColor,
+    getLiveDate:getLiveDate,
+    getMoneyLogType:getMoneyLogType,
+    turnArray:turnArray,
+    priceDuring:priceDuring,
+    isMultipleChooseChoose:isMultipleChooseChoose,
+    distance:distance,
+    cancelRule:cancelRule,
+    network:network,
+    picType:picType,
+    canlcelRule:canlcelRule,
+    invoice:invoice,
+    level:level,
+    refundStatus:refundStatus,
+    orderStatus:orderStatus,
+    onlyTime:onlyTime,
+    getTime3:getTime3,
+    percentage:percentage,
+    toFix:toFix,
+    getCardHead:getCardHead
   };

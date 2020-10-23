@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-        "navbar": "/components/navbar/navbar"
-  }
+        "navbar": "/components/navbar/navbar",
+        "van-switch": "@vant/weapp/switch/index",
+        "van-field": "@vant/weapp/field/index"
+  },
+  "disableScroll":true
 }

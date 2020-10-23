@@ -1,12 +1,23 @@
 <!--components/navbar/index.wxml-->
-<view class="navbar" style='height:{{navHeight}}px;background-color:{{headColor}};'>
-  <view style='height:{{statusBarHeight}}px;background-color:{{headColor}};'/>
-  <view class="title-container" style='height:{{navHeight-statusBarHeight}}px;'>
-     <van-icon name="arrow-left" wx:if='{{back}}' bindtap="goBack"/>
-     <van-icon name="wap-home-o" wx:if='{{home}}' bindtap="goHome"/>
-    <view class="title_head">{{title}}</view>
-  </view>
-  </view>
-<view style='padding-top:{{navHeight}}px;'></view>
+<!--1：position:relative Or 2：position:fixed-->
 
- 
+<view class="{{navbarType==2||navbarType==4?'navbarFixed':'navbar'}}" style='height:{{navHeight}}px;background-color:{{headColor}};'>
+	<view style='height:{{statusBarHeight}}px;background-color:{{headColor}};' />
+	<view class="title-container" style='height:{{navHeight-statusBarHeight}}px;'>
+		<van-icon name="arrow-left" wx:if='{{back}}' bindtap="goBack" style='color:{{titleColor}};' />
+		<van-icon name="wap-home-o" wx:if='{{home}}' bindtap="goHome" style='color:{{titleColor}};' />
+		<view class="title_head" style='color:{{titleColor}};'>{{title}}</view>
+	</view>
+</view>
+<view wx:if="{{navbarType==1}}" class="content" style="height: calc(100vh - {{navHeight}}px);background:{{backgroundColor}};">
+	<slot></slot>
+</view>
+<view wx:if="{{navbarType==2}}" style="padding-top:{{navHeight}}px;">
+ <slot></slot>
+</view>
+<scroll-view scroll-y="{{true}}" bindscroll='scroll' wx:if="{{navbarType==3}}" style="height:100%;margin-top:-{{navHeight-0.1}}px;" bindscrolltolower="scrolltolower">
+<slot></slot>
+</scroll-view>
+<view wx:if="{{navbarType==4}}" style="height:100%">
+ <slot></slot>
+</view>

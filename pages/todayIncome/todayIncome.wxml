@@ -1,0 +1,11 @@
+<!--pages/todayIncome/todayIncome.wxml-->
+<wxs src="../../wxs/filter.wxs" module="filter"/>
+<navbar title="今日收益明细">
+	<scroll-view style="height:100%" scroll-y="true" bindscrolltolower="onReachBottom">
+		<view class="inComeList">
+			<include src="/components/inCome/inCome.wxml" />
+			<include src="/components/noData/noData.wxml"/>
+		</view>
+	</scroll-view>
+	<serviceCustomer/>
+</navbar>

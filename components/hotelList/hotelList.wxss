@@ -1,0 +1,99 @@
+
+ .hotelDetail {
+  height: 348rpx;
+  width: 100%;
+  padding-bottom: 28rpx;
+}
+
+ .hotelDetail>image {
+  height: 320rpx;
+  width: 240rpx;
+  margin-right: 24rpx;
+  border-radius: 8rpx;
+}
+
+ .hotelDetail>.hotelMsg {
+  width: calc(100% - 240rpx);
+}
+
+ .hotelDetail>.hotelMsg>view>.name {
+  font-size: 34rpx;
+  color: #333333;
+  letter-spacing: 1rpx;
+  font-weight: bold;
+}
+
+.hotelDetail>.hotelMsg>view>.EnglishName {
+  font-size: 26rpx;
+  color: #999999;
+  margin-bottom: 18rpx;
+}
+
+ .hotelDetail>.hotelMsg>view>.label {
+  margin-bottom: 10rpx;
+}
+
+ .hotelDetail>.hotelMsg>view>.label>view {
+  background: #ffffff;
+  border-radius: 26rpx;
+  padding: 8rpx 12rpx;
+  font-size: 24rpx;
+  letter-spacing: 0rpx;
+  margin-right: 20rpx;
+  
+}
+
+.violet {
+  border: 2rpx solid #780acc;
+  color: #780acc;
+}
+
+.violetSize {
+  color: #780acc;
+}
+
+.grey {
+  border: 2rpx solid #666666;
+  color: #666666;
+  width: auto !important;
+}
+
+.orange {
+  border: 2rpx solid #ff8c38;
+  color: #ff8c38;
+}
+
+.yellow {
+  background: #ffbc00 !important;
+  border: 2rpx solid #ffbc00;
+  color: #ffffff;
+
+}
+
+ .hotelDetail>.hotelMsg>.distanceAndPdirce>view:first-child {
+  font-size: 26rpx;
+  color: #333333;
+  letter-spacing: 1rpx;
+
+}
+
+ .hotelDetail>.hotelMsg>.distanceAndPdirce>view:last-child>text:first-child {
+  font-size: 24rpx;
+  text-decoration: line-through;
+  color: #999999;
+  letter-spacing: 0rpx;
+}
+
+ .hotelDetail>.hotelMsg>.distanceAndPdirce>view:last-child>text:last-child {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #e3311a;
+  letter-spacing: 1rpx;
+}
+
+ .hotelDetail>.hotelMsg>.distanceAndPdirce>view:last-child>text:last-child::after {
+  content: '起';
+  font-size: 26rpx;
+  color: #666666;
+  letter-spacing: 1rpx;
+}

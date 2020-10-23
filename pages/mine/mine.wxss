@@ -1,1 +1,222 @@
 /* pages/mine/mine.wxss */
+.mine {
+  width: 100%;
+  background: linear-gradient(213deg, #8c42ad 12%, #7212a5 34%, #34244f 83%);
+  padding: 180rpx 30rpx 168rpx;
+
+}
+
+.mineHead>.mineAvatar {
+  width: 216rpx;
+  height: 216rpx;
+  border-radius: 50%;
+  margin-bottom: 18rpx;
+  overflow: hidden;
+}
+
+
+.mineHead>.mineAvatar>image {
+  width: 100%;
+  height: 100%;
+}
+
+.mineHead>.mineLevel {
+  position: absolute;
+  bottom: 26rpx;
+}
+
+
+.mineHead>.mineLevel>.line {
+  width: 344rpx;
+  height: 123rpx;
+}
+
+.mineHead>.mineLevel>.line2 {
+  width: 349rpx;
+  height: 332rpx;
+}
+
+.mineHead>.mineLevel>.user {
+  width: 20rpx;
+  height: 22rpx;
+  position: absolute;
+  top: 47%;
+  left: 33%;
+
+}
+
+.mineHead>.mineLevel>.qingTong {
+  width: 22rpx;
+  height: 22rpx;
+  position: absolute;
+  top: 47%;
+  left: 33%;
+
+}
+
+.mineHead>.mineLevel>.baiYing {
+  width: 22rpx;
+  height: 26rpx;
+  position: absolute;
+  top: 46%;
+  left: 33%;
+
+}
+
+.mineHead>.mineLevel>.gold {
+  width: 25rpx;
+  height: 18rpx;
+  position: absolute;
+  top: 49%;
+  left: 32%;
+}
+
+.mineHead>.mineLevel>.baiJing {
+  width: 22rpx;
+  height: 18rpx;
+  position: absolute;
+  top: 49%;
+  left: 33%;
+}
+
+.mineHead>.mineLevel>.zuanShi {
+  width: 20rpx;
+  height: 20rpx;
+  position: absolute;
+  bottom: 16%;
+  left: 32%;
+}
+.mineHead>.mineLevel>.zuanShiHG {
+  width: 160rpx;
+  height: 160rpx;
+  position: absolute;
+  left: 30rpx;
+  top: -2rpx;
+}
+
+.mineHead>.mineLevel>.goldName {
+  font-size: 22rpx;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+  position: absolute;
+  top: 45%;
+  left: 40%;
+}
+
+.mineHead>.mineLevel>.goldName2 {
+  font-size: 22rpx;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+  position: absolute;
+  bottom: 15%;
+  left: 39%;
+}
+
+
+.mineHead>.mineName {
+  font-size: 36rpx;
+  color: #ffffff;
+  letter-spacing: 1rpx;
+  font-weight: bold;
+}
+
+.mineDetail {
+  height: 378rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  padding: 22rpx 30rpx 38rpx;
+  margin-top: 24rpx;
+}
+
+.mineDetail>.mineDetailTop {
+  padding-bottom: 22rpx;
+  border-bottom: 2rpx solid #f6f6f6;
+}
+
+.mineDetail>.mineDetailTop:last-child {
+  padding-top: 26rpx;
+  border-bottom: none;
+  padding-bottom: 0rpx;
+}
+
+.mineDetail>.mineDetailTop>.mineDetailTile {
+  font-size: 28rpx;
+  color: #aaaaaa;
+  letter-spacing: 2rpx;
+  margin-bottom: 28rpx;
+}
+
+.mineDetail>.mineDetailTop>.mineDetailContent>view:first-child {
+  font-size: 52rpx;
+  color: #333333;
+  letter-spacing: 2rpx;
+  font-weight: bold;
+}
+
+.mineDetail>.mineDetailTop>.mineDetailContent>view:last-child {
+  font-size: 24rpx;
+  color: #cccccc;
+  letter-spacing: 1rpx;
+}
+
+.mineDetail>.mineDetailTop>.mineDetailContent>view>image {
+  width: 13rpx;
+  height: 23rpx;
+}
+
+.mineOrder {
+  height: 94rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  margin: 16rpx 0;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #555555;
+  letter-spacing: 2rpx;
+}
+
+.mineOrder>view:last-child {
+  color: #cccccc;
+  letter-spacing: 1rpx;
+  font-size: 24rpx;
+}
+
+.mineMenu {
+  height: 148rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  padding: 0 26rpx 0 30rpx;
+}
+
+.mineMenu>.menuDetail>image {
+  width: 64rpx;
+  height: 64rpx;
+  margin-bottom: 8rpx;
+}
+
+.mineMenu>.menuDetail>view {
+  color: #6405b2;
+  letter-spacing: 1rpx;
+  font-size: 24rpx;
+}
+
+.loginOut {
+  height: 88rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8rpx;
+  box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(0, 0, 0, 0.16);
+  font-size: 32rpx;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+  margin-top: 64rpx;
+}
+
+button {
+  background-color: transparent;
+  line-height: inherit;
+
+}
+
+button::after {
+  border: none
+}

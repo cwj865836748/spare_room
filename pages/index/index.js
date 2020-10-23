@@ -1,53 +1,105 @@
-
 const App=getApp()
 var utils = require('../../utils/util.js')
+import api from '../../request/api.js'
+import {request} from '../../request/index.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    swiperList:[],//轮播图
+    notice:'',//走马灯宣传
     calendarShow:false,
-    low: 0,
-    heigh: 100,
+    defaultCity:{},
+    defaultDate:[],
+    defaultKeyWords:'',
+    iconList:[
+      {icon:'../../images/home_low_price@2x.png',name:'全网低价'},
+      {icon:'../../images/home_star_treatment@2x.png',name:'五星待遇'},
+      {icon:'../../images/home_housing@2x.png',name:'房源保障'},
+      {icon:'../../images/home_professional_services@2x.png',name:'专业服务'}
+    ]
   },
-
   
-
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-     utils.getAuth().then(re=>{
-       console.log(re)
-     })
-   
+    this.getLocation()
   },
+  //加载轮播图和公告
+  getInit(){
+     const getPromise=[api.index.advert,api.index.notice].map(item=>{
+       return request({url:item})
+     })
+     Promise.all(getPromise).then(res=>{
+       const notice=res[1].data.list.map(item=>{
+         return item.title
+       })
+       this.setData({
+        swiperList:res[0].data.list,
+        notice:notice.join(',').replace(/,/g, " ")  
+       })
+     })
+  },
+
+  //开启日历
   openCalendar(){
     this.setData({
       calendarShow:true
     })
   },
+  //关闭日历
   closeCalendar(){
     this.setData({
       calendarShow:false
     })
+    this.getStatus()
+  },
+  //获取当前位置
+  getLocation(){
+    const {defaultCity} = App.globalData
+    utils.getAuth().then(res=>{
+      const {address_component,location} = res.result
+      //避免相同位置多次点击触发
+      if(location.lat==defaultCity.lat&&location.lng==defaultCity.lng){
+        return
+      }
+      request({url:api.config.cityConversion,data:{city_name:address_component.city}}).then(city=>{
+        const defaultCity={
+          name:address_component.city,
+          ...location,
+          ...city.data
+        }
+        App.globalData.defaultCity=defaultCity
+        App.getAreaAndRoom()
+        this.getStatus()
+       })
+      }) 
+  },
+ 
+  
+  //更新状态
+  getStatus(){
+    const {defaultDate,defaultCity,defaultKeyWords} = App.globalData
+    this.setData({
+      defaultDate,defaultCity,defaultKeyWords
+    })
+  },
+  cleanSearch(){
+    App.globalData.defaultKeyWords=''
+    this.setData({
+      defaultKeyWords:''
+    })
+  },
+  jumpTab(e){
+    const {url} = e.currentTarget.dataset
+     wx.navigateTo({
+       url
+     })
   },
   
-  lowValueChangeAction: function (e) {
-    this.setData({
-      low: e.detail.lowValue
-    })
-  },
-
-  heighValueChangeAction: function (e) {
-    this.setData({
-      heigh: e.detail.heighValue
-    })
-  },
-
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -59,7 +111,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+    this.getStatus()
+    this.getInit()
   },
 
   /**

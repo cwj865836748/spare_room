@@ -1,0 +1,11 @@
+/* pages/softwareRule/softwareRule.wxss */
+.van-tabs__line {
+  background-color:#780acc!important;
+  bottom: 10rpx!important;
+}
+.van-tab--active {
+  color: #780acc!important;
+}
+.vanTabContent {
+  padding: 0 16rpx;
+}

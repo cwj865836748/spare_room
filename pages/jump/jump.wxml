@@ -1,0 +1,6 @@
+<!--pages/jump/jump.wxml-->
+<navbar title='商家申请入驻平台'>
+<view class="jumpContent">
+	<include src="/components/jumpService/jumpService.wxml"/>
+</view>
+</navbar>

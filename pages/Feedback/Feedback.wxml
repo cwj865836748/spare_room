@@ -1,0 +1,25 @@
+<!--pages/Feedback/Feedback.wxml-->
+<navbar title="意见反馈">
+	<view class="appealForm">
+		<van-field value="{{ content }}" type="textarea" autosize placeholder="请输入您的意见反馈" border="{{ false }}"  bind:change="onChange"/>
+		<view class="appealFont">支付凭证（仅支持.jpg等格式）</view>
+		<view class="picList flex-wrap">
+			<block wx:for="{{img_url}}" wx:key="index">
+				<view class="picDetail">
+					<image mode="aspectFill" src="{{item}}" catchtap="previewImg" data-current="{{item}}"></image>
+					<view class="closeIcon flex-xy-center" bindtap="delImage" data-index="{{index}}">
+						<van-icon name="cross" color="#fff" size="12px"/>
+					</view>
+				</view>
+			</block>
+			<view class="picDetail" bindtap="uploadImage" wx:if="{{count>img_url.length}}">
+				<image src="/images/upload_pictures@2x.png"></image>
+			</view>
+		</view>
+		<view class="submitBtn flex-xy-center" bindtap="submit">提交</view>
+	</view>
+	<van-dialog use-slot show="{{ isShow }}" confirm-button-color="#5302ad">
+		<view class="submitOk flex-xy-center">您已提交成功,感谢反馈</view>
+	</van-dialog>
+	<serviceCustomer/>
+</navbar>

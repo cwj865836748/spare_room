@@ -1,0 +1,18 @@
+<view class="facilities">
+	<block wx:for="{{hotelFacilitiesList}}" wx:key="index">
+		<view class="eq">
+			<view class="title">{{item.name}}</view>
+			<view class="service flex-wrap">
+				<view wx:for="{{item.second}}" wx:key="indexs" wx:for-item="items">{{items}}</view>
+			</view>
+		</view>
+	</block>
+	<!-- <view class="seeEq flex-xy-center">
+		<text>收起酒店设施</text>
+		<image src="../../images/hotel_roomdetails_takeback@2x.png"></image>
+	</view>
+	<view class="seeEq flex-xy-center" wx:if="{{false}}">
+		<text>查看更多酒店设施</text>
+		<image src="../../images/hotel_roomdetails_pulldown@2x.png"></image>
+	</view> -->
+</view>

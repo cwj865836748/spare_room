@@ -1,0 +1,5 @@
+/* pages/memberIntroduction/memberIntroduction.wxss */
+@import "../../wxParse/wxParse.wxss";
+.content {
+  padding:30rpx;
+}

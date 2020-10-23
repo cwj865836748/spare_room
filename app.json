@@ -11,7 +11,25 @@
     "pages/hotelIntroduction/hotelIntroduction",
     "pages/hotelPicture/hotelPicture",
     "pages/roomReservation/roomReservation",
-    "pages/invoiceMessage/invoiceMessage"
+    "pages/invoiceMessage/invoiceMessage",
+    "pages/address/address",
+    "pages/order/order",
+    "pages/cancleOrder/cancleOrder",
+    "pages/orderDetail/orderDetail",
+    "pages/Appeal/Appeal",
+    "pages/jump/jump",
+    "pages/collect/collect",
+    "pages/myScore/myScore",
+    "pages/Feedback/Feedback",
+    "pages/releaseRequirements/releaseRequirements",
+    "pages/evaluation/evaluation",
+    "pages/memberIntroduction/memberIntroduction",
+    "pages/goodFriends/goodFriends",
+    "pages/todayIncome/todayIncome",
+    "pages/withdraw/withdraw",
+    "pages/invitePicture/invitePicture",
+    "pages/inComeDetail/inComeDetail",
+    "pages/softwareRule/softwareRule"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -20,7 +38,32 @@
     "navigationBarTextStyle":"black",
     "navigationStyle":"custom"
   },
-  
+  "tabBar": {
+    "color": "#cccccc",
+    "selectedColor": "#49047a",
+    "borderStyle": "white",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tabbar/home_un.png",
+        "selectedIconPath": "images/tabbar/home.png"
+      },
+      {
+        "pagePath": "pages/recommend/recommend",
+        "text": "推荐",
+        "iconPath": "images/tabbar/recommend_un.png",
+        "selectedIconPath": "images/tabbar/recommend.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/tabbar/mine_un.png",
+        "selectedIconPath": "images/tabbar/mine.png"
+      }
+    ]
+  },
   "sitemapLocation": "sitemap.json",
   "permission": {
     "scope.userLocation": {

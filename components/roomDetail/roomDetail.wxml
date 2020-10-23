@@ -1,0 +1,67 @@
+<!--房型详情弹框-->
+<van-action-sheet show="{{ roomDetailShow }}" bind:click-overlay="closeHotelDetailShow">
+	<view class="hotelSheet">
+		<image src="../../images/delete@2x.png" bindtap="closeHotelDetailShow"></image>
+		<!-- padding: 76rpx 30rpx 36rpx; -->
+		<scroll-view scroll-y style="max-height:460px;">
+			<view style="padding:0 30rpx">
+				<view class="pic">
+					<image src="{{roomDetail.img_url}}"></image>
+				</view>
+				<view class="bedDetail">
+					<text>{{roomDetail.room_name}}</text>
+					<view class='showBedDetail'>
+						<view class="bedEq">
+							<view class="detail flex-wrap flex-x-between">
+								<view class="flex-y-center flex-x-start">
+									<image src="/images/double_bed@2x.png"></image>
+									<text>{{roomDetail.bed_type}}</text>
+								</view>
+								<view class="flex-y-center flex-x-start">
+									<image src="/images/no_smoking@2x.png"></image>
+									<text>{{roomDetail.is_smoke}}</text>
+								</view>
+								<view class="flex-y-center flex-x-start text-more-single">
+									<image src="/images/square@2x.png"></image>
+									<text>{{roomDetail.area}}平方米</text>
+								</view>
+								<view class="flex-y-center flex-x-start">
+									<image src="/images/window@2x.png"></image>
+									<text>{{roomDetail.is_window?"有窗户":"无窗户"}}</text>
+								</view>
+								<view class="flex-y-center flex-x-start">
+									<image src="/images/floor@2x.png"></image>
+									<text>{{roomDetail.floor}}层</text>
+								</view>
+								<view class="flex-y-center flex-x-start">
+									<image src="/images/wifi@2x.png"></image>
+									<text>{{filter.network(roomDetail.network)}}</text>
+								</view>
+							</view>
+						</view>
+						<view class="bedSort">
+							<text>费用政策</text>
+							<view>关于加床，该房型{{roomDetail.is_window?'可加床':'不可加床'}}</view>
+						</view>
+						<block wx:for="{{roomDetail.list}}" wx:key="index" wx:for-item="room">
+							<view class="bedSort">
+								<text>{{room.name}}</text>
+								<view>{{room.second}}</view>
+							</view>
+						</block>
+
+						<!-- <view class="hotelShow flex-xy-center">
+					<text>查看更多房型设施</text>
+					<image src="/images/hotel_roomdetails_pulldown@2x.png"></image>
+				</view>
+
+				<view class="hotelShow flex-xy-center" wx:if="{{false}}">
+					<text>收起房型信息</text>
+					<image src="../../images/hotel_roomdetails_takeback@2x.png"></image>
+				</view> -->
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</van-action-sheet>

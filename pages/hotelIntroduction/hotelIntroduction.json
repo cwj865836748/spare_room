@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "navbar": "/components/navbar/navbar"
-
-  }
+    "navbar": "/components/navbar/navbar",
+    "van-rate": "@vant/weapp/rate/index"
+  },
+  "disableScroll":true
 }

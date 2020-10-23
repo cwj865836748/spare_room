@@ -1,5 +1,16 @@
 {
   "usingComponents": {
-    "navbar": "/components/navbar/navbar"
-  }
+    "navbar": "/components/navbar/navbar",
+    "van-rate": "@vant/weapp/rate/index",
+    "wux-slider": "/components/sliders/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "calendar":"/components/calendar/calendar",
+    "hotelRequire":"/components/hotelRequire/hotelRequire"
+  },
+  "disableScroll":true
 }

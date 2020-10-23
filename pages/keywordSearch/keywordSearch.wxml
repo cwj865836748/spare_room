@@ -1,2 +1,103 @@
 <!--pages/hotelSearch/hotelSearch.wxml-->
-<navbar title="酒店搜索" ></navbar>
+<wxs src = "../../wxs/filter.wxs" module="filter"/>
+<navbar title="搜索">
+	<view class="keyWord">
+		<view class="search flex-y-center">
+			<image src="../../images/search@2x.png"></image>
+			  <van-field
+         value="{{ defaultKeyWords }}"
+         placeholder="关键字/位置/集团/酒店名"
+         border="{{ false }}"
+         bind:change="onChange"
+				 confirm-type="搜索"
+				 bind:confirm="confirm"
+				 type="text"
+				 clearable
+				 class="flex-grow-1"
+  />
+		</view>
+	</view>
+
+	<view class="content">
+		<!--历史记录-->
+		<view class="title" wx:if="{{historySearchList.length}}">
+			<view class="head flex-y-center">
+				<view class="flex-y-center">
+					<image src="../../images/history@2x.png"></image>
+					<text class="black">历史记录</text>
+				</view>
+				<text bindtap="clearHistory">清空</text>
+			</view>
+			<view class="center longHisHidden">
+				<block wx:for="{{historySearchList}}" wx:key="index">
+					<view class="name text-more-single" bindtap="chooseCity" data-name="{{item}}">
+						{{item}}
+					</view>
+				</block>
+			</view>
+		</view>
+		<!--热搜关键字-->
+		<view class="title">
+			<view class="head flex-y-center">
+				<view class="flex-y-center">
+					<image src="../../images/top_search@2x.png"></image>
+					<text class="black">热搜关键字</text>
+				</view>
+				<view class="flex-y-center" bindtap="openAll" wx:if="{{isHotKeyWordListIsLong}}" data-key="hotKeyWordListIsLong">
+					<text>{{hotKeyWordListIsLong?"收起":"展开"}}</text>
+					<image src="../../images/down@2x.png" class="{{hotKeyWordListIsLong?'rotate':''}}"></image>
+				</view>
+			</view>
+			<view id="hot" class="center {{isHotKeyWordListIsLong&&!hotKeyWordListIsLong?'longHidden':''}}">
+				<block 
+        wx:for="{{hotKeyWordList}}" wx:key="index">
+					<view class="name text-more-single hotKeyWord" bindtap="chooseCity" data-name="{{item.name}}">
+						{{item.name}}
+					</view>
+				</block>
+			</view>
+		</view>
+		<!--行政区-->
+		<view class="title">
+			<view class="head flex-y-center">
+				<view class="flex-y-center">
+					<image src="../../images/area@2x.png"></image>
+					<text class="black">行政区</text>
+				</view>
+				<view class="flex-y-center"  bindtap="openAll" data-key="policyListIsLong" wx:if="{{isPolicyListIsLong}}">
+					<text>{{policyListIsLong?"收起":"展开"}}</text>
+					<image src="../../images/down@2x.png" class="{{policyListIsLong?'rotate':''}}"></image>
+				</view>
+				<!-- <serviceCustomer class="service"/> -->
+			</view>
+			<view id="policy" class="center {{isPolicyListIsLong&&!policyListIsLong?'longHidden':''}}">
+				<block wx:for="{{policyList}}" wx:key="index">
+					<view class="hotKeyWord name text-more-single" bindtap="chooseCity" data-name="{{item.name}}">
+						{{item.name}}
+					</view>
+				</block>
+			</view>
+		</view>
+		<!--集团-->
+		<view class="title">
+			<view class="head flex-y-center">
+				<view class="flex-y-center">
+					<image src="../../images/group@2x.png"></image>
+					<text class="black">集团</text>
+				</view>
+
+				<view class="flex-y-center"  bindtap="openAll" data-key="groupListIsLong" wx:if="{{isGroupListIsLong}}">
+					<text>{{groupListIsLong?"收起":"展开"}}</text>
+					<image src="../../images/purpleIcon.jpg" class="{{groupListIsLong?'rotate':''}}"></image>
+				</view>
+			</view>
+			<view class="center {{isGroupListIsLong&&!groupListIsLong?'longHidden':''}}" id="group">
+				<block wx:for="{{groupList}}" wx:key="index">
+					<view class="hotKeyWord name text-more-single" bindtap="chooseCity" data-name="{{item.name}}">
+						{{item.name}}
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+</navbar>

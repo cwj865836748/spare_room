@@ -9,4 +9,6 @@
   title="选择日期"
   formatter="{{ formatter }}"
   default-date="{{defaultDate}}"
+  show-confirm="{{ false }}"
+  color="#73009D"
 />

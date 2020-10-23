@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "van-field": "@vant/weapp/field/index",
+    "cityPicker":"/components/cityPicker/cityPicker"
+  },
+  "disableScroll":true
+}

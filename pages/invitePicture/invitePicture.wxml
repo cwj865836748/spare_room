@@ -1,0 +1,16 @@
+<!--pages/invitePicture/invitePicture.wxml-->
+<navbar title="邀请图片">
+   <view class="inviteBg">
+	   <image src="/images/invite_bg@2x.png" class="inviteImg"></image>
+		 <view class="avatr">
+		   <image src="/images/mine/default_avatar@2x.png"></image>
+		 </view>
+		 <view class="disCount">全场{{discount}}折</view>
+		 <image src="{{qrcode}}" class="codePic"></image>
+	 </view>
+	<view class="recommendInvite flex">
+		<button class="flex-xy-center flex-grow-1" bindtap='onShareAppMessage' open-type="share">分享</button>
+		<view class="flex-xy-center flex-grow-1" bindtap="keepPic">保存图片</view>
+	</view>
+	<canvas  style="width:375px;height:724px;position:fixed;top:9999px" canvas-id="mycanvas"/>
+</navbar>

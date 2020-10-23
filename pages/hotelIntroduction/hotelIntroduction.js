@@ -1,20 +1,53 @@
 // pages/hotelIntroduction/hotelIntroduction.js
+import api from '../../request/api.js'
+import {request} from '../../request/index.js'
+import {turnImg} from '../../utils/util.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    hotelDetail:{},
+    hotelFacilitiesList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getInit(options)
   },
-
+  getInit(hotel){
+    const {id:hotel_id,longitude,latitude} = hotel
+    //酒店详情
+    const hotelDl = request({url:api.hotel.index,data:{hotel_id,longitude,latitude}})
+     //酒店设施 酒店轮播图
+    const promise = [api.hotel.hotelFacilities].map(url=>{
+      return request({url,data:{hotel_id}})
+    })
+    Promise.all([hotelDl,...promise]).then(res=>{
+      let {policy,content} = res[0].data.info
+      policy=turnImg(policy)
+      content=turnImg(content)
+      const hotelDetail ={...res[0].data.info,policy,content}
+        this.setData({
+          hotelDetail,
+          hotelFacilitiesList:res[1].data.list
+        })
+    })
+  },
+  toPhone(){
+    wx.makePhoneCall({
+      phoneNumber: this.data.hotelDetail.phone,
+      success: function () {
+        console.log("拨打电话成功！")
+      },
+      fail: function () {
+        console.log("拨打电话失败！")
+      }
+      })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

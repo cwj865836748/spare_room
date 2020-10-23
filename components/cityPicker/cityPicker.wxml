@@ -1,0 +1,11 @@
+<!--components/cityPicker/cityPicker.wxml-->
+<van-popup show="{{ addressChooseShow }}" position="bottom">
+<van-picker
+  show-toolbar
+  columns="{{ columns }}"
+  value-key="fullname"
+  bind:change="onChange"
+  bind:confirm="confirm"
+  bind:cancel="cancel"
+/>
+</van-popup>

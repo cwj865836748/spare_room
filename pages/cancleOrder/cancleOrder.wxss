@@ -1,0 +1,68 @@
+/* pages/cancleOrder/cancleOrder.wxss */
+.cancelContent {
+  height: 100%;
+  background: #F9F9F9;
+  padding: 28rpx 30rpx 0;
+}
+
+.cancelReason {
+  height: 108rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  padding: 0rpx 20rpx 0rpx 30rpx;
+  font-size: 26rpx;
+  color: #999999;
+letter-spacing: 2rpx;
+}
+.cancelReason>view {
+  width: 490rpx;
+height: 68rpx;
+border: 2rpx solid #cccccc;
+border-radius: 4rpx;
+font-size: 26rpx;
+color: #aaaaaa;
+letter-spacing: 2rpx;
+padding: 0 20rpx;
+}
+.cancelReason>view>image {
+  width: 16rpx;
+  height: 16rpx;
+}
+.van-cell {
+  border-radius: 8rpx;
+  height: 256rpx;
+  margin: 28rpx 0 90rpx;
+}
+.cancelBtn {
+  height: 88rpx;
+  border-radius: 8rpx;
+  background: var(--buttonColor);
+  font-size: 32rpx;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+}
+.cancelOrder {
+  padding: 48rpx 50rpx 52rpx 36rpx;
+  letter-spacing: 1rpx;
+  color: #333333;
+}
+.van-field__input--textarea {
+  height: 200rpx !important;
+}
+.formTextarea {
+  width: 100%;
+  height: 256rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  margin-top: 22rpx;
+  padding: 26rpx 32rpx;
+  font-size: 26rpx;
+  color: #aaaaaa;
+  margin: 28rpx 0 90rpx;
+
+}
+.van-field__placeholder {
+  font-size: 26rpx !important;
+  color: #aaaaaa !important;
+  
+}

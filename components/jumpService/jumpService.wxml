@@ -1,0 +1,9 @@
+<!--components/jumpService/jumpService.wxml-->
+	<!--联系客服-->
+	<van-dialog use-slot show="{{ true }}" show-confirm-button="{{false}}" overlay="{{overlay}}">
+	  <view class="service">
+		  <view class="serviceTitle">联系客服</view>
+			<view class="serviceContent"> 跳转至微信小程序客服</view>
+			<image src="/images/close_gary@2x.png"></image>
+		</view>
+	</van-dialog>

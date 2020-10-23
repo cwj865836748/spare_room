@@ -1,2 +1,40 @@
 <!--pages/login/login.wxml-->
-<text>登录</text>
+<navbar title="" back="{{false}}" home="{{true}}" headColor="transparent" navbarType="4" titleColor="#fff">
+<view class="login_bg"></view>
+<view class="login por">
+	<view class="logo">
+		<image src="../../images/login_logo@2x.png"></image>
+	</view>
+	<view wx:if="{{canIUse}}">
+		<!-- <button class="btn flex-xy-center" open-type="getUserInfo" bindgetuserinfo="wxLogin">微信一键登录</button> -->
+		<button class="btn flex-xy-center" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">手机号一键登录</button>
+		<button class="btn btn2 flex-xy-center" bindtap="openPhoneLogin">其他手机登录</button>
+	</view>
+	<view wx:else>请升级微信版本</view>
+	<view class="rule flex-x-center" style="width:100%">
+		<image src="../../images/login_check@2x.png" wx:if="{{isCheck}}" bindtap="toCheck" data-check="{{false}}"></image>
+		<image src="../../images/login_check_un@2x.png" wx:else bindtap="toCheck" data-check="{{true}}"></image>
+		<view class="ruleContent flex">已阅读并同意以下协议：<navigator hover-class="none" url="/pages/softwareRule/softwareRule?index=0">服务条款</navigator>，<navigator hover-class="none" url="/pages/softwareRule/softwareRule?index=1">隐私条款</navigator>，<navigator hover-class="none" url="/pages/softwareRule/softwareRule?index=2">免责声明</navigator></view>
+	</view>
+	<van-action-sheet show="{{ phoneShow }}">
+	  <view class="loginSheet">
+	  	<view class="name">
+		  	<text>短信验证登录</text>
+			  <image src="../../images/close_gary@2x.png" bindtap="closePhoneLogin"></image>
+		  </view>
+		  <van-cell-group>
+		  	<van-field value="{{ phone }}"  clearable placeholder="请输入手机号" bind:change="onChange"
+			   maxlength="11" data-key="phone" cursor-spacing="100" disabled="{{phoneDisabled}}" bind:focus="inputFocus" bind:blur="inputBlur" data-name="phone"/>
+		  	<van-field value="{{ phone_code }}" center clearable  
+			    maxlength="6" placeholder="请输入短信验证码" data-key="phone_code" 
+		  	bind:change="onChange" use-button-slot cursor-spacing="100" disabled="{{codeDisabled}}" bind:focus="inputFocus" bind:blur="inputBlur" data-name="code">
+				<van-button slot="button"
+				 disabled="{{setTime}}" size="small" type="info" plain bindtap="getCode">{{codeName}}
+				</van-button>
+		    </van-field> 
+	  	</van-cell-group>
+		  <view class="phoneLogin flex-xy-center" bindtap="codeLogin">登录</view>
+	 </view>
+  </van-action-sheet>
+</view>
+</navbar>
