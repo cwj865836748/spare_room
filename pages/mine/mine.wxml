@@ -3,7 +3,7 @@
 	<view class="mineHead por flex-col flex-y-center">
 
 		<view class="mineAvatar">
-			<image src="/images/mine/default_avatar@2x.png"></image>
+			<open-data type="userAvatarUrl"></open-data>
 		</view>
 		<view class="mineLevel" wx:if="{{mine.level==0}}">
 			<image src="/images/mine/vip_one@2x.png" class="line"></image>
@@ -37,11 +37,12 @@
 			<text class="goldName2">钻石会员</text>
 		</view>
 		<!--您还未登录,请先登录-->
-		<view class="mineName">尊贵的会员</view>
+		<open-data type="userNickName" class="mineName"></open-data>
+		<!-- <view class="mineName">尊贵的会员</view> -->
 	</view>
 	<view class="mineDetail">
 		<navigator url="/pages/myScore/myScore?score={{mine.score}}" hover-class="none" class="mineDetailTop">
-			<view class="mineDetailTile">闲分</view>
+			<view class="mineDetailTile">积分</view>
 			<view class="mineDetailContent flex-x-between flex-y-center">
 				<view>{{mine.score}}</view>
 				<view class="flex-y-center">查看明细
@@ -84,4 +85,5 @@
 		</button>
 	</view>
 	<view class="loginOut flex-xy-center" bindtap="loginOut">退出登录</view>
+	<serviceCustomer/>
 </view>

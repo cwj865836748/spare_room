@@ -1,5 +1,6 @@
 /* pages/hotelIntroduction/hotelIntroduction.wxss */
 @import "/components/hotelFacilities/hotelFacilities.wxss";
+@import "../../wxParse/wxParse.wxss";
 .hotelIntro {
   width: 100%;
   padding: 20rpx 30rpx 0;

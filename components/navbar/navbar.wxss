@@ -16,10 +16,6 @@
   align-items: center;
   position: relative;
 }
-.title-container>van-icon {
-  font-size: 22px;
-  margin-left: 10px;
-}
 .title_head {
   position: absolute; 
   transform: translate(-50%, -50%); 
@@ -27,9 +23,9 @@
   top: 50%; 
   font-size: 17px; 
   font-weight: bold;
+  max-width: 400rpx;
 }
-.content {
+.slotContent {
   overflow: auto;
   position: relative;
-  
 }

@@ -17,16 +17,16 @@
 }
 
  .hotelDetail>.hotelMsg>view>.name {
-  font-size: 34rpx;
+  font-size: 32rpx;
   color: #333333;
   letter-spacing: 1rpx;
   font-weight: bold;
 }
 
 .hotelDetail>.hotelMsg>view>.EnglishName {
-  font-size: 26rpx;
+  font-size: 24rpx;
   color: #999999;
-  margin-bottom: 18rpx;
+  margin-bottom: 16rpx;
 }
 
  .hotelDetail>.hotelMsg>view>.label {
@@ -37,9 +37,9 @@
   background: #ffffff;
   border-radius: 26rpx;
   padding: 8rpx 12rpx;
-  font-size: 24rpx;
+  font-size: 22rpx;
   letter-spacing: 0rpx;
-  margin-right: 20rpx;
+  margin-right: 16rpx;
   
 }
 
@@ -71,21 +71,21 @@
 }
 
  .hotelDetail>.hotelMsg>.distanceAndPdirce>view:first-child {
-  font-size: 26rpx;
+  font-size: 24rpx;
   color: #333333;
   letter-spacing: 1rpx;
 
 }
 
  .hotelDetail>.hotelMsg>.distanceAndPdirce>view:last-child>text:first-child {
-  font-size: 24rpx;
+  font-size: 22rpx;
   text-decoration: line-through;
   color: #999999;
   letter-spacing: 0rpx;
 }
 
  .hotelDetail>.hotelMsg>.distanceAndPdirce>view:last-child>text:last-child {
-  font-size: 40rpx;
+  font-size: 38rpx;
   font-weight: bold;
   color: #e3311a;
   letter-spacing: 1rpx;
@@ -96,4 +96,24 @@
   font-size: 26rpx;
   color: #666666;
   letter-spacing: 1rpx;
+}
+.qtLevel {
+  border: 2rpx solid #88bc92;
+  color: #88bc92;
+}
+.byLevel {
+  border: 2rpx solid #b3b3b3;
+  color: #b3b3b3;
+}
+.hjLevel {
+  border: 2rpx solid #ffca31;
+  color: #ffca31;
+}
+.zsLevel {
+  border: 2rpx solid #373737;
+  color: #373737;
+}
+.noPriceAndStock {
+  color: #b3b3b3;
+  font-weight: bold;
 }

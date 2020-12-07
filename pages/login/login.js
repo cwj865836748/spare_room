@@ -91,16 +91,20 @@ Page({
         }
       }).then(result => {
         wx.hideLoading();
-        if (result.code == 200) {
           wx.setStorageSync('token', result.data.token);
           wx.setStorageSync('userId', result.data.id);
           this.pageRush()
+          result.data.flag&&setTimeout(()=>{
+            wx.showModal({
+              title: '尊敬的客户您好',
+              content: '恭喜您获得好友赠送的黄金会员！',
+              showCancel: false,//是否显示取消按钮
+              confirmText:"好的",//默认是“确定”
+           })
+          },1500)
           wx.navigateBack({
             delta: 1
           })
-        } else {
-          showToast({title: result.msg})
-        }
       })
   },
   //获取验证码
@@ -134,16 +138,20 @@ Page({
     const {phone,phone_code,wxCode:code} =this.data
     const {parent_id}= App.globalData
     isNull({content:!checkPhone(phone),title:'手机号码格式',topic:'有误'})&&request({url:api.authorization.codeLogin,data:{phone,phone_code,code,parent_id}}).then(result=>{
-      if (result.code == 200) {
         wx.setStorageSync('token', result.data.token);
         wx.setStorageSync('userId', result.data.id);
         this.pageRush()
+        result.data.flag&&setTimeout(()=>{
+          wx.showModal({
+            title: '尊敬的客户您好',
+            content: '恭喜您获得好友赠送的黄金会员！',
+            showCancel: false,//是否显示取消按钮
+            confirmText:"好的",//默认是“确定”
+         })
+        },1500)
         wx.navigateBack({
           delta: 1
         })
-      } else {
-        showToast({title: result.msg})
-      }
     })
   },
   //登录刷新

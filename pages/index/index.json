@@ -3,8 +3,7 @@
     "navbar": "/components/navbar/navbar",
     "calendar":"/components/calendar/calendar",
     "van-notice-bar": "@vant/weapp/notice-bar/index",
-    "van-field": "@vant/weapp/field/index",
-    "serviceCustomer": "/components/serviceCustomer/serviceCustomer"
+    "van-field": "@vant/weapp/field/index"
   }
 
 }

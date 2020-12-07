@@ -20,19 +20,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const {navBar,cityData,defaultCity} = App.globalData
-    this.setData({
-      offsetTop:navBar.navHeight,
-      cityList:cityData.cityList,
-      indexList:cityData.indexList,
-      defaultCity
-    })
-    this.getHotCity()
+    this.getCity()
   },
-  getHotCity(){
+  getCity(){
+    const {navBar,cityData,defaultCity} = App.globalData
     request({url:api.config.hotcity}).then(res=>{
       this.setData({
-        hotCityList:res.data.list
+        offsetTop:navBar.navHeight,
+        cityList:cityData.cityList,
+        indexList:cityData.indexList,
+        hotCityList:res.data.list,
+        defaultCity
       })
     })
   },
@@ -43,10 +41,12 @@ Page({
   const {city} = e.currentTarget.dataset
   App.globalData.defaultCity=city
   App.getAreaAndRoom().then(res=>{
-  //获取上一页信息
+    
+  //上一页要是酒店列表 就重置筛选
    let p=getCurrentPages();
    let pages = p[p.length-2]
    pages.route=='pages/hotelList/hotelList'&& pages.clearAll()
+
    wx.navigateBack({
      delta:1
    })

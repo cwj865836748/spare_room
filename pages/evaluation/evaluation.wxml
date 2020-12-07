@@ -4,14 +4,14 @@
 		<view class="star flex-x-between flex-y-center">
 			<text>商户服务态度</text>
 			<view class="starNum flex-y-center">
-				<van-rate value="{{service_attitude_score}}" bind:change="onChange" data-key="service_attitude_score" style="padding-top:8rpx" size="{{ 16 }}" color="#F5A44F" void-color="#CCCCCC" />
+				<van-rate value="{{service_attitude_score}}" bind:change="onChange" data-key="service_attitude_score" style="padding-top:8rpx" size="{{ 20 }}" color="#F5A44F" void-color="#CCCCCC" />
 				<text>{{service_attitude_score}}分</text>
 			</view>
 		</view>
 		<view class="star flex-x-between flex-y-center">
 			<text>房间安排效率</text>
 			<view class="starNum flex-y-center">
-				<van-rate value="{{room_arrange_score}}" bind:change="onChange"  data-key="room_arrange_score" style="padding-top:8rpx" size="{{ 16 }}" color="#F5A44F" void-color="#CCCCCC" />
+				<van-rate value="{{room_arrange_score}}" bind:change="onChange"  data-key="room_arrange_score" style="padding-top:8rpx" size="{{ 20 }}" color="#F5A44F" void-color="#CCCCCC" />
 				<text>{{room_arrange_score}}分</text>
 			</view>
 		</view>

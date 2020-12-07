@@ -1,269 +1,270 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": true,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useCompilerModule": true,
-		"userConfirmedUseCompilerModuleSwitch": false
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.13.1",
-	"appid": "wx6018917b96bbcff0",
-	"projectname": "%E9%97%B2%E6%88%BF",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "城市列表",
-					"pathName": "pages/cityList/cityList",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 1,
-					"name": "关键词搜索",
-					"pathName": "pages/keywordSearch/keywordSearch",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "酒店列表",
-					"pathName": "pages/hotelList/hotelList",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "酒店详情介绍",
-					"pathName": "pages/hotelIntroduction/hotelIntroduction",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "房间预订",
-					"pathName": "pages/roomReservation/roomReservation",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "发票信息",
-					"pathName": "pages/invoiceMessage/invoiceMessage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "登录",
-					"pathName": "pages/login/login",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "酒店订房",
-					"pathName": "pages/hotelDetail/hotelDetail",
-					"query": "id=14&longitude=118.11022&latitude=24.490474",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "酒店图片",
-					"pathName": "pages/hotelPicture/hotelPicture",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "酒店详情",
-					"pathName": "pages/hotelIntroduction/hotelIntroduction",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 10,
-					"name": "是否开发票",
-					"pathName": "pages/invoiceMessage/invoiceMessage",
-					"query": "address=&is_invoice=0",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的",
-					"pathName": "pages/mine/mine",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的订单",
-					"pathName": "pages/order/order",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "取消订单",
-					"pathName": "pages/cancleOrder/cancleOrder",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "订单详情",
-					"pathName": "pages/orderDetail/orderDetail",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "申诉",
-					"pathName": "pages/Appeal/Appeal",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 17,
-					"name": "跳转页",
-					"pathName": "pages/jump/jump",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的收藏",
-					"pathName": "pages/collect/collect",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的闲分",
-					"pathName": "pages/myScore/myScore",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "意见反馈",
-					"pathName": "pages/Feedback/Feedback",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 21,
-					"name": "已发布需求列表",
-					"pathName": "pages/releaseRequirements/releaseRequirements",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "评价",
-					"pathName": "pages/evaluation/evaluation",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "推荐",
-					"pathName": "pages/recommend/recommend",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "邀请图片",
-					"pathName": "pages/invitePicture/invitePicture",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "好友列表",
-					"pathName": "pages/goodFriends/goodFriends",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "今日收益明细",
-					"pathName": "pages/todayIncome/todayIncome",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "收益明细",
-					"pathName": "pages/inComeDetail/inComeDetail",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "提现",
-					"pathName": "pages/withdraw/withdraw",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "邀请图片",
-					"pathName": "pages/invitePicture/invitePicture",
-					"query": "qrcode=https://wogen.oss-cn-shenzhen.aliyuncs.com/uploads/images/20201015/f3e1fbe3df0aa0fa23a4acb5f2074911.png&discount=9.5",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": false,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.13.1",
+  "appid": "wxbbca6f143c16d2ac",
+  "projectname": "%E9%97%B2%E6%88%BF",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "城市列表",
+          "pathName": "pages/cityList/cityList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "关键词搜索",
+          "pathName": "pages/keywordSearch/keywordSearch",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "酒店列表",
+          "pathName": "pages/hotelList/hotelList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "酒店详情介绍",
+          "pathName": "pages/hotelIntroduction/hotelIntroduction",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "房间预订",
+          "pathName": "pages/roomReservation/roomReservation",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "发票信息",
+          "pathName": "pages/invoiceMessage/invoiceMessage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "登录",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "酒店订房",
+          "pathName": "pages/hotelDetail/hotelDetail",
+          "query": "id=14&longitude=118.11022&latitude=24.490474",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "酒店图片",
+          "pathName": "pages/hotelPicture/hotelPicture",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "酒店详情",
+          "pathName": "pages/hotelIntroduction/hotelIntroduction",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 10,
+          "name": "是否开发票",
+          "pathName": "pages/invoiceMessage/invoiceMessage",
+          "query": "address=&is_invoice=0",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的订单",
+          "pathName": "pages/order/order",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "取消订单",
+          "pathName": "pages/cancleOrder/cancleOrder",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "订单详情",
+          "pathName": "pages/orderDetail/orderDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "申诉",
+          "pathName": "pages/Appeal/Appeal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 17,
+          "name": "跳转页",
+          "pathName": "pages/jump/jump",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的收藏",
+          "pathName": "pages/collect/collect",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的闲分",
+          "pathName": "pages/myScore/myScore",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "意见反馈",
+          "pathName": "pages/Feedback/Feedback",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 21,
+          "name": "已发布需求列表",
+          "pathName": "pages/releaseRequirements/releaseRequirements",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "评价",
+          "pathName": "pages/evaluation/evaluation",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "推荐",
+          "pathName": "pages/recommend/recommend",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "邀请图片",
+          "pathName": "pages/invitePicture/invitePicture",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "好友列表",
+          "pathName": "pages/goodFriends/goodFriends",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "今日收益明细",
+          "pathName": "pages/todayIncome/todayIncome",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "收益明细",
+          "pathName": "pages/inComeDetail/inComeDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "提现",
+          "pathName": "pages/withdraw/withdraw",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "邀请图片",
+          "pathName": "pages/invitePicture/invitePicture",
+          "query": "qrcode=https://wogen.oss-cn-shenzhen.aliyuncs.com/uploads/images/20201015/f3e1fbe3df0aa0fa23a4acb5f2074911.png&discount=9.5",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

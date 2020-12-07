@@ -1,5 +1,5 @@
 /* pages/memberIntroduction/memberIntroduction.wxss */
 @import "../../wxParse/wxParse.wxss";
-.content {
+.memberContent {
   padding:30rpx;
 }

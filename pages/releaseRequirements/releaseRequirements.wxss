@@ -94,7 +94,7 @@
   text-align: center;
   color: #333333;
   font-size: 32rpx;
-  margin-bottom: 22rpx;
+  padding-bottom: 22rpx;
 }
 
 .actionRequire>.actionTitle>image {

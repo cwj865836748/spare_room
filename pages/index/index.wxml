@@ -1,11 +1,12 @@
 <!--index.wxml-->
-<wxs src="../../wxs/filter.wxs" module="filter"/>
+<wxs src="../../wxs/filter.wxs" module="filter" />
 <view class="home por">
   <!-- 轮播图 -->
-  <swiper class="home_swiper" indicator-dots="true" autoplay="{{true}}" interval="3000"  indicator-active-color="#FFFFFF" indicator-color="rgba(255,255,255,0.6)" >
+  <swiper class="home_swiper" indicator-dots="true" autoplay="{{true}}" interval="3000" indicator-active-color="#FFFFFF"
+    indicator-color="rgba(255,255,255,0.6)">
     <block wx:for="{{swiperList}}" wx:key="key">
       <swiper-item>
-          <image src="{{item.img_url}}" class="swiperImage" bindtap="jumpTab" data-url="{{item.jump_url}}"></image>
+        <image src="{{item.img_url}}" class="swiperImage" bindtap="jumpTab" data-url="{{item.jump_url}}"></image>
       </swiper-item>
     </block>
   </swiper>
@@ -14,60 +15,46 @@
     <view class="notice flex-xy-center">
       <image src="../../images/home_message@2x.png" mode="widthFix"></image>
       <view>
-        <van-notice-bar
-         text="{{notice}}"
-         speed="{{25}}"
-         background="linear-gradient(86deg,#ffffff -13%, #faf2ff 53%, #ffffff 121%)"
-         color="#333333"
-        
-     />
-     </view>
+        <van-notice-bar text="{{notice}}" speed="{{25}}"
+          background="linear-gradient(86deg,#ffffff -13%, #faf2ff 53%, #ffffff 121%)" color="#333333" />
+      </view>
     </view>
-    <navigator url="/pages/cityList/cityList" hover-class="none" class="address flex-y-center" bindtap="openAddress">
+    <navigator url="/pages/cityList/cityList" hover-class="none" class="address flex-y-center">
       <text class="text-more-single flex-grow-1">{{defaultCity.name}}</text>
       <view class='addressIcon flex-xy-center' catchtap="getLocation">
         <image src="../../images/home_location@2x.png" mode="widthFix"></image>
         <text>当前位置</text>
       </view>
     </navigator>
-
     <view class="date" bindtap="openCalendar">
       <view class="dateNow flex">
-       <text>{{filter.getLiveDate(defaultDate).startTime}}</text>
-       <text>{{filter.getLiveDate(defaultDate).dateTitle}}</text>
+        <text>{{filter.getLiveDate(defaultDate).startTime}}</text>
+        <text>{{filter.getLiveDate(defaultDate).dateTitle}}</text>
       </view>
       <view class="dateNow flex">
-       <text>{{filter.getLiveDate(defaultDate).endTime}}</text>
-       <text>{{filter.getLiveDate(defaultDate).dateTitle2}}</text>
+        <text>{{filter.getLiveDate(defaultDate).endTime}}</text>
+        <text>{{filter.getLiveDate(defaultDate).dateTitle2}}</text>
       </view>
       <view class="dateNumber">共{{filter.getLiveDate(defaultDate).allDay}}晚</view>
     </view>
-    <navigator url="/pages/keywordSearch/keywordSearch" hover-class="none" class="search flex-y-center">
-      <van-field
-      value="{{ defaultKeyWords }}"
-      placeholder="关键词/位置/品牌/酒店名"
-      border="{{ false }}"
-      disabled
-      clearable
-      class="flex-grow-1"
-     />
-     <image src = "/images/text_delete@2x.png" class="deteleIcon" wx:if="{{defaultKeyWords}}" catchtap="cleanSearch"/>
+    <view class="search flex-y-center">
+      <navigator class="flex-grow-1" hover-class="none" url="/pages/keywordSearch/keywordSearch">
+        <van-field value="{{ defaultKeyWords }}" placeholder="关键词/位置/品牌/酒店名" border="{{ false }}" disabled clearable />
+      </navigator>
+      <image src="/images/text_delete@2x.png" class="deteleIcon" wx:if="{{defaultKeyWords}}" catchtap="cleanSearch" />
+    </view>
+    <navigator url="/pages/hotelList/hotelList" hover-class="none" class="buttonSearch flex-xy-center">
+      搜索酒店
     </navigator>
-     <navigator url="/pages/hotelList/hotelList" hover-class="none" class="buttonSearch flex-xy-center">
-       搜索酒店
-     </navigator>
   </view>
   <view class="home_show">
     <view class="bottom flex-x-around">
-          <view class="flex-y-between" wx:for="{{iconList}}" wx:key="index">
-            <image src="{{item.icon}}"/>
-            <text>{{item.name}}</text>
-          </view>
+      <view class="flex-y-between" wx:for="{{iconList}}" wx:key="index">
+        <image src="{{item.icon}}" />
+        <text>{{item.name}}</text>
+      </view>
     </view>
   </view>
   <!-- 日历弹窗 -->
-   <calendar calendarShow="{{calendarShow}}" bind:closeCalendar="closeCalendar"/>
-   <serviceCustomer/>
+  <calendar calendarShow="{{calendarShow}}" bind:closeCalendar="closeCalendar" />
 </view>
-
- 

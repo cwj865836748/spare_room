@@ -1,22 +1,26 @@
 /**房型详情弹窗**/
 .hotelSheet {
   width: 100%;
-  padding: 76rpx 0rpx 36rpx;
+  padding: 0rpx 0rpx 36rpx;
+}
+
+.hotelSheet>.hotelHead {
+  width: 100%;
+  height: 76rpx;
   position: relative;
 }
 
-.hotelSheet>image {
+.hotelSheet>.hotelHead>image {
   width: 36rpx;
-  height:36rpx;
+  height: 36rpx;
   position: absolute;
   right: 30rpx;
   top: 30rpx;
-
 }
 
-.pic>image {
+.swiperAll {
   width: 100%;
-  height: 388rpx;
+  height: 388rpx !important;
   margin-bottom: 24rpx;
 }
 
@@ -29,9 +33,10 @@
   box-sizing: content-box;
   display: block;
 }
+
 .bedDetail>.showBedDetail {
   background: #f8f8f8;
-border-radius: 8rpx;
+  border-radius: 8rpx;
 }
 
 .bedDetail>.showBedDetail>.bedEq {

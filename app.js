@@ -5,7 +5,7 @@ import {request} from './request/index.js'
 App({
   globalData: {
     qqKey:'ZBRBZ-E4WC2-HA3UF-CMQPB-QKR6E-5OFVJ',
-    baseUrl:'https://api.xiantrip.com.cn',
+    baseUrl:'https://api.zhetrip.com',
     //入住日期-离店日期 默认当天-明天
     defaultDate:[Date.now(),Date.now()+86400000],
     //城市 默认厦门
@@ -16,7 +16,8 @@ App({
     roomList:[],
     windowWidth:null,
     windowHeight:null,
-    userInfo:{}
+    userInfo:{},
+    dataCodeList:[]
   },
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）

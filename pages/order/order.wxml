@@ -8,8 +8,15 @@
 			</block>
 		</view>
 	</scroll-view>
-	<scroll-view scroll-y='true' style="height:100%;background:#F9F9F9;"
- bindscrolltolower="onReachBottom">
+	<scroll-view scroll-y='true' style="height:100%;background:#F9F9F9;padding-top:100rpx"
+ bindscrolltolower="onReachBottom"   refresher-enabled="{{true}}"
+  refresher-threshold="{{100}}"
+  refresher-default-style="black"
+  refresher-background="white"
+  refresher-triggered="{{triggered}}"
+  bindrefresherrefresh="onRefresh"
+	 bindrefresherpulling="onPulling"
+  >
 		<view class="orderList">
 			<block wx:for="{{orderList}}" wx:key="index">
 				<view class="orderDetail" >
@@ -43,7 +50,7 @@
 							</view>
 							<view class="flex-x-between">
 								<text style="font-size:24rpx">返现</text>
-								<text>{{item.score}}闲分</text>
+								<text>{{item.score}}积分</text>
 							</view>
 							<view class="flex-x-between" style="margin-bottom:30rpx">
 								<text>总计</text>
@@ -65,8 +72,8 @@
 						<!--申诉状态appeal_status:0=未进入申诉,1=申诉中,2=申诉完成,3=申诉驳回-->
 						<!--退款状态refund_status 0--未发起退款 1--退款中 2--退款成功 3--退款失败-->
 						<view class="orderBtn flex">
-              <!--未支付/待确认/已确认-->
-							<view wx:if="{{item.order_status==0||item.order_status==1||item.order_status==2}}" class="flex-xy-center" bindtap="cancleOrder"  data-id="{{item.id}}" data-status="{{item.order_status}}" data-cancel="{{item.cancel_type}}">取消订单</view>
+              <!--未支付/待确认未退款情况/已确认未退款情况-->
+							<view  wx:if="{{item.order_status==0||(item.order_status==1&&!item.refund_status)||(item.order_status==2&&!item.refund_status)}}" class="flex-xy-center" bindtap="cancleOrder"  data-id="{{item.id}}" data-status="{{item.order_status}}" data-cancel="{{item.cancel_type}}">取消订单</view>
                <!--已完成/已取消并退款成功/已取消并退款失败/已取消并未发起退款-->
 							<view wx:if="{{item.order_status==3||item.order_status==5||(item.order_status==4&&item.refund_status!=1)}}" class="flex-xy-center" bindtap="deleteOrder" data-id="{{item.id}}">删除订单</view>
 							<!--已取消并退款中-->
@@ -77,7 +84,7 @@
 							</view>
 							<!--已取消并退款失败/退款成功-->
 						
-							<button wx:if="{{(item.order_status==4&&item.refund_status)}}" open-type='contact' class="flex-xy-center pinkBtn concatBtn">
+							<button wx:if="{{(item.order_status==4&&item.refund_status)||(item.order_status==1&&item.refund_status==1)||(item.order_status==2&&item.refund_status==1)}}" open-type='contact' class="flex-xy-center pinkBtn concatBtn">
 							联系客服
 							</button>
 							<!--待支付-->
@@ -85,10 +92,10 @@
 							<navigator hover-class="none" url="/pages/orderDetail/orderDetail?id={{item.id}}">立即付款</navigator>
 							</view>
 							<!--已完成并未进入申诉-->
-							<view class="flex-xy-center purpleBtn"  wx:if="{{item.order_status==3&&item.appeal_status==0}}" >
+							<view class="flex-xy-center purpleBtn"  wx:if="{{item.order_status==3&&item.appeal_status==0&&item.is_user_appeal_expire==0}}" >
 							<navigator hover-class="none" url="/pages/Appeal/Appeal?id={{item.id}}" >申诉</navigator></view> 
 				
-								<!--已完成并申诉完成/驳回-->
+							<!--已完成并申诉完成/驳回-->
 							<view class="flex-xy-center purpleBtn" 	wx:if="{{(item.order_status==3&&item.appeal_status)}}" bindtap="appealResult" data-status="user" data-id="{{item.id}}" data-depositMoney="{{item.refund_deposit_money}}">申诉结果</view>
 
 							<!--已取消但未发起退款-->
@@ -102,11 +109,11 @@
 		<include src="/components/noData/noData.wxml" />
 	</scroll-view>
 	<!--取消订单-->
-	<van-dialog use-slot show="{{ isCancleOrderShow }}" show-cancel-button confirm-button-color="#5302ad" cancel-button-color="#666666" bind:confirm="cancleOrder" bind:cancel="cancleOrder">
+	<van-dialog use-slot show="{{ isCancleOrderShow }}" close-on-click-overlay show-cancel-button confirm-button-color="#5302ad" cancel-button-color="#666666" bind:confirm="cancleOrder" bind:cancel="cancleOrder">
 		<view class="cancelOrder flex-xy-center">确认要取消订单吗?</view>
 	</van-dialog>
 	<!--删除订单-->
-		<van-dialog use-slot show="{{ isdeleteOrderShow }}" show-cancel-button confirm-button-color="#5302ad" cancel-button-color="#666666" bind:confirm="deleteOrder" bind:cancel="deleteOrder">
+		<van-dialog use-slot show="{{ isdeleteOrderShow }}" close-on-click-overlay show-cancel-button confirm-button-color="#5302ad" cancel-button-color="#666666" bind:confirm="deleteOrder" bind:cancel="deleteOrder">
 		<view class="cancelOrder flex-xy-center">确认要删除订单吗?</view>
 	</van-dialog>
 	<AppealStatus id="appeal" depositMoney="{{depositMoney}}"  order_id="{{orderId}}"/>

@@ -1,7 +1,6 @@
 /* pages/recommend/recommend.wxss */
 @import "/components/wxActionSheet/wxActionSheet.wxss";
 @import "/components/inCome/inCome.wxss";
-
 .recommendHead {
   margin: 30rpx 0 124rpx;
   text-align: center;
@@ -18,10 +17,10 @@
 
 .cardMember {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   position: relative;
   padding: 36rpx 20rpx 0 30rpx;
-  box-shadow: 0rpx 8rpx 16rpx 0rpx rgba(0, 0, 0, 0.17);
+  /* box-shadow: 0rpx 8rpx 16rpx 0rpx rgba(0, 0, 0, 0.17); */
 
 }
 
@@ -79,12 +78,13 @@
   transition: all 0.7s ease-in 0s;
 }
 
-.cardAvatr>image {
+.cardAvatr>open-data {
   width: 114rpx;
   height: 114rpx;
   margin-right: 12rpx;
   margin-top: 28rpx;
-
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .cardAvatr>.cardLine {
@@ -114,20 +114,17 @@
   margin-left: 54rpx;
 }
 
-.cardAvatr>.cardBtn>view {
+.cardAvatr>.cardBtn>.inviteBtn {
   width: 116rpx;
   height: 64rpx;
   background: #ffffff;
   border-radius: 8rpx;
   box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(6, 0, 31, 0.16);
   font-size: 24rpx;
-}
-
-.cardAvatr>.cardBtn>view {
   margin-bottom: 36rpx;
 }
 
-.cardAvatr>.cardBtn>view:last-child {
+.cardAvatr>.cardBtn>.inviteBtn:last-child {
   margin-bottom: 0rpx;
 }
 
@@ -138,13 +135,13 @@
 .cardTitle>.cardTitleOne {
   font-size: 24rpx;
   color: #ffffff;
+  height: 96rpx;
 }
 
 .cardTitle>.cardTitleOne>.cardPrice {
   font-size: 40rpx;
   color: #ff6c00;
   font-weight: bold;
-  margin-bottom: 10rpx;
 }
 
 .cardTitle>.cardTitleOne>image {
@@ -258,7 +255,7 @@
 }
 
 .recommendPrice {
-  height: 378rpx;
+  /* height: 378rpx; */
   background: #ffffff;
   border-radius: 8rpx;
   padding: 0 30rpx 0;

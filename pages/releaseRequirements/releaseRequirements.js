@@ -1,6 +1,7 @@
 // pages/releaseRequirements/releaseRequirements.js
 import api from '../../request/api.js'
 import {request} from '../../request/index.js'
+const App = getApp()
 Page({
 
   /**
@@ -76,6 +77,16 @@ Page({
       !this.data.requireList.length&&this.setData({
         noData:true
       })
+  },
+  goHotelDetail(e){
+    const {item} = e.currentTarget.dataset
+    const today = new Date(new Date().toLocaleDateString()).getTime() 
+    const start_time=item.start_time*1000>=today?item.start_time*1000:today
+    const end_time=item.start_time*1000>=today?item.end_time*1000:today+86400000
+    App.globalData.defaultDate=[start_time,end_time]
+    wx.navigateTo({
+      url: `/pages/hotelDetail/hotelDetail?id=${item.hotel_id}&isInvite=true`,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

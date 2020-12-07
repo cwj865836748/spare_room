@@ -1,5 +1,6 @@
 <!--pages/hotelIntroduction/hotelIntroduction.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter"/>
+<import src="../../wxParse/wxParse.wxml"/>
 <navbar title="{{hotelDetail.name}}">
 <view class="hotelIntro">
 	<view class="hotelDetail">
@@ -43,12 +44,12 @@
 
 		<view class="hotelSetting">
 			<view class="title">酒店政策</view>
-			<rich-text nodes="{{hotelDetail.policy}}"></rich-text>
+			<rich-text nodes="{{filter.greenFee(hotelDetail.policy)}}"></rich-text>
 		</view>
 
 		<view class="hotelSetting">
 			<view class="title">订房必读</view>
-			<rich-text nodes="{{hotelDetail.reservation_description}}"></rich-text>
+			<template is="wxParse" data="{{wxParseData:bookDescription.nodes}}"/>
 		</view>
 		<view class="hotelSetting">
 			<view class="title">图文详情</view>

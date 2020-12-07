@@ -135,7 +135,7 @@ button::after {
   font-weight: bold;
 }
 
-.haiBao>.haibaoBtn {
+.haibaoBtn {
   width: 100%;
   height: 84rpx;
   background: var(--buttonColor);
@@ -144,10 +144,70 @@ button::after {
   letter-spacing: 2rpx;
   margin: 40rpx 0 30rpx;
 }
+.remmandHaibaoBtn {
+  width: 690rpx;
+  margin: 100rpx 30rpx 30rpx;
+}
 
-.haiBao>.haibaoContent {
-
+.haibaoContent {
   color: #EEEEEE;
   letter-spacing: 2rpx;
   font-size: 26rpx;
+}
+
+
+.recommendHaiBao {
+  padding-top: 300rpx;
+  position: relative;
+}
+.recommendHaiBao>.haiBaoBg {
+  width:750rpx;
+  height:972rpx;
+  position: absolute;
+  left: 0;
+  top: 180rpx;
+}
+.avatr {
+  width: 100rpx;
+  height:100rpx;
+  position: relative;
+  margin: 0 0 102rpx 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatr>open-data {
+  width: 100%;
+  height: 100%;
+}
+.disCount {
+  font-family: 'YouSheBiaoTiHei', 'YouSheBiaoTiHei-Regular';
+  font-weight: bold;
+  color: #7A21A8;
+  letter-spacing: 2rpx;
+  margin-left: 536rpx;
+  position: relative;
+  width: 138rpx;
+  text-align: center;
+  white-space: nowrap;
+  margin-bottom: 112rpx;
+}
+.disCount2 {
+  font-size: 38rpx;
+  font-family: 'YouSheBiaoTiHei', 'YouSheBiaoTiHei-Regular';
+  font-weight: bold;
+  color: #e9ac29;
+  letter-spacing:2rpx;
+  white-space: nowrap;
+  position: relative;
+  text-align: center;
+  height: 64rpx;
+  width: 590rpx;
+  margin-left: 80rpx;
+  background: #fff;
+}
+.codePic {
+  width: 292rpx;
+  height: 292rpx;
+  margin: 104rpx 0 0 226rpx;
+  position: relative;
 }

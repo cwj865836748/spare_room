@@ -440,8 +440,11 @@
   border-bottom: 2rpx #f2f2f2 solid;
 }
 
-.feeCoupon>view:first-child {
+.feeCoupon>view {
   margin-bottom: 26rpx;
+}
+.feeCoupon>view:last-child {
+  margin-bottom: 0rpx;
 }
 
 .allPrice {
@@ -520,28 +523,30 @@
 }
 
 .feeExpolre {
-  padding:36rpx 50rpx 50rpx 52rpx;
-  position: relative;
+  padding:26rpx 0;
+
 }
-.feeExpolre>image {
-  width: 30rpx;
-  height: 30rpx;
-  position: absolute;
-  top: 28rpx;
-  right: 28rpx;
-}
+
 .feeExpolreTitle {
   color: #333333;
   letter-spacing: 1rpx;
   font-size: 32rpx;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 44rpx;
+  margin-bottom: 24rpx;
+  position: relative;
+}
+.feeExpolreTitle>image {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 8rpx;
+  right: 28rpx;
 }
 .feeExpolreContent {
   letter-spacing: 1rpx;
   color: #333333;
   line-height: 46rpx;
   font-size: 28rpx;
-
+  padding: 0 30rpx;
 }

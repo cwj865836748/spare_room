@@ -158,8 +158,11 @@
   color: #333333;
 }
 
-.detailHead>.hotelDetail>.time>view:nth-child(3)>text {
+.detailHead>.hotelDetail>.time>view:nth-child(3)>view {
   color: #ff9d00;
+  width: 180rpx;
+  font-weight: bold;
+  font-family: DIN Alternate, DIN Alternate-Bold;
 }
 
 .detailHead>.hotelDetail>.time>view>image {
@@ -339,9 +342,10 @@
   margin-left: 52rpx;
 }
 .detailBed>.hotelMsg>.middle>text:nth-child(3) {
-  color: rgba(51, 51, 51, 1);
-  font-weight: bold;
   margin-left: 46rpx;
+}
+.detailBed>.hotelMsg>.middle>text:last-child {
+  margin-left: 2rpx;
 }
 .detailBed>.hotelMsg>.middle>text:last-child::after {
   content: '2';
@@ -367,12 +371,12 @@
   font-size: 20rpx;
   height: 30rpx;
   margin-right: 8rpx;
+  padding: 0 6rpx;
 }
 
 .purple {
   border: 2rpx solid #780acc;
   color: #780acc;
-  width: 116rpx;
 }
 
 .grey {
@@ -395,7 +399,7 @@
   padding: 11rpx 30rpx 20rpx;
 }
 .detailBed>.hotelMsg>.price {
-  width: 178rpx;
+  width: 204rpx;
   height: 100rpx;
   position: absolute;
   right: 0;
@@ -433,8 +437,8 @@
   margin-top: 20rpx;
 }
 .detailBed>.hotelMsg>.price>view>.openCloseimage {
-  width: 50rpx;
- height: 50rpx;
+  width: 60rpx;
+ height: 60rpx;
  margin: 4rpx 0 0 4rpx;
 
 
@@ -530,13 +534,14 @@
   color: #e3311a;
 }
 
+
 .detailContent>.roomType>.detailType>.bedType>.typeDetail>.typeRight>.ding>.order {
   width: 100rpx;
   height: 100rpx;
   background: linear-gradient(#73009d, #6c03a5 39%, #40205f);
   border-radius: 8rpx;
   margin-left: 10rpx;
-
+  min-width: 100rpx;
 }
 
 .detailContent>.roomType>.detailType>.bedType>.typeDetail>.typeRight>.ding>.order>view:nth-child(1) {
@@ -549,7 +554,6 @@
 }
 
 .detailContent>.roomType>.detailType>.bedType>.typeDetail>.typeRight>.ding>.order>view:nth-child(2) {
-  width: 98rpx;
   height: 44rpx;
   background: #ffffff;
   border: 2rpx solid #5c04b5;
@@ -559,13 +563,13 @@
   color: #6c08c2;
 }
 
-.detailContent>.roomType>.detailType>.release {
+.releaseBtn {
   padding: 32rpx 0 52rpx;
   box-sizing: content-box;
   background: #f9f9f9;
 }
 
-.detailContent>.roomType>.detailType>.release>view {
+.releaseBtn>.releaseRequire {
   width: 222rpx;
   height: 72rpx;
   background: #ffffff;
@@ -575,6 +579,19 @@
   color: #666666;
   letter-spacing: 2rpx;
   font-weight: bold;
+  margin-bottom: 10rpx;
+
+}
+.releaseBtn>.releaseText {
+  color: #999999;
+  font-size: 24rpx;
+  letter-spacing: 1rpx;
+  text-align: center;
+}
+.releaseBtn>.releaseText >view {
+  font-weight: bold;
+  font-size: 26rpx;
+  margin-bottom: 10rpx;
 }
 
 .opacity {
@@ -593,4 +610,8 @@
 .hotelFacilities {
   padding: 0 30rpx;
 }
-
+.noPrice {
+  font-weight: bold;
+  color: #666 !important;
+  font-size: 28rpx !important;
+}

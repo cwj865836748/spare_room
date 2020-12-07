@@ -1,25 +1,29 @@
 <!--pages/recommend/recommend.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter" />
 <navbar title="推荐" back="{{false}}">
+
 	<view class="recommendHead">
 		<image src="/images/recommend/logo@2x.png"></image>
 	</view>
 	<view class="por">
 		<view class="cardHead flex-y-center {{filter.getCardHead(swiperIndex)}}" wx:if="{{isShowHead}}">
 			<view class="zeng flex-xy-center">赠</view>
-			<view>赠送好友一张金卡</view>
+			<view>赠送好友金卡,您可快速升级</view>
 			<view class="flex-grow-1 flex-y-center goZeng flex-x-bottom" catchtap="openOrCancelShare" data-show="{{true}}">
 				<text>去赠送</text>
 				<van-icon name="arrow" size="13px" color="#FF8C38" />
 			</view>
 		</view>
 
-		<swiper previous-margin="32rpx" next-margin="28rpx" current="{{swiperIndex}}" bindchange="bindchange" class="mySwiper" bindtransition="bindtransition" bindanimationfinish="bindanimationfinish">
+		<swiper previous-margin="32rpx" next-margin="28rpx" current="{{swiperIndex}}" bindchange="bindchange"
+			class="mySwiper" bindtransition="bindtransition" bindanimationfinish="bindanimationfinish">
 			<block wx:for="{{swiperList}}" wx:key="index">
 				<swiper-item>
 					<view class="cardMember">
-						<image mode="widthFix" src="{{item.imageUrl}}" class="slide-image {{swiperIndex == index ? 'zoom-in' : 'zoom-out'}}" />
-						<view class="cardMemberName flex-y-center" style="padding-left:{{userMemberInfo.info.level==index&&userMemberInfo.info.level!=0?'60rpx':''}}">
+						<image mode="widthFix" src="{{item.imageUrl}}"
+							class="slide-image {{swiperIndex == index ? 'zoom-in' : 'zoom-out'}}" />
+						<view class="cardMemberName flex-y-center"
+							style="padding-left:{{userMemberInfo.info.level==index&&userMemberInfo.info.level!=0?'60rpx':''}}">
 							<view>尊贵的会员</view>
 							<!--普通用户-->
 							<view class="flex-xy-center pinkBg" wx:if="{{index==0}}">
@@ -51,13 +55,16 @@
 								<image src="/images/recommend/diamond_member@2x.png"></image>
 								<text>钻石会员</text>
 							</view>
-							<view wx:if="{{userMemberInfo.info.level==index&&userMemberInfo.info.level!=0}}">有效期至{{filter.getTime2(userMemberInfo.info.expiration_time)}}</view>
+							<view wx:if="{{userMemberInfo.info.level==index&&userMemberInfo.info.level!=0}}">
+								有效期至{{filter.getTime2(userMemberInfo.info.expiration_time)}}</view>
 						</view>
 						<view class="cardAvatr flex">
-							<image src="/images/mine/default_avatar@2x.png"></image>
+							<open-data type="userAvatarUrl"></open-data>
 							<view class="cardLine">
 								<view class="cardLineLevel">
-									<van-progress percentage="{{filter.percentage(userMemberInfo.info.recommended,item.recommend)}}" stroke-width="4" show-pivot="{{false}}" color="rgba(255,255,255,1)" track-color="rgba(255,255,255,0.2)" />
+									<van-progress percentage="{{filter.percentage(userMemberInfo.info.recommended,item.recommend)}}"
+										stroke-width="4" show-pivot="{{false}}" color="rgba(255,255,255,1)"
+										track-color="rgba(255,255,255,0.2)" />
 									<view class="cardLineStatus">
 										<text>{{userMemberInfo.info.recommended}}/{{item.recommend}}</text>
 										<text wx:if="{{index==5}}">(人)当前为最高等级</text>
@@ -66,41 +73,51 @@
 									</view>
 								</view>
 								<view class="cardLineLevel">
-									<van-progress percentage="{{filter.percentage(userMemberInfo.info.consumption_amount,item.money)}}" stroke-width="4" show-pivot="{{false}}" color="rgba(255,255,255,1)" track-color="rgba(255,255,255,0.2)" />
+									<van-progress percentage="{{filter.percentage(userMemberInfo.info.consumption_amount,item.money)}}"
+										stroke-width="4" show-pivot="{{false}}" color="rgba(255,255,255,1)"
+										track-color="rgba(255,255,255,0.2)" />
 									<view class="cardLineStatus">
 										<text>{{userMemberInfo.info.consumption_amount}}/{{item.money}}</text>
 										<text wx:if="{{index==5}}">(元)当前为最高等级</text>
-										<text wx:elif="{{userMemberInfo.info.consumption_amount>=item.money}}">(元)满足条件升至{{item.remark}}</text>
+										<text
+											wx:elif="{{userMemberInfo.info.consumption_amount>=item.money}}">(元)满足条件升至{{item.remark}}</text>
 										<text wx:else>(元)可升级{{item.remark}}</text>
 									</view>
 								</view>
 							</view>
 							<view class="cardBtn">
 								<!--pinkSize greenSize-->
-								<view class="flex-xy-center {{filter.vipColor(index)}}" bindtap="openOrCancelShare" data-show="{{true}}">邀请</view>
-								<view class="flex-xy-center {{filter.vipColor(index)}}">
-								<navigator url="/pages/index/index" open-type="switchTab" hover-class="none">订房</navigator>
-								</view>
+								<view class="flex-xy-center inviteBtn {{filter.vipColor(index)}}" bindtap="openOrCancelShare"
+									data-show="{{true}}">邀请</view>
+
+								<navigator class="flex-xy-center inviteBtn {{filter.vipColor(index)}}" url="/pages/index/index"
+									open-type="switchTab" hover-class="none">订房</navigator>
+
 							</view>
 						</view>
 						<view class="cardTitle flex-x-between">
-							<view class="cardTitleOne flex-col flex-y-center">
+							<view class="cardTitleOne flex-col flex-xy-center">
 								<view class="cardPrice">{{item.discount!=10?item.discount:'/'}}</view>
 								<view class="{{index==4?'whiteGoldBgSize':''}}">全平台{{item.discount!=10?item.discount:'/'}}折</view>
 							</view>
-							<navigator url="/pages/memberIntroduction/memberIntroduction" hover-class="none" class="cardTitleOne flex-col flex-y-center">
+							<navigator url="/pages/memberIntroduction/memberIntroduction" hover-class="none"
+								class="cardTitleOne flex-col flex-y-center">
 
-								<image src='/images/recommend/{{index==4?"upgrade_instructions@2x":"upgrade_instructions_white@2x"}}.png'></image>
+								<image
+									src='/images/recommend/{{index==4?"upgrade_instructions@2x":"upgrade_instructions_white@2x"}}.png'>
+								</image>
 
 								<view class="{{index==4?'whiteGoldBgSize':''}}">升级说明</view>
 							</navigator>
 
-							<view class="cardTitleOne flex-col flex-y-center" bindtap="jumpGoodFriends" data-index="{{index}}">
+							<navigator url="/pages/goodFriends/goodFriends" class="cardTitleOne flex-col flex-y-center"
+								hover-class="none">
 
-								<image src='/images/recommend/{{index==4?"invitation_details@2x":"invitation_details_white@2x"}}.png'></image>
+								<image src='/images/recommend/{{index==4?"invitation_details@2x":"invitation_details_white@2x"}}.png'>
+								</image>
 
 								<view class="{{index==4?'whiteGoldBgSize':''}}">邀请详情</view>
-							</view>
+							</navigator>
 							<view class="cardTitleOne flex-col flex-y-center" bindtap="showDoMore">
 
 								<image src='/images/recommend/{{index==4?"more@2x":"more_white@2x"}}.png'></image>
@@ -139,35 +156,37 @@
 				</view>
 			</navigator>
 		</view>
-		<view class="recommendDetail">
-			<navigator hover-class="none" url="/pages/inComeDetail/inComeDetail" class="recommendDetailTitle flex-x-between flex-y-center">
+		<view class="recommendDetail" wx:if="{{recommendRecordList.length}}">
+			<navigator hover-class="none" url="/pages/inComeDetail/inComeDetail"
+				class="recommendDetailTitle flex-x-between flex-y-center">
 				<text>收支明细</text>
 				<view>
 					<text>更多</text>
 					<van-icon name="arrow" color="#cccccc" size="8px" />
 				</view>
 			</navigator>
-		<include src="/components/inCome/inCome.wxml"/>
+			<include src="/components/inCome/inCome.wxml" />
 		</view>
 	</view>
 	<view class="recommendInvite flex">
-		<button class="flex-xy-center flex-grow-1" bindtap='onShareAppMessage' open-type="share" style="font-size: 32rpx;">邀请好友</button>
+		<button class="flex-xy-center flex-grow-1" bindtap='onShareAppMessage' hover-class="none" open-type="share"
+			style="font-size: 32rpx;">邀请好友</button>
 		<view class="flex-xy-center flex-grow-1">
-			<navigator url="/pages/invitePicture/invitePicture?qrcode={{userMemberInfo.info.qrcode}}&discount={{swiperList[3].discount}}" hover-class="none">生成邀请图</navigator>
+			<navigator
+				url="/pages/invitePicture/invitePicture?qrcode={{userMemberInfo.info.qrcode}}&discount={{swiperList[3].discount}}"
+				hover-class="none">生成邀请图</navigator>
 		</view>
+
 	</view>
-<!--分享弹框-->
-<include src="/components/wxActionSheet/wxActionSheet.wxml"/>
-<van-dialog
-  use-slot
-  show="{{ moreShow }}"
-  show-confirm-button="{{false}}"
-	width="690rpx"
-	custom-style="border-radius: 16rpx;"
->
- <view class="myDialog flex-xy-center">
-   <text>功能开发中 , 敬请期待</text>
-	 <image src="/images/close_black@2x.png" bindtap="closeDoMore"></image>
- </view>
-</van-dialog>
+	<!--分享弹框-->
+	<include src="/components/wxActionSheet/wxActionSheet.wxml" />
+	<van-dialog use-slot show="{{ moreShow }}" show-confirm-button="{{false}}" width="690rpx"
+		custom-style="border-radius: 16rpx;" closeOnClickOverlay>
+		<view class="myDialog flex-xy-center">
+			<text>功能开发中 , 敬请期待</text>
+			<image src="/images/close_black@2x.png" bindtap="closeDoMore"></image>
+		</view>
+	</van-dialog>
+	<canvas style="width:375px;height:496px;position:fixed;top:9999px;" canvas-id="mycanvas" />
+	<canvas style="width:632px;height:506px;position:fixed;top:9999px;" canvas-id="mycanvass" />
 </navbar>

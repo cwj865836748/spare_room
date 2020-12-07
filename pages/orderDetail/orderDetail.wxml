@@ -1,6 +1,6 @@
 <!--pages/orderDetail/orderDetail.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter" />
-<import src="../../wxParse/wxParse.wxml"/>
+<import src="../../wxParse/wxParse.wxml" />
 <navbar title='订单' navbarType='3' headColor="transparent" titleColor="#fff">
 
 	<view class="orderDetail por">
@@ -8,75 +8,101 @@
 		<view class="orderStatus flex-y-center">
 			<text>{{filter.orderStatus(orderDetailInfo.order_status).size}}</text>
 			<!--如果有退款才展示-->
-			<text class='{{filter.refundStatus(item.refund_status).font}}' wx:if="{{orderDetailInfo.refund_status}}">{{filter.refundStatus(orderDetailInfo.refund_status).size}}</text>
+			<text class='{{filter.refundStatus(item.refund_status).font}}'
+				wx:if="{{orderDetailInfo.refund_status}}">{{filter.refundStatus(orderDetailInfo.refund_status).size}}</text>
 			<image src="/images/order_detail_information@2x.png" bindtap="toProgress"></image>
 		</view>
 		<view class="orderShow">
 			<view class="orderTitle flex-y-center">
-			  <!--待支付-->
+				<!--待支付-->
 				<text wx:if="{{orderDetailInfo.order_status==0}}">此订单将为您保留15分钟,请尽快支付</text>
-        <!--待确认-->
-				<block wx:if="{{orderDetailInfo.order_status==1}}">
-				  <text>等待商家接单</text>
-				  <view class="flex-y-center" wx:if="{{timeOut>0}}">剩余<van-count-down time="{{ timeOut }}" format="mm:ss" bind:finish	="getInit"/></view>
+				<!--待确认-->
+				<block wx:if="{{orderDetailInfo.order_status==1&&!orderDetailInfo.refund_status}}">
+					<text>等待商家接单</text>
+					<view class="flex-y-center" wx:if="{{timeOut>0}}">剩余
+						<van-count-down time="{{ timeOut }}" format="mm:ss" bind:finish="getInit" />
+					</view>
 					<text wx:else style="color:#c12306"> 已超时，请联系客服催单</text>
 				</block>
-        <!--已确认-->
-        <text wx:if="{{orderDetailInfo.order_status==2}}">您的订单已确认,祝您入住愉快!</text>
-			
-			  <!--已取消 | 退款中… ：等待商家确认退款-->
-				 <text wx:if="{{orderDetailInfo.order_status==4&&orderDetailInfo.refund_status==1}}">等待商家确认退款</text>
-        <!--已完成-->
-				<text wx:if="{{orderDetailInfo.order_status==3}}">感谢您使用闲房预定酒店,期待下次光临!</text>
-        <!--已取消-->
+				<!--已确认-->
+				<text wx:if="{{orderDetailInfo.order_status==2}}">您的订单已确认,祝您入住愉快!</text>
+
+				<!--待确认或已确认 | 退款中… ：等待商家确认退款-->
+				<text
+					wx:if="{{(orderDetailInfo.order_status==1||orderDetailInfo.order_status==2||orderDetailInfo.order_status==4)&&orderDetailInfo.refund_status==1}}">等待商家确认退款</text>
+				<!--已完成-->
+				<text wx:if="{{orderDetailInfo.order_status==3}}">感谢您使用这旅预定酒店,期待下次光临!</text>
+				<!--已取消-->
 				<text wx:if="{{orderDetailInfo.order_status==4&&orderDetailInfo.refund_status==0}}">您的订单已取消</text>
 				<!--已关闭-->
 				<text wx:if="{{orderDetailInfo.order_status==5}}">您的订单已关闭</text>
-         <!--已取消|退款成功 已取消|退款失败 -->
-				<text wx:if="{{(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status==2)||(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status==3)}}">商家已确认退款</text>
+				<!--已取消|退款成功 已取消|退款失败 -->
+				<text
+					wx:if="{{(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status==2)||(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status==3)}}">商家已确认退款</text>
 
-				<view class="flex-grow-1 flex-y-center flex-x-bottom" style="padding-right: 48rpx;" wx:if="{{orderDetailInfo.order_status==3}}">
+				<view class="flex-grow-1 flex-y-center flex-x-bottom" style="padding-right: 48rpx;"
+					wx:if="{{orderDetailInfo.order_status==3}}">
 					<image src="/images/hotel_detail_doubt@2x.png" class="questionIcon"></image>
 				</view>
 			</view>
 			<view class="orderBtn flex-wrap">
-        <!--待支付-->
-				<view class="orderBtn_pay flex-y-center flex-x-between" wx:if="{{orderDetailInfo.order_status==0}}" bindtap="payOrder">
+				<!--待支付-->
+				<view class="orderBtn_pay flex-y-center flex-x-between" wx:if="{{orderDetailInfo.order_status==0}}"
+					bindtap="payOrder">
 					<text>立即支付</text>
 					<!--bind:finish="getInit"-->
-					<view class="flex-y-center">剩余<van-count-down time="{{ timeOut }}" format="mm:ss" bind:finish	="getInit"/></view>
+					<view class="flex-y-center">剩余
+						<van-count-down time="{{ timeOut }}" format="mm:ss" bind:finish="getInit" />
+					</view>
 				</view>
-        <!--未支付/待确认/已确认-->
-				<view class="cancleOrderBtn flex-xy-center" wx:if="{{orderDetailInfo.order_status==0||orderDetailInfo.order_status==1||orderDetailInfo.order_status==2}}" bindtap="cancleOrder" data-cancel="{{orderDetailInfo.cancel_type}}">取消订单</view> 
-        <!--已完成并未评价-->
+				<!--未支付/待确认未退款情况/已确认未退款情况-->
+				<view class="cancleOrderBtn flex-xy-center"
+					wx:if="{{orderDetailInfo.order_status==0||(orderDetailInfo.order_status==1&&!orderDetailInfo.refund_status)||(orderDetailInfo.order_status==2&&!orderDetailInfo.refund_status)}}"
+					bindtap="cancleOrder" data-cancel="{{orderDetailInfo.cancel_type}}">取消订单</view>
+				<!--已完成并未评价-->
 				<block wx:if="{{orderDetailInfo.order_status==3&&orderDetailInfo.comment_status==0}}">
-					<navigator class="evaluationBtn flex-xy-center" hover-class="none" url="/pages/evaluation/evaluation?id={{orderDetailInfo.id}}">评价</navigator></block>
-       <!--已取消并退款失败/退款成功-->
-				<button wx:if="{{(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status)}}" 
-				open-type='contact' class="evaluationBtn flex-xy-center">联系客服</button>
-	      <!--已取消但未发起退款-->
-				<block wx:if="{{(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status==0)||orderDetailInfo.order_status==5}}">	
-				<navigator class="appealBtn flex-xy-center" hover-class="none" url="/pages/hotelDetail/hotelDetail?id={{orderDetailInfo.hotel_id}}&longitude={{orderDetailInfo.longitude}}&latitude={{orderDetailInfo.latitude}}">再次预订</navigator></block>
+					<navigator class="evaluationBtn flex-xy-center" hover-class="none"
+						url="/pages/evaluation/evaluation?id={{orderDetailInfo.id}}">评价</navigator>
+				</block>
+				<!--已取消并退款失败/退款成功||待确认退款中||已确认退款中-->
+				<button
+					wx:if="{{(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status)||(orderDetailInfo.order_status==1&&orderDetailInfo.refund_status==1)||(orderDetailInfo.order_status==2&&orderDetailInfo.refund_status==1)}}"
+					open-type='contact' class="evaluationBtn flex-xy-center">联系客服</button>
+				<!--已取消但未发起退款-->
+				<block
+					wx:if="{{(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status==0)||orderDetailInfo.order_status==5}}">
+					<navigator class="appealBtn flex-xy-center" hover-class="none"
+						url="/pages/hotelDetail/hotelDetail?id={{orderDetailInfo.hotel_id}}&longitude={{orderDetailInfo.longitude}}&latitude={{orderDetailInfo.latitude}}">
+						再次预订</navigator>
+				</block>
 				<!--已完成并未进入申诉-->
-	      <navigator wx:if="{{orderDetailInfo.order_status==3&&orderDetailInfo.appeal_status==0}}" hover-class="none" url="/pages/Appeal/Appeal?id={{orderId}}" class="appealBtn flex-xy-center redCircle">申诉</navigator>
+				<navigator
+					wx:if="{{orderDetailInfo.order_status==3&&orderDetailInfo.appeal_status==0&&orderDetailInfo.is_user_appeal_expire==0}}"
+					hover-class="none" url="/pages/Appeal/Appeal?id={{orderId}}" class="appealBtn flex-xy-center redCircle">申诉
+				</navigator>
 
-         <!--已完成并申诉完成/驳回-->
-				<view class="appealBtn flex-xy-center" bindtap="appealResult" data-status="user" wx:if="{{(orderDetailInfo.order_status==3&&orderDetailInfo.appeal_status)}}" >申诉结果</view>
+				<!--已完成并申诉完成/驳回-->
+				<view class="appealBtn flex-xy-center" bindtap="appealResult" data-status="user"
+					wx:if="{{(orderDetailInfo.order_status==3&&orderDetailInfo.appeal_status)}}">申诉结果</view>
 
-				<view wx:if="{{orderDetailInfo.is_system_appeal}}" class="appealBtnForApp flex-xy-center" 
-				bindtap="appealResult" data-status="app">平台申诉</view>
-    <!--已完成/已取消并退款成功/已取消并退款失败/已取消并未发起退款-->
-				<view wx:if="{{orderDetailInfo.order_status==3||orderDetailInfo.order_status==5||(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status!=1)}}"  class="cancleOrderBtn flex-xy-center" bindtap="deleteOrder">删除订单</view> 
+				<view wx:if="{{orderDetailInfo.is_system_appeal}}" class="appealBtnForApp flex-xy-center" bindtap="appealResult"
+					data-status="app">平台申诉</view>
+				<!--已完成/已取消并退款成功/已取消并退款失败/已取消并未发起退款-->
+				<view
+					wx:if="{{orderDetailInfo.order_status==3||orderDetailInfo.order_status==5||(orderDetailInfo.order_status==4&&orderDetailInfo.refund_status!=1)}}"
+					class="cancleOrderBtn flex-xy-center" bindtap="deleteOrder">删除订单</view>
 			</view>
 		</view>
 		<view class="orderHotel">
-			<navigator url="/pages/hotelDetail/hotelDetail?id={{orderDetailInfo.hotel_id}}&longitude={{defaultCity.lng}}&latitude={{defaultCity.lat}}" hover-class="none" class="hotelName flex-y-center">
+			<navigator
+				url="/pages/hotelDetail/hotelDetail?id={{orderDetailInfo.hotel_id}}&longitude={{defaultCity.lng}}&latitude={{defaultCity.lat}}"
+				hover-class="none" class="hotelName flex-y-center">
 				<view class="hotelImage">
-					<image src="{{orderDetailInfo.room_info.img_url}}"></image>
+					<image src="{{orderDetailInfo.room_info.img_url[0]}}"></image>
 				</view>
 				<view class="nameDetail">
-					<view>{{orderDetailInfo.hotel_name}}</view>
-					<view>{{orderDetailInfo.hotel_name_en}} </view>
+					<view class="text-more">{{orderDetailInfo.hotel_name}}</view>
+					<view class="text-more">{{orderDetailInfo.hotel_name_en}} </view>
 				</view>
 			</navigator>
 			<view class="hotelAddress flex-y-center">
@@ -90,7 +116,8 @@
 					<text>{{filter.getLiveDate([orderDetailInfo.start_time*1000,orderDetailInfo.end_time*1000]).startTime}}</text>
 					<text>{{filter.getLiveDate([orderDetailInfo.start_time*1000,orderDetailInfo.end_time*1000]).dateTitle}}</text>
 				</view>
-				<view class="allDays">共{{filter.getLiveDate([orderDetailInfo.start_time*1000,orderDetailInfo.end_time*1000]).allDay}}晚</view>
+				<view class="allDays">
+					共{{filter.getLiveDate([orderDetailInfo.start_time*1000,orderDetailInfo.end_time*1000]).allDay}}晚</view>
 				<view class="monthAndWeek">
 					<text>{{filter.getLiveDate([orderDetailInfo.start_time*1000,orderDetailInfo.end_time*1000]).endTime}}</text>
 					<text>{{filter.getLiveDate([orderDetailInfo.start_time*1000,orderDetailInfo.end_time*1000]).dateTitle2}}</text>
@@ -127,32 +154,41 @@
 				<view class="feeTitle">费用明细</view>
 				<view class="flex-x-between">
 					<text class="feeTitleDetailSize1">房费</text>
-					<text class="feeTitleDetailSize1">{{orderDetailInfo.day}}晚,{{orderDetailInfo.room_num}}间 共 ￥{{orderDetailInfo.pay_money}}</text>
+					<text class="feeTitleDetailSize1">{{orderDetailInfo.day}}晚,{{orderDetailInfo.room_num}}间 共
+						￥{{orderDetailInfo.pay_money}}</text>
 				</view>
 				<view class="flex-x-between" wx:for="{{orderDetailInfo.room_price_detail}}" wx:key="index">
-					<text class="feeTitleDetailSize2">{{item.date}}  {{item.name}}</text>
+					<text class="feeTitleDetailSize2">{{item.date}} {{item.name}}</text>
 					<text class="feeTitleDetailSize2">{{orderDetailInfo.room_num}} x￥{{item.price}} </text>
 				</view>
 				<view class="flex-x-between">
-					<view class="feeTitleDetailSize2 flex-y-center">押金
-						<image src="/images/hotel_detail_doubt@2x.png" class="questionIcon" bindtap="toDepositShow" data-show="{{true}}"></image>
+					<view class="feeTitleDetailSize2 flex-y-center" bindtap="toDepositShow" data-show="{{true}}">押金
+						<image src="/images/hotel_detail_doubt@2x.png" class="questionIcon"></image>
 					</view>
 					<text class="feeTitleDetailSize2">￥{{orderDetailInfo.deposit_money}} </text>
 				</view>
-				<view class="flex-x-between">
+				<!-- <view class="flex-x-between">
 					<text class="feeTitleDetailSize2">发票税点</text>
 					<text class="feeTitleDetailSize2">￥{{orderDetailInfo.tax_money}} </text>
-				</view>
+				</view> -->
 			</view>
 			<view class="feeDetail" wx:if="{{orderDetailInfo.score}}">
 				<view class="aboutInvoiceSize" style="padding-top: 38rpx;">离店可获</view>
 				<view class="flex-x-between">
-					<text class="feeTitleDetailSize1">闲分</text>
+					<text class="feeTitleDetailSize1">积分</text>
 					<text class="feeTitleDetailSize1">{{orderDetailInfo.score}}</text>
 				</view>
 			</view>
 			<view class="feeCoupon">
 				<view class="flex-x-between">
+					<text class="feeTitleDetailSize3">原价</text>
+					<text class="feeTitleDetailSize5">￥{{orderDetailInfo.order_money}}</text>
+				</view>
+				<view class="flex-x-between" wx:if="{{orderDetailInfo.continuous_discount>0}}">
+					<text class="feeTitleDetailSize3">连住优惠</text>
+					<text class="feeTitleDetailSize5">-￥{{orderDetailInfo.continuous_discount}}</text>
+				</view>
+				<view class="flex-x-between" wx:if="{{orderDetailInfo.user_level}}">
 					<text class="feeTitleDetailSize3">{{filter.level(orderDetailInfo.user_level)}}</text>
 					<text class="feeTitleDetailSize4">{{orderDetailInfo.level_ratio}}折</text>
 				</view>
@@ -171,57 +207,59 @@
 		</view>
 	</view>
 	<!--取消订单-->
-	<van-dialog use-slot show="{{ isCancleOrderShow }}" show-cancel-button confirmButtonText="确认" cancelButtonText="取消" confirm-button-color="#8c42ad" cancel-button-color="#666666"
-	bind:confirm="cancleOrder" bind:cancel="cancleOrder"
-	>
+	<van-dialog use-slot show="{{ isCancleOrderShow }}" show-cancel-button confirmButtonText="确认" cancelButtonText="取消"
+		confirm-button-color="#8c42ad" cancel-button-color="#666666" bind:confirm="cancleOrder" bind:cancel="cancleOrder"
+		close-on-click-overlay catchtouchmove='preventTouchMove'>
 		<view class='cancelOrder flex-xy-center'>确定要取消订单吗？</view>
 	</van-dialog>
-		<!--删除订单-->
-		<van-dialog use-slot show="{{ isdeleteOrderShow }}" show-cancel-button confirm-button-color="#5302ad" cancel-button-color="#666666" bind:confirm="deleteOrder" bind:cancel="deleteOrder">
+	<!--删除订单-->
+	<van-dialog use-slot show="{{ isdeleteOrderShow }}" show-cancel-button close-on-click-overlay
+		confirm-button-color="#5302ad" cancel-button-color="#666666" bind:confirm="deleteOrder" bind:cancel="deleteOrder"
+		catchtouchmove='preventTouchMove'>
 		<view class="cancelOrder flex-xy-center">确认要删除订单吗?</view>
 	</van-dialog>
-	
+
 	<!--详细进度-->
-	<van-action-sheet show="{{ progressShow }}" bind:click-overlay="toProgress">
-		<view class="detailStepTitle">
+	<van-action-sheet show="{{ progressShow }}" bind:click-overlay="toProgress" catchtouchmove='preventTouchMove'>
+		<view class="detailStepTitle" bindtap="toProgress">
 			<text>详细进度</text>
-			<image src="/images/close_gary@2x.png" bindtap="toProgress"></image>
+			<image src="/images/close_gary@2x.png"></image>
 		</view>
 		<scroll-view scroll-y style="max-height:460px">
-		<view class="detailStep">
-		  <block wx:for="{{progressList}}" wx:key="index">
-			<view class="stepOne flex">
-				<view class="stepTime">
-					<view>{{filter.getTime2(item.create_time)}}</view>
-					<view>{{filter.getTime3(item.create_time)}}</view>
-				</view>
-				<view class="stepContent">
-					<text>{{item.content}}</text>
-				</view>
+			<view class="detailStep">
+				<block wx:for="{{progressList}}" wx:key="index">
+					<view class="stepOne flex">
+						<view class="stepTime">
+							<view>{{filter.getTime2(item.create_time)}}</view>
+							<view>{{filter.getTime3(item.create_time)}}</view>
+						</view>
+						<view class="stepContent" style="{{index==progressList.length-1&&'height:0'}}">
+							<text>{{item.content}}</text>
+						</view>
+					</view>
+				</block>
 			</view>
-	    </block>
-		</view>
 		</scroll-view>
 	</van-action-sheet>
 	<!--申诉详情-->
-	<AppealStatus id="appeal" depositMoney="{{orderDetailInfo.refund_deposit_money}}"  order_id="{{orderId}}"/>
+	<AppealStatus id="appeal" depositMoney="{{orderDetailInfo.refund_deposit_money}}" order_id="{{orderId}}" />
 	<!--押金说明-->
-      <van-dialog
-        use-slot
-				width="690rpx"
-        show="{{ depositShow }}"
-        showConfirmButton="{{false}}">
-        <view class="feeExpolre">
-          <image src="/images/close_black@2x.png" bindtap="toDepositShow" data-show="{{false}}"></image>
-          <view class='feeExpolreTitle'>押金说明</view>
-					<scroll-view scroll-y style="max-height:460rpx;">
-          <view class='feeExpolreContent'>
-             <template is="wxParse" data="{{wxParseData:deposit.nodes}}"/>
-          </view>
-					</scroll-view>
-        </view>
-      </van-dialog>
+	<van-dialog use-slot close-on-click-overlay width="690rpx" show="{{ depositShow }}" showConfirmButton="{{false}}"
+		catchtouchmove='preventTouchMove'>
+		<view class="feeExpolre">
+
+			<view class='feeExpolreTitle' bindtap="toDepositShow" data-show="{{false}}">押金说明
+				<image src="/images/close_black@2x.png"></image>
+			</view>
+			<scroll-view scroll-y style="max-height:600rpx;">
+				<view class='feeExpolreContent'>
+					<template is="wxParse" data="{{wxParseData:deposit.nodes}}" />
+				</view>
+			</scroll-view>
+		</view>
+	</van-dialog>
 	<!-- <include src="/components/jumpService/jumpService.wxml" wx:if="{{overlay}}"/> -->
+	<!--房型详情-->
 	<include src="/components/roomDetail/roomDetail.wxml" />
-	 <serviceCustomer/>
+	<serviceCustomer />
 </navbar>

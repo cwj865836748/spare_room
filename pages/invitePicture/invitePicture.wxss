@@ -19,9 +19,11 @@
   height: 100rpx;
   position: relative;
   margin: 0 0 140rpx 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
-.avatr>image {
+.avatr>open-data {
   width: 100%;
   height: 100%;
 }

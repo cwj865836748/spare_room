@@ -9,12 +9,7 @@ Page({
    */
   data: {
     scoreThing:[],
-    showScoreList: false,
-    scoreList:50,
     myScore:0,
-    page:1,
-    is_next:false,
-    noData:false,
     isShow:false,
     ruleInfo:null
   },
@@ -29,27 +24,10 @@ Page({
     this.getEquityLists()
     this.scoreRule()
   },
-  seeDetail(){
-    this.setData({
-      showScoreList:!this.data.showScoreList,
-      scoreList:[]
-    })
-    this.getScoreLists()
+  preventTouchMove(){
+    return
   },
-  //闲分记录
-  getScoreLists(){
-    request({url:api.mine.scoreLists,data:{page:this.data.page}}).then(res=>{
-       this.setData({
-        scoreList:[...res.data.list,...this.data.scoreList],
-        is_next:res.data.is_next
-       },()=>{
-        !this.data.scoreList.length&& this.setData({
-          noData:true
-          })
-       })
-    })
-  },
-  //闲房说明
+  //这旅说明
   scoreRule(){
     request({url:api.config.scoreRule}).then(res=>{
       const ruleInfo = res.data.info.replace(/&amp;nbsp;/g, ' ')
@@ -73,6 +51,7 @@ Page({
       isShow
     })
   },
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -112,10 +91,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(this.data.is_next){
-      this.data.page++
-      this.getScoreLists()
-    }
+  
   },
 
   /**

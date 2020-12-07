@@ -1,6 +1,7 @@
 <!--components/wxActionSheet/wxActionSheet.wxml-->
 <!--分享弹框-->
-<van-action-sheet show="{{ shareShow }}" close-on-click-overlay bind:click-overlay="openOrCancelShare" data-show="{{false}}">
+<van-action-sheet show="{{ shareShow }}" close-on-click-overlay bind:click-overlay="openOrCancelShare"
+	data-show="{{false}}">
 	<view class="actionSheet">
 		<view class="shareIcon flex-x-around">
 			<button open-type='share' class="flex-col flex-y-center" hover-class="none">
@@ -18,30 +19,43 @@
 	</view>
 </van-action-sheet>
 <van-overlay show="{{ shareFriendsShow }}" bind:click="shareFriendsSquare" data-show="{{false}}">
- <scroll-view scroll-y style="height:100%">
-	<view class="haiBao">
-		<view class="haiBaoPic">
-			<image src="{{slideshowList[0]}}"></image>
-			<image src="{{hotelDetail.qrcode}}"></image>
-		</view>
-		<view class="haiBaoHotel">
-			<view class="name">{{hotelDetail.name}} </view>
-			<van-rate value="{{hotelDetail.star}}" count="{{hotelDetail.star}}" readonly size="12" />
-			<view class="EnglishName">{{hotelDetail.name_en}} </view>
-			<view class="address">{{hotelDetail.city}} {{hotelDetail.county}} {{hotelDetail.address}}</view>
-			<view class="time flex-y-center">
-				<view class="flex-y-center">
-					<text>{{hotelDetail.open_time}}</text>
-					年开业
-				</view>
-				<view class="flex-y-center">
-					<text>{{hotelDetail.room_num}}</text>
-					间房
+	<scroll-view scroll-y style="height:100%">
+		<view class="haiBao" wx:if="{{!whereHaiBao}}">
+			<view class="haiBaoPic">
+				<image src="{{slideshowList[0]}}"></image>
+				<image src="{{hotelDetail.qrcode}}"></image>
+			</view>
+			<view class="haiBaoHotel">
+				<view class="name">{{hotelDetail.name}} </view>
+				<van-rate value="{{hotelDetail.star}}" count="{{hotelDetail.star}}" readonly size="12" />
+				<view class="EnglishName">{{hotelDetail.name_en}} </view>
+				<view class="address">{{hotelDetail.city}} {{hotelDetail.county}} {{hotelDetail.address}}</view>
+				<view class="time flex-y-center">
+					<view class="flex-y-center">
+						<text>{{hotelDetail.open_time}}</text>
+						年开业
+					</view>
+					<view class="flex-y-center">
+						<text>{{hotelDetail.room_num}}</text>
+						间房
+					</view>
 				</view>
 			</view>
+			<view class="haibaoBtn flex-xy-center" bindtap="saveCavans"> 保存至本地</view>
+			<view class="haibaoContent flex-xy-center">保存图片到手机后,可以到朋友圈分享该酒店</view>
 		</view>
-		<view class="haibaoBtn flex-xy-center" bindtap="saveCavans"> 保存至本地</view>
-		<view class="haibaoContent flex-xy-center">保存图片到手机后,可以到朋友圈分享该酒店</view>
-	</view>
+
+		<view class="recommendHaiBao" wx:else>
+			<image src="/images/send_square.png" class="haiBaoBg" />
+			<view class="avatr">
+				<open-data type="userAvatarUrl"></open-data>
+			</view>
+			<view class="disCount">全场{{swiperList[3].discount}}折</view>
+			<view class="disCount2 flex-xy-center">全网低价全场{{swiperList[3].discount}}折,快来收藏</view>
+			<image src="{{userMemberInfo.info.qrcode}}" class="codePic"></image>
+			<button class="haibaoBtn remmandHaibaoBtn flex-xy-center" open-type="getUserInfo" hover-class="none" bindgetuserinfo="bindgetuserinfo"> 保存至本地</button>
+			<view class="haibaoContent flex-xy-center">保存图片到手机后,可以到朋友圈分享该酒店</view>
+		</view>
+
 	</scroll-view>
 </van-overlay>

@@ -1,14 +1,15 @@
 <!--components/AppealStatus/AppealStatus.wxml-->
 <!--申诉-->
-<van-dialog use-slot show="{{ isAppealShow }}" show-confirm-button="{{false}}" close-on-click-overlay>
-	<view class="customAppealTitle flex-x-center">
+<van-dialog use-slot show="{{ isAppealShow }}" show-confirm-button="{{false}}" width="690rpx" catchtouchmove='preventTouchMove'   closeOnClickOverlay>
+	<view class="customAppealTitle flex-x-center" bindtap="closeResult">
 		<text>{{appealDetail.type==1?'客户申诉':(appealDetail.type==2?'商家申诉':'平台申诉')}}</text>
-		<image src="/images/delete@2x.png" bindtap="closeResult"></image>
+		<image src="/images/delete@2x.png"></image>
 	</view>
 	
 		<view class="appealStatus flex-y-center flex-x-between">
 			<text class='appealSize'>申诉状态:</text>
-			<text class="appealSize2" wx:if="{{appealDetail.status==3}}">已通过</text>
+			<text class="appealSize2" wx:if="{{appealDetail.status==3}}">已赔偿</text>
+			<text class="appealSize2" wx:if="{{appealDetail.status==1}}">已通过</text>
 			<text class="appealSize6" wx:if="{{appealDetail.status==0}}">处理中···</text>
 			<text class="appealSize7" wx:if="{{appealDetail.status==2}}">已驳回</text>
 		</view>

@@ -74,5 +74,8 @@ Component({
       }
       this.onClose()
     },
+    preventTouchMove(){
+      return
+    }
   }
 })

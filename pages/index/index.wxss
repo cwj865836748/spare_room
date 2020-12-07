@@ -146,7 +146,7 @@
   margin: 6rpx 0 36rpx;
   border-bottom: 2rpx solid #f6f6f6;
   position: relative;
-  padding-right: 50rpx;
+  padding-right:70rpx;
   box-sizing: border-box;
   z-index:0
 }
@@ -215,8 +215,8 @@
   letter-spacing: 2rpx;
 }
 .deteleIcon {
-  width: 26rpx;
-  height: 26rpx;
+  width: 30rpx;
+  height: 30rpx;
   position: absolute;
   right: 0;
   top: 50%;

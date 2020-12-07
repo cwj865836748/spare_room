@@ -18,7 +18,7 @@
 		</view>
 	</view>
 
-	<view class="content">
+	<view class="keyContent">
 		<!--历史记录-->
 		<view class="title" wx:if="{{historySearchList.length}}">
 			<view class="head flex-y-center">

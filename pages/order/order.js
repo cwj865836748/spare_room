@@ -20,13 +20,14 @@ Page({
     total:0,
     isCancleOrderShow:false,
     isdeleteOrderShow:false,
-    depositMoney:0
+    depositMoney:0,
+    triggered: false,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getInit()
   },
   getInit(){
     const {query:data,orderList} = this.data
@@ -76,14 +77,17 @@ Page({
   deleteOrder(e){
     const {type} = e
     const {id:orderId} = e.currentTarget.dataset
+    const index = this.data.orderList.findIndex(item=>item.id==this.data.orderId)
     type=="confirm"&&request({url:api.orderDetail.userDelete,data:{id:this.data.orderId}}).then(res=>{
       if(res.code==200){
+        this.data.orderList.splice(index,1)
         this.setData({
-          query:{...this.data.query,page:1},
-          orderList:[],
-          noData:false
+          orderList:[...this.data.orderList]
         })
-        this.getInit()
+        wx.showToast({
+          title: '删除成功！',
+          icon:'none'
+        })
       }
     })
     this.setData({
@@ -108,18 +112,37 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this._freshing = false
   },
+
+  onPulling(e) {
+    setTimeout(()=>{
+      this.setData({
+        triggered: true,
+      })
+    },3000)
+ 
+  },
+  onRefresh(e) {
+    if (this._freshing) return
+    this._freshing = true
+    setTimeout(() => {
+      this.setData({
+        triggered: false,
+        query:{...this.data.query,page:1},
+        orderList:[]
+      })
+      this.getInit()
+      this._freshing = false
+    }, 3000)
+  },
+
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      query:{...this.data.query,page:1},
-      orderList:[]
-    })
-    this.getInit()
+   
   },
 
   /**

@@ -1,354 +1,355 @@
 <!--pages/roomReservation/roomReservation.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter" />
-<import src="../../wxParse/wxParse.wxml"/>
-	<navbar title="房间预订" headColor="{{headColor}}" titleColor="{{titleColor}}" navbarType="4">
-    <view class="roomReservation por">
-      <image src="../../images/bg@2x.png" class="roomHeadBg"></image>
-      <view class="roomDate">
-        <view class="top">
-          <text class="roomDateNumber">{{filter.getLiveDate(defaultDate).startTime}}</text>
-          <text>{{filter.getLiveDate(defaultDate).dateTitle}}</text>
-          <text class="roomNumber">共{{filter.getLiveDate(defaultDate).allDay}}晚</text>
-          <text class="roomDateNumber">{{filter.getLiveDate(defaultDate).endTime}}</text>
-          <text>{{filter.getLiveDate(defaultDate).dateTitle2}}</text>
+<import src="../../wxParse/wxParse.wxml" />
+<navbar title="房间预订" headColor="{{headColor}}" titleColor="{{titleColor}}" navbarType="4">
+  <view class="roomReservation por">
+    <image src="../../images/bg@2x.png" class="roomHeadBg"></image>
+    <view class="roomDate">
+      <view class="top">
+        <text class="roomDateNumber">{{filter.getLiveDate(defaultDate).startTime}}</text>
+        <text>{{filter.getLiveDate(defaultDate).dateTitle}}</text>
+        <text class="roomNumber">共{{filter.getLiveDate(defaultDate).allDay}}晚</text>
+        <text class="roomDateNumber">{{filter.getLiveDate(defaultDate).endTime}}</text>
+        <text>{{filter.getLiveDate(defaultDate).dateTitle2}}</text>
+      </view>
+      <view class="roomTitle text-more">{{roomBook.info.hotel_name}}</view>
+      <view class="roomType">{{roomBook.info.room_name}}</view>
+      <view class="roomTypeDetail flex-y-center">
+        <text>{{filter.breakfastType(roomBook.info.breakfast)}}</text>
+        <text>{{roomBook.info.bed_type}}</text>
+      </view>
+    </view>
+    <view class="cancelRule flex-y-center">
+      <view class="cancalTitle flex-y-center">
+        <image src="../../images/order_detail_information@2x.png"></image>
+        <text>取消规则</text>
+      </view>
+      <view class="rule">
+        {{filter.canlcelRule(roomBook.info.cancel_type)}}
+      </view>
+    </view>
+    <view class="bookRoom">
+      <view class="bookTitle flex-x-between">
+        <view class="title flex-y-center">
+          <image src="../../images/hotel_detail_attention2@2x.png"></image>
+          <text class="fb">订房必读</text>
         </view>
-        <view class="roomTitle text-more">{{roomBook.info.hotel_name}}</view>
-        <view class="roomType">{{roomBook.info.room_name}}</view>
-        <view class="roomTypeDetail flex-y-center">
-          <text>{{filter.breakfastType(roomBook.info.breakfast)}}</text>
-          <text>{{roomBook.info.bed_type}}</text>
+        <view class="seeAll" bindtap="ocBookDescription" data-show="{{true}}">查看全部</view>
+      </view>
+      <view class="bookRules">
+        {{filter.symbolSubstitution(roomBook.info.reservation_description)}}
+      </view>
+    </view>
+    <view class="bookMsg">
+      <view class="bookmessage flex-y-center">
+        <text>入住信息</text>
+        <text>姓名与证件保持一致</text>
+      </view>
+      <view class="roomChoose flex-y-center flex-x-between">
+        <text class='roomDetailMsg'>房间数</text>
+        <van-stepper value="{{ bookQuery.room_number }}" data-key="room_number" bind:change="onChange" max="20" />
+      </view>
+      <view class="roomPerson">
+        <view class="roomChoose flex-y-center">
+          <text class='roomDetailMsg'>联系人信息</text></view>
+        <van-cell-group>
+          <block wx:for="{{personList}}" wx:key="index">
+            <view class="por">
+              <van-field value="{{ item.name }}" label="入住客人" maxlength='15' placeholder="请输入入住客人姓名"
+                bind:change="personOnChange" data-index="{{index}}" />
+              <image src='{{!index?"/images/hotel_detail_add@2x.png":"/images/hotel_detail_reduce@2x.png"}}'
+                class="personAdd" bindtap="controllerPerson" data-index="{{index}}"></image>
+            </view>
+          </block>
+          <van-field value="{{ bookQuery.phone }}" maxlength='11' label="手机号码" clearable placeholder="请输入手机号码"
+            bind:change="onChange" data-key="phone" />
+          <van-field value="{{ bookQuery.estimate_time  }}" label="预计到店" clearable placeholder="请选择预计到店时间点"
+            bind:change="onChange" data-key="estimate_time" disabled bindtap="dateTimePicker" data-show="{{true}}" />
+        </van-cell-group>
+      </view>
+      <view class="specialRequirements">
+        <view class="roomChoose flex-y-center">
+          <text class='roomDetailMsg'>特殊要求以及备注</text></view>
+        <view class="specialAnother">
+          <van-checkbox-group value="{{ remarkCheckboxChoose }}" bind:change="checkboxChange"
+            data-key="remarkCheckboxChoose" class="flex-wrap checkBoxGroup ">
+            <block wx:for="{{remarkCheckboxList}}" wx:key="index">
+              <van-checkbox name="{{item.name}}" checked-color=" #7a0dcb" icon-size="15px" class='checkBox'>
+                {{item.name}}</van-checkbox>
+            </block>
+          </van-checkbox-group>
+        </view>
+        <!-- <textarea wx:if="{{!dateTimePickerShow&&!bookDescriptionShow&&!coupleShow&&!feeShow&&!depositShow&&!bookStatusShow&&!bookStatusShow2}}" placeholder="因疫情期间,需备注填写户籍,感谢配合。" class="formTextarea"  maxlength='-1' value="{{bookQuery.remark}}" data-key="remark" bind:input="onChange"/>
+            <view wx:else class="formTextarea">{{bookQuery.remark?bookQuery.remark:'因疫情期间，需要填写客人是户籍哪里人，感谢配合。'}}</view> -->
+        <van-field value="{{ bookQuery.remark }}" clearable placeholder="如您有特别要求,这旅需要和酒店联系,请您耐心等待!"
+          bind:change="onChange" data-key="remark" />
+
+      </view>
+      <view class="roomChoose2 flex-y-center flex-x-between" bindtap="toCoupleShow" data-show="{{true}}">
+        <text class='roomDetailMsg'>优惠券</text>
+        <view class="coupon flex-y-center">
+          <!--判断一进来是否有优惠券可用-->
+          <text
+            class="{{couponList.length?'black':''}}">{{couponList.length?(feeDetail.detail.coupon_discount?coupon_name:'有可用优惠券'):"暂无可用优惠券"}}</text>
+          <image src="/images/right@2x.png" wx:if="{{couponList.length}}"></image>
         </view>
       </view>
-      <view class="cancelRule flex-y-center">
-        <view class="cancalTitle flex-y-center">
-          <image src="../../images/order_detail_information@2x.png"></image>
-          <text>取消规则</text>
+      <view class="roomChoose2 flex-y-center flex-x-between">
+        <view class='roomDetailMsg '>
+          <view>关于发票</view>
+          <text class='fpbz'>(如需发票请在下单前填写,发票由闲旅公司开具)</text>
         </view>
-        <view class="rule">
-          {{filter.canlcelRule(roomBook.info.cancel_type)}}
+        <view class="coupon flex-y-center" bindtap="goInvoice">
+          <text
+            class="black">{{bookQuery.is_invoice?filter.invoice(bookQuery.invoice_info.invoice_type):'不需要开票'}}</text>
+          <image src="/images/right@2x.png"></image>
         </view>
       </view>
-      <view class="bookRoom">
-        <view class="bookTitle flex-x-between">
-          <view class="title flex-y-center">
-            <image src="../../images/hotel_detail_attention2@2x.png"></image>
-            <text class="fb">订房必读</text>
+      <view class="interest" wx:if="{{roomBook.equity.length}}">
+        <navigator url="/pages/myScore/myScore?score={{roomBook.score}}" hover-class="none"
+          class='interestHead flex-x-between '>
+          <view class='interestLeft'>
+            <text>权益兑换</text>
+            <text>您当前可享受免费,积分兑换权益</text>
           </view>
-          <view class="seeAll" bindtap="ocBookDescription" data-show="{{true}}">查看全部</view>
-        </view>
-        <view class="bookRules">
-          {{roomBook.reservation_description}}
-        </view>
-      </view>
-      <view class="bookMsg">
-        <view class="bookmessage flex-y-center">
-          <text>入住信息</text>
-          <text>姓名与证件保持一致</text>
-        </view>
-        <view class="roomChoose flex-y-center flex-x-between">
-          <text class='roomDetailMsg'>房间数</text>
-          <van-stepper value="{{ bookQuery.room_number }}" data-key="room_number" bind:change="onChange" max="20" />
-        </view>
-        <view class="roomPerson">
-          <view class="roomChoose flex-y-center">
-            <text class='roomDetailMsg'>联系人信息</text></view>
-          <van-cell-group>
-            <block wx:for="{{personList}}" wx:key="index">
-              <view class="por">
-                <van-field value="{{ item.name }}" label="入住客人" maxlength='8' placeholder="请输入入住客人姓名" bind:change="personOnChange" data-index="{{index}}"/>
-                <image src='{{!index?"/images/hotel_detail_add@2x.png":"/images/hotel_detail_reduce@2x.png"}}' class="personAdd" bindtap="controllerPerson" data-index="{{index}}"></image>
+          <view class='interestRight'>
+            <text>{{roomBook.score}}</text>
+            <text>积分余额（分）</text>
+          </view>
+          <image src='/images/right_white@2x.png'></image>
+        </navigator>
+        <view class='interestContent'>
+          <van-checkbox-group value="{{ equityChoose }}" bind:change="checkboxChange" data-key="equityChoose">
+            <block wx:for="{{filter.turnArray(equityIsOpen,roomBook.equity)}}" wx:key="index">
+              <view class='interestThings flex-x-between flex-y-center'>
+                <view class="interestThingsLeft">
+                  <view class="interestTitle">
+                    <text>{{item.name}}</text>
+                    <text>{{item.score}}/份</text>
+                  </view>
+                  <text class="interestPrice">价值￥{{item.worth}}</text>
+                </view>
+                <van-checkbox name="{{item.id}}" icon-size="17px" checked-color="#7a0dcb"></van-checkbox>
               </view>
             </block>
-            <van-field value="{{ bookQuery.phone }}" maxlength='11' label="手机号码" clearable placeholder="请输入手机号码" bind:change="onChange" data-key="phone"/>
-            <van-field value="{{ bookQuery.estimate_time  }}" label="到店时间" clearable placeholder="请选择预计到店时间点" bind:change="onChange" data-key="estimate_time" disabled bindtap="dateTimePicker" data-show="{{true}}"/>
-          </van-cell-group>
-        </view>
-        <view class="specialRequirements">
-          <view class="roomChoose flex-y-center">
-            <text class='roomDetailMsg'>特殊要求以及备注</text></view>
-          <view class="specialAnother">
-            <van-checkbox-group value="{{ remarkCheckboxChoose }}" bind:change="checkboxChange" data-key="remarkCheckboxChoose" class="flex-wrap checkBoxGroup ">
-              <block wx:for="{{remarkCheckboxList}}" wx:key="index">
-                <van-checkbox name="{{item.name}}" checked-color=" #7a0dcb" icon-size="15px" class='checkBox'>{{item.name}}</van-checkbox>
-              </block>
-            </van-checkbox-group>
+          </van-checkbox-group>
+          <view class="interestScore flex-x-bottom flex-y-center">
+            <text>合计:</text>
+            <text>{{equityScore}}分</text>
           </view>
-            <!-- <textarea wx:if="{{!dateTimePickerShow&&!bookDescriptionShow&&!coupleShow&&!feeShow&&!depositShow&&!bookStatusShow&&!bookStatusShow2}}" placeholder="因疫情期间,需备注填写户籍,感谢配合。" class="formTextarea"  maxlength='-1' value="{{bookQuery.remark}}" data-key="remark" bind:input="onChange"/>
-            <view wx:else class="formTextarea">{{bookQuery.remark?bookQuery.remark:'因疫情期间，需要填写客人是户籍哪里人，感谢配合。'}}</view> -->
-             <van-field value="{{ bookQuery.remark }}"  clearable placeholder="因疫情期间,需备注填写户籍,感谢配合." bind:change="onChange" data-key="remark"/>
-           
-        </view>
-        <view class="roomChoose2 flex-y-center flex-x-between" bindtap="toCoupleShow" data-show="{{true}}">
-          <text class='roomDetailMsg'>优惠券</text>
-          <view class="coupon flex-y-center">
-          <!--判断一进来是否有优惠券可用-->
-            <text class="{{couponList.length?'black':''}}">{{couponList.length?(feeDetail.detail.coupon_discount?coupon_name:'有可用优惠券'):"暂无可用优惠券"}}</text>
-            <image src="/images/right@2x.png" wx:if="{{couponList.length}}"></image>
+          <view class='closeInterest flex-xy-center' wx:if="{{roomBook.equity.length>3}}" catchtap="toEquityDo">
+            <image
+              src="{{!equityIsOpen?'/images/hotel_roomdetails_pulldown@2x.png':'/images/hotel_roomdetails_takeback@2x.png'}}">
+            </image>
           </view>
         </view>
-        <view class="roomChoose2 flex-y-center flex-x-between">
-          <text class='roomDetailMsg'>关于发票</text>
-          <view class="coupon flex-y-center" bindtap="goInvoice">
-            <text class="black">{{bookQuery.is_invoice?filter.invoice(bookQuery.invoice_info.invoice_type):'不需要开票'}}</text>
-            <image src="/images/right@2x.png"></image>
-          </view>
+      </view>
+      <view class="sendBag" wx:if="{{giftContent}}">
+        <view class="roomChoose flex-y-center" style="height:100rpx">
+          <text class='roomDetailMsg'>赠送礼包</text>
         </view>
-        <view class="interest" wx:if="{{roomBook.equity.length}}">
-          <navigator url="/pages/myScore/myScore?score={{roomBook.score}}" hover-class="none" class='interestHead flex-x-between ' >
-            <view class='interestLeft'>
-              <text>权益兑换</text>
-              <text>您当前可享受免费,闲分兑换权益</text>
-            </view>
-            <view class='interestRight'>
-              <text>{{roomBook.score}}</text>
-              <text>闲分余额（分）</text>
-            </view>
-            <image src='/images/right_white@2x.png'></image>
-          </navigator>
-          <view class='interestContent'>
-            <van-checkbox-group value="{{ equityChoose }}" bind:change="checkboxChange" data-key="equityChoose">
-              <block wx:for="{{filter.turnArray(equityIsOpen,roomBook.equity)}}" wx:key="index">
-                <view class='interestThings flex-x-between flex-y-center' >
-                  <view class="interestThingsLeft">
-                    <view class="interestTitle">
-                      <text>{{item.name}}</text>
-                      <text>{{item.score}}/份</text>
+        <view class="sendContent">
+          {{giftContent}}
+        </view>
+      </view>
+    </view>
+    <view class="bookRoomPrice flex-x-between flex-y-center">
+      <text bindtap="feeShowOpenClose">明细</text>
+      <view class="flex-xy-center" bindtap="isBookHotel" data-show="{{true}}">
+        <text>￥</text>
+        <text>{{filter.toFix(feeDetail.detail.pay_money)}}</text>
+        <text>预定</text>
+      </view>
+    </view>
+  </view>
+  <!--时间选择-->
+  <van-overlay show="{{ dateTimePickerShow }}" z-index="100" bind:click="dateTimePicker" data-show="{{false}}">
+    <view class="dateTimePicker">
+      <van-datetime-picker type="time" data-key="estimate_time" bind:cancel="onChange" bind:confirm="onChange"
+        value="{{bookQuery.estimate_time}}" />
+    </view>
+  </van-overlay>
+  <!--订房必读-->
+  <van-action-sheet show="{{ bookDescriptionShow }}" catchtouchmove='preventTouchMove'
+    bind:click-overlay="ocBookDescription" data-show="{{false}}">
+    <view class="bookRoomRead flex-xy-center" bindtap="ocBookDescription" data-show="{{false}}">
+      <text>订房必读</text>
+      <image src="/images/close_gary@2x.png"></image>
+    </view>
+    <scroll-view style="max-height:460px" scroll-y>
+      <view class="bookRoomContent">
+        <template is="wxParse" data="{{wxParseData:bookDescription.nodes}}" />
+      </view>
+    </scroll-view>
+  </van-action-sheet>
+  <!--优惠券-->
+  <van-action-sheet show="{{ coupleShow }}" catchtouchmove='preventTouchMove' bind:click-overlay="toCoupleShow"
+    data-show="{{false}}">
+    <view class='couponListBtn flex-x-between'>
+      <text bindtap="toCoupleShow" data-show="{{false}}">取消</text>
+      <text bindtap="toCoupleShow" data-show="{{false}}" data-ok="{{true}}">确认</text>
+    </view>
+    <view class="couponList">
+      <view class="couponHead flex-x-between ">
+        <text class="{{chooseCoupon?'couponActive':''}}" bindtap="tabCouple" data-show="{{true}}">可用优惠券</text>
+        <text class="{{chooseCoupon?'':'couponActive'}}" bindtap="tabCouple" data-show="{{false}}">不可用优惠券</text>
+      </view>
+      <van-radio-group value="{{ bookQuery.coupon_id }}" bind:change="onChange" data-key="coupon_id">
+        <scroll-view scroll-y style="max-height:460px">
+          <view class="couponContent">
+
+            <block wx:for="{{chooseCoupon?couponList:couponNoList}}" wx:key="index">
+              <view class="flex-x-between flex-y-center">
+                <van-radio name="{{item.id}}" checked-color="#ffac1e" icon-size="15px"></van-radio>
+                <view class="couponListAll">
+                  <view class="couponListDetail flex-x-between {{chooseCoupon?'':'couponListOpacity'}}">
+                    <image src="/images/coupons_bg@2x.png"></image>
+                    <view class="couponPrice flex-y-center">
+                      <block wx:if="{{item.type==1}}">
+                        <text>￥</text>
+                        <text>{{item.money}}</text>
+                      </block>
+                      <block wx:else>
+                        <text>{{item.rebate_ratio}}折</text>
+                      </block>
                     </view>
-                    <text class="interestPrice">价值￥{{item.worth}}</text>
-                  </view>
-                  <van-checkbox name="{{item.id}}" icon-size="17px" checked-color="#7a0dcb"></van-checkbox>
-                </view>
-              </block>
-            </van-checkbox-group>
-            <view class="interestScore flex-x-bottom flex-y-center">
-              <text>合计:</text>
-              <text>{{equityScore}}分</text>
-            </view>
-            <view class='closeInterest flex-xy-center' wx:if="{{roomBook.equity.length>3}}" catchtap="toEquityDo">
-              <image src="{{!equityIsOpen?'/images/hotel_roomdetails_pulldown@2x.png':'/images/hotel_roomdetails_takeback@2x.png'}}"></image>
-            </view>
-          </view>
-        </view>
-        <view class="sendBag">
-          <view class="roomChoose flex-y-center" style="height:100rpx">
-            <text class='roomDetailMsg'>赠送礼包</text>
-          </view>
-          <view class="sendContent">
-            {{giftContent}}
-          </view>
-        </view>
-      </view>
-      <view class="bookRoomPrice flex-x-between flex-y-center">
-        <text bindtap="feeShowOpenClose" data-show="{{true}}">明细</text>
-        <view class="flex-xy-center" bindtap="isBookHotel" data-show="{{true}}">
-          <text>￥</text>
-          <text>{{filter.toFix(feeDetail.detail.pay_money)}}</text>
-          <text>预定</text>
-        </view>
-      </view>
-      </view>
-      <!--时间选择-->
-      <van-overlay show="{{ dateTimePickerShow }}" z-index="100" bind:click="dateTimePicker" data-show="{{false}}">
-        <view class="dateTimePicker">
-          <van-datetime-picker
-            type="time"
-            value="{{bookQuery.estimate_time}}"
-            data-key="estimate_time"
-            bind:input="onChange"
-            show-toolbar="{{false}}"
-          />
-        </view>
-      </van-overlay>
-      <!--订房必读-->
-      <van-action-sheet show="{{ bookDescriptionShow }}" catchtouchmove='preventTouchMove' bind:click-overlay="ocBookDescription" data-show="{{false}}">
-        <view class="bookRoomRead flex-xy-center">
-          <text>订房必读</text>
-          <image src="/images/close_gary@2x.png" bindtap="ocBookDescription" data-show="{{false}}"></image>
-        </view>
-        <scroll-view style="max-height:460px" scroll-y>
-        <view class="bookRoomContent">
-          <template is="wxParse" data="{{wxParseData:bookDescription.nodes}}"/>
-        </view>
-        </scroll-view>
-      </van-action-sheet>
-      <!--优惠券-->
-      <van-action-sheet show="{{ coupleShow }}" catchtouchmove='preventTouchMove' bind:click-overlay="toCoupleShow" data-show="{{false}}">
-        <view class='couponListBtn flex-x-between'>
-          <text bindtap="toCoupleShow" data-show="{{false}}">取消</text>
-          <text bindtap="toCoupleShow" data-show="{{false}}" data-ok="{{true}}">确认</text>
-        </view>
-        <view class="couponList">
-          <view class="couponHead flex-x-between ">
-            <text class="{{chooseCoupon?'couponActive':''}}" bindtap="tabCouple" data-show="{{true}}">可用优惠券</text>
-            <text class="{{chooseCoupon?'':'couponActive'}}" bindtap="tabCouple" data-show="{{false}}">不可用优惠券</text>
-          </view>
-          <van-radio-group value="{{ bookQuery.coupon_id }}" bind:change="onChange" data-key="coupon_id">
-          <scroll-view scroll-y style="max-height:460px" >
-            <view class="couponContent">
-             
-              <block wx:for="{{chooseCoupon?couponList:couponNoList}}" wx:key="index">
-                <view class="flex-x-between flex-y-center" >
-                  <van-radio name="{{item.id}}" checked-color="#ffac1e" icon-size="15px"></van-radio>
-                  <view class="couponListAll">
-                    <view class="couponListDetail flex-x-between {{chooseCoupon?'':'couponListOpacity'}}">
-                      <image src="/images/coupons_bg@2x.png"></image>
-                      <view class="couponPrice flex-y-center">
-                        <block wx:if="{{item.type==1}}">
-                          <text>￥</text>
-                          <text>{{item.money}}</text>
-                        </block>
-                        <block wx:else>
-                          <text>{{item.rebate_ratio}}折</text>
-                        </block>
-                      </view>
-                      <view class="couponRules por">
-                        
-                        <view>{{item.title}}</view>
-                        <view>{{filter.getTime2(item.start_time)}} ~ {{filter.getTime2(item.expire_time)}}</view>
-                        <view class="flex-y-center" data-index="{{index}}" bindtap="toShowInstructions">
+                    <view class="couponRules por">
+
+                      <view>{{item.title}}</view>
+                      <view>{{filter.getTime2(item.start_time)}} ~ {{filter.getTime2(item.expire_time)}}</view>
+                      <view class="flex-y-center" data-index="{{index}}" bindtap="toShowInstructions">
                         使用说明
-                        <van-icon name="arrow-down" color="#fff" size="12"/>
-                        </view>
+                        <van-icon name="arrow-down" color="#fff" size="12" />
                       </view>
-                      <view class="line"></view>
                     </view>
-                    <view class="couponExpolre flex-y-center" wx:if="{{item.instructionsShow}}">{{item.instructions}}</view>
+                    <view class="line"></view>
+                  </view>
+                  <view class="couponExpolre flex-y-center" wx:if="{{item.instructionsShow}}">{{item.instructions}}
                   </view>
                 </view>
-              </block>
-							<view class="flex-y-center" wx:if="{{chooseCoupon}}">
-                  <van-radio name="" checked-color="#ffac1e" icon-size="15px"></van-radio>
-									<view class="couponListNo">
-                    不使用优惠券
-                 </view>
               </view>
-           
+            </block>
+            <view class="flex-y-center" wx:if="{{chooseCoupon}}">
+              <van-radio name="" checked-color="#ffac1e" icon-size="15px"></van-radio>
+              <view class="couponListNo">
+                不使用优惠券
+              </view>
             </view>
-          </scroll-view>
-          </van-radio-group>
-        </view>
-      </van-action-sheet>
-      <!--费用明细-->
-      <van-action-sheet show="{{ feeShow }}" z-index='98'	catchtouchmove='preventTouchMove' bind:click-overlay="feeShowOpenClose" data-show="{{false}}">
-        <view class="fee">
-          <view class="bookRoomRead flex-xy-center">
-            <text>费用明细</text>
-            <image src="/images/close_gary@2x.png" bindtap="feeShowOpenClose" data-show="{{false}}"></image>
+
           </view>
-          <view class="feeContent">
-            <view class="feeBody">
-              <view class="feeTitle">在线支付</view>
-              <view class="flex-x-between m24">
-                <text class="feeSize1">房费</text>
-                <text class="feeSize1">{{filter.getLiveDate(defaultDate).allDay}}晚,{{bookQuery.room_number}}间 共 ￥{{feeDetail.detail.room_rate}}</text>
-              </view>
-              <block wx:for="{{feeDetail.list}}" wx:key="index"> 
-              <view class="flex-x-between m24">
-                <text class="feeSize2">{{filter.getTime2(item.day_time)}}  {{filter.breakfast(item.breakfast)}}</text>
-                <text class="feeSize2">{{item.room_number}} x￥{{item.price}}</text>
-              </view>
-              </block>
-              <view class="flex-x-between m24">
-                <view class="feeSize2 flex-y-center" bindtap="toDepositShow" data-show="{{true}}">押金
-                  
-                  <image src="/images/hotel_detail_doubt@2x.png" class="feeImage"></image>
-                </view>
-                <text class="feeSize2">￥{{feeDetail.detail.deposit}}</text>
-              </view>
-              <view class="flex-x-between">
+        </scroll-view>
+      </van-radio-group>
+    </view>
+  </van-action-sheet>
+  <!--费用明细-->
+  <van-action-sheet show="{{ feeShow }}" z-index='98' catchtouchmove='preventTouchMove'
+    bind:click-overlay="feeShowOpenClose">
+    <view class="fee">
+      <view class="bookRoomRead flex-xy-center" bindtap="feeShowOpenClose">
+        <text>费用明细</text>
+        <image src="/images/close_gary@2x.png"></image>
+      </view>
+      <view class="feeContent">
+        <view class="feeBody">
+          <view class="feeTitle">在线支付</view>
+          <view class="flex-x-between m24">
+            <text class="feeSize1">房费</text>
+            <text class="feeSize1">{{filter.getLiveDate(defaultDate).allDay}}晚,{{bookQuery.room_number}}间 共
+              ￥{{feeDetail.detail.room_rate}}</text>
+          </view>
+          <block wx:for="{{feeDetail.list}}" wx:key="index">
+            <view class="flex-x-between m24">
+              <text class="feeSize2">{{filter.getTime2(item.day_time)}} {{filter.breakfast(item.breakfast)}}</text>
+              <text class="feeSize2">{{item.room_number}} x￥{{item.price}}</text>
+            </view>
+          </block>
+          <view class="flex-x-between m24">
+            <view class="feeSize2 flex-y-center" bindtap="toDepositShow" data-show="{{true}}">押金
+
+              <image src="/images/hotel_detail_doubt@2x.png" class="feeImage"></image>
+            </view>
+            <text class="feeSize2">￥{{feeDetail.detail.deposit}}</text>
+          </view>
+          <!-- <view class="flex-x-between">
                 <text class="feeSize2">发票税点</text>
                 <text class="feeSize2">￥{{feeDetail.detail.tax}}</text>
-              </view>
+              </view> -->
+        </view>
+        <view class="feeBody" wx:if="{{equityList.length}}">
+          <view class="feeTitle">积分兑换</view>
+          <view class="flex-x-between" wx:for="{{equityList}}" wx:key="index">
+            <text class="feeSize2">{{item.name}}</text>
+            <text class="feeSize2">-{{item.score}}积分</text>
+          </view>
+        </view>
+        <view class="feeBody" wx:if="{{feeDetail.detail.score}}">
+          <view class="feeTitle">离店可获</view>
+          <view class="flex-x-between">
+            <text class="feeSize2">积分</text>
+            <text class="feeSize2">{{feeDetail.detail.score}}</text>
+          </view>
+        </view>
+        <view class="feeBody" style="padding:22rpx 30rpx 16rpx;">
+          <view class="flex-x-between m30">
+            <text class="feeSize1 fs30">原价</text>
+            <text class="feeSize2 fs30">￥{{feeDetail.detail.order_money}}</text>
+          </view>
+          <view class="flex-x-between m26" wx:if="{{feeDetail.detail.continuous_discount}}">
+            <text class="feeSize1 fs30">连住优惠</text>
+            <text class="feeSize2 fs30">-￥{{feeDetail.detail.continuous_discount}}</text>
+          </view>
+          <view class="flex-x-between m26" wx:if="{{feeDetail.detail.is_discount}}">
+            <view class="feeSize1 fs30">
+              <text>{{filter.level(feeDetail.detail.level)}}</text>
+              <text class='feeSize3'>{{feeDetail.detail.discount}}折</text>
             </view>
-            <view class="feeBody" wx:if="{{equityList.length}}">
-              <view class="feeTitle">积分兑换</view>
-              <view class="flex-x-between" wx:for="{{equityList}}" wx:key="index">
-                <text class="feeSize2">{{item.name}}</text>
-                <text class="feeSize2">-{{item.score}}闲分</text>
-              </view>
-            </view>
-            <view class="feeBody" wx:if="{{feeDetail.detail.score}}">
-              <view class="feeTitle">离店可获</view>
-              <view class="flex-x-between">
-                <text class="feeSize2">闲分</text>
-                <text class="feeSize2">{{feeDetail.detail.score}}</text>
-              </view>
-            </view>
-            <view class="feeBody" style="padding:22rpx 30rpx 16rpx;">
-              <view class="flex-x-between m26" wx:if="{{feeDetail.detail.continuous_discount}}">
-                <text class="feeSize1 fs30">连住优惠</text>
-                <text class="feeSize2 fs30">-￥{{feeDetail.detail.continuous_discount}}</text>
-              </view>
-              <view class="flex-x-between m26" wx:if="{{feeDetail.detail.is_discount}}">
-                <view class="feeSize1 fs30">
-                  <text>{{filter.level(feeDetail.detail.level)}}</text>
-                  <text class='feeSize3'>{{feeDetail.detail.discount}}折</text>
-                </view>
-                <text class="feeSize2 fs30">-￥{{feeDetail.detail.vip_discount}}</text>
-              </view>
-              <view class="flex-x-between m30" wx:if="{{feeDetail.detail.coupon_discount}}">
-                <text class="feeSize1 fs30">优惠券</text>
-                <text class="feeSize2 fs30">-￥{{feeDetail.detail.coupon_discount}}</text>
-              </view>
-              <view class="flex-x-between feeTotal {{!feeDetail.detail.coupon_discount&&!feeDetail.detail.is_discount&&!feeDetail.detail.continuous_discount?borderNo:''}}">
-                <text class="feeSize2">总计</text>
-                <view class="feeSize4">
-                  <text>￥</text>
-                  <text class="fs40">{{filter.toFix(feeDetail.detail.pay_money)}}</text>
-                </view>
-              </view>
+            <text class="feeSize2 fs30">-￥{{feeDetail.detail.vip_discount}}</text>
+          </view>
+          <view class="flex-x-between m30" wx:if="{{feeDetail.detail.coupon_discount}}">
+            <text class="feeSize1 fs30">优惠券</text>
+            <text class="feeSize2 fs30">-￥{{feeDetail.detail.coupon_discount}}</text>
+          </view>
+          <view
+            class="flex-x-between feeTotal {{!feeDetail.detail.coupon_discount&&!feeDetail.detail.is_discount&&!feeDetail.detail.continuous_discount?borderNo:''}}">
+            <text class="feeSize2">总计</text>
+            <view class="feeSize4">
+              <text>￥</text>
+              <text class="fs40">{{filter.toFix(feeDetail.detail.pay_money)}}</text>
             </view>
           </view>
         </view>
-      </van-action-sheet>
-      <!--支付-->
-      <van-dialog use-slot
-                  customStyle="border-radius:20rpx;"
-                  show="{{ bookStatusShow }}"
-                  show-cancel-button
-                  confirmButtonText="支付"
-                  cancelButtonText="取消付款"
-                  confirm-button-color="#8c42ad"
-                  cancel-button-color="#666666"
-                  bind:confirm="bookConfirm"
-                  bind:cancel="bookCancel"
-                  data-pay="{{true}}"
-                  width="690rpx"
-      >
-        <view class='payTitle flex-x-center'>微信支付</view>
-        <view class="payDetail flex-x-center">应付金额:￥{{filter.toFix(feeDetail.detail.pay_money)}} </view>
-      </van-dialog>
-      <!--支付2-->
-      <van-dialog use-slot
-                  show="{{ bookStatusShow2 }}"
-                  show-cancel-button
-                  confirmButtonText="继续支付"
-                  cancelButtonText="取消付款"
-                  confirm-button-color="#8c42ad"
-                  cancel-button-color="#666666"
-                  bind:confirm="bookConfirm"
-                  bind:cancel="bookCancel"
-                  data-pay="{{false}}"
-                  width="690rpx"
-      >
-        <view class='payTitle flex-x-center'>是否取消付款</view>
-        <view class="payDetail2 flex-x-center">若超过15分钟未付款，需要重新下单哦!</view>
-      </van-dialog>
-      <!--押金说明-->
-      <van-dialog
-        use-slot
-        width="690rpx"
-        show="{{ depositShow }}"
-        showConfirmButton="{{false}}">
-        <view class="feeExpolre">
-          <image src="/images/close_black@2x.png" bindtap="toDepositShow" data-show="{{false}}"></image>
-          <view class='feeExpolreTitle'>押金说明</view>
-          <scroll-view scroll-y style="max-height:460rpx">
-          <view class='feeExpolreContent'>
-            <template is="wxParse" data="{{wxParseData:deposit.nodes}}"/>
-          </view>
-          </scroll-view>
+      </view>
+    </view>
+  </van-action-sheet>
+  <!--支付-->
+  <van-dialog use-slot catchtouchmove='preventTouchMove' customStyle="border-radius:20rpx;" show="{{ bookStatusShow }}"
+    show-cancel-button confirmButtonText="支付" cancelButtonText="取消付款" confirm-button-color="#8c42ad"
+    cancel-button-color="#666666" bind:confirm="bookConfirm" bind:cancel="bookCancel" data-pay="{{true}}"
+    width="690rpx">
+    <view class='payTitle flex-x-center'>微信支付</view>
+    <view class="payDetail flex-x-center">应付金额:￥{{filter.toFix(feeDetail.detail.pay_money)}} </view>
+  </van-dialog>
+  <!--支付2-->
+  <van-dialog use-slot catchtouchmove='preventTouchMove' show="{{ bookStatusShow2 }}" show-cancel-button
+    confirmButtonText="继续支付" cancelButtonText="取消付款" confirm-button-color="#8c42ad" cancel-button-color="#666666"
+    bind:confirm="bookConfirm" bind:cancel="bookCancel" data-pay="{{false}}" width="690rpx">
+    <view class='payTitle flex-x-center'>是否取消付款</view>
+    <view class="payDetail2 flex-x-center">若超过15分钟未付款，需要重新下单哦!</view>
+  </van-dialog>
+  <!--押金说明-->
+  <van-dialog use-slot close-on-click-overlay width="690rpx" show="{{ depositShow }}" showConfirmButton="{{false}}"
+    catchtouchmove='preventTouchMove'>
+    <view class="feeExpolre">
+
+      <view class='feeExpolreTitle' bindtap="toDepositShow" data-show="{{false}}">押金说明
+        <image src="/images/close_black@2x.png"></image>
+      </view>
+      <scroll-view scroll-y style="max-height:600rpx;">
+        <view class='feeExpolreContent'>
+          <template is="wxParse" data="{{wxParseData:deposit.nodes}}" />
         </view>
-      </van-dialog>
-    <serviceCustomer/>
-  </navbar>
+      </scroll-view>
+    </view>
+  </van-dialog>
+  <serviceCustomer />
+</navbar>

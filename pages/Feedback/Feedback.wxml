@@ -1,7 +1,8 @@
 <!--pages/Feedback/Feedback.wxml-->
 <navbar title="意见反馈">
 	<view class="appealForm">
-		<van-field value="{{ content }}" type="textarea" autosize placeholder="请输入您的意见反馈" border="{{ false }}"  bind:change="onChange"/>
+		<van-field wx:if="{{!isShow}}" maxlength="{{300}}" value="{{ content }}" type="textarea" placeholder="请输入您的意见反馈" border="{{ false }}" bind:change="onChange" />
+		<view wx:else class="formTextarea">{{content?content:'请输入您的意见反馈'}}</view>
 		<view class="appealFont">支付凭证（仅支持.jpg等格式）</view>
 		<view class="picList flex-wrap">
 			<block wx:for="{{img_url}}" wx:key="index">

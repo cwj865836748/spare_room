@@ -22,7 +22,8 @@ Page({
     depositInfo:null,
     roomDetailShow:false,
     roomDetail:{},
-    defaultCity:null
+    defaultCity:null,
+    isAppealShow:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -120,6 +121,9 @@ Page({
         depositInfo
       })
     })
+  },
+  preventTouchMove(){
+    return
   },
   //跳转发票
   goInvoice(){

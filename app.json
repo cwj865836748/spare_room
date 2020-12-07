@@ -20,6 +20,7 @@
     "pages/jump/jump",
     "pages/collect/collect",
     "pages/myScore/myScore",
+    "pages/myScoreList/myScoreList",
     "pages/Feedback/Feedback",
     "pages/releaseRequirements/releaseRequirements",
     "pages/evaluation/evaluation",

@@ -42,7 +42,7 @@
   border-radius: 4rpx;
 }
 .orderList {
-  padding: 124rpx 30rpx 52rpx;
+  padding: 24rpx 30rpx 52rpx;
 }
 .orderDetail {
  

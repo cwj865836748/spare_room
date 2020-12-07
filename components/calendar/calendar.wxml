@@ -11,4 +11,6 @@
   default-date="{{defaultDate}}"
   show-confirm="{{ false }}"
   color="#73009D"
+  max-range="28"
+  catchtouchmove='preventTouchMove'
 />

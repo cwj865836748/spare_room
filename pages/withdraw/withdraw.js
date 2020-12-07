@@ -22,7 +22,18 @@ Page({
     })
   },
   onChange(e){
-   
+    if(!this.data.allMoney){
+      this.setData({
+        withdrawMoney:''
+      })
+      return
+    }
+    if(!Number(e.detail.charAt(0))){
+      this.setData({
+        withdrawMoney:''
+      })
+      return
+    }
     e.detail>this.data.allMoney&&wx.showToast({
           title: `最高可提现${this.data.allMoney}元！`,
           icon:'none'

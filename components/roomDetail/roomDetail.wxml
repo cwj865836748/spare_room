@@ -1,13 +1,24 @@
 <!--房型详情弹框-->
-<van-action-sheet show="{{ roomDetailShow }}" bind:click-overlay="closeHotelDetailShow">
+<van-action-sheet show="{{ roomDetailShow }}" bind:click-overlay="closeHotelDetailShow"
+	catchtouchmove="preventTouchMove">
 	<view class="hotelSheet">
-		<image src="../../images/delete@2x.png" bindtap="closeHotelDetailShow"></image>
+		<view class="hotelHead" bindtap="closeHotelDetailShow">
+			<image src="../../images/delete@2x.png"></image>
+		</view>
 		<!-- padding: 76rpx 30rpx 36rpx; -->
 		<scroll-view scroll-y style="max-height:460px;">
 			<view style="padding:0 30rpx">
-				<view class="pic">
+				<!-- <view class="pic">
 					<image src="{{roomDetail.img_url}}"></image>
-				</view>
+				</view> -->
+				<swiper class="swiperAll" indicator-dots="true" indicator-active-color="#FFFFFF"
+					indicator-color="rgba(255,255,255,0.6)">
+					<block wx:for="{{roomDetail.img_url}}" wx:key="index">
+						<swiper-item>
+							<image src="{{item}}" class="swiperImage"></image>
+						</swiper-item>
+					</block>
+				</swiper>
 				<view class="bedDetail">
 					<text>{{roomDetail.room_name}}</text>
 					<view class='showBedDetail'>
@@ -46,7 +57,9 @@
 						<block wx:for="{{roomDetail.list}}" wx:key="index" wx:for-item="room">
 							<view class="bedSort">
 								<text>{{room.name}}</text>
-								<view>{{room.second}}</view>
+								<view>
+									<rich-text nodes="{{filter.greenFee(room.second)}}"></rich-text>
+								</view>
 							</view>
 						</block>
 

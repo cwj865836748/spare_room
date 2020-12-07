@@ -56,6 +56,7 @@ Component({
   openRequire(){
     let {defaultDate,defaultCity,bedDetail} =App.globalData
     const {isHotelList} = this.properties
+    console.log(isHotelList)
     bedDetail=isHotelList?'':bedDetail
     const {id:cityid,name:city} = defaultCity
     let [start_time,end_time] =defaultDate
@@ -190,6 +191,9 @@ Component({
        this.setData({
         isScroll:type=='focus'?false:true
        })
+    },
+    preventTouchMove(){
+      return
     }
   }
 })

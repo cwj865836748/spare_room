@@ -44,16 +44,16 @@ Page({
       endtime:''
     },
     //备注
-    remarkCheckboxChoose:[],
+    remarkCheckboxChoose:['无要求'],
     remarkCheckboxList:[
-      {name:'吸烟房',id:1},
-      {name:'无烟房',id:2},
-      {name:'搞派对',id:3},
-      {name:'旅游',id:4},
-      {name:'商务出差',id:5},
-      {name:'蜜月房',id:6},
-      {name:'抢亲房',id:7},
-      {name:'婚房',id:8}
+      {name:'无要求',id:1},
+      {name:'吸烟房',id:2},
+      {name:'无烟房',id:3},
+      {name:'搞派对',id:4},
+      {name:'旅游',id:5},
+      {name:'商务出差',id:6},
+      {name:'婚房',id:7},
+      {name:'其他',id:8}
     ],
     coupleShow:false,//优惠卷展示
     chooseCoupon:true, //切换优惠券
@@ -97,7 +97,7 @@ Page({
     starttime=formatTime2(starttime)
     endtime=formatTime2(endtime)
     const header = {starttime,endtime}
-    const {id:store_room_id,reservation_description} = this.data.room
+    const {id:store_room_id} = this.data.room
     request({url:api.order.reservation,data:{store_room_id},header}).then(res=>{
         //优惠券自动获取
         const coupon_id = res.data.coupon?res.data.coupon.id:''
@@ -109,7 +109,7 @@ Page({
           defaultDate:App.globalData.defaultDate,
           header,
           bookQuery:{...this.data.bookQuery,store_room_id,coupon_id},
-          roomBook:{...res.data,reservation_description},
+          roomBook:res.data,
           coupon_id,
           coupon_name,
           giftContent:giftContent.join(' '),
@@ -117,6 +117,7 @@ Page({
           y:windowHeight-133,
           windowHeight
         })
+        WxParse.wxParse('bookDescription','html',res.data.info.reservation_description,this,5)
         this.getFee()
         this.depositRequset()
     })
@@ -136,7 +137,6 @@ Page({
   //查看订房必读
   ocBookDescription(e){
     const {show:bookDescriptionShow} = e.currentTarget.dataset
-    WxParse.wxParse('bookDescription','html',this.data.roomBook.reservation_description,this,5)
     this.setData({
       bookDescriptionShow
     })
@@ -146,6 +146,9 @@ Page({
     const {key} = e.currentTarget.dataset
     const {bookQuery,coupon_id} =this.data
     if(key=='coupon_id'&&!this.data.chooseCoupon){
+      return
+    }
+    if(key=='estimate_time'&&e.type=='cancel'){
       return
     }
     this.setData({
@@ -276,9 +279,8 @@ Page({
   },
   //开启关闭明细
   feeShowOpenClose(e){
-     const {show:feeShow}  = e.currentTarget.dataset
      this.setData({
-      feeShow
+      feeShow:!this.data.feeShow
      })
   },
   //押金说明
@@ -362,16 +364,16 @@ Page({
               paySign: info.paySign,
               complete: function (e) {
                  //支付成功/失败
-                 e.errMsg == "requestPayment:ok"?
+                 e.errMsg == "requestPayment:ok"&&
                  setTimeout(() => {
                   showToast({title: '付款成功'})
-                }, 500):
-                  showModal({
-                    title: "提示",
-                    content: "订单支付失败",
-                    showCancel: false,
-                    confirmText: "确认",
-                  })
+                }, 500)
+                  // showModal({
+                  //   title: "提示",
+                  //   content: "订单支付失败",
+                  //   showCancel: false,
+                  //   confirmText: "确认",
+                  // })
                   wx.redirectTo({
                     url: `/pages/orderDetail/orderDetail?id=${res.data.order_id}`,
                   })
@@ -396,9 +398,15 @@ Page({
   },
   onPageScroll:function(e){
      const {scrollTop} = e
+     if(scrollTop>50&&this.data.headColor!='#fff'){
+      this.setData({
+        headColor:'#fff',
+        titleColor:'#333333'
+       })
+     }else if (scrollTop<50&&this.data.headColor!='transparent')
      this.setData({
-      headColor:scrollTop>50?'#fff':'transparent',
-      titleColor:scrollTop>50?'#333333':'#fff'
+      headColor:'transparent',
+      titleColor:'#fff'
      })
   },
  //权益收起展开按钮

@@ -39,7 +39,7 @@ Page({
     breakfastChooseOne:-1,
      //优惠促销
     //  ,{id:2,name:'可开发票'}
-    promotionList:[{id:1,name:'可闲分兑换'},{id:3,name:'礼包'},{id:4,name:'连住优惠'}],
+    promotionList:[{id:1,name:'可积分兑换'},{id:3,name:'礼包'},{id:4,name:'连住优惠'}],
     promotionChooseList:[],
 
     hotelList:[],
@@ -162,8 +162,8 @@ Page({
   keyWordSeach(){
     const {defaultKeyWords} =App.globalData
     this.setData({
-      query:{...this.data.query,name:defaultKeyWords},
-      page:1,
+      'query.name':defaultKeyWords,
+      'query.page':1,
       hotelList:[]
     })
     this.getHotelList()
@@ -172,8 +172,8 @@ Page({
   clearKeyWord(){
     App.globalData.defaultKeyWords=''
     this.setData({
-      query:{...this.data.query,name:''},
-      page:1,
+      'query.name':'',
+      'query.page':1,
       hotelList:[]
     })
     this.getHotelList()
@@ -230,7 +230,8 @@ Page({
     const sortList =this.data.sortList
     sortList[0] = name
     this.setData({
-      query:{...this.data.query,order_sort,page:1},
+      'query.order_sort':order_sort,
+      'query.page':1,
       sortList,
       sortNumber:-1,
       hotelList:[]
@@ -310,7 +311,9 @@ Page({
       }
        const star = starChooseList.join(',')
        this.setData({
-         query:{...query,min_price,max_price,star},
+         'query.min_price':min_price,
+         'query.max_price':max_price,
+         'query.star':star,
          isSilderPrice
        })
      }
@@ -319,7 +322,8 @@ Page({
        const distance=meterChooseOne!=-1?meterChooseOne:''
        const area=areaChooseOne!=-1?areaChooseOne:''
        this.setData({
-        query:{...query,distance,area}
+        'query.distance':distance,
+        'query.area':area
       })
      }
      //综合筛选
@@ -337,7 +341,7 @@ Page({
      }
      this.setData({
       sortNumber:-1,
-      query:{...this.data.query,page:1},
+      'query.page':1,
       hotelList:[]
      })
      this.getHotelList()
@@ -390,7 +394,7 @@ Page({
    endtime=endtime.replace(/-/g,"")
    if((utils.formatTime3(chooseStart)-starttime)||(utils.formatTime3(chooseEnd)-endtime)){
      this.setData({
-       query:{...this.data.query,page:1},
+       'query.page':1,
        hotelList:[]
      })
     this.getGlobalData()

@@ -35,7 +35,9 @@ Component({
         value: '#fff'
       }
   },
-
+  options: {
+    addGlobalClass: true
+  },
   /**
    * 组件的初始数据
    */
@@ -57,8 +59,7 @@ Component({
             statusBarHeight:App.globalData.navBar.statusBarHeight
           })
         }
-      } 
-      this.triggerEvent('getNavHeight', { navHeight:this.data.navHeight}); 
+      }  
     },
   /**
    * 组件的方法列表
@@ -68,16 +69,22 @@ Component({
       navigateBack(1)
     },
     goHome(){
-      wx.switchTab({
+      wx.reLaunch({
         url: '/pages/index/index',
       })
     },
     scroll(e){
       const {scrollTop} =e.detail
-      this.setData({
-        headColor:scrollTop>100?'#fff':'transparent',
-        titleColor:scrollTop>100?'#333333':'#fff'
-      })
+      if(scrollTop>50&&this.data.headColor!='#fff'){
+        this.setData({
+          headColor:'#fff',
+          titleColor:'#333333'
+         })
+       }else if (scrollTop<50&&this.data.headColor!='transparent')
+       this.setData({
+        headColor:'transparent',
+        titleColor:'#fff'
+       })
     },
     scrolltolower(e){
       this.triggerEvent('onReachBottom')

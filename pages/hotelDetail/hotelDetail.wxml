@@ -1,174 +1,211 @@
 <!--pages/hotelDetail/hotelDetail.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter" />
-<navbar title="{{hotelDetail.name}}" back="{{!parent_id}}" home="{{parent_id}}" headColor="{{headColor}}" titleColor="{{titleColor}}" navbarType="4" >
-<view class="detailHead por">
-	<swiper autoplay interval="3000" circular="true" class="home_swiper" >
-    <block wx:for="{{slideshowList}}" wx:key="key">
-      <swiper-item>
-        <image src="{{item}}" class="swiperImage"></image>
-      </swiper-item>
-    </block>
-  </swiper>
+<navbar title="{{hotelDetail.name}}" back="{{!isHotelInvite}}" home="{{isHotelInvite}}" headColor="{{headColor}}"
+	titleColor="{{titleColor}}" navbarType="4">
+	<view class="detailHead por">
+		<swiper autoplay interval="3000" circular="true" class="home_swiper">
+			<block wx:for="{{slideshowList}}" wx:key="key">
+				<swiper-item>
+					<image src="{{item}}" class="swiperImage"></image>
+				</swiper-item>
+			</block>
+		</swiper>
 
-	<view class="hotelDetail">
-		<navigator url="/pages/hotelPicture/hotelPicture?id={{hotelId}}" hover-class="none" class="hotelPic flex-xy-center">
-		<image src="../../images/hotel_pic@2x.png"></image>
-		<text>{{hotelDetail.img_num}}张</text>
-	  </navigator>
-		<view class="hotelTitle flex-x-between">
-			<view class="left">
-				<text class="text-more">{{hotelDetail.name}}</text>
-				<van-rate value="{{hotelDetail.star}}" count="{{hotelDetail.star}}" readonly size="12" />
-				<view class="text-more">{{hotelDetail.name_en}} </view>
-			</view>
-			<view class="right">
-				<view class="collectIcon flex-x-between" bindtap="isCollect">
-					<view class="flex-y-between flex-y-center">
-						<image src='{{hotelDetail.is_collect?"../../images/collection@2x.png":"../../images/collection_un@2x.png"}}'></image>
-						<text>{{hotelDetail.is_collect?'已收藏':'收藏'}}</text>
-					</view>
-					<view class="flex-y-between flex-y-center" catchtap="openOrCancelShare" data-show="{{true}}">
-						<image src="../../images/sharing@2x.png"></image>
-						<text>分享</text>
-					</view>
+		<view class="hotelDetail">
+			<navigator url="/pages/hotelPicture/hotelPicture?id={{hotelId}}" hover-class="none"
+				class="hotelPic flex-xy-center">
+				<image src="../../images/hotel_pic@2x.png"></image>
+				<text>{{hotelDetail.img_num}}张</text>
+			</navigator>
+			<view class="hotelTitle flex-x-between">
+				<view class="left">
+					<text class="text-more">{{hotelDetail.name}}</text>
+					<van-rate value="{{hotelDetail.star}}" count="{{hotelDetail.star}}" readonly size="12" />
+					<view class="text-more">{{hotelDetail.name_en}} </view>
 				</view>
-				<navigator url="/pages/hotelIntroduction/hotelIntroduction?id={{hotelDetail.id}}&longitude={{hotelDetail.longitude}}&latitude={{hotelDetail.latitude}}" hover-class="none" class="seeDetail flex-x-between flex-y-center" >
-					<text>查看详情</text>
-					<image src="../../images/view_hotel_details@2x.png"></image>
-				</navigator>
+				<view class="right">
+					<view class="collectIcon flex-x-between" bindtap="isCollect">
+						<view class="flex-y-between flex-y-center">
+							<image
+								src='{{hotelDetail.is_collect?"../../images/collection@2x.png":"../../images/collection_un@2x.png"}}'>
+							</image>
+							<text>{{hotelDetail.is_collect?'已收藏':'收藏'}}</text>
+						</view>
+						<view class="flex-y-between flex-y-center" catchtap="openOrCancelShare" data-show="{{true}}">
+							<image src="../../images/sharing@2x.png"></image>
+							<text>分享</text>
+						</view>
+					</view>
+					<navigator
+						url="/pages/hotelIntroduction/hotelIntroduction?id={{hotelDetail.id}}&longitude={{hotelDetail.longitude}}&latitude={{hotelDetail.latitude}}"
+						hover-class="none" class="seeDetail flex-x-between flex-y-center">
+						<text>查看详情</text>
+						<image src="../../images/view_hotel_details@2x.png"></image>
+					</navigator>
+				</view>
 			</view>
-		</view>
-		<view class="address text-more-single">{{hotelDetail.city}} {{hotelDetail.county}} {{hotelDetail.address}}</view>
-		<view class="time flex-x-between">
-			<view><text>{{hotelDetail.open_time}}</text>年开业</view>
-			<view><text>{{hotelDetail.room_num}}</text>间房</view>
-			<view class="flex-y-center" bindtap="openMap">
-				<text>距离{{filter.distance(hotelDetail.distance)}}</text>
-				<image src="../../images/hotel_to_locate@2x.png"></image>
+			<view class="address text-more-single">{{hotelDetail.city}} {{hotelDetail.county}} {{hotelDetail.address}}</view>
+			<view class="time flex-x-between">
+				<view><text>{{hotelDetail.open_time}}</text>年开业</view>
+				<view><text>{{hotelDetail.room_num}}</text>间房</view>
+				<view class="flex-y-center" bindtap="openMap">
+					<view class="text-more-single">距您{{filter.distance(hotelDetail.distance)}}</view>
+					<image src="../../images/hotel_to_locate@2x.png"></image>
+				</view>
 			</view>
 		</view>
 	</view>
-</view>
-<scroll-view scroll-y style="margin-top:288rpx">
-	<view class="detailContent">
-		<view class="detailTitle flex-x-between">
-			<view class="{{tab==index?'headTitle':''}}" wx:for="{{detailHeadList}}" wx:key="index" bindtap="tabChange" data-index='{{index}}'>{{item}}</view>
-		</view>
-		<!--房型-->
-		<view class="roomType" wx:if="{{tab==0}}">
-			<!--日期管理-->
-			<view class="detailWeek flex-y-center">
-				<view class="date flex-x-between" bindtap="openCalendar">
-					<text>{{filter.getLiveDate(defaultDate).startTime}}</text>
-					<text>{{filter.getLiveDate(defaultDate).dateTitle}}</text>
-				</view>
-				<view class="date flex-x-between" bindtap="openCalendar">
-					<text>{{filter.getLiveDate(defaultDate).endTime}}</text>
-					<text>{{filter.getLiveDate(defaultDate).dateTitle2}}</text>
-				</view>
-				<view class="dateNumber">共{{filter.getLiveDate(defaultDate).allDay}}晚</view>
+	<scroll-view scroll-y style="margin-top:288rpx">
+		<view class="detailContent">
+			<view class="detailTitle flex-x-between">
+				<view class="{{tab==index?'headTitle':''}}" wx:for="{{detailHeadList}}" wx:key="index" bindtap="tabChange"
+					data-index='{{index}}'>{{item}}</view>
 			</view>
-			<!--床型-->
-			<block wx:for="{{bedList}}" wx:key="index">
-			<view class="detailType" >
-			  <view class="detailBedAll">
-				 <view class="detailBed flex-y-center">
-					<image src="{{item.img_url}}"></image>
-					<view class="hotelMsg por">
-						<view class="name">{{item.room_name}}</view>
-						<view class="middle">
-							<text>{{item.bed_type}}</text>
-							<text>{{item.is_smoke}}</text>
-							<text>{{item.area}}</text>
-							<text>m</text>
-						</view>
-						<view class="label  flex-wrap">
-							<view class="purple detailIcon flex-xy-center" wx:if="{{item.is_score}}">可闲分兑换</view>
-							<!-- <view class="grey detailIcon flex-xy-center" wx:if="{{item.is_invoice}}">可开发票</view> -->
-							<view class="green detailIcon flex-xy-center" wx:if="{{item.cancel_type!=3}}">{{filter.cancelRule(item.cancel_type)}}</view>
-							<view class="orange detailIcon flex-xy-center" style="width:56rpx" wx:if="{{item.is_gift}}">礼包</view>
-							<view class="orange detailIcon flex-xy-center" style="width:76rpx" wx:if="{{item.is_coupon}}">优惠券</view>
-						</view>
-						<view class="price">
-							<text style="visibility:{{item.original_price?'visible':'hidden'}}">￥{{item.original_price}}</text>
-							<view class="flex-x-bottom">
-								<text style="visibility:{{item.price?'visible':'hidden'}}">￥</text>
-								<text style="visibility:{{item.price?'visible':'hidden'}}">{{item.price}}</text>
-								<text style="visibility:{{item.price?'visible':'hidden'}}">起</text>
-								<view class="openCloseimage flex-xy-center" bindtap="openCloseRoom" data-index="{{index}}">
-								<image src='{{item.isOpen?"../../images/hotel_room_takeback@2x.png":"../../images/hotel_room_pulldown@2x.png"}}'></image>
-								</view>
-							</view>
-						</view>
+			<!--房型-->
+			<view class="roomType" wx:if="{{tab==0}}">
+				<!--日期管理-->
+				<view class="detailWeek flex-y-center">
+					<view class="date flex-x-between" bindtap="openCalendar">
+						<text>{{filter.getLiveDate(defaultDate).startTime}}</text>
+						<text>{{filter.getLiveDate(defaultDate).dateTitle}}</text>
 					</view>
-				 </view>
+					<view class="date flex-x-between" bindtap="openCalendar">
+						<text>{{filter.getLiveDate(defaultDate).endTime}}</text>
+						<text>{{filter.getLiveDate(defaultDate).dateTitle2}}</text>
+					</view>
+					<view class="dateNumber">共{{filter.getLiveDate(defaultDate).allDay}}晚</view>
 				</view>
-				<!--床型详情-->
-				<view class="bedType" wx:if="{{item.isOpen}}">
-					<!--opacity满房-->
-					<block wx:for="{{item.store_room}}" wx:key="indexs" wx:for-item="items">
-					<view class="typeDetail flex {{items.is_empty?'':'opacity'}}" bindtap="roomDetailShow"  data-id="{{items.id}}" data-i="{{item.id}}">
-						<view class='typeLeft'>
-							<view class='typeName'>
-								<text>{{filter.breakfastType(items.breakfast)}}</text>{{items.bed_type}}
-							</view>
-							<view class="typeIcon flex-wrap">
-								<view class="purple detailIcon flex-xy-center" wx:if="{{items.is_score}}">可闲分兑换</view>
-								<!-- <view class="grey detailIcon flex-xy-center" wx:if="{{items.is_invoice}}">可开发票</view> -->
-								<view class="yellowIcon detailIcon flex-xy-center" wx:if="{{items.is_discount}}">{{filter.level(item.level)}}会员{{item.discount}}折</view>
-								<view class="greenIcon detailIcon flex-xy-center" wx:if="{{item.cancel_type!=3}}">{{filter.cancelRule(item.cancel_type)}}</view>
-								<view class="orange detailIcon flex-xy-center" style="width:56rpx" wx:if="{{items.is_gift}}">礼包</view>
-								<view class="orange detailIcon flex-xy-center" style="width:76rpx" wx:if="{{items.is_coupon}}">优惠券</view>
-							</view>
-						</view>
-						<view class="typeRight flex-grow-1  flex-col">
-							<view class="bhId">
-								编号: {{items.code}}
-							</view>
-							<view class="ding flex-x-bottom">
-								<view class='money'>
-									<view>￥{{items.original_price?items.original_price:''}}</view>
-									<view>
-										<text>￥</text>
-										<text style="font-weight:bold">{{items.price?items.price:''}}</text>
+				<!--床型-->
+				<block wx:for="{{bedList}}" wx:key="index">
+					<view class="detailType">
+						<view class="detailBedAll">
+							<view class="detailBed flex-y-center">
+								<image src="{{item.img}}"></image>
+								<view class="hotelMsg por">
+									<view class="name">{{item.room_name}}</view>
+									<view class="middle">
+										<text>{{item.bed_type}}</text>
+										<text>{{item.is_smoke}}</text>
+										<text>{{item.area}}</text>
+										<text>m</text>
+									</view>
+									<view class="label  flex-wrap">
+										<view class="purple detailIcon flex-xy-center" wx:if="{{item.is_score}}">可积分兑换</view>
+										<!-- <view class="grey detailIcon flex-xy-center" wx:if="{{item.is_invoice}}">可开发票</view> -->
+										<view class="{{item.cancel_type==1?'grey':'greenIcon'}} detailIcon flex-xy-center"
+											wx:if="{{item.cancel_type!=3}}">
+											{{filter.cancelRule(item.cancel_type)}}</view>
+										<view class="orange detailIcon flex-xy-center" style="width:56rpx" wx:if="{{item.is_gift}}">礼包
+										</view>
+										<view class="orange detailIcon flex-xy-center" style="width:76rpx" wx:if="{{item.is_coupon}}">优惠券
+										</view>
+										<view class="{{filter.levelClass(item.level)}} detailIcon flex-xy-center"
+											wx:if="{{item.is_discount}}">{{filter.level(item.level)}}会员{{item.discount}}折</view>
+									</view>
+									<view class="price">
+										<text wx:if="{{item.price&&item.is_empty}}">￥{{item.original_price}}</text>
+										<view class="flex-x-bottom">
+											<text wx:if="{{item.price&&item.is_empty}}">￥</text>
+											<text class="{{item.price&&item.is_empty?'':'noPrice'}}">{{item.price&&item.is_empty?item.price:(!item.price?'暂无价格':'已售罄')}}</text>
+											<text wx:if="{{item.price&&item.is_empty}}">起</text>
+											<view class="openCloseimage flex-xy-center" bindtap="openCloseRoom" data-index="{{index}}">
+												<image
+													src='{{item.isOpen?"../../images/hotel_room_takeback@2x.png":"../../images/hotel_room_pulldown@2x.png"}}'>
+												</image>
+											</view>
+										</view>
 									</view>
 								</view>
-							
-								<view class='order flex-y-between' catchtap="goDetail" data-items="{{items}}">
-									<view>订</view>
-									<view class="flex-xy-center">在线付</view>
-							  </view>
 							</view>
 						</view>
+						<!--床型详情-->
+						<view class="bedType" wx:if="{{item.isOpen}}">
+							<!--opacity满房-->
+							<block wx:for="{{item.store_room}}" wx:key="indexs" wx:for-item="items">
+								<view class="typeDetail flex {{items.is_empty&&items.price?'':'opacity'}}" bindtap="roomDetailShow"
+									data-id="{{items.id}}" data-i="{{item.id}}">
+									<view class='typeLeft'>
+										<view class='typeName'>
+											<text
+												class="{{items.breakfast?'greenSize':''}}">{{filter.breakfastType(items.breakfast)}}</text>{{items.bed_type}}
+										</view>
+										<view class="typeIcon flex-wrap">
+											<view class="purple detailIcon flex-xy-center" wx:if="{{items.is_score}}">可积分兑换</view>
+											<!-- <view class="grey detailIcon flex-xy-center" wx:if="{{items.is_invoice}}">可开发票</view> -->
+											<!-- <view class="{{filter.levelClass(item.level)}} detailIcon flex-xy-center"
+												wx:if="{{items.is_discount}}">{{filter.level(item.level)}}会员{{item.discount}}折</view> -->
+											<view class="{{item.cancel_type==1?'grey':'greenIcon'}} detailIcon flex-xy-center"
+												wx:if="{{item.cancel_type!=3}}">
+												{{filter.cancelRule(item.cancel_type)}}</view>
+											<view class="orange detailIcon flex-xy-center" wx:if="{{items.is_gift}}">礼包</view>
+											<view class="orange detailIcon flex-xy-center" wx:if="{{items.is_coupon}}">优惠券</view>
+										</view>
+									</view>
+									<view class="typeRight flex-grow-1  flex-col">
+										<view class="bhId">
+											编号: {{items.code}}
+										</view>
+										<view class="ding flex-x-bottom">
+											<block wx:if="{{items.is_empty&&items.price}}">
+												<view class='money por'>
+													<view>￥{{items.original_price}}</view>
+													<view>
+														<text>￥</text>
+														<text style="font-weight:bold">{{items.price}}</text>
+													</view>
+												</view>
+											</block>
+											<block wx:elif="{{!items.price}}">
+												<view class="noPrice flex-y-center">暂无价格</view>
+											</block>
+											<block wx:else>
+												<view class="noPrice flex-y-center">已售罄</view>
+											</block>
+											<view class='order flex-y-between' catchtap="goDetail" data-items="{{items}}">
+												<view>订</view>
+												<view class="flex-xy-center">在线付</view>
+											</view>
+										</view>
+									</view>
+								</view>
+							</block>
+							<!--满房发布需求-->
+							<block wx:if="{{item.isRequire||!item.store_room.length}}">
+								<view class="releaseBtn flex-xy-center flex-col" catchtap="openRequire">
+									<view class='releaseRequire flex-xy-center'>发布需求</view>
+									<view class='releaseText'>
+										<view>该日期该房型暂无价格</view>
+										请尝试修改日期重新查询或发布需求等待商家上架。
+									</view>
+								</view>
+							</block>
+						</view>
+
 					</view>
-          </block>
-								<!--满房发布需求-->
-				   <hotelRequire isHotelList="{{false}}" wx:if="{{item.isRequire||!item.store_room.length}}"/>
-				</view>
-			
+				</block>
 			</view>
-			</block>
+			<!--发布需求-->
+			<hotelRequire id="hotelRequire" isHotelList="{{false}}" />
+			<!--酒店设施-->
+			<view class='hotelFacilities'>
+				<include src="/components/hotelFacilities/hotelFacilities.wxml" wx:if="{{tab==1}}" />
+			</view>
+			<!--酒店政策-->
+			<view wx:if="{{tab==2}}" class="hotelFacilities">
+				<rich-text nodes="{{filter.greenFee(hotelDetail.policy)}}"></rich-text>
+			</view>
+			<!--附近商家推荐-->
+			<view wx:if="{{tab==3}}" class="hotelFacilities">
+				<include src="/components/hotelList/hotelList.wxml" />
+			</view>
+			<include src="/components/noData/noData" />
 		</view>
-		<!--酒店设施-->
-		<view class='hotelFacilities'>
-			<include src="/components/hotelFacilities/hotelFacilities.wxml" wx:if="{{tab==1}}" />
-		</view>
-		<!--酒店政策-->
-		<view wx:if="{{tab==2}}" class="hotelFacilities">
-			<rich-text nodes="{{hotelDetail.policy}}"></rich-text>
-		</view>
-		<!--附近商家推荐-->
-		<view wx:if="{{tab==3}}" class="hotelFacilities">
-			<include src="/components/hotelList/hotelList.wxml" />
-		</view>
-		<include src="/components/noData/noData"/>
-	</view>
-</scroll-view>
-<!--房型详情弹框-->
-<include src ="/components/roomDetail/roomDetail.wxml"/>
-<!--分享弹框-->
-<include src="/components/wxActionSheet/wxActionSheet.wxml"></include>
-<!--日历弹窗 -->
-<calendar calendarShow="{{calendarShow}}" bind:closeCalendar="closeCalendar"/>
-<canvas  style="width: 375px;height: 505px;position:fixed;top:9999px;" canvas-id="mycanvas"/>
+	</scroll-view>
+	<!--房型详情弹框-->
+	<include src="/components/roomDetail/roomDetail.wxml" />
+	<!--分享弹框-->
+	<include src="/components/wxActionSheet/wxActionSheet.wxml"></include>
+	<!--日历弹窗 -->
+	<calendar calendarShow="{{calendarShow}}" bind:closeCalendar="closeCalendar" />
+	<canvas style="width: 375px;height: 505px;position:fixed;top:9999px;" canvas-id="mycanvas" />
 </navbar>

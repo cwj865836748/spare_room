@@ -11,18 +11,24 @@
 						</view>
 						<view class="EnglishName text-more">{{item.name_en}}</view>
 						<view class="label flex flex-wrap">
-							<view class="violet" wx:if="{{item.is_score}}">可闲分兑换</view>
+							<view class="violet" wx:if="{{item.is_score}}">可积分兑换</view>
 							<!-- <view class="grey" wx:if="{{item.is_invoice}}">可开发票</view> -->
 							<view class="orange" wx:if="{{item.is_gift}}">礼包</view>
-							<view class="yellow" wx:if="{{item.is_discount}}">{{filter.level(item.level)}}{{item.discount}}折</view>
+							<!-- <view class="{{filter.levelClass(item.level)}}" wx:if="{{item.is_discount}}">{{filter.level(item.level)}}{{item.discount}}折</view> -->
 							<view class="orange" wx:if="{{item.is_continuous}}">连住优惠</view>
 						</view>
 					</view>
 					<view class=" distanceAndPdirce flex-x-between flex-y-center">
-						<view>距离{{filter.distance(item.distance)}}</view>
-						<view>
+						<view>距您{{filter.distance(item.distance)}}</view>
+						<view class="noPriceAndStock" wx:if="{{item.original_price&&!item.is_empty}}">
+					      已售罄
+						</view>
+						<view wx:elif="{{item.original_price}}">
 							<text>￥{{item.original_price}}</text>
 							<text>￥{{item.price}}</text>
+						</view>
+						<view class="noPriceAndStock" wx:else>
+              暂无价格
 						</view>
 					</view>
 				</view>

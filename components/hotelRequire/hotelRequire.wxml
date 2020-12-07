@@ -1,15 +1,15 @@
 <wxs src="../../wxs/filter.wxs" module="filter" />
 <view class="requireBody flex-col flex-y-center" wx:if="{{isHotelList}}">
 	<image src="/images/nodate@2x.png"></image>
-	<view class="requireTitle">抱歉，没有搜索到相关酒店，请点击发布需求，我们将尽快为您上架</view>
+	<view class="requireTitle">抱歉，没有搜索到相关酒店，请尝试修改日期查询或点击发布需求，我们将尽快为您上架!</view>
 	<view class="requireBtns flex-xy-center" catchtap="openRequire">发布需求</view>
 </view>
 <!--满房发布需求-->
-<view class="release flex-xy-center" wx:else catchtap="openRequire">
+<!-- <view class="release flex-xy-center" wx:else catchtap="openRequire">
 			<view class='flex-xy-center'>发布需求</view>
-</view>
+</view> -->
 <!--发布需求弹框-->
-<van-action-sheet show="{{requireShow}}" z-index="100">
+<van-action-sheet show="{{requireShow}}" z-index="100" bind:click-overlay="closeRequire" catchtouchmove='preventTouchMove'>
 	<view class="require">
 		<view class="name">
 			<text>编辑需求</text>
@@ -74,9 +74,9 @@
 
 </van-action-sheet>
 <!--早餐弹框-->
-<van-action-sheet show="{{ requireBreakFastShow }}" actions="{{ breakFastList }}"  bind:select="onChange" bind:close="closeBreakFast" data-key="breakfast"  z-index="101" close-on-click-overlay/>
+<van-action-sheet show="{{ requireBreakFastShow }}" actions="{{ breakFastList }}"  bind:select="onChange" bind:close="closeBreakFast" data-key="breakfast"  z-index="101" close-on-click-overlay catchtouchmove='preventTouchMove'/>
 <!--确认需求-->
-<van-overlay show="{{ requireCertainShow }}" z-index="102">
+<van-overlay show="{{ requireCertainShow }}" z-index="102" catchtouchmove='preventTouchMove'>
 	<view class="overlay">
 		<view class="msg">
 			已成功发布需求，请等待上架消息通知，

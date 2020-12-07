@@ -16,7 +16,7 @@
 		<image src="../../images/login_check_un@2x.png" wx:else bindtap="toCheck" data-check="{{true}}"></image>
 		<view class="ruleContent flex">已阅读并同意以下协议：<navigator hover-class="none" url="/pages/softwareRule/softwareRule?index=0">服务条款</navigator>，<navigator hover-class="none" url="/pages/softwareRule/softwareRule?index=1">隐私条款</navigator>，<navigator hover-class="none" url="/pages/softwareRule/softwareRule?index=2">免责声明</navigator></view>
 	</view>
-	<van-action-sheet show="{{ phoneShow }}">
+	<van-action-sheet show="{{ phoneShow }}" bind:click-overlay="closePhoneLogin">
 	  <view class="loginSheet">
 	  	<view class="name">
 		  	<text>短信验证登录</text>

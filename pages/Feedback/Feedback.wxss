@@ -62,3 +62,19 @@
   font-size: 28rpx;
   letter-spacing: 1rpx;
 }
+.van-field__input--textarea {
+  height: 200rpx !important;
+}
+.formTextarea {
+  width: 100%;
+  height: 256rpx;
+  background: #ffffff;
+  border-radius: 8rpx;
+  margin-top: 22rpx;
+  padding: 28rpx 30rpx;
+  font-size: 26rpx;
+  color: #aaaaaa;
+  letter-spacing: 2rpx;
+  margin: 28rpx 0 90rpx;
+
+}

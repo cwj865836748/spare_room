@@ -1,5 +1,8 @@
 // pages/invitePicture/invitePicture.js
 const App = getApp()
+import {
+  saveImageToPhotosAlbum
+} from '../../utils/wx.js'
 import {circleImg} from '../../utils/util.js'
 Page({
 
@@ -18,6 +21,7 @@ Page({
    */
   onLoad: function (options) {
      const {qrcode,discount}=options
+     console.log(qrcode)
      const {windowWidth,windowHeight} = App.globalData
      this.setData({
       qrcode,discount,
@@ -25,9 +29,22 @@ Page({
       windowHeight
      })  
   },
-  keepCavans(){
+  bindgetuserinfo(e){
+    let {errMsg,rawData} = e.detail
+    if(errMsg=='getUserInfo:ok'){
+      const src = JSON.parse(rawData).avatarUrl
+      wx.getImageInfo({
+        src,
+        success: (res) => {
+          this.keepPic(res.path)
+        }
+      })
+     
+    }
+  },
+  keepCavans(avatarUrl){
     return new Promise((resolve,reject)=>{
-      const {qrcode,discount, windowWidth} = this.data
+      const {qrcode,discount} = this.data
       wx.showToast({
         title: '生成图片中...',
         mask: true,
@@ -38,7 +55,7 @@ Page({
         success:  (res)=> {
           var ctx = wx.createCanvasContext('mycanvas');
           var inviteBg = '/images/invite_bg@2x.png'
-          var avatar = '/images/mine/default_avatar@2x.png'
+          var avatar = avatarUrl
           //画布大小
           ctx.setFillStyle("#fff")
           ctx.fillRect(0, 0, 375, 724)
@@ -76,19 +93,9 @@ Page({
    
     
   },
-  keepPic(){
-    this.keepCavans().then(filePath=>{
-      wx.saveImageToPhotosAlbum({ //下载图片
-        filePath,
-        success : function () {
-          setTimeout(()=>{
-            wx.showToast({
-              title : "保存成功",
-              icon: "success",
-            })
-          },500)
-        }
-      })
+  keepPic(avatarUrl){
+    this.keepCavans(avatarUrl).then(filePath=>{
+      saveImageToPhotosAlbum(filePath)
     })
   },
   /**
@@ -137,14 +144,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    this.keepCavans().then(imageUrl=>{
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2]; 
     const userId =wx.getStorageSync('userId')?wx.getStorageSync('userId'):'-1'
     return {
-      title:`闲房`,
+      title: '嘿！朋友，送您一张订房金卡，快领取。',
       path:`/pages/index/index?parentId=${userId}`,
-      imageUrl
+      imageUrl:prevPage.data.imageUrl 
     }
-  })
 }
-  
 })

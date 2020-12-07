@@ -4,18 +4,18 @@
 <view class="{{navbarType==2||navbarType==4?'navbarFixed':'navbar'}}" style='height:{{navHeight}}px;background-color:{{headColor}};'>
 	<view style='height:{{statusBarHeight}}px;background-color:{{headColor}};' />
 	<view class="title-container" style='height:{{navHeight-statusBarHeight}}px;'>
-		<van-icon name="arrow-left" wx:if='{{back}}' bindtap="goBack" style='color:{{titleColor}};' />
-		<van-icon name="wap-home-o" wx:if='{{home}}' bindtap="goHome" style='color:{{titleColor}};' />
-		<view class="title_head" style='color:{{titleColor}};'>{{title}}</view>
+		<van-icon name="arrow-left" size="22px" wx:if='{{back}}' bindtap="goBack" style='color:{{titleColor}};margin-left: 10px;' />
+		<van-icon name="wap-home-o" size="22px" wx:if='{{home}}' bindtap="goHome" style='color:{{titleColor}};margin-left: 10px;'/>
+		<view class="title_head text-more-single" style='color:{{titleColor}};'>{{title}}</view>
 	</view>
 </view>
-<view wx:if="{{navbarType==1}}" class="content" style="height: calc(100vh - {{navHeight}}px);background:{{backgroundColor}};">
+<view wx:if="{{navbarType==1}}" class="slotContent" style="height: calc(100vh - {{navHeight}}px);background:{{backgroundColor}};">
 	<slot></slot>
 </view>
 <view wx:if="{{navbarType==2}}" style="padding-top:{{navHeight}}px;">
  <slot></slot>
 </view>
-<scroll-view scroll-y="{{true}}" bindscroll='scroll' wx:if="{{navbarType==3}}" style="height:100%;margin-top:-{{navHeight-0.1}}px;" bindscrolltolower="scrolltolower">
+<scroll-view scroll-y  bindscroll='scroll' wx:if="{{navbarType==3}}" style="height:100%;margin-top:-{{navHeight-0.1}}px;" bindscrolltolower="scrolltolower">
 <slot></slot>
 </scroll-view>
 <view wx:if="{{navbarType==4}}" style="height:100%">

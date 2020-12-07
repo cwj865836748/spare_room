@@ -8,7 +8,7 @@ Page({
   data: {
     is_invoice: 0,//是否开票
     invoice_info:{
-     invoice_type:2,//发票类型:1=普通(电子),2=普通(纸质),3=专票(纸质)
+     invoice_type:1,//发票类型:1=普通(电子),2=普通(纸质),3=专票(纸质)
      platform_type:1,//开票类型:1=平台开票,2=商家开票,
      title:'',//抬头,
      identity_type:1,//身份类型:1=公司,2=个人,

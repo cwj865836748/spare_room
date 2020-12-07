@@ -1,17 +1,18 @@
 <!--pages/myScore/myScore.wxml-->
-<wxs src="../../wxs/filter.wxs" module="filter"/>
-  <import src="../../wxParse/wxParse.wxml"/>
-<navbar title="我的闲分" navbarType='3' headColor="transparent" titleColor="#fff" bind:onReachBottom="onReachBottom">
+
+<import src="../../wxParse/wxParse.wxml" />
+<navbar title="我的积分" navbarType='3' headColor="transparent" titleColor="#fff">
 	<view class="scoreDetail por">
-		<image src="../../images/bg@2x.png" class="scoreDetailBg {{showScoreList?'Bg2':''}}"></image>
+		<image src="../../images/bg@2x.png" class="scoreDetailBg"></image>
 		<view class="scoreHead">
-			<view>闲分</view>
+			<view>积分</view>
 			<view class="flex-x-between flex-y-center score">
 				<text>{{myScore}}</text>
-				<view class="flex-xy-center" bindtap="seeDetail" wx:if="{{!showScoreList}}">查看明细</view>
+				<navigator hover-class="none" url="/pages/myScoreList/myScoreList?score={{myScore}}" class="flex-xy-center">查看明细
+				</navigator>
 			</view>
 		</view>
-		<view class="scoreThing" wx:if="{{!showScoreList}}">
+		<view class="scoreThing">
 			<view class="scoreRich flex-x-between" bindtap="openOrCloseShow" data-show="{{true}}">
 				<view class="scoreRichLeft">
 					<view>积分兑换</view>
@@ -29,41 +30,23 @@
 						<view class="flex-x-center text-more-single">{{item.name}}</view>
 						<view class="flex-xy-center thingScore">
 							<text>{{item.score}}</text>
-							<text>闲分起</text>
+							<text>积分起</text>
 						</view>
 					</view>
 				</block>
 			</view>
 		</view>
-		<view class="scoreList" wx:else>
-			<view class="scoreListTitle por">闲分记录</view>
-			<block wx:for="{{scoreList}}" wx:key="index">
-				<view class="scoreRecord flex-x-between flex-y-center">
-					<view class="scoreRecordLeft">
-						<view class="orderNumber">
-							<text>订单ID</text>
-							<text>{{item.associated_id}}</text>
-						</view>
-						<view class="orderDate">{{filter.getTime2(item.create_time)}}</view>
-					</view>
-					<view class="scoreRecordRight {{item.in_out==1?'purpleSize':''}}">
-						{{item.in_out==1?'+':'-'}}{{item.score}}
-					</view>
-				</view>
-			</block>
-
-		</view>
-		<include src="/components/noData/noData.wxml"/>
 	</view>
-	<van-action-sheet show="{{ isShow }}" bind:click-overlay="openOrCloseShow" data-show="{{false}}">
-		<view class="actionTitle">
-			<text>闲分兑换详情</text>
-			<image src="/images/close_gary@2x.png" bindtap="openOrCloseShow" data-show="{{false}}"></image>
+	<van-action-sheet show="{{ isShow }}" bind:click-overlay="openOrCloseShow" data-show="{{false}}"
+		catchtouchmove='preventTouchMove'>
+		<view class="actionTitle" bindtap="openOrCloseShow" data-show="{{false}}">
+			<text>积分兑换详情</text>
+			<image src="/images/close_gary@2x.png"></image>
 		</view>
 		<scroll-view style="max-height:460px;" scroll-y>
-	  	<view class="actionContent">
-			   <template is="wxParse" data="{{wxParseData:rules.nodes}}"/>
-		  </view>
+			<view class="actionContent">
+				<template is="wxParse" data="{{wxParseData:rules.nodes}}" />
+			</view>
 		</scroll-view>
 	</van-action-sheet>
 </navbar>

@@ -2,6 +2,7 @@
 import api from '../../request/api.js'
 import {request} from '../../request/index.js'
 import {turnImg} from '../../utils/util.js'
+let WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -31,6 +32,7 @@ Page({
       policy=turnImg(policy)
       content=turnImg(content)
       const hotelDetail ={...res[0].data.info,policy,content}
+      WxParse.wxParse('bookDescription','html',res[0].data.info.reservation_description,this,5)
         this.setData({
           hotelDetail,
           hotelFacilitiesList:res[1].data.list

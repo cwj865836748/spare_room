@@ -19,7 +19,7 @@
 								<view class="hotelName">
 									<view class="hotelCnName">
 										<text class="text-more">{{item.hotel.name}}</text>
-										<van-rate size="9" value="{{item.hotel.star}}" count="{{item.hotel.star}}" readonly  />
+										<van-rate size="11" value="{{item.hotel.star}}" count="{{item.hotel.star}}" readonly  />
 									</view>
 									<view class="hotelEnglishName text-more">
 										{{item.hotel.name_en}}
@@ -49,6 +49,7 @@
 	</view>
 
 	<van-dialog use-slot show="{{ delCollectShow }}" show-cancel-button confirmButtonText="删除" cancelButtonText="取消" 
+	close-on-click-overlay
 	bind:cancel="closeDelCollect"
 	bind:confirm="delCollectOK"
 	confirm-button-color="#8c42ad" cancel-button-color="#666666">

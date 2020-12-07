@@ -26,7 +26,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getLocation()
+    const {parentId,scene} = options
+    const parent_id = parentId||scene
+    parent_id&&this.getBindParent(parent_id)
+     this.getLocation()
   },
   //加载轮播图和公告
   getInit(){
@@ -35,7 +38,7 @@ Page({
      })
      Promise.all(getPromise).then(res=>{
        const notice=res[1].data.list.map(item=>{
-         return item.title
+         return item.content
        })
        this.setData({
         swiperList:res[0].data.list,
@@ -78,8 +81,7 @@ Page({
        })
       }) 
   },
- 
-  
+
   //更新状态
   getStatus(){
     const {defaultDate,defaultCity,defaultKeyWords} = App.globalData
@@ -96,9 +98,23 @@ Page({
   jumpTab(e){
     const {url} = e.currentTarget.dataset
      wx.navigateTo({
-       url
+       url:`${url}&isInvite=true`
      })
   },
+  getBindParent(parent_id){
+    App.globalData.parent_id=parent_id
+    if(!wx.getStorageSync("token")){
+      return
+    }
+    request({url:api.authorization.userBind,data:{parent_id}}).then(res=>{
+      res.data&&wx.showModal({
+        title: '尊敬的客户您好',
+        content: '恭喜您获得好友赠送的黄金会员！',
+        showCancel: false,//是否显示取消按钮
+        confirmText:"好的",//默认是“确定”
+     })
+    })
+ },
   
   /**
    * 生命周期函数--监听页面初次渲染完成

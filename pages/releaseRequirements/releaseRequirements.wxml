@@ -4,23 +4,23 @@
 	<scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="onReachBottom">
 		<view class="requireList">
 			<block wx:for="{{requireList}}" wx:key="index">
-				<view class="requireOne">
+				<view class="requireOne" bindtap="openDemandOneDetail" data-id="{{item.id}}">
 					<view class="hotelName flex-x-between">
 						<text>{{item.hotel_name}}</text>
-						<image src="/images/delete_published_information@2x.png" bindtap="delDemandOne" data-index="{{index}}" data-id="{{item.id}}"></image>
+						<image src="/images/delete_published_information@2x.png" catchtap="delDemandOne" data-index="{{index}}" data-id="{{item.id}}"></image>
 					</view>
 					<view class="hotelDate">
 						入住日期：{{filter.getTime(item.start_time)}}-离店日期：{{filter.getTime(item.end_time)}}
 					</view>
 					<view class="hotelType flex-y-center flex-x-between {{item.status?'':'mt40'}}">
 						<text>{{item.room_name}}</text>
-						<view class="hotelTypeBtn flex-xy-center" bindtap="openDemandOneDetail" data-id="{{item.id}}" wx:if="{{item.status}}">点击进入</view>
+						<view class="hotelTypeBtn flex-xy-center" catchtap="goHotelDetail" data-item="{{item}}"  wx:if="{{item.status}}">点击进入</view>
 						<view class="noMessage" wx:else>暂无信息</view>
 					</view>
 				</view>
 			</block>
 		</view>
-		<van-dialog use-slot show="{{ delShow }}" show-cancel-button confirmButtonText="删除" cancelButtonText="取消" confirm-button-color="#8c42ad" cancel-button-color="#666666" bind:confirm="delConfirm" bind:cancel	="delDemandClose">
+		<van-dialog use-slot show="{{ delShow }}" 	close-on-click-overlay show-cancel-button confirmButtonText="删除" cancelButtonText="取消" confirm-button-color="#8c42ad" cancel-button-color="#666666" bind:confirm="delConfirm" bind:cancel	="delDemandClose">
 			<view class='cancelCollect'>
 				<view class="title">是否删除此需求</view>
 				<view class="content">删除需求后,无法进行找回</view>
@@ -29,13 +29,13 @@
 		
 		<include src="/components/noData/noData.wxml"/>
 	</scroll-view>
-	<van-action-sheet show="{{demandOneDetailShow}}" z-index="100">
+	<van-action-sheet show="{{demandOneDetailShow}}" z-index="100" bind:click-overlay="closeDemandOneDetail">
 			<view class="actionRequire">
 				<view class="actionTitle">
 					<text>已发布需求</text>
 					<image src="/images/close_gary@2x.png" bindtap="closeDemandOneDetail"></image>
 				</view>
-				<view class="actionName">{{demandOneDetail.hotel_name}}</view>
+				<!-- <view class="actionName">{{demandOneDetail.hotel_name}}</view> -->
 			</view>
 			<scroll-view style="height:460px;" scroll-y>
 				<view class="actionMsg">

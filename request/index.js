@@ -1,8 +1,8 @@
 import {showToast} from '../utils/wx'
 // const app= getApp()
 // 后台url
- const baseUrl = 'https://api.xiantrip.com.cn';
- 
+ const baseUrl = 'https://api.zhetrip.com';
+ const App = getApp()
 // 同时发送异步代码的次数
 let ajaxTimes = 0;
 
@@ -14,14 +14,14 @@ export const request = (params) => {
   }
   // header["token"] = '1111';
   header['Content-Type']= header['Content-Type']? header['Content-Type']:"application/x-www-form-urlencoded"
-  if(params.isLoading){
+  // if(params.isLoading){
     ajaxTimes++;
     // 显示加载中 效果
-    wx.showLoading({
-      title: "加载中",
-      mask: true
-    });
-  }
+    // wx.showLoading({
+    //   title: "加载中",
+    //   mask: true
+    // });
+  // }
 
 
   return new Promise((resolve, reject) => {
@@ -32,8 +32,9 @@ export const request = (params) => {
       url: baseUrl + params.url,
       success: (res) => {
         if (res.data.code == 201 ) {
-          wx.clearStorageSync();
-          wx.navigateTo({ url: '/pages/login/login'}) 
+        getApp().globalData.dataCodeList.push(res.data.code)
+          // wx.clearStorageSync();
+          // wx.navigateTo({ url: '/pages/login/login'}) 
               }
         else if(res.data.code==500){
             wx.showToast({
@@ -49,14 +50,19 @@ export const request = (params) => {
         showToast(res.msg)
         reject(res);
       },
-      complete: () => {
-        if(params.isLoading){ 
+      complete: (res) => {
+        // if(params.isLoading){ 
         ajaxTimes--;
         if (ajaxTimes === 0) {
           //  关闭正在等待的图标
-          wx.hideLoading();
+          // wx.hideLoading();
+          if(getApp().globalData.dataCodeList.includes(201)){
+                 wx.clearStorageSync();
+                 wx.navigateTo({ url: '/pages/login/login'}) 
+                 getApp().globalData.dataCodeList=[]
           }
-        }
+          }
+        // }
       }
     });
   })

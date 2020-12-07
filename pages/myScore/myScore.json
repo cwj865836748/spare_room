@@ -1,8 +1,7 @@
 {
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
-    "van-action-sheet": "@vant/weapp/action-sheet/index",
-    "noData":"/components/noData/noData"
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
   },
   "disableScroll":true
 }

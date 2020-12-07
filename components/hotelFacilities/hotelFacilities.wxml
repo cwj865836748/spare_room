@@ -3,7 +3,9 @@
 		<view class="eq">
 			<view class="title">{{item.name}}</view>
 			<view class="service flex-wrap">
-				<view wx:for="{{item.second}}" wx:key="indexs" wx:for-item="items">{{items}}</view>
+				<view wx:for="{{item.second}}" wx:key="indexs" wx:for-item="items">
+				<rich-text nodes="{{filter.greenFee(items)}}"></rich-text>
+				</view>
 			</view>
 		</view>
 	</block>

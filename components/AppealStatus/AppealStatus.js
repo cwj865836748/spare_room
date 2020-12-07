@@ -33,12 +33,15 @@ Component({
    */
   methods: {
     getAppealDetail(status){
-      console.log(status)
       const {order_id} = this.properties
       request({url:status=='user'?api.orderDetail.appealDetail:api.orderDetail.appealDetailPlatform,data:{order_id}}).then(res=>{
        
         this.setData({
           appealDetail:res.data.info,
+          isAppealShow:true
+        })
+        let pages = getCurrentPages()
+        pages[pages.length-1].setData({
           isAppealShow:true
         })
       })
@@ -47,11 +50,18 @@ Component({
       this.setData({
         isAppealShow:false
       })
+      let pages = getCurrentPages()
+      pages[pages.length-1].setData({
+        isAppealShow:false
+      })
     },
     previewImg(e){
       const {current} = e.target.dataset
       previewImage({ current,
         urls: this.data.appealDetail.img_url})
     },
+    preventTouchMove(){
+      return
+    }
   }
 })
