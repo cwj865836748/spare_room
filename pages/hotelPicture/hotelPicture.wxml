@@ -1,5 +1,5 @@
 <!--pages/hotelPicture/hotelPicture.wxml-->
-<wxs src="../../wxs/filter.wxs" module="filter"/>
+<wxs src="../../wxs/filter.wxs" module="filter" />
 <navbar title="酒店图片">
 	<scroll-view scroll-x class="myScroll">
 		<view class="picTitle">
@@ -10,28 +10,36 @@
 	</scroll-view>
 	<scroll-view scroll-y>
 		<view class="picList">
-		
-        <!--全部-->
-				<block wx:if="{{!titleIndex}}" >
-					<view class="picView por" wx:for="{{initList}}" wx:key="index" bindtap="previewImage" data-img="{{item.img_url}}">
-						<image src="{{item.img_url[0]}}"></image>
-						<view class="picMen flex-xy-center">
-							<text>{{filter.picType(item.type)}}：</text>
-							<view class="opacity flex-y-center">
+
+			<!--全部-->
+			<block wx:if="{{!titleIndex}}">
+				<view class="picView por" wx:for="{{initList}}" wx:key="index" bindtap="previewImage"
+					data-img="{{item.img_url}}">
+					<image src="{{item.img_url[0]}}"></image>
+					<view class="picMen flex-xy-center">
+						<text>{{filter.picType(item.type)}}：</text>
+						<view class="opacity flex-y-center">
 							<image src="../../images/hotel_pic@2x.png"></image>
 							<text>{{item.img_url.length}}张</text>
-							</view>
 						</view>
 					</view>
-				</block>
-        <!--其他类型-->
-				<block wx:else >
-					<view class="picView por"  wx:for="{{picList}}" wx:key="indexs" bindtap="previewImage" data-img="{{item}}">
-						<image src="{{item}}"></image>
+				</view>
+			</block>
+			<!--其他类型-->
+			<block wx:if="{{picList.length}}">
+				<view class="picView por" bindtap="previewImage" data-img="{{picList}}">
+					<image src="{{picList[0]}}"></image>
+					<view class="picMen flex-xy-center">
+						<text>{{filter.picType(titleIndex)}}：</text>
+						<view class="opacity flex-y-center">
+							<image src="../../images/hotel_pic@2x.png"></image>
+							<text>{{picList.length}}张</text>
+						</view>
 					</view>
-				</block>
-		
+				</view>
+			</block>
+
 		</view>
-		<include src="/components/noData/noData.wxml"/>
+		<include src="/components/noData/noData.wxml" />
 	</scroll-view>
 </navbar>

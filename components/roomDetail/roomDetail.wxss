@@ -46,18 +46,27 @@
 
 .bedDetail>.showBedDetail>.bedEq>.detail {
   width: 100%;
-  height: 96rpx;
+  min-height: 96rpx;
   font-size: 24rpx;
   color: #666666;
   align-content: space-between;
+}
+.bedDetail>.showBedDetail>.bedEq>.detail:last-child {
+  height: auto;
+  min-height: auto;
+  margin-top: 20rpx;
 }
 
 .bedDetail>.showBedDetail>.bedEq>.detail>view {
   width: 200rpx;
 }
+.bedDetail>.showBedDetail>.bedEq>.detail:last-child>view {
+  width: 100%;
+}
 
 .bedDetail>.showBedDetail>.bedEq>.detail>view>image {
   width: 36rpx;
+  min-width: 36rpx;
   height: 36rpx;
   margin-right: 12rpx;
 }
@@ -106,4 +115,7 @@
   width: 21rpx;
   height: 12rpx;
   margin-left: 9rpx;
+}
+.swiperImage {
+  height: 100%;
 }

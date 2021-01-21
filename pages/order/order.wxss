@@ -175,4 +175,18 @@ flex-grow: 1;
   letter-spacing: 1rpx;
   color: #333333;
 }
+.redCircle {
+  position: relative;
+}
+
+.redCircle::after {
+  content: "";
+  position: absolute;
+  right: -4rpx;
+  top: -8rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #c12306;
+  border-radius: 50%;
+}
 

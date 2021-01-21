@@ -119,8 +119,12 @@ Page({
     }
     App.globalData.defaultKeyWords = e.detail
     this.pushHistory(e.detail)
-    wx.navigateTo({
-      url: '/pages/hotelList/hotelList',
+     //上一页是酒店列表进行搜索
+     let p = getCurrentPages();
+     let pages = p[p.length - 2]
+     pages.route == 'pages/hotelList/hotelList' && pages.keyWordSeach()
+    wx.navigateBack({
+      delta: 1
     })
   },
   /**
@@ -174,6 +178,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '"这旅"-高端酒店，低价预定。',
+      path: `/pages/index/index`,
+    }
   }
 })

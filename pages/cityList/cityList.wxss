@@ -71,3 +71,37 @@
   font-size: 28rpx!important;
   padding-top: 8rpx !important;
 }
+.chooseSearchCity {
+  padding: 0 20rpx;
+  width: 100%;
+  position: absolute;
+  top: 90rpx;
+  left: 0;
+}
+.chooseSearchCity>.select {
+  background: #ffffff;
+  border-radius: 8rpx;
+  box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(0, 0, 0, 0.09);
+  padding: 24rpx;
+  font-size: 26rpx;
+  font-weight:bold ;
+  color: #333333;
+  letter-spacing: 2rpx;
+  /* box-sizing: content-box; */
+  max-height: 270px;
+  overflow-y: auto;
+}
+.chooseSearchCity>.select>view {
+  margin-bottom: 34rpx;
+}
+
+.chooseSearchCity>.select>.seleceNone {
+  font-size: 26rpx;
+  color: #999999;
+  letter-spacing: 2rpx;
+  line-height: 40rpx;
+}
+
+.chooseSearchCity>.select>view:last-child {
+  margin-bottom: 0;
+}

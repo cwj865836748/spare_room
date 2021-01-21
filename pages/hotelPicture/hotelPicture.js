@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    headTitleList:[{type:0,name:"全部"},{type:1,name:"外观"},{type:2,name:"房间"},{type:3,name:"餐饮"},{type:4,name:"休闲"},{type:5,name:"商务"},{type:6,name:"公告区域"},{type:7,name:"周边"},{type:8,name:"其他"}],
+    headTitleList:[{type:0,name:"全部"},{type:1,name:"外观"},{type:2,name:"房间"},{type:3,name:"餐饮"},{type:4,name:"休闲"},{type:5,name:"商务"},{type:6,name:"公共区域"},{type:7,name:"周边"},{type:8,name:"其他"}],
     titleIndex:0,
     picList:[],
     initList:[],
@@ -44,10 +44,10 @@ Page({
   
   previewImage(e){
     const {img} =e.currentTarget.dataset
-    const {picList,titleIndex} =this.data
+    // const {picList,titleIndex} =this.data
     previewImage({
-      　　　　current: titleIndex?img:img[0],
-      　　　　urls: titleIndex?picList:img
+      　　　　current:img[0],
+      　　　　urls:img
       　　})
   },
   /**
@@ -96,6 +96,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '"这旅"-高端酒店，低价预定。',
+      path: `/pages/index/index`,
+    }
   }
 })

@@ -7,9 +7,11 @@
 	<view class="invoiceContent">
 		<view class="invoiceOne flex-y-center flex-x-between">
 			<text>是否需要开发票</text>
-			<van-switch disabled="{{isDisable}}" checked="{{is_invoice?true:false }}" size="40rpx" active-color="#72009d" inactive-color="#fff" bind:change="onChange" data-key="is_invoice" />
+			<van-switch disabled="{{isDisable}}" checked="{{is_invoice?true:false }}" size="40rpx" active-color="#72009d"
+				inactive-color="#fff" bind:change="onChange" data-key="is_invoice" />
 		</view>
 		<!--商家开票-->
+		<!--
 		<block wx:if="{{is_invoice&&invoice_info.platform_type==2}}">
 			<view class="invoiceOne flex-y-center">
 				<text>发票类型</text>
@@ -19,33 +21,39 @@
 			</view>
 			<view class="invoiceOne flex-y-center">
 				<text>发票抬头</text>
-				<view class="invoiceWho flex-xy-center {{invoice_info.identity_type==1?'invoicePurple':''}}" data-key="identity_type" data-value="1" bindtap="onChange2">
+				<view class="invoiceWho flex-xy-center {{invoice_info.identity_type==1?'invoicePurple':''}}"
+					data-key="identity_type" data-value="1" bindtap="onChange2">
 					企业
 				</view>
-				<view class="invoiceWho flex-xy-center {{invoice_info.identity_type==2?'invoicePurple':''}}" data-key="identity_type" data-value="2" bindtap="onChange2">
+				<view class="invoiceWho flex-xy-center {{invoice_info.identity_type==2?'invoicePurple':''}}"
+					data-key="identity_type" data-value="2" bindtap="onChange2">
 					个人
 				</view>
 			</view>
 			<block wx:if="{{invoice_info.identity_type==2}}">
 				<view class="invoiceOne flex-y-center">
 					<text>个人名称</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写个人名称" value="{{invoice_info.name}}" bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写个人名称" value="{{invoice_info.name}}"
+						bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
 				</view>
 			</block>
-			<!--企业状态-->
+			 /**企业状态**/
 			<block wx:else>
 				<view class="invoiceOne flex-y-center">
 					<text>企业名称</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写企业名称" value="{{invoice_info.name}}" bind:change="onChange3" data-key="name" clearable class="flex-grow-1" disabled="{{isDisable}}"/>
+					<van-field disabled="{{isDisable}}" placeholder="请填写企业名称" value="{{invoice_info.name}}"
+						bind:change="onChange3" data-key="name" clearable class="flex-grow-1" disabled="{{isDisable}}" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>企业税号</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写税号" value="{{invoice_info.duty_paragraph}}" bind:change="onChange3" data-key="duty_paragraph" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写税号" value="{{invoice_info.duty_paragraph}}"
+						bind:change="onChange3" data-key="duty_paragraph" clearable class="flex-grow-1" />
 				</view>
 			</block>
 			<view class="invoiceOne distance flex-y-center flex-x-between">
 				<text>是否需要注明酒店名称和入离时间</text>
-				<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx" active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
+				<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx"
+					active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
 			</view>
 			<view class="invoiceOne flex-y-center flex-x-between">
 				<text>配送方式</text>
@@ -58,22 +66,23 @@
 			<view class="invoiceOne boderNo flex-y-center">
 				<text>发票说明</text>
 			</view>
-			<view class="explanation">
-				·以上均为必填项，具体信息请与公司财务索要
-			</view>
+		   <include src="../../components/invoiceExplanation/invoiceExplanation.wxml"/>
 			<view class="btn flex-xy-center" bindtap="isOk" wx:if="{{!isDisable}}">
 				确定
 			</view>
 		</block>
+	  -->
 		<!--平台开票-->
 		<block wx:if="{{is_invoice&&invoice_info.platform_type==1}}">
 			<view class="invoiceOne invoiceType  flex-x-between">
 				<text>发票类型</text>
 				<view class="flex-y-between">
-					<view class="invoiceName flex-xy-center {{invoice_info.invoice_type==1?'invoicePurple':''}}" style="width:294rpx" data-key="invoice_type" data-value="1" bindtap="onChange2">
+					<view class="invoiceName flex-xy-center {{invoice_info.invoice_type==1?'invoicePurple':''}}"
+						style="width:294rpx" data-key="invoice_type" data-value="1" bindtap="onChange2">
 						增值税普通发票(电子)
 					</view>
-					<view class="invoiceName flex-xy-center {{invoice_info.invoice_type==2?'invoicePurple':''}}" style="width:294rpx" data-key="invoice_type" data-value="2" bindtap="onChange2">
+					<view class="invoiceName flex-xy-center {{invoice_info.invoice_type==2?'invoicePurple':''}}"
+						style="width:294rpx" data-key="invoice_type" data-value="2" bindtap="onChange2">
 						增值税普通发票(纸质)
 					</view>
 					<!-- <view class="invoiceName flex-xy-center {{invoice_info.invoice_type==3?'invoicePurple':''}} {{invoice_info.identity_type==2?'opacity':''}}" style="width:294rpx" data-key="invoice_type" data-value="3" data-disabled="{{invoice_info.identity_type==2?true:false}}" bindtap="onChange2">
@@ -83,10 +92,14 @@
 			</view>
 			<view class="invoiceOne flex-y-center">
 				<text>发票抬头</text>
-				<view class="invoiceWho flex-xy-center {{invoice_info.identity_type==1?'invoicePurple':''}} " data-key="identity_type" data-value="1" bindtap="onChange2">
+				<view class="invoiceWho flex-xy-center {{invoice_info.identity_type==1?'invoicePurple':''}} "
+					data-key="identity_type" data-value="1" bindtap="onChange2">
 					企业
 				</view>
-				<view class="invoiceWho flex-xy-center {{invoice_info.identity_type==2?'invoicePurple':''}} {{invoice_info.invoice_type==3?'opacity':''}}" data-disabled="{{invoice_info.invoice_type==3?true:false}}" data-key="identity_type" data-value="2" bindtap="onChange2">
+				<view
+					class="invoiceWho flex-xy-center {{invoice_info.identity_type==2?'invoicePurple':''}} {{invoice_info.invoice_type==3?'opacity':''}}"
+					data-disabled="{{invoice_info.invoice_type==3?true:false}}" data-key="identity_type" data-value="2"
+					bindtap="onChange2">
 					个人
 				</view>
 			</view>
@@ -94,83 +107,79 @@
 			<block wx:if="{{invoice_info.invoice_type==1&&invoice_info.identity_type==1}}">
 				<view class="invoiceOne flex-y-center">
 					<text>企业名称</text>
-					<van-field disabled="{{isDisable}}"placeholder="请填写企业名称" value="{{invoice_info.name}}" bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写企业名称" value="{{invoice_info.name}}"
+						bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>企业税号</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写企业税号" value="{{invoice_info.duty_paragraph}}" bind:change="onChange3" data-key="duty_paragraph" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写企业税号" value="{{invoice_info.duty_paragraph}}"
+						bind:change="onChange3" data-key="duty_paragraph" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>邮箱号</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写邮箱号" value="{{invoice_info.email}}" bind:change="onChange3" data-key="email" clearable class="flex-grow-1" style="padding-left:26rpx" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写邮箱号" value="{{invoice_info.email}}"
+						bind:change="onChange3" data-key="email" clearable class="flex-grow-1" style="padding-left:26rpx" />
 				</view>
 				<view class="invoiceOne flex-y-center flex-x-between">
 					<text>是否需要注明酒店名称和入离时间</text>
-					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx" active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
-				</view>
-				<view class="invoiceOne boderNo flex-y-center">
-					<text>发票说明</text>
-				</view>
-				<view class="explanation">
-					·以上均为必填项，具体信息请与公司财务索要
-				</view>
-				<view class="btn flex-xy-center" bindtap="isOk" wx:if="{{!isDisable}}">
-					确定
+					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx"
+						active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
 				</view>
 			</block>
 			<!--（普票电子）个人-->
 			<block wx:if="{{invoice_info.invoice_type==1&&invoice_info.identity_type==2}}">
 				<view class="invoiceOne flex-y-center">
 					<text>个人名称</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写个人名称" value="{{invoice_info.name}}" bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写个人名称" value="{{invoice_info.name}}"
+						bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>邮箱号</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写邮箱号" value="{{invoice_info.email}}" bind:change="onChange3" data-key="email" clearable class="flex-grow-1" style="padding-left:26rpx" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写邮箱号" value="{{invoice_info.email}}"
+						bind:change="onChange3" data-key="email" clearable class="flex-grow-1" style="padding-left:26rpx" />
 				</view>
 				<view class="invoiceOne flex-y-center flex-x-between">
 					<text>是否需要注明酒店名称和入离时间</text>
-					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx" active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
-				</view>
-				<view class="invoiceOne boderNo flex-y-center">
-					<text>发票说明</text>
-				</view>
-				<view class="explanation">
-					·以上均为必填项，具体信息请与公司财务索要
-				</view>
-				<view class="btn flex-xy-center" style="margin-top:208rpx" bindtap="isOk" wx:if="{{!isDisable}}">
-					确定
+					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx"
+						active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
 				</view>
 			</block>
 			<!--（专用发票）企业-->
-			<block wx:if="{{invoice_info.invoice_type==3&&invoice_info.identity_type==1}}">
+			<!-- <block wx:if="{{invoice_info.invoice_type==3&&invoice_info.identity_type==1}}">
 				<view class="invoiceOne flex-y-center">
 					<text>企业名称</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写企业名称" value="{{invoice_info.name}}" bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写企业名称" value="{{invoice_info.name}}"
+						bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>企业税号</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写企业税号" value="{{invoice_info.duty_paragraph}}" bind:change="onChange3" data-key="duty_paragraph" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写企业税号" value="{{invoice_info.duty_paragraph}}"
+						bind:change="onChange3" data-key="duty_paragraph" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>注册地址</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写注册地址" value="{{invoice_info.company_address}}" bind:change="onChange3" data-key="company_address" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写注册地址" value="{{invoice_info.company_address}}"
+						bind:change="onChange3" data-key="company_address" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne distance flex-y-center flex-x-between">
 					<text>是否需要注明酒店名称和入离时间</text>
-					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx" active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
+					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx"
+						active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>公司电话</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写公司电话" value="{{invoice_info.company_phone}}" bind:change="onChange3" data-key="company_phone" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写公司电话" value="{{invoice_info.company_phone}}"
+						bind:change="onChange3" data-key="company_phone" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>开户银行</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写开户银行" value="{{invoice_info.open_bank}}" bind:change="onChange3" data-key="open_bank" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写开户银行" value="{{invoice_info.open_bank}}"
+						bind:change="onChange3" data-key="open_bank" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne distance flex-y-center">
 					<text>银行账户</text>
-					<van-field  disabled="{{isDisable}}" placeholder="请填写银行账户" value="{{invoice_info.card_number}}" bind:change="onChange3" data-key="card_number" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写银行账户" value="{{invoice_info.card_number}}"
+						bind:change="onChange3" data-key="card_number" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne flex-y-center flex-x-between">
 					<text>配送方式</text>
@@ -183,26 +192,27 @@
 				<view class="invoiceOne boderNo flex-y-center">
 					<text>发票说明</text>
 				</view>
-				<view class="explanation">
-					·以上均为必填项，具体信息请与公司财务索要
-				</view>
+				<include src="../../components/invoiceExplanation/invoiceExplanation.wxml"/>
 				<view class="btn flex-xy-center" style="margin-top:52rpx" bindtap="isOk" wx:if="{{!isDisable}}">
 					确定
 				</view>
-			</block>
+			</block> -->
 			<!--（普票纸质）企业-->
 			<block wx:if="{{invoice_info.invoice_type==2&&invoice_info.identity_type==1}}">
 				<view class="invoiceOne flex-y-center">
 					<text>企业名称</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写企业名称" value="{{invoice_info.name}}" bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写企业名称" value="{{invoice_info.name}}"
+						bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne flex-y-center">
 					<text>企业税号</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写企业税号" value="{{invoice_info.duty_paragraph}}" bind:change="onChange3" data-key="duty_paragraph" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写企业税号" value="{{invoice_info.duty_paragraph}}"
+						bind:change="onChange3" data-key="duty_paragraph" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne distance flex-y-center flex-x-between">
 					<text>是否需要注明酒店名称和入离时间</text>
-					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx" active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
+					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx"
+						active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
 				</view>
 				<view class="invoiceOne flex-y-center flex-x-between">
 					<text>配送方式</text>
@@ -212,20 +222,19 @@
 					<text>收货地址</text>
 					<image src="/images/right_black@2x.png"></image>
 				</navigator>
-				<view class="btn flex-xy-center" style="margin-top:90rpx" bindtap="isOk" wx:if="{{!isDisable}}">
-					确定
-				</view>
 			</block>
 			<!--(普票纸质）个人-->
 			<block wx:if="{{invoice_info.invoice_type==2&&invoice_info.identity_type==2}}">
 
 				<view class="invoiceOne flex-y-center">
 					<text>个人名称</text>
-					<van-field disabled="{{isDisable}}" placeholder="请填写个人名称" value="{{invoice_info.name}}" bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
+					<van-field disabled="{{isDisable}}" placeholder="请填写个人名称" value="{{invoice_info.name}}"
+						bind:change="onChange3" data-key="name" clearable class="flex-grow-1" />
 				</view>
 				<view class="invoiceOne distance flex-y-center flex-x-between">
 					<text>是否需要注明酒店名称和入离时间</text>
-					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx" active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
+					<van-switch disabled="{{isDisable}}" checked="{{ invoice_info.is_Indicate?true:false }}" size="40rpx"
+						active-color="#72009d" inactive-color="#fff" bind:change="onChange3" data-key="is_Indicate" />
 				</view>
 				<view class="invoiceOne flex-y-center flex-x-between">
 					<text>配送方式</text>
@@ -235,17 +244,21 @@
 					<text>收货地址</text>
 					<image src="/images/right_black@2x.png"></image>
 				</navigator>
-				<view class="invoiceOne boderNo flex-y-center">
-					<text>发票说明</text>
-				</view>
-				<view class="explanation">
-					·以上均为必填项，具体信息请与公司财务索要
-				</view>
-				<view class="btn flex-xy-center" style="margin-top:54rpx" bindtap="isOk" wx:if="{{!isDisable}}">
-					确定
-				</view>
-			</block>
 
+			</block>
+			<view class="invoiceOne boderNo flex-y-center">
+				<text>发票说明</text>
+			</view>
+			<view class="explanation">
+				<view>·发票金额不包含押金、礼品卡、优惠券、积分抵扣支付的部分。</view>
+				<view>·该房费发票由闲旅公司开具。</view>
+				<view>·开票内容统一为 "酒店住宿费"。</view>
+				<view>·发票仅支持开普票(电子发票或纸质发票),无法开专票。</view>
+				<view> ·需要开票的客户请下单时提交开票信息开票，如下单时不填写开票信息默认不开发票，后期也无法补开发票，感谢理解。</view>
+			</view>
+			<view class="btn flex-xy-center" bindtap="isOk" wx:if="{{!isDisable}}">
+				确定
+			</view>
 		</block>
 	</view>
 </navbar>

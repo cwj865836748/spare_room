@@ -37,12 +37,12 @@
 			<include src="/components/hotelFacilities/hotelFacilities.wxml"></include>
 		</view>
 
-		<view class="hotelSetting">
+		<view class="hotelSetting" >
 			<view class="title">酒店介绍</view>
 			<rich-text nodes="{{hotelDetail.description}}"></rich-text>
 		</view>
 
-		<view class="hotelSetting">
+		<view class="hotelSetting" wx:if="{{hotelDetail.policy}}">
 			<view class="title">酒店政策</view>
 			<rich-text nodes="{{filter.greenFee(hotelDetail.policy)}}"></rich-text>
 		</view>

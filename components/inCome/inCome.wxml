@@ -4,9 +4,9 @@
 	<view class="recommendRecord flex-x-between flex-y-center">
 		<view>
 			<text>{{filter.getMoneyLogType(item.type).idName}}</text>
-			<text wx:if="{{item.associated_id}}">{{filter.orderPhone(item.associated_id)}}</text><!--已提现/提现中无id-->
+			<text wx:if="{{item.order_sn}}">{{item.order_sn}}</text><!--已提现/提现中无id-->
 		</view>
-		<text>{{filter.getTime2(item.create_time)}}</text>
+		<text style="white-space:nowrap">{{filter.getTime2(item.create_time)}}</text>
 	</view>
 	<view class="recommendOne flex-x-between flex-y-center">
 		<view>

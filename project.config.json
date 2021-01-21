@@ -18,24 +18,27 @@
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": false,
     "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "useApiHostProcess": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.1",
   "appid": "wxbbca6f143c16d2ac",
-  "projectname": "%E9%97%B2%E6%88%BF",
+  "projectname": "%E8%BF%99%E6%97%85",
   "debugOptions": {
     "hidedInDevtools": []
   },
@@ -43,17 +46,10 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
     "game": {
-      "currentL": -1,
       "list": []
     },
     "gamePlugin": {
@@ -262,6 +258,12 @@
           "name": "邀请图片",
           "pathName": "pages/invitePicture/invitePicture",
           "query": "qrcode=https://wogen.oss-cn-shenzhen.aliyuncs.com/uploads/images/20201015/f3e1fbe3df0aa0fa23a4acb5f2074911.png&discount=9.5",
+          "scene": null
+        },
+        {
+          "name": "授权登录",
+          "pathName": "pages/authWx/authWx",
+          "query": "",
           "scene": null
         }
       ]

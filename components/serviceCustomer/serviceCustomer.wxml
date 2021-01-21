@@ -2,7 +2,7 @@
 
 <movable-area class="movableArea" style="width:{{windowWidth}}px;height:{{windowHeight}}px;" class="movableArea">
 <movable-view class="movableView" x="{{x}}" y="{{y}}" direction="all" animation="{{false}}">
-<button open-type='contact' class="servicePerson" hover-class="none">
+<button open-type='contact' class="servicePerson flex-xy-center" hover-class="none">
        <image src="../../images/service_fl@2x.png"></image>
 </button> 
 </movable-view>

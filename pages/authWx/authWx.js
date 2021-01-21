@@ -1,4 +1,7 @@
-// pages/todayIncome/todayIncome.js
+// pages/authWx/authWx.js
+import {
+  login,
+} from '../../utils/wx.js'
 import api from '../../request/api.js'
 import {request} from '../../request/index.js'
 Page({
@@ -7,31 +10,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    recommendRecordList:[],
-    page:1,
-    is_next:false,
-    noData:false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    wxCode: ''
   },
-  getTodatIncome(){
-    request({url:api.moneyLog.todayLists,data:{page:this.data.page}}).then(res=>{
-      this.setData({
-        recommendRecordList:[...res.data.list,...this.data.recommendRecordList],
-        is_next:res.data.is_next
-      },()=>{
-        this.isNoData()
-      })
-    })
-  },
-  isNoData(){
-    !this.data.recommendRecordList.length&&this.setData({
-      noData:true
-    })
-},
+
   /**
    * 生命周期函数--监听页面加载
    */
+  bindGetUserInfo(e) {
+    const {
+      errMsg,
+      encryptedData,
+      iv
+    } = e.detail
+    if (errMsg !== 'getUserInfo:ok') {
+      return false
+    }
+    wx.showLoading({
+      title: "正在获取",
+      mask: true
+    });
+    request({
+      url: api.authorization.login,
+      data: {
+        code: this.data.wxCode,
+        encrypted_data: encryptedData,
+        iv
+      }
+    }).then(result => {
+      wx.hideLoading();
+      wx.navigateBack({
+        delta: 1
+      })
+    })
+  },
   onLoad: function (options) {
-    this.getTodatIncome()
+
   },
 
   /**
@@ -45,7 +59,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    login().then(res => {
+      this.setData({
+        wxCode: res.code
+      })
+    })
   },
 
   /**
@@ -73,10 +91,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(this.data.is_next){
-      this.data.page++
-      this.getTodatIncome()
-    }
+
   },
 
   /**
@@ -87,6 +102,5 @@ Page({
       title: '"这旅"-高端酒店，低价预定。',
       path: `/pages/index/index`,
     }
-
   }
 })

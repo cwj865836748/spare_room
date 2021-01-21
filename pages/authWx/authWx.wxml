@@ -1,0 +1,22 @@
+<!--pages/authWx/authWx.wxml-->
+<navbar title='授权登录' back="{{!canIUse}}">
+  <view class="authContent">
+    <view class="wxImage flex-x-center">
+      <image src="/images/wechat@2x.png"></image>
+    </view>
+    <block wx:if="{{canIUse}}">
+      <view class="authSize">
+        <text>申请获取以下权限</text>
+        <view>获得您的公开信息(昵称，头像等)</view>
+      </view>
+      <button class="wxButton flex-xy-center" type='primary' open-type="getUserInfo" lang="zh_CN"
+        bindgetuserinfo="bindGetUserInfo">
+        授权登录
+      </button>
+    </block>
+    <block wx:else>
+      <view class='authSize'>请升级微信版本</view>
+    </block>
+
+  </view>
+</navbar>

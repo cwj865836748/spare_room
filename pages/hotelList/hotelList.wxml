@@ -169,6 +169,8 @@
 						data-choose='2'>房型早餐</view>
 					<view class="linearTitle flex-xy-center {{chooseDistan==3? 'titleActive' : ''}}" bindtap="distanChange"
 						data-choose='3'>优惠促销</view>
+					<view class="linearTitle flex-xy-center {{chooseDistan==4? 'titleActive' : ''}}" bindtap="distanChange"
+						data-choose='4'>政策服务</view>
 				</view>
 
 				<view class="group" wx:if="{{chooseDistan==1}}">
@@ -188,16 +190,16 @@
 
 				<view class="group" wx:if="{{chooseDistan==2}}">
 					<view class='title'>房型</view>
-					<scroll-view style="height:320rpx" scroll-y>
-						<view class="hotel flex-wrap">
-							<block wx:for="{{roomList}}" wx:key="index">
-								<view class="chooseView text-more-single {{item.id==roomChooseOne?'chooseOne':''}}"
-									bindtap="chooseHotelOne" data-id="{{item.id}}" data-key="roomChooseOne">
-									{{item.room_name}}
-								</view>
-							</block>
-						</view>
-					</scroll-view>
+					<!-- <scroll-view style="height:320rpx" scroll-y> -->
+					<view class="hotel flex-wrap">
+						<block wx:for="{{roomList}}" wx:key="index">
+							<view class="chooseView text-more-single {{item.id==roomChooseOne?'chooseOne':''}}"
+								bindtap="chooseHotelOne" data-id="{{item.id}}" data-key="roomChooseOne">
+								{{item.room_name}}
+							</view>
+						</block>
+					</view>
+					<!-- </scroll-view> -->
 					<view class='title' style="margin-top:28rpx">早餐</view>
 					<view class="hotel flex-wrap">
 						<block wx:for="{{breakfastList}}" wx:key="index">
@@ -221,7 +223,17 @@
 						</block>
 					</view>
 				</view>
-
+				<view class="group" wx:if="{{chooseDistan==4}}">
+					<view class='title'>政策服务</view>
+					<view class="hotel flex-wrap">
+						<block wx:for="{{policyList}}" wx:key="index">
+							<view class="chooseView text-more-single {{item.id==policyChooseOne?'chooseOne':''}}"
+								bindtap="chooseHotelOne" data-id="{{item.id}}" data-key="policyChooseOne">
+								{{item.name}}
+							</view>
+						</block>
+					</view>
+				</view>
 			</view>
 			<view class="btn flex-x-between" style="padding:0 30rpx">
 				<view class="flex-xy-center" bindtap="resetSearchHotel" data-type="3">重置</view>
@@ -229,8 +241,12 @@
 			</view>
 		</view>
 	</view>
+	<!--返回顶部-->
+	<view class="returnTop" style="opacity:{{returnTop?1:0}}" bindtap="listReturnTop">
+		<image src="/images/up.png"></image>
+	</view>
 	<!--酒店列表-->
-	<include src="/components/hotelList/hotelList.wxml" wx:if="{{hotelList.length}}" />
+	<include src="/components/hotelList/hotelList.wxml" wx:if="{{hotelList[0].length}}" />
 	<!-- 需求弹窗 -->
 	<hotelRequire wx:else />
 	<!-- 日历弹窗 -->

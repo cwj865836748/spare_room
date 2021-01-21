@@ -10,7 +10,8 @@ import {
   getAuth,
   circleImg,
   darwRoundRect,
-  textPrewrap
+  textPrewrap,
+  turnImg
 } from '../../utils/util.js'
 import {
   openLocation,saveImageToPhotosAlbum
@@ -21,7 +22,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    detailHeadList: ['房型', '酒店设施', '酒店政策', '附近商家推荐'],
+    detailHeadList: ['房型', '酒店设施', '酒店政策', '附近酒店推荐'],
     tab: 0,
     hotelId: null,
     //酒店详情
@@ -45,7 +46,8 @@ Page({
     isHotelInvite: '',
     shareFriendsShow: false,
     postImg: null,
-    qrImg: null
+    qrImg: null,
+    roomList:[]
   },
 
   /**
@@ -56,7 +58,8 @@ Page({
     const {
       isInvite,scene,id,isHotelInvite
     } = options
-    
+    const { lat: latitude,
+      lng: longitude} = App.globalData.userLocation
     isInvite||scene ? this.getLocation().then(location => {
       const {
         lat: latitude,
@@ -69,7 +72,8 @@ Page({
         isHotelInvite:scene||isHotelInvite,
         id:scene?scene:id,
       })
-    }) : this.getInit(options)
+    }) : 
+    this.getInit({...options,latitude,longitude})
 
     scene?this.getTimeInit({...options,id:scene}):this.getTimeInit(options)
   },
@@ -90,7 +94,7 @@ Page({
       }
     })
     //酒店设施 酒店轮播图
-    const promise = [api.hotel.hotelFacilities].map(url => {
+    const promise = [api.hotel.hotelFacilities,api.demand.roomIndex].map(url => {
       return request({
         url,
         data: {
@@ -99,10 +103,12 @@ Page({
       })
     })
     Promise.all([hotelDetail, ...promise]).then(res => {
+      
       this.setData({
-        hotelDetail: res[0].data.info,
+        hotelDetail: {...res[0].data.info,policy:turnImg(res[0].data.info.policy)},
         slideshowList: res[0].data.info.slideshow,
         hotelFacilitiesList: res[1].data.list,
+        roomList:res[2].data.list,
         hotelId: hotel_id,
         isHotelInvite
       })
@@ -137,24 +143,13 @@ Page({
       })
       this.setData({
         bedList,
-        hotelList: res[1].data.list,
+        'hotelList[0]': res[1].data.list,
         defaultDate: App.globalData.defaultDate,
         noData: !bedList.length ? true : false
       })
     })
   },
-  // getBindParent(parent_id) {
-  //   App.globalData.parent_id = parent_id
-  //   this.setData({
-  //     parent_id
-  //   })
-    // request({
-    //   url: api.authorization.userBind,
-    //   data: {
-    //     parent_id
-    //   }
-    // })
-  // },
+
   //是否收藏/取消收藏
   isCollect() {
     const {
@@ -206,7 +201,7 @@ Page({
       bedList,
       hotelList
     } = this.data
-    const noData = (!bedList.length && tab == 0) || (!hotelList.length && tab == 3)
+    const noData = (!bedList.length && tab == 0) || (!hotelList[0].length && tab == 3)
     this.setData({
       tab,
       noData
@@ -225,7 +220,9 @@ Page({
     bedList[index].isOpen = !bedList[index].isOpen
     App.globalData.bedDetail = {
       ...bedList[index],
-      hotelName: hotelDetail.name
+      hotelName: hotelDetail.name,
+      province:hotelDetail.province,
+      city:hotelDetail.city
     }
     this.setData({
       bedList
@@ -234,15 +231,12 @@ Page({
   // 房型详情
   roomDetailShow(e) {
     const {
-      id: room_id,
-      i
+      item:bedDetail
     } = e.currentTarget.dataset
-    const index = this.data.bedList.findIndex(item => item.id == i)
-    const bedDetail = this.data.bedList[index]
     request({
       url: api.hotel.roomFacilities,
       data: {
-        room_id
+        room_id:bedDetail.id
       }
     }).then(res => {
       const list = res.data.list.map(item => {
@@ -260,7 +254,8 @@ Page({
   },
   closeHotelDetailShow() {
     this.setData({
-      roomDetailShow: false
+      roomDetailShow: false,
+      roomDetail:{}
     })
   },
   //开启地图
@@ -526,7 +521,7 @@ Page({
       shareShow: false
     })
     return {
-      title: `${this.data.hotelDetail.name}`,
+      title: `"这旅"-高端酒店，低价预定。`,
       path: `/pages/hotelDetail/hotelDetail?id=${this.data.hotelId}&isHotelInvite=true&isInvite=true`,
       imageUrl: this.data.slideshowList[0],
 

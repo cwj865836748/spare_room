@@ -5,40 +5,42 @@
 		<view class="mineAvatar">
 			<open-data type="userAvatarUrl"></open-data>
 		</view>
-		<view class="mineLevel" wx:if="{{mine.level==0}}">
-			<image src="/images/mine/vip_one@2x.png" class="line"></image>
-			<image src="/images/recommend/domestic_consumer@2x.png" class="user"></image>
-			<text class="goldName">普通用户</text>
-		</view>
-		<view class="mineLevel" wx:if="{{mine.level==1}}">
-			<image src="/images/mine/vip_two@2x.png" class="line"></image>
-			<image src="/images/recommend/bronze_member@2x.png" class="qingTong"></image>
-			<text class="goldName">青铜会员</text>
-		</view>
-		<view class="mineLevel" wx:if="{{mine.level==2}}">
-			<image src="/images/mine/vip_three@2x.png" class="line"></image>
-			<image src="/images/recommend/silver_members@2x.png" class="baiYing"></image>
-			<text class="goldName">白银会员</text>
-		</view>
-		<view class="mineLevel" wx:if="{{mine.level==3}}">
-			<image src="/images/mine/vip_four@2x.png" class="line"></image>
-			<image src="/images/mine/gold_members@2x.png" class="gold"></image>
-			<text class="goldName">黄金会员</text>
-		</view>
-		<view class="mineLevel" wx:if="{{mine.level==4}}">
-			<image src="/images/mine/vip_five@2x.png" class="line"></image>
-			<image src="/images/recommend/platinum_member@2x.png" class="baiJing"></image>
-			<text class="goldName">白金会员</text>
-		</view>
-		<view class="mineLevel" style="bottom:20rpx" wx:if="{{mine.level==5}}">
-			<image src="/images/mine/vip_six@2x.png" class="line2"></image>
-			<image src="/images/recommend/diamond_member@2x.png" class="zuanShi"></image>
-			<image src="/images/vip_six_crown@2x.png" class="zuanShiHG"></image>
-			<text class="goldName2">钻石会员</text>
-		</view>
+		<navigator hover-class="none" url="/pages/memberIntroduction/memberIntroduction" class="mineLevel">
+			<block wx:if="{{mine.level==0}}">
+				<image src="/images/mine/vip_one@2x.png" class="line"></image>
+				<image src="/images/recommend/domestic_consumer@2x.png" class="user"></image>
+				<text class="goldName">普通用户</text>
+			</block>
+			<block wx:if="{{mine.level==1}}">
+				<image src="/images/mine/vip_two@2x.png" class="line"></image>
+				<image src="/images/recommend/bronze_member@2x.png" class="qingTong"></image>
+				<text class="goldName">青铜会员</text>
+			</block>
+			<block wx:if="{{mine.level==2}}">
+				<image src="/images/mine/vip_three@2x.png" class="line"></image>
+				<image src="/images/recommend/silver_members@2x.png" class="baiYing"></image>
+				<text class="goldName">白银会员</text>
+			</block>
+			<block wx:if="{{mine.level==3}}">
+				<image src="/images/mine/vip_four@2x.png" class="line"></image>
+				<image src="/images/mine/gold_members@2x.png" class="gold"></image>
+				<text class="goldName">黄金会员</text>
+			</block>
+			<block wx:if="{{mine.level==4}}">
+				<image src="/images/mine/vip_five@2x.png" class="line"></image>
+				<image src="/images/recommend/platinum_member@2x.png" class="baiJing"></image>
+				<text class="goldName">白金会员</text>
+			</block>
+			<block wx:if="{{mine.level==5}}">
+				<image src="/images/mine/vip_six@2x.png" class="line2"></image>
+				<image src="/images/recommend/diamond_member@2x.png" class="zuanShi"></image>
+				<image src="/images/vip_six_crown@2x.png" class="zuanShiHG"></image>
+				<text class="goldName2">钻石会员</text>
+			</block>
+		</navigator>
+
 		<!--您还未登录,请先登录-->
 		<open-data type="userNickName" class="mineName"></open-data>
-		<!-- <view class="mineName">尊贵的会员</view> -->
 	</view>
 	<view class="mineDetail">
 		<navigator url="/pages/myScore/myScore?score={{mine.score}}" hover-class="none" class="mineDetailTop">
@@ -67,7 +69,8 @@
 		</view>
 	</navigator>
 	<view class="mineMenu flex-x-between flex-y-center">
-		<navigator url="/pages/releaseRequirements/releaseRequirements" hover-class="none" class="menuDetail flex-col flex-y-center">
+		<navigator url="/pages/releaseRequirements/releaseRequirements" hover-class="none"
+			class="menuDetail flex-col flex-y-center">
 			<image src="/images/mine/mine_demand_center@2x.png"></image>
 			<view>需求中心</view>
 		</navigator>
@@ -85,5 +88,5 @@
 		</button>
 	</view>
 	<view class="loginOut flex-xy-center" bindtap="loginOut">退出登录</view>
-	<serviceCustomer/>
+	<serviceCustomer />
 </view>

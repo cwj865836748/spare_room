@@ -71,7 +71,7 @@ Page({
   submit(){
     const{content,img_url,order_id,service_attitude_score,room_arrange_score} = this.data
     isNull({content:service_attitude_score,title:'服务态度分数'})&&isNull({content:room_arrange_score,title:'房间安排效率分数'})&&isNull({content,title:'评价内容'})&&
-    isNull({content:img_url.length,title:'支付凭证'})&&
+    isNull({content:img_url.length,title:'添加图片'})&&
     request({url:api.orderDetail.comment,data:{content,order_id,service_attitude_score,room_arrange_score,img_url:img_url.join(',')}}).then(res=>{
       if(res.code==200){
         this.setData({
@@ -139,6 +139,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '"这旅"-高端酒店，低价预定。',
+      path: `/pages/index/index`,
+    }
   }
 })

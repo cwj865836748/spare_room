@@ -148,7 +148,7 @@ Page({
     var prevPage = pages[pages.length - 2]; 
     const userId =wx.getStorageSync('userId')?wx.getStorageSync('userId'):'-1'
     return {
-      title: '嘿！朋友，送您一张订房金卡，快领取。',
+      title: '嘿！送您一张金卡，订高端酒店非常划算，快领取。',
       path:`/pages/index/index?parentId=${userId}`,
       imageUrl:prevPage.data.imageUrl 
     }

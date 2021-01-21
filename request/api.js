@@ -16,7 +16,8 @@
     hotKeyword:'/api/index/hot-keyword',
     area:'/api/index/area',
     company:'/api/company/index',
-    room:'/api/room/index'
+    room:'/api/room/index',
+    freeze:'/api/user/freeze'
    },
    mine: {
     index:'/api/user/index',
@@ -29,7 +30,8 @@
     demandDetail:'/api/demand/detail',
     demandDel:'/api/demand/del',
     demandAdd:'/api/demand/add',
-    search:'/api/hotel/search'
+    search:'/api/hotel/search',
+    roomIndex:'/api/room/index'
    },
    collection:{
     collectionLists:'/api/collection/lists',
@@ -67,7 +69,8 @@
     depositRule:'/api/config/deposit-rule',
     customerService:'/api/config/customer-service',
     customerPrivacy:'/api/config/customer-privacy',
-    customerInstructions:'/api/config/customer-instructions'
+    customerInstructions:'/api/config/customer-instructions',
+    earn:'/api/config/earn'
    },
    hotel:{
     index:'/api/hotel/index',
@@ -82,6 +85,7 @@
     reservation:'/api/hotel/reservation',  
     fee:'/api/hotel/fee',  
     orderAdd:'/api/order/add',  
+    urged:'/api/order/urged'
    },
    orderDetail:{
      cancel:'/api/order/cancel',

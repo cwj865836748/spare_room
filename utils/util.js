@@ -131,6 +131,9 @@ const checkPhone = (value) =>{
   return !(/^1[3456789]\d{9}$/.test(value))   
 }
 const turnImg = (html) =>{
+  if(!html){
+    return
+  }
   return html.replace(/\<img/g, '<img style="max-width:100%;height:auto"')
 }
 const circleImg=(ctx, img, width , heigth , x ,y )=> {

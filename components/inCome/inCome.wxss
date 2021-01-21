@@ -19,7 +19,6 @@
   font-size: 26rpx;
   color: rgba(51, 51, 51, 0.5);
   letter-spacing: 2rpx;
-  margin-left: 20rpx;
 }
 
 .recommendOne {

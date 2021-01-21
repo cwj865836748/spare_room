@@ -1,5 +1,6 @@
 <!--pages/recommend/recommend.wxml-->
 <wxs src="../../wxs/filter.wxs" module="filter" />
+<import src="../../wxParse/wxParse.wxml" />
 <navbar title="推荐" back="{{false}}">
 
 	<view class="recommendHead">
@@ -22,9 +23,9 @@
 					<view class="cardMember">
 						<image mode="widthFix" src="{{item.imageUrl}}"
 							class="slide-image {{swiperIndex == index ? 'zoom-in' : 'zoom-out'}}" />
-						<view class="cardMemberName flex-y-center"
-							style="padding-left:{{userMemberInfo.info.level==index&&userMemberInfo.info.level!=0?'60rpx':''}}">
-							<view>尊贵的会员</view>
+						<view class="cardMemberName flex-xy-center"
+							style="padding-left:{{userMemberInfo.info.level==index&&userMemberInfo.info.level!=0?'60rpx':'0rpx'}}">
+							<view style="display:{{userMemberInfo.info.level==index&&userMemberInfo.info.level!=0?'block':'none'}}">当前尊贵的</view>
 							<!--普通用户-->
 							<view class="flex-xy-center pinkBg" wx:if="{{index==0}}">
 								<image src="/images/recommend/domestic_consumer@2x.png"></image>
@@ -67,7 +68,7 @@
 										track-color="rgba(255,255,255,0.2)" />
 									<view class="cardLineStatus">
 										<text>{{userMemberInfo.info.recommended}}/{{item.recommend}}</text>
-										<text wx:if="{{index==5}}">(人)当前为最高等级</text>
+										<text wx:if="{{index==5}}">(人)最高等级</text>
 										<text wx:elif="{{userMemberInfo.info.recommended>=item.recommend}}">(元)满足条件升至{{item.remark}}</text>
 										<text wx:else>(人)可升级{{item.remark}}</text>
 									</view>
@@ -78,7 +79,7 @@
 										track-color="rgba(255,255,255,0.2)" />
 									<view class="cardLineStatus">
 										<text>{{userMemberInfo.info.consumption_amount}}/{{item.money}}</text>
-										<text wx:if="{{index==5}}">(元)当前为最高等级</text>
+										<text wx:if="{{index==5}}">(元)最高等级</text>
 										<text
 											wx:elif="{{userMemberInfo.info.consumption_amount>=item.money}}">(元)满足条件升至{{item.remark}}</text>
 										<text wx:else>(元)可升级{{item.remark}}</text>
@@ -118,11 +119,11 @@
 
 								<view class="{{index==4?'whiteGoldBgSize':''}}">邀请详情</view>
 							</navigator>
-							<view class="cardTitleOne flex-col flex-y-center" bindtap="showDoMore">
+							<view class="cardTitleOne flex-col flex-y-center" bindtap="showDoMore" data-show="{{true}}">
 
 								<image src='/images/recommend/{{index==4?"more@2x":"more_white@2x"}}.png'></image>
 
-								<view class="{{index==4?'whiteGoldBgSize':''}}">更多</view>
+								<view class="{{index==4?'whiteGoldBgSize':''}}">赚钱攻略</view>
 							</view>
 						</view>
 					</view>
@@ -181,11 +182,15 @@
 	<!--分享弹框-->
 	<include src="/components/wxActionSheet/wxActionSheet.wxml" />
 	<van-dialog use-slot show="{{ moreShow }}" show-confirm-button="{{false}}" width="690rpx"
-		custom-style="border-radius: 16rpx;" closeOnClickOverlay>
+		custom-style="border-radius: 16rpx;" closeOnClickOverlay bind:close="showDoMore" data-show="{{false}}">
 		<view class="myDialog flex-xy-center">
-			<text>功能开发中 , 敬请期待</text>
-			<image src="/images/close_black@2x.png" bindtap="closeDoMore"></image>
+			<image src="/images/close_black@2x.png" bindtap="showDoMore" data-show="{{false}}"></image>
 		</view>
+		<scroll-view style="max-height:500px" scroll-y>
+      <view class="bookRoomContent">
+        <template is="wxParse" data="{{wxParseData:earn.nodes}}" />
+      </view>
+    </scroll-view>
 	</van-dialog>
 	<canvas style="width:375px;height:496px;position:fixed;top:9999px;" canvas-id="mycanvas" />
 	<canvas style="width:632px;height:506px;position:fixed;top:9999px;" canvas-id="mycanvass" />

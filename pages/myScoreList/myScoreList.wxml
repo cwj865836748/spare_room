@@ -1,0 +1,32 @@
+<!--pages/myScore/myScore.wxml-->
+<wxs src="../../wxs/filter.wxs" module="filter" />
+<navbar title="我的积分" navbarType='3' headColor="transparent" titleColor="#fff" bind:onReachBottom="onReachBottom">
+	<view class="scoreDetail por">
+		<image src="../../images/bg@2x.png" class="scoreDetailBg"></image>
+		<view class="scoreHead">
+			<view>积分</view>
+			<view class="flex-x-between flex-y-center score">
+				<text>{{myScore}}</text>
+			</view>
+		</view>
+		<view class="scoreList">
+			<view class="scoreListTitle por">积分记录</view>
+			<block wx:for="{{scoreList}}" wx:key="index">
+				<view class="scoreRecord flex-x-between flex-y-center">
+					<view class="scoreRecordLeft">
+						<view class="orderNumber">
+							<text>订单号</text>
+							<text>{{item.order_sn}}</text>
+						</view>
+						<view class="orderDate">{{filter.getTime2(item.create_time)}}</view>
+					</view>
+					<view class="scoreRecordRight {{item.in_out==1?'purpleSize':''}}">
+						{{item.in_out==1?'+':'-'}}{{item.score}}
+					</view>
+				</view>
+			</block>
+
+		</view>
+		<include src="/components/noData/noData.wxml" />
+	</view>
+</navbar>

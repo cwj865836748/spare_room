@@ -85,7 +85,7 @@ Page({
     const end_time=item.start_time*1000>=today?item.end_time*1000:today+86400000
     App.globalData.defaultDate=[start_time,end_time]
     wx.navigateTo({
-      url: `/pages/hotelDetail/hotelDetail?id=${item.hotel_id}&isInvite=true`,
+      url: `/pages/hotelDetail/hotelDetail?id=${item.hotel_id}`,
     })
   },
   /**
@@ -137,6 +137,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '"这旅"-高端酒店，低价预定。',
+      path: `/pages/index/index`,
+    }
   }
 })

@@ -1,49 +1,53 @@
 <!--components/AppealStatus/AppealStatus.wxml-->
 <!--申诉-->
-<van-dialog use-slot show="{{ isAppealShow }}" show-confirm-button="{{false}}" width="690rpx" catchtouchmove='preventTouchMove'   closeOnClickOverlay>
+<van-dialog use-slot show="{{ isAppealShow }}" show-confirm-button="{{false}}" width="690rpx"
+	catchtouchmove='preventTouchMove' closeOnClickOverlay>
 	<view class="customAppealTitle flex-x-center" bindtap="closeResult">
 		<text>{{appealDetail.type==1?'客户申诉':(appealDetail.type==2?'商家申诉':'平台申诉')}}</text>
 		<image src="/images/delete@2x.png"></image>
 	</view>
-	
-		<view class="appealStatus flex-y-center flex-x-between">
+	<!--申述状态只有商家和用户有-->
+	<scroll-view scroll-y style="max-height:460px">
+		<view class="appealStatus flex-y-center flex-x-between" wx:if="{{appealDetail.type==1||appealDetail.type==2}}">
 			<text class='appealSize'>申诉状态:</text>
-			<text class="appealSize2" wx:if="{{appealDetail.status==3}}">已赔偿</text>
+			<text class="appealSize2" wx:if="{{appealDetail.status==3&&appealDetail.type==1}}">已赔偿</text>
+			<text class="appealSize2" wx:if="{{appealDetail.status==3&&appealDetail.type==2}}">已扣款</text>
 			<text class="appealSize2" wx:if="{{appealDetail.status==1}}">已通过</text>
 			<text class="appealSize6" wx:if="{{appealDetail.status==0}}">处理中···</text>
 			<text class="appealSize7" wx:if="{{appealDetail.status==2}}">已驳回</text>
 		</view>
-	
+
 		<view class="appealResult" wx:if="{{appealDetail.status==3}}">
 			<view class="appealSize" style="padding: 0rpx 30rpx 0 28rpx;">申诉结果</view>
 			<view class="appealResultDetail">
-				<view class="appealResultOne" wx:if="{{depositMoney}}">
+				<view class="appealResultOne">
 					<view class="appealSize3">押金</view>
 					<view class="flex-x-between flex-y-center">
 						<view>
 							<text class="appealSize5">￥</text>
 							<text class="appealSize4">{{depositMoney}}</text>
 						</view>
-						<view wx:if="{{appealDetail.type==1}}">
-							<text class="appealSize2">已退款</text>
+						<view>
+							<text class="appealSize2">{{appealDetail.type==1?'已退款':'已赔偿'}}</text>
 						</view>
-						<view wx:else>
-							<text class="appealSize9">扣款￥{{appealDetail.deposit_money}}</text>
+						<!-- <view wx:else>
+						<text class="appealSize9">扣款￥{{appealDetail.deposit_money}}</text>
 
-							<text class="appealSize2">已退款</text>
-							<text class="appealSize2">￥{{depositMoney-appealDetail.deposit_money}}</text>
-						</view>
-						
+						<text class="appealSize2">已退款</text>
+						<text class="appealSize2">￥{{depositMoney-appealDetail.deposit_money}}</text>
+					</view> -->
+
 					</view>
 				</view>
-				<view class="appealResultOne" wx:if="{{appealDetail.type==1}}">
+				<view class="appealResultOne">
 					<view class="appealSize3">赔偿</view>
 					<view class="flex-x-between flex-y-center">
 						<view>
 							<text class="appealSize5">￥</text>
-							<text class="appealSize4">{{appealDetail.compensate_money}}</text>
+							<text
+								class="appealSize4">{{appealDetail.type==1?appealDetail.compensate_money:appealDetail.user_money}}</text>
 						</view>
-						<view class="appealSize2">已打款到账户收益</view>
+						<view class="appealSize2">{{appealDetail.type==1?'已打款到账户收益':'已赔偿到对方账户'}}</view>
 					</view>
 				</view>
 			</view>
@@ -54,22 +58,22 @@
 				{{appealDetail.fail_reason}}
 			</view>
 		</view>
-	
-	<view class="appealWhy" wx:if="{{appealDetail.status!=2}}">
-		<view class="appealSize" style="padding: 0rpx 0rpx 20rpx 28rpx;">申诉理由</view>
-		<view class="appealWhyDetail flex-y-center">
-			{{appealDetail.content}}
+
+		<view class="appealWhy">
+			<view class="appealSize" style="padding: 0rpx 0rpx 20rpx 28rpx;">申诉理由</view>
+			<view class="appealWhyDetail flex-y-center">
+				{{appealDetail.content}}
+			</view>
 		</view>
-	</view>
-	
-	<view class="appealWJ">
-		<view class="appealSize" style="padding-bottom: 30rpx;">文件材料</view>
-		<view class="picList flex-wrap">
-			<block wx:for="{{appealDetail.img_url}}" wx:key="index">
-				<view class="picDetail">
-					<image mode="aspectFill" src="{{item}}" catchtap="previewImg" data-current="{{item}}"></image>
-				</view>
-			</block>
+		<view class="appealWJ">
+			<view class="appealSize" style="padding-bottom: 30rpx;">文件材料</view>
+			<view class="picList flex-wrap">
+				<block wx:for="{{appealDetail.img_url}}" wx:key="index">
+					<view class="picDetail">
+						<image mode="aspectFill" src="{{item}}" catchtap="previewImg" data-current="{{item}}"></image>
+					</view>
+				</block>
+			</view>
 		</view>
-	</view>
+	</scroll-view>
 </van-dialog>

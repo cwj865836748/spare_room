@@ -10,14 +10,17 @@ App({
     defaultDate:[Date.now(),Date.now()+86400000],
     //城市 默认厦门
     defaultCity:{id: 1183, name: "厦门市", first: "X", lat: "24.490474", lng: "118.11022"},
+    //用户默认地方
+    userLocation:{id: 1183, name: "厦门市", first: "X", lat: "24.490474", lng: "118.11022"},
     defaultKeyWords:'',
     historySearchList:[],
     areaList:[],
-    roomList:[],
+    // roomList:[],
     windowWidth:null,
     windowHeight:null,
     userInfo:{},
-    dataCodeList:[]
+    dataCodeList:[],
+    isHomeUrl:null
   },
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
@@ -51,33 +54,26 @@ App({
   },
   getNavBar(){
     let menuButtonObject = wx.getMenuButtonBoundingClientRect();//获取胶囊按钮信息
-    getSystemInfo().then(res=>{
-    const {windowWidth,windowHeight} = res
-    let statusBarHeight = res.statusBarHeight//状态栏高度
+    const {statusBarHeight,system,windowWidth,windowHeight} = wx.getSystemInfoSync() //状态栏高度
     let navHeight=0
     //机型适配 如果获取不到胶囊按钮信息手动赋值
     if(menuButtonObject){
       let navTop = menuButtonObject.top//胶囊按钮与最顶部的距离
        navHeight = statusBarHeight + menuButtonObject.height + (navTop - statusBarHeight)*2 //导航高度
     }else{
-      navHeight=(res.system.indexOf('iOS') > -1?44:48)+statusBarHeight
+      navHeight=(system.indexOf('iOS') > -1?44:48)+statusBarHeight
     }
     let navBar={
       navHeight,
       statusBarHeight
     }
-    this.globalData.navBar= navBar
-    this.globalData.windowWidth= windowWidth
-    this.globalData.windowHeight= windowHeight
+    this.globalData= {...this.globalData,navBar,windowWidth,windowHeight}
     if (this.userInfoReadyCallback) {
       this.userInfoReadyCallback(navBar)
     }
-  }).catch(err=>{
-    console.log(err)
-  })
   },
   getCitys(){
-    request({url:api.config.cityList}).then(res=>{
+    request({url:api.config.cityList,isHomeUrl:true}).then(res=>{
       const indexList=[]
       const cityList = res.data.list.reduce((pre,next)=>{
         let target=pre.find(v=>v.first==next.first)
@@ -91,23 +87,22 @@ App({
           pre.push({first:next.first,list})
         }
         return pre
-      },[])
-       let cityData = {
+      },[]) 
+       this.globalData.cityData= {
         indexList,cityList
        }
-       this.globalData.cityData= cityData
     })
   },
    //获取行政区和房型
    getAreaAndRoom(){
      return new Promise ((reslove,reject)=>{
       const {defaultCity} = this.globalData
-      const promise = [api.index.area,api.index.room].map(item=>{
-        return request({url:item,header:{cityid:defaultCity.id}})
+      const promise = [api.index.area].map(item=>{
+        return request({url:item,header:{cityid:defaultCity.id},isHomeUrl:true})
       })
      Promise.all(promise).then(res=>{
         this.globalData.areaList=res[0].data.list
-        this.globalData.roomList=res[1].data.list
+        // this.globalData.roomList=res[1].data.list
         reslove(true)
       })
      })

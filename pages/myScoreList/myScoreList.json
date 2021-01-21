@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
-    "van-dialog": "@vant/weapp/dialog/index"
+    "noData":"/components/noData/noData"
   },
   "disableScroll":true
 }

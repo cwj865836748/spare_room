@@ -2,6 +2,7 @@
 @import '/components/jumpService/jumpService.wxss';
 @import "../../wxParse/wxParse.wxss";
 @import "/components/roomDetail/roomDetail.wxss";
+
 .orderDetail {
   padding: 204rpx 30rpx 62rpx;
   background: #F9F9F9;
@@ -29,7 +30,8 @@
 .orderStatus>image {
   width: 36rpx;
   height: 36rpx;
-  margin-left: 10rpx;
+  padding:20rpx;
+  box-sizing: content-box;
 }
 
 .orderStatus>text:nth-child(2) {
@@ -58,6 +60,7 @@
   letter-spacing: 1rpx;
   font-weight: bold;
 }
+
 .purpleSize {
   color: #ffffff;
   letter-spacing: 1rpx;
@@ -114,6 +117,7 @@
   letter-spacing: 1rpx;
   white-space: nowrap;
 }
+
 .van-count-down {
   color: #c12306 !important;
   padding-top: 4rpx !important;
@@ -137,6 +141,7 @@
   color: #7a0dcb;
   letter-spacing: 1rpx;
   font-size: 28rpx;
+  margin-right: 24rpx;
 }
 
 .orderShow>.orderBtn>.appealBtn {
@@ -157,9 +162,11 @@
   color: #7a0dcb;
   letter-spacing: 1rpx;
 }
+
 .redCircle {
   position: relative;
 }
+
 .redCircle::after {
   content: "";
   position: absolute;
@@ -171,7 +178,8 @@
   border-radius: 50%;
 }
 
-.orderShow>.orderBtn>view,navigator {
+.orderShow>.orderBtn>view,
+navigator {
   margin-right: 24rpx;
 }
 
@@ -187,7 +195,7 @@
   height: 260rpx;
   width: 100%;
   background: #ffffff;
-  border-radius: 8rpx;
+  /* border-radius: 8rpx; */
   box-shadow: 0rpx 6rpx 20rpx 0rpx rgba(77, 0, 168, 0.06);
   margin-top: 20rpx;
   padding: 30rpx;
@@ -228,7 +236,7 @@
   padding: 22rpx 26rpx 20rpx;
   color: #999999;
   font-size: 26rpx;
-  margin: 0 22rpx 0 20rpx;
+  margin: 2rpx 22rpx 0 20rpx;
 
 }
 
@@ -317,8 +325,9 @@
   letter-spacing: 2rpx;
   font-weight: bold;
   position: relative;
-  
+
 }
+
 .aboutInvoiceSize {
   letter-spacing: 1rpx;
   font-size: 32rpx;
@@ -443,6 +452,7 @@
 .feeCoupon>view {
   margin-bottom: 26rpx;
 }
+
 .feeCoupon>view:last-child {
   margin-bottom: 0rpx;
 }
@@ -507,7 +517,7 @@
 .stepOne>.stepContent>text {
   position: absolute;
   top: -10rpx;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 
 }
 
@@ -523,7 +533,7 @@
 }
 
 .feeExpolre {
-  padding:26rpx 0;
+  padding: 26rpx 0;
 
 }
 
@@ -536,6 +546,7 @@
   margin-bottom: 24rpx;
   position: relative;
 }
+
 .feeExpolreTitle>image {
   width: 30rpx;
   height: 30rpx;
@@ -543,10 +554,99 @@
   top: 8rpx;
   right: 28rpx;
 }
+
 .feeExpolreContent {
   letter-spacing: 1rpx;
   color: #333333;
   line-height: 46rpx;
   font-size: 28rpx;
   padding: 0 30rpx;
+}
+
+.cancelRule {
+  margin: 0 30rpx;
+  height: 96rpx;
+  background: #484848;
+  border-radius: 0rpx 0rpx 8rpx 8rpx;
+  color: #ffffff;
+  padding: 0 30rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.cancelRule>.cancalTitle {
+  font-size: 26rpx;
+  letter-spacing: 2rpx;
+  margin-right: 34rpx;
+}
+
+.cancelRule>.cancalTitle>image {
+  width: 31rpx;
+  height: 31rpx;
+  margin-right: 2rpx;
+}
+
+.cancelRule>.rule {
+  width: 388rpx;
+  text-align: left;
+  font-size: 24rpx;
+  position: relative;
+
+}
+
+.cancelRule>.rule::before {
+  content: '';
+  width: 0rpx;
+  height: 60rpx;
+  border: 2rpx dashed #a8a8a8;
+  position: absolute;
+  left: -21rpx;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.roomTypeCon {
+  height: 84rpx;
+  background: #ffffff;
+  /* border-radius: 8rpx; */
+  width: 100%;
+  padding-left: 30rpx;
+  font-size: 24rpx;
+  color: #999999;
+  /* margin-top: 24rpx; */
+  z-index: 1;
+  position: relative;
+}
+
+.roomTypeCon>text {
+  margin-right: 52rpx;
+  position: relative;
+}
+.roomTypeCon>text::after {
+  content: '';
+  position: absolute;
+  width: 2rpx;
+  height: 20rpx;
+  background: #cccccc;
+  right: -23rpx;
+  top: 6rpx;
+}
+.roomTypeCon>text:last-child::after {
+  content: '';
+  position: relative;
+  width: 0;
+  height: 0;
+  right: 0;
+  top: 0;
+}
+.roomTypeCon>text:last-child  {
+  /* max-width: 250rpx; */
+  margin-right: 0;
+}
+.roomChannel {
+  font-size: 16rpx;
+  padding: 2rpx;
+  border-radius: 8rpx;
+  background: #EEF4FE;
+  color: #8799B6;
+  margin-left: 10rpx;
 }

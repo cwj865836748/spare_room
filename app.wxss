@@ -18,6 +18,7 @@ textarea, navigator, audio, image, video, map, canvas, contact-button {
  }
  image{
    width: 100%;
+   max-width: 100%;
  }
  .flex {
   display: -webkit-box;
@@ -205,4 +206,12 @@ textarea, navigator, audio, image, video, map, canvas, contact-button {
 .chooseOne {
   border: 2rpx solid #780acc !important;
   color: #780acc !important;
+}
+button {
+  background-color: transparent;
+  line-height: inherit;
+}
+
+button::after {
+  border: none
 }

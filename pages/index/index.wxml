@@ -39,7 +39,7 @@
     </view>
     <view class="search flex-y-center">
       <navigator class="flex-grow-1" hover-class="none" url="/pages/keywordSearch/keywordSearch">
-        <van-field value="{{ defaultKeyWords }}" placeholder="关键词/位置/品牌/酒店名" border="{{ false }}" disabled clearable />
+        <van-field value="{{ defaultKeyWords }}" placeholder="关键词/位置/集团/酒店名" border="{{ false }}" disabled clearable />
       </navigator>
       <image src="/images/text_delete@2x.png" class="deteleIcon" wx:if="{{defaultKeyWords}}" catchtap="cleanSearch" />
     </view>
@@ -55,6 +55,12 @@
       </view>
     </view>
   </view>
+  <van-dialog use-slot show="{{ isFreeze }}" showConfirmButton="{{false}}">
+    <view class="freeze flex-xy-center">您的账户已被冻结,暂无法使用,如有任何疑问请联系客服</view>
+    <button open-type='contact' class="freezeBtn" hover-class="none">
+      联系客服
+    </button>
+  </van-dialog>
   <!-- 日历弹窗 -->
   <calendar calendarShow="{{calendarShow}}" bind:closeCalendar="closeCalendar" />
 </view>

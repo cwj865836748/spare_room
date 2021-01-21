@@ -48,7 +48,7 @@
    var year = date.getFullYear()
    var month = date.getMonth() + 1
    var day = date.getDate()
-   return year + '-' + month + '-' + day;
+   return [year, month, day].map(formatNumber).join('-')
  }
  var getTime3 = function (timestamp) {
    var date = getDate(parseInt(timestamp * 1000));
@@ -119,11 +119,11 @@
      case 0:
        return '无早';
      case 1:
-       return '单份早餐';
+       return '1份早餐';
      case 2:
-       return '双份早餐';
-     case 3:
-       return '免费早餐';
+       return '2份早餐';
+       //  case 3:
+       //    return '免费早餐';
      default:
        return '请选择';
    }
@@ -209,9 +209,9 @@
  var network = function (wifi) {
    switch (wifi) {
      case 1:
-       return "WIFI免费"
+       return "免费WIFI"
      case 2:
-       return "优先宽带免费"
+       return "收费WIFI"
      case 3:
        return "无网络"
    }
@@ -239,9 +239,9 @@
  var canlcelRule = function (type) {
    switch (type) {
      case 0:
-       return "入住前免费取消，入住当天不可取消"
+       return "订单确认后，入住前均可免费取消"
      case 1:
-       return "下单之后不可取消"
+       return "订单一经确认后不可取消"
      case 2:
        return "入住前1天18点前免费取消，18点后收取10%违约金取消"
    }
@@ -379,6 +379,23 @@
    content = content.replace(reg2, '')
    return content
  }
+ var bedType = function (type) {
+   var type = parseInt(type)
+   switch (type) {
+     case 1:
+       return '大床房'
+     case 2:
+       return '双床房'
+     case 3:
+       return '多床房'
+     case 4:
+       return '大/双床房'
+     case 5:
+       return '单人床房'
+     case 6:
+       return '单/双床房'
+   }
+ }
  module.exports = {
    orderPhone: orderPhone,
    orderMinutes: orderMinutes,
@@ -407,5 +424,6 @@
    getCardHead: getCardHead,
    levelClass: levelClass,
    greenFee: greenFee,
-   symbolSubstitution: symbolSubstitution
+   symbolSubstitution: symbolSubstitution,
+   bedType: bedType
  };

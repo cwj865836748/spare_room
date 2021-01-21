@@ -13,7 +13,7 @@
 				</view> -->
 				<swiper class="swiperAll" indicator-dots="true" indicator-active-color="#FFFFFF"
 					indicator-color="rgba(255,255,255,0.6)">
-					<block wx:for="{{roomDetail.img_url}}" wx:key="index">
+					<block wx:for="{{roomDetail.hotel_img||roomDetail.img_url}}" wx:key="index">
 						<swiper-item>
 							<image src="{{item}}" class="swiperImage"></image>
 						</swiper-item>
@@ -23,36 +23,38 @@
 					<text>{{roomDetail.room_name}}</text>
 					<view class='showBedDetail'>
 						<view class="bedEq">
-							<view class="detail flex-wrap flex-x-between">
-								<view class="flex-y-center flex-x-start">
-									<image src="/images/double_bed@2x.png"></image>
-									<text>{{roomDetail.bed_type}}</text>
-								</view>
-								<view class="flex-y-center flex-x-start">
-									<image src="/images/no_smoking@2x.png"></image>
-									<text>{{roomDetail.is_smoke}}</text>
-								</view>
-								<view class="flex-y-center flex-x-start text-more-single">
+							<view class="detail flex-wrap">
+								<view class="flex-y-center">
 									<image src="/images/square@2x.png"></image>
-									<text>{{roomDetail.area}}平方米</text>
+									<text>{{roomDetail.area?roomDetail.area:'暂无信息'}}</text>
 								</view>
-								<view class="flex-y-center flex-x-start">
-									<image src="/images/window@2x.png"></image>
-									<text>{{roomDetail.is_window?"有窗户":"无窗户"}}</text>
-								</view>
-								<view class="flex-y-center flex-x-start">
+								<view class="flex-y-center">
 									<image src="/images/floor@2x.png"></image>
-									<text>{{roomDetail.floor}}层</text>
+									<text>{{roomDetail.floor?roomDetail.floor+'层':'暂无信息'}}</text>
 								</view>
-								<view class="flex-y-center flex-x-start">
+								<view class="flex-y-center">
+									<image src="/images/no_smoking@2x.png"></image>
+									<text>{{roomDetail.is_smoke?roomDetail.is_smoke:'暂无信息'}}</text>
+								</view>
+								<view class="flex-y-center">
 									<image src="/images/wifi@2x.png"></image>
-									<text>{{filter.network(roomDetail.network)}}</text>
+									<text>{{roomDetail.network?roomDetail.network:'暂无信息'}}</text>
+								</view>
+								<view class="flex-y-center">
+									<image src="/images/window@2x.png"></image>
+									<text>{{roomDetail.is_window?roomDetail.is_window:'暂无信息'}}</text>
+								</view>
+							</view>
+							<view class="detail">
+								<view class="flex-y-center">
+									<image src="/images/double_bed@2x.png"></image>
+									<text>{{roomDetail.bed_type?roomDetail.bed_type:'暂无信息'}}</text>
 								</view>
 							</view>
 						</view>
-						<view class="bedSort">
+						<view class="bedSort" wx:if="{{roomDetail.is_add_bed}}">
 							<text>费用政策</text>
-							<view>关于加床，该房型{{roomDetail.is_window?'可加床':'不可加床'}}</view>
+							<view>关于加床，该房型{{roomDetail.is_add_bed}}</view>
 						</view>
 						<block wx:for="{{roomDetail.list}}" wx:key="index" wx:for-item="room">
 							<view class="bedSort">

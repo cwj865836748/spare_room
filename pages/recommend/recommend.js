@@ -10,7 +10,7 @@ import {
 import {
   circleImg
 } from '../../utils/util.js'
-
+let WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -82,14 +82,15 @@ Page({
       shareShow
     })
   },
-  showDoMore() {
-    this.setData({
-      moreShow: true
+
+  showDoMore(e) {
+    const {show:moreShow} =e.currentTarget.dataset
+    moreShow&&request({url:api.config.earn}).then(res=>{
+      WxParse.wxParse('earn', 'html', res.data.info, this, 5)
     })
-  },
-  closeDoMore() {
+    moreShow ? wx.hideTabBar() : wx.showTabBar()
     this.setData({
-      moreShow: false
+      moreShow
     })
   },
 
@@ -311,7 +312,7 @@ Page({
     })
     wx.showTabBar()
     return {
-      title: '嘿！朋友，送您一张订房金卡，快领取。',
+      title: '嘿！送您一张金卡，订高端酒店非常划算，快领取。',
       path: `/pages/index/index?parentId=${userId}`,
       imageUrl: this.data.imageUrl
     }

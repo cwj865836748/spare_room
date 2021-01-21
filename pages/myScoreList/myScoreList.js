@@ -1,4 +1,4 @@
-// pages/todayIncome/todayIncome.js
+// pages/myScore/myScore.js
 import api from '../../request/api.js'
 import {request} from '../../request/index.js'
 Page({
@@ -7,33 +7,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-    recommendRecordList:[],
+    scoreList:50,
+    myScore:0,
     page:1,
     is_next:false,
-    noData:false,
+    noData:false
   },
-  getTodatIncome(){
-    request({url:api.moneyLog.todayLists,data:{page:this.data.page}}).then(res=>{
-      this.setData({
-        recommendRecordList:[...res.data.list,...this.data.recommendRecordList],
-        is_next:res.data.is_next
-      },()=>{
-        this.isNoData()
-      })
-    })
-  },
-  isNoData(){
-    !this.data.recommendRecordList.length&&this.setData({
-      noData:true
-    })
-},
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getTodatIncome()
+    this.setData({
+      myScore:options.score
+    })
+    this.getScoreLists()
   },
 
+  //积分记录
+  getScoreLists(){
+    request({url:api.mine.scoreLists,data:{page:this.data.page}}).then(res=>{
+       this.setData({
+        scoreList:[...res.data.list,...this.data.scoreList],
+        is_next:res.data.is_next
+       },()=>{
+        !this.data.scoreList.length&& this.setData({
+          noData:true
+          })
+       })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -75,7 +78,7 @@ Page({
   onReachBottom: function () {
     if(this.data.is_next){
       this.data.page++
-      this.getTodatIncome()
+      this.getScoreLists()
     }
   },
 
@@ -87,6 +90,5 @@ Page({
       title: '"这旅"-高端酒店，低价预定。',
       path: `/pages/index/index`,
     }
-
   }
 })

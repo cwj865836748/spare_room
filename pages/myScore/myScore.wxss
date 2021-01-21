@@ -157,7 +157,7 @@
 
 .actionContent {
 
-  padding: 0 36rpx 0 38rpx;
+  padding: 0 36rpx 10rpx 38rpx;
   font-size: 28rpx;
   color: #666666;
   letter-spacing: 1rpx;

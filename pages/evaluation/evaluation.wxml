@@ -16,9 +16,9 @@
 			</view>
 		</view>
 		<view class="appealFont">评价</view>
-		<van-field value="{{ content }}" wx:if="{{!isShow}}"  type="textarea" placeholder="为了提高服务质量,请认证填写一经提交,无法更改" border="{{ false }}" bind:change="onChange" data-key="content" />
-		<view wx:else class="formTextarea">{{content?content:'为了提高服务质量,请认证填写一经提交,无法更改'}}</view>
-		<view class="appealFont">支付凭证（仅支持.jpg等格式）</view>
+		<van-field value="{{ content }}" wx:if="{{!isShow}}"  type="textarea" placeholder="为了提高服务质量,请认真填写一经提交,无法更改" border="{{ false }}" bind:change="onChange" data-key="content" />
+		<view wx:else class="formTextarea">{{content?content:'为了提高服务质量,请认真填写一经提交,无法更改'}}</view>
+		<view class="appealFont">提交图片</view>
 		<view class="picList flex-wrap">
 			<block wx:for="{{img_url}}" wx:key="index">
 				<view class="picDetail">

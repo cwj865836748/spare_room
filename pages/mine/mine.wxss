@@ -211,12 +211,20 @@
   margin-top: 64rpx;
 }
 
-button {
-  background-color: transparent;
-  line-height: inherit;
 
+.toAuth {
+  height: 180rpx;
+  font-size: 28rpx;
+  letter-spacing: 2rpx;
+  color: #333333;
+  padding: 0 20rpx;
+  line-height: 50rpx;
+  text-align: center;
 }
 
-button::after {
-  border: none
+.toAuthBtn {
+  color: #5302ad;
+  height: 90rpx;
+  font-size: 28rpx;
+  line-height: 80rpx;
 }

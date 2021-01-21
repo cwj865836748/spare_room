@@ -21,7 +21,7 @@ Page({
     isCancleOrderShow:false,
     isdeleteOrderShow:false,
     depositMoney:0,
-    triggered: false,
+    triggered: false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -102,9 +102,11 @@ Page({
     })
   },
   appealResult(e){
-    const {status,id:orderId,depositMoney} = e.currentTarget.dataset
+    const {status,id:orderId,depositMoney,index} = e.currentTarget.dataset
+    console.log(index)
     this.setData({
-      orderId,depositMoney
+      orderId,depositMoney,
+      [`orderList[${index}].is_read`]:0
     })
     this.selectComponent('#appeal').getAppealDetail(status)
   },
@@ -136,7 +138,17 @@ Page({
       this._freshing = false
     }, 3000)
   },
-
+  toReminders(e){
+    const {id:order_id} = e.currentTarget.dataset
+   request({url:api.order.urged,data:{order_id}}).then(res=>{
+      if(res.code==200){
+        wx.showToast({
+          title: '您已催单成功，请耐心等待。',
+          icon: 'none',
+        })
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -181,6 +193,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '这旅满天下，伴君走天涯',
+      path: `/pages/index/index`,
+    }
   }
 })

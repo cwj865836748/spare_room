@@ -57,6 +57,14 @@
   font-size: 26rpx;
   letter-spacing: 1rpx;
 }
+.roomDate>.roomType>text {
+  font-size: 16rpx;
+  padding: 2rpx;
+  border-radius: 8rpx;
+  background: #EEF4FE;
+  color: #8799B6;
+  margin-left: 10rpx;
+}
 
 .roomDate>.roomTypeDetail {
   height: 84rpx;
@@ -64,7 +72,7 @@
   border-radius: 8rpx;
   width: 100%;
   padding-left: 30rpx;
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #999999;
   margin-top: 24rpx;
 }
@@ -73,11 +81,6 @@
   margin-right: 52rpx;
   position: relative;
 }
-
-.roomDate>.roomTypeDetail>text:last-child {
-  margin-right: 0;
-}
-
 .roomDate>.roomTypeDetail>text::after {
   content: '';
   position: absolute;
@@ -86,6 +89,18 @@
   background: #cccccc;
   right: -23rpx;
   top: 6rpx;
+}
+.roomDate>.roomTypeDetail>text:last-child::after {
+  content: '';
+  position: relative;
+  width: 0;
+  height: 0;
+  right: 0;
+  top: 0;
+}
+.roomDate>.roomTypeDetail>text:last-child  {
+  /* max-width: 250rpx; */
+  margin-right: 0;
 }
 
 .cancelRule {
@@ -124,8 +139,8 @@
   border: 2rpx dashed #a8a8a8;
   position: absolute;
   left: -21rpx;
-  top: -14rpx;
-
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .bookRoom {
@@ -651,6 +666,7 @@ letter-spacing: 1rpx;
   color: #666666;
   letter-spacing: 1rpx;
 }
+
 .feeSize3 {
   color: #ffbc00;
   margin-left: 16rpx;

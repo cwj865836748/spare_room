@@ -80,6 +80,10 @@
 							<text>早餐</text>
 							<text>{{filter.breakfastType(demandOneDetail.breakfast)}}</text>
 						</view>
+						<view class="actionMsgOne borderB2 flex-y-center">
+							<text>床型</text>
+							<text>{{demandOneDetail.bed_type_cate}}</text>
+						</view>
 						<view class="actionMsgOne flex-y-center">
 							<text>备注</text>
 							<text>{{demandOneDetail.remark}}</text>

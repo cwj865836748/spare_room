@@ -17,7 +17,6 @@
     "pages/cancleOrder/cancleOrder",
     "pages/orderDetail/orderDetail",
     "pages/Appeal/Appeal",
-    "pages/jump/jump",
     "pages/collect/collect",
     "pages/myScore/myScore",
     "pages/myScoreList/myScoreList",
@@ -30,7 +29,8 @@
     "pages/withdraw/withdraw",
     "pages/invitePicture/invitePicture",
     "pages/inComeDetail/inComeDetail",
-    "pages/softwareRule/softwareRule"
+    "pages/softwareRule/softwareRule",
+    "pages/authWx/authWx"
   ],
   "window":{
     "backgroundTextStyle":"light",

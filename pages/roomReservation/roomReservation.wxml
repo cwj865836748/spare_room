@@ -13,10 +13,16 @@
         <text>{{filter.getLiveDate(defaultDate).dateTitle2}}</text>
       </view>
       <view class="roomTitle text-more">{{roomBook.info.hotel_name}}</view>
-      <view class="roomType">{{roomBook.info.room_name}}</view>
+      <view class="roomType flex-y-center">
+        {{roomBook.info.room_name}}
+        <text wx:if="{{roomBook.info.channel==2}}">特殊房源</text>
+      </view>
       <view class="roomTypeDetail flex-y-center">
         <text>{{filter.breakfastType(roomBook.info.breakfast)}}</text>
-        <text>{{roomBook.info.bed_type}}</text>
+        <text>{{roomBook.info.is_smoke}}</text>
+        <text wx:if="{{roomBook.info.area}}">{{roomBook.info.area}}</text>
+        <text>{{filter.bedType(roomBook.info.bed_type_cate)}}</text>
+        <text wx:if="{{roomBook.info.is_treatment==2}}">不含行政待遇</text>
       </view>
     </view>
     <view class="cancelRule flex-y-center">
@@ -28,7 +34,7 @@
         {{filter.canlcelRule(roomBook.info.cancel_type)}}
       </view>
     </view>
-    <view class="bookRoom">
+    <view class="bookRoom" wx:if="{{roomBook.info.reservation_description}}">
       <view class="bookTitle flex-x-between">
         <view class="title flex-y-center">
           <image src="../../images/hotel_detail_attention2@2x.png"></image>
@@ -43,11 +49,11 @@
     <view class="bookMsg">
       <view class="bookmessage flex-y-center">
         <text>入住信息</text>
-        <text>姓名与证件保持一致</text>
+        <text>姓名需与证件保持一致</text>
       </view>
       <view class="roomChoose flex-y-center flex-x-between">
         <text class='roomDetailMsg'>房间数</text>
-        <van-stepper value="{{ bookQuery.room_number }}" data-key="room_number" bind:change="onChange" max="20" />
+        <van-stepper value="{{ bookQuery.room_number }}" disable-input data-key="room_number" bind:change="onChange" max="{{roomBook.min_room_number}}" bind:overlimit="overlimit"/>
       </view>
       <view class="roomPerson">
         <view class="roomChoose flex-y-center">
@@ -81,7 +87,7 @@
         </view>
         <!-- <textarea wx:if="{{!dateTimePickerShow&&!bookDescriptionShow&&!coupleShow&&!feeShow&&!depositShow&&!bookStatusShow&&!bookStatusShow2}}" placeholder="因疫情期间,需备注填写户籍,感谢配合。" class="formTextarea"  maxlength='-1' value="{{bookQuery.remark}}" data-key="remark" bind:input="onChange"/>
             <view wx:else class="formTextarea">{{bookQuery.remark?bookQuery.remark:'因疫情期间，需要填写客人是户籍哪里人，感谢配合。'}}</view> -->
-        <van-field value="{{ bookQuery.remark }}" clearable placeholder="如您有特别要求,这旅需要和酒店联系,请您耐心等待!"
+        <van-field value="{{ bookQuery.remark }}" disabled clearable placeholder="如您有特别要求,这旅需要和酒店联系,请您耐心等待!"
           bind:change="onChange" data-key="remark" />
 
       </view>
@@ -125,7 +131,7 @@
                 <view class="interestThingsLeft">
                   <view class="interestTitle">
                     <text>{{item.name}}</text>
-                    <text>{{item.score}}/份</text>
+                    <text>{{item.score}}分/份</text>
                   </view>
                   <text class="interestPrice">价值￥{{item.worth}}</text>
                 </view>
@@ -194,7 +200,7 @@
         <text class="{{chooseCoupon?'couponActive':''}}" bindtap="tabCouple" data-show="{{true}}">可用优惠券</text>
         <text class="{{chooseCoupon?'':'couponActive'}}" bindtap="tabCouple" data-show="{{false}}">不可用优惠券</text>
       </view>
-      <van-radio-group value="{{ bookQuery.coupon_id }}" bind:change="onChange" data-key="coupon_id">
+      <van-radio-group value="{{ coupon_id }}" bind:change="onChange" data-key="coupon_id">
         <scroll-view scroll-y style="max-height:460px">
           <view class="couponContent">
 
@@ -259,17 +265,11 @@
           </view>
           <block wx:for="{{feeDetail.list}}" wx:key="index">
             <view class="flex-x-between m24">
-              <text class="feeSize2">{{filter.getTime2(item.day_time)}} {{filter.breakfast(item.breakfast)}}</text>
+              <text class="feeSize2">{{filter.getTime2(item.day_time)}} {{item.breakfast_name}}
+              </text>
               <text class="feeSize2">{{item.room_number}} x￥{{item.price}}</text>
             </view>
           </block>
-          <view class="flex-x-between m24">
-            <view class="feeSize2 flex-y-center" bindtap="toDepositShow" data-show="{{true}}">押金
-
-              <image src="/images/hotel_detail_doubt@2x.png" class="feeImage"></image>
-            </view>
-            <text class="feeSize2">￥{{feeDetail.detail.deposit}}</text>
-          </view>
           <!-- <view class="flex-x-between">
                 <text class="feeSize2">发票税点</text>
                 <text class="feeSize2">￥{{feeDetail.detail.tax}}</text>
@@ -291,8 +291,8 @@
         </view>
         <view class="feeBody" style="padding:22rpx 30rpx 16rpx;">
           <view class="flex-x-between m30">
-            <text class="feeSize1 fs30">原价</text>
-            <text class="feeSize2 fs30">￥{{feeDetail.detail.order_money}}</text>
+            <text class="feeSize1 fs30">房费</text>
+            <text class="feeSize2 fs30">￥{{feeDetail.detail.room_rate}}</text>
           </view>
           <view class="flex-x-between m26" wx:if="{{feeDetail.detail.continuous_discount}}">
             <text class="feeSize1 fs30">连住优惠</text>
@@ -305,9 +305,16 @@
             </view>
             <text class="feeSize2 fs30">-￥{{feeDetail.detail.vip_discount}}</text>
           </view>
-          <view class="flex-x-between m30" wx:if="{{feeDetail.detail.coupon_discount}}">
+          <view class="flex-x-between m26" wx:if="{{feeDetail.detail.coupon_discount}}">
             <text class="feeSize1 fs30">优惠券</text>
             <text class="feeSize2 fs30">-￥{{feeDetail.detail.coupon_discount}}</text>
+          </view>
+          <view class="flex-x-between m30">
+            <view class="feeSize1 fs30 flex-y-center" bindtap="toDepositShow" data-show="{{true}}">押金
+
+              <image src="/images/hotel_detail_doubt@2x.png" class="feeImage"></image>
+            </view>
+            <text class="feeSize2 fs30">￥{{feeDetail.detail.deposit}}</text>
           </view>
           <view
             class="flex-x-between feeTotal {{!feeDetail.detail.coupon_discount&&!feeDetail.detail.is_discount&&!feeDetail.detail.continuous_discount?borderNo:''}}">

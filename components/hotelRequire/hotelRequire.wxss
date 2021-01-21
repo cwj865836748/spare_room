@@ -104,7 +104,6 @@
 
 .searchInput>.select {
   width: 518rpx;
-
   background: #ffffff;
   border-radius: 8rpx;
   box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(0, 0, 0, 0.09);
@@ -112,11 +111,13 @@
   top: 100rpx;
   left: 160rpx;
   z-index: 103;
-  padding: 24rpx 34rpx 28rpx 28rpx;
+  padding: 24rpx 34rpx 28rpx 38rpx;
   font-size: 26rpx;
   color: #333333;
   letter-spacing: 2rpx;
   /* box-sizing: content-box; */
+  overflow: auto;
+  height: 280rpx;
 }
 
 .searchInput>.select>view {
@@ -199,7 +200,7 @@
 .myCellGroup {
   margin-bottom: 24rpx;
   border-radius: 8rpx;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .myBreadfast {

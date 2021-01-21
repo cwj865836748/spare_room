@@ -4,7 +4,7 @@
 		<view class="appealFont">申诉理由</view>
 		<van-field wx:if="{{!isShow}}" value="{{ content }}" type="textarea" placeholder="请输入您的申诉原因" border="{{ false }}" bind:change="onChange" />
 		<view wx:else class="formTextarea">{{content?content:'请输入您的申诉原因'}}</view>
-		<view class="appealFont">支付凭证（仅支持.jpg等格式）</view>
+		<view class="appealFont">提交图片</view>
 		<view class="picList flex-wrap">
 			<block wx:for="{{img_url}}" wx:key="index">
 				<view class="picDetail">

@@ -146,9 +146,9 @@
   margin: 6rpx 0 36rpx;
   border-bottom: 2rpx solid #f6f6f6;
   position: relative;
-  padding-right:70rpx;
+  padding-right: 70rpx;
   box-sizing: border-box;
-  z-index:0
+  z-index: 0
 }
 
 .home_center .buttonSearch {
@@ -160,6 +160,7 @@
   letter-spacing: 2rpx;
   border-radius: 8rpx;
 }
+
 .van-notice-bar {
   height: 60rpx !important;
 }
@@ -208,12 +209,14 @@
 .van-cell {
   padding: 0 !important;
 }
+
 .van-field__input--disabled {
   color: #333333 !important;
   font-size: 28rpx;
   font-weight: bold;
   letter-spacing: 2rpx;
 }
+
 .deteleIcon {
   width: 30rpx;
   height: 30rpx;
@@ -221,4 +224,21 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.freeze {
+  height: 180rpx;
+  font-size: 28rpx;
+  letter-spacing: 2rpx;
+  color: #333333;
+  padding: 0 20rpx;
+  line-height: 50rpx;
+  text-align: center;
+}
+
+.freezeBtn {
+  color: #5302ad;
+  height: 90rpx;
+  font-size: 28rpx;
+  line-height: 80rpx;
 }

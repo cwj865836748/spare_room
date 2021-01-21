@@ -32,7 +32,8 @@ Page({
       policy=turnImg(policy)
       content=turnImg(content)
       const hotelDetail ={...res[0].data.info,policy,content}
-      WxParse.wxParse('bookDescription','html',res[0].data.info.reservation_description,this,5)
+      const {reservation_description} = res[0].data.info
+      reservation_description&&WxParse.wxParse('bookDescription','html',reservation_description,this,5)
         this.setData({
           hotelDetail,
           hotelFacilitiesList:res[1].data.list
@@ -96,6 +97,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '"这旅"-高端酒店，低价预定。',
+      path: `/pages/index/index`,
+    }
   }
 })

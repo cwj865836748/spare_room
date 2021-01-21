@@ -1,6 +1,7 @@
 /* pages/recommend/recommend.wxss */
 @import "/components/wxActionSheet/wxActionSheet.wxss";
 @import "/components/inCome/inCome.wxss";
+@import "../../wxParse/wxParse.wxss";
 .recommendHead {
   margin: 30rpx 0 124rpx;
   text-align: center;
@@ -100,6 +101,7 @@
   margin-top: 8rpx;
   color: #ffffff;
   letter-spacing: 1rpx;
+  white-space: nowrap;
 }
 
 .cardAvatr>.cardLine>.cardLineLevel>.cardLineStatus>text:last-child {
@@ -346,11 +348,12 @@
 }
 
 .myDialog {
-  height: 198rpx;
+  height: 60rpx;
   font-size: 32rpx;
   letter-spacing: 1rpx;
   color: #333333;
   position: relative;
+  margin-bottom: 20rpx;
 }
 
 .myDialog>image {
@@ -359,4 +362,13 @@
   top: 28rpx;
   width: 30rpx;
   height: 30rpx;
+}
+.bookRoomContent {
+  padding:0 30rpx 30rpx;
+  color: #333333;
+  line-height: 46rpx;
+  letter-spacing: 1rpx;
+}
+.bookRoomContent image {
+  max-width: 100%!important;
 }

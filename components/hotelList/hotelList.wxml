@@ -1,38 +1,41 @@
-<scroll-view scroll-y="true" style="height:100%" bindscrolltolower="onReachBottom">
-	<view class="hotelList" bindtap="showSort" data-index="{{sortNumber}}">
-		<block wx:for="{{hotelList}}" wx:key="index">
-			<navigator url="/pages/hotelDetail/hotelDetail?id={{item.id}}&longitude={{query.longitude}}&latitude={{query.latitude}}" hover-class="none" class="hotelDetail flex">
-				<image src="{{item.img_url}}"></image>
-				<view class="hotelMsg flex-y-between">
-					<view class="">
-						<view class="name">
-							<text class="text-more ">{{item.name}}</text>
-							<van-rate value="{{item.star}}" count="{{item.star}}" readonly size="12" />
+<scroll-view scroll-y="{{sortNumber==-1}}" style="height:100%" bindscrolltolower="onReachBottom" bindscroll="scrollDown" scroll-top='{{topNum}}'>
+	<view class="hotelList por" bindtap="showSort" data-index="{{sortNumber}}">
+		<view class="hotelOpaCity" wx:if="{{sortNumber!=-1&&isHotelList}}"></view>
+		<block wx:for="{{hotelList}}" wx:key="index" wx:for-item="items">
+			<block wx:for="{{items}}" wx:key="index">
+				<navigator url="/pages/hotelDetail/hotelDetail?id={{item.id}}" hover-class="none" class="hotelDetail flex">
+					<image src="{{item.img_url}}"></image>
+					<view class="hotelMsg flex-y-between">
+						<view class="">
+							<view class="name">
+								<text class="text-more ">{{item.name}}</text>
+								<van-rate value="{{item.star}}" count="{{item.star}}" readonly size="12" />
+							</view>
+							<view class="EnglishName text-more">{{item.name_en}}</view>
+							<view class="label flex flex-wrap">
+								<view class="violet" wx:if="{{item.is_score}}">可积分兑换</view>
+								<!-- <view class="grey" wx:if="{{item.is_treatment==2}}">不含行政待遇</view> -->
+								<view class="orange" wx:if="{{item.is_gift}}">礼包</view>
+								<!-- <view class="{{filter.levelClass(item.level)}}" wx:if="{{item.is_discount}}">{{filter.level(item.level)}}{{item.discount}}折</view> -->
+								<view class="orange" wx:if="{{item.is_continuous}}">连住优惠</view>
+							</view>
 						</view>
-						<view class="EnglishName text-more">{{item.name_en}}</view>
-						<view class="label flex flex-wrap">
-							<view class="violet" wx:if="{{item.is_score}}">可积分兑换</view>
-							<!-- <view class="grey" wx:if="{{item.is_invoice}}">可开发票</view> -->
-							<view class="orange" wx:if="{{item.is_gift}}">礼包</view>
-							<!-- <view class="{{filter.levelClass(item.level)}}" wx:if="{{item.is_discount}}">{{filter.level(item.level)}}{{item.discount}}折</view> -->
-							<view class="orange" wx:if="{{item.is_continuous}}">连住优惠</view>
+						<view class=" distanceAndPdirce">
+							<view>距{{isHotelList?'您':'离'}}{{filter.distance(item.distance)}}</view>
+							<view class="noPriceAndStock" wx:if="{{item.original_price&&!item.is_empty}}">
+								已售罄
+							</view>
+							<view wx:elif="{{item.original_price}}">
+								<text>￥{{item.original_price}}</text>
+								<text>￥{{item.price}}</text>
+							</view>
+							<view class="noPriceAndStock" wx:else>
+								暂无价格
+							</view>
 						</view>
 					</view>
-					<view class=" distanceAndPdirce flex-x-between flex-y-center">
-						<view>距您{{filter.distance(item.distance)}}</view>
-						<view class="noPriceAndStock" wx:if="{{item.original_price&&!item.is_empty}}">
-					      已售罄
-						</view>
-						<view wx:elif="{{item.original_price}}">
-							<text>￥{{item.original_price}}</text>
-							<text>￥{{item.price}}</text>
-						</view>
-						<view class="noPriceAndStock" wx:else>
-              暂无价格
-						</view>
-					</view>
-				</view>
-			</navigator>
+				</navigator>
+			</block>
 		</block>
 	</view>
 </scroll-view>
