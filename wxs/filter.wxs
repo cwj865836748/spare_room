@@ -243,7 +243,7 @@
      case 1:
        return "订单一经确认后不可取消"
      case 2:
-       return "入住前1天18点前免费取消，18点后收取10%违约金取消"
+       return "入住前1天18点前免费取消，入住当天18点前扣除10%房款，逾期不可取消"
    }
  }
  var invoice = function (type) {
@@ -318,14 +318,18 @@
              size: "已确认", font: 'greySize'
            }
            case 3:
+            return {
+              size: "已成交", font: 'greenSize'
+            }
+           case 4:
              return {
                size: "已完成", font: 'greenSize'
              }
-             case 4:
+             case 5:
                return {
                  size: "已取消", font: 'greySize'
                }
-               case 5:
+               case 6:
                  return {
                    size: "已关闭", font: 'greySize'
                  }

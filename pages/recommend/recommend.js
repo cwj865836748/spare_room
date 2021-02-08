@@ -115,8 +115,6 @@ Page({
         swiperList: [...swiperList],
         recommendRecordList: res[2].data.list,
         swiperIndex
-      }, () => {
-        this.getSharePic()
       })
     })
 
@@ -138,14 +136,21 @@ Page({
     }
   },
   shareFriendsSquare(e) {
-    const {
-      show: shareFriendsShow
-    } = e.currentTarget.dataset
+    // const {
+    //   show: shareFriendsShow
+    // } = e.currentTarget.dataset
+    // this.setData({
+    //   shareFriendsShow,
+    //   shareShow: shareFriendsShow && false
+    // })
+    // shareFriendsShow && wx.showTabBar()
+    wx.showTabBar()
     this.setData({
-      shareFriendsShow,
-      shareShow: shareFriendsShow && false
+      shareShow:false
     })
-    shareFriendsShow && wx.showTabBar()
+    wx.navigateTo({
+      url: `/pages/invitePicture/invitePicture?qrcode=${this.data.userMemberInfo.info.qrcode}`,
+    }) 
   },
   bindgetuserinfo(e) {
     let {
@@ -224,7 +229,6 @@ Page({
     })
   },
   getSharePic() {
-
     const {
       swiperList
     } = this.data
@@ -239,11 +243,11 @@ Page({
     ctx.save()
     ctx.setFontSize(23)
     ctx.setFillStyle('#7A21A8')
-    ctx.fillText(`全场${swiperList[3].discount}折`, 476, 100 - 0.5);
-    ctx.fillText(`全场${swiperList[3].discount}折`, 476 - 0.5, 100);
-    ctx.fillText(`全场${swiperList[3].discount}折`, 476,100);
+    ctx.fillText(`转运`, 500, 100 - 0.5);
+    ctx.fillText(`转运`, 500 - 0.5, 100);
+    ctx.fillText(`转运`, 500,100);
 
-    ctx.draw(false, setTimeout(() => {
+    ctx.draw(false, () => {
       wx.canvasToTempFilePath({
         canvasId: 'mycanvass',
         success: (res) => {
@@ -255,11 +259,11 @@ Page({
           console.log(res);
         }
       })
-    }, 1000))
+    })
 
   },
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -271,6 +275,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getSharePic()
     this.getInit()
   },
 

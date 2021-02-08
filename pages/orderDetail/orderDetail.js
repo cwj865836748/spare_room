@@ -32,7 +32,9 @@ Page({
     roomDetail: {},
     defaultCity: null,
     isAppealShow: false,
-    giftContent: ''
+    giftContent: '',
+    userInfo:null,
+    needKnow:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -40,7 +42,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       orderId: options.id,
-      defaultCity: App.globalData.defaultCity
+      defaultCity: App.globalData.defaultCity,
+      userInfo:wx.getStorageSync('user')
     })
     this.depositRequset()
   },
@@ -79,14 +82,25 @@ Page({
     const {
       cancel
     } = e.currentTarget.dataset
-    if (cancel == 1 && this.data.orderDetailInfo.order_status == 1) {
+    //cancel代表取消规则 1 为不可取消
+    if (cancel == 1 && this.data.orderDetailInfo.order_status == 2) {
       return wx.showToast({
         title: '该订单不可取消',
         icon: 'none',
       })
     }
-    type == "confirm" && wx.navigateTo({
-      url: '/pages/cancleOrder/cancleOrder?id=' + this.data.orderId + '&jumpStatus=' + this.data.orderDetailInfo.order_status,
+    type == "confirm"&&this.data.orderDetailInfo.order_status && wx.navigateTo({
+      url: `/pages/cancleOrder/cancleOrder?id=${this.data.orderId}&orderStatus=${this.data.orderDetailInfo.order_status}`
+    })
+    type=="confirm"&&!this.data.orderDetailInfo.order_status&&request({url:api.orderDetail.cancel,data:{
+      order_id:this.data.orderId,
+      cancel_reason:'',
+      cancel_remark:'',
+    }}).then(res=>{
+      if(res.code==200){
+    
+        this.getInit()
+      }
     })
     this.setData({
       isCancleOrderShow: type == "tap" ? true : false
@@ -166,6 +180,16 @@ Page({
     WxParse.wxParse('deposit', 'html', this.data.depositInfo, this, 5)
     this.setData({
       depositShow
+    })
+  },
+  toNeedKnow(e){
+    const {
+      show: needKnow
+    } = e.currentTarget.dataset
+    console.log(this.data.orderDetailInfo.customer_should_know)
+    WxParse.wxParse('customerShouldKnow', 'html', this.data.orderDetailInfo.customer_should_know, this, 5)
+    this.setData({
+      needKnow
     })
   },
   depositRequset() {
@@ -276,6 +300,9 @@ Page({
       }
     }).then(res => {
       if (res.code == 200) {
+        this.setData({
+          'orderDetailInfo.is_urged':1
+        })
         showToast({
           title: '您已催单成功，请耐心等待。'
         })

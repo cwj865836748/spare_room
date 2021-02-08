@@ -25,8 +25,13 @@ Page({
       {
         name: '房间选错/数量不足',
       },
-    ],
-    jumpStatus:''
+      {
+        name: '行程有变',
+      },
+      {
+        name: '其他',
+      }
+    ]
   },
 
   /**
@@ -35,7 +40,25 @@ Page({
   onLoad: function (options) {
      this.setData({
       query:{...this.data.query,order_id:options.id},
-      jumpStatus:options.jumpStatus
+      actions:options.orderStatus==1?[
+        {
+          name: '不要想要了',
+        },
+        {
+          name: '商家长时间未接单',
+        },
+        {
+          name: '房间选错/数量不足',
+        }
+      ]:[
+       
+        {
+          name: '行程有变',
+        },
+        {
+          name: '其他',
+        }
+      ]
      })
   },
   onSelect(e){
@@ -57,9 +80,8 @@ Page({
   },
   closeOrder(){
     const{cancel_reason} = this.data.query
-    const url = Number(this.data.jumpStatus)?api.orderDetail.userCancel:api.orderDetail.cancel
     isNull({content:cancel_reason,title:'取消原因'})&&
-    request({url,data:this.data.query}).then(res=>{
+    request({url:api.orderDetail.userCancel,data:this.data.query}).then(res=>{
       if(res.code==200){
         this.setData({
           cancelShow:true
@@ -68,7 +90,7 @@ Page({
           wx.navigateBack({
             delta:1
           })
-        },1500)
+        },2000)
       }
     })
   },

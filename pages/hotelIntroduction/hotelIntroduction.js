@@ -32,8 +32,11 @@ Page({
       policy=turnImg(policy)
       content=turnImg(content)
       const hotelDetail ={...res[0].data.info,policy,content}
-      const {reservation_description} = res[0].data.info
+      const {reservation_description,description} = res[0].data.info
       reservation_description&&WxParse.wxParse('bookDescription','html',reservation_description,this,5)
+      description&&WxParse.wxParse('hotelDescription','html',description,this,5)
+      policy&&WxParse.wxParse('policy','html',policy,this,5)
+      content&&WxParse.wxParse('picText','html',content,this,5)
         this.setData({
           hotelDetail,
           hotelFacilitiesList:res[1].data.list

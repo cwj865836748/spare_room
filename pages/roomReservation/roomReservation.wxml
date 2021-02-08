@@ -53,7 +53,8 @@
       </view>
       <view class="roomChoose flex-y-center flex-x-between">
         <text class='roomDetailMsg'>房间数</text>
-        <van-stepper value="{{ bookQuery.room_number }}" disable-input data-key="room_number" bind:change="onChange" max="{{roomBook.min_room_number}}" bind:overlimit="overlimit"/>
+        <van-stepper value="{{ bookQuery.room_number }}" disable-input data-key="room_number" bind:change="onChange"
+          max="{{roomBook.min_room_number}}" bind:overlimit="overlimit" />
       </view>
       <view class="roomPerson">
         <view class="roomChoose flex-y-center">
@@ -255,77 +256,79 @@
         <text>费用明细</text>
         <image src="/images/close_gary@2x.png"></image>
       </view>
-      <view class="feeContent">
-        <view class="feeBody">
-          <view class="feeTitle">在线支付</view>
-          <view class="flex-x-between m24">
-            <text class="feeSize1">房费</text>
-            <text class="feeSize1">{{filter.getLiveDate(defaultDate).allDay}}晚,{{bookQuery.room_number}}间 共
-              ￥{{feeDetail.detail.room_rate}}</text>
-          </view>
-          <block wx:for="{{feeDetail.list}}" wx:key="index">
+      <scroll-view scroll-y style="max-height:500px">
+        <view class="feeContent">
+          <view class="feeBody">
+            <view class="feeTitle">在线支付</view>
             <view class="flex-x-between m24">
-              <text class="feeSize2">{{filter.getTime2(item.day_time)}} {{item.breakfast_name}}
-              </text>
-              <text class="feeSize2">{{item.room_number}} x￥{{item.price}}</text>
+              <text class="feeSize1">房费</text>
+              <text class="feeSize1">{{filter.getLiveDate(defaultDate).allDay}}晚,{{bookQuery.room_number}}间 共
+                ￥{{feeDetail.detail.room_rate}}</text>
             </view>
-          </block>
-          <!-- <view class="flex-x-between">
+            <block wx:for="{{feeDetail.list}}" wx:key="index">
+              <view class="flex-x-between m24">
+                <text class="feeSize2">{{filter.getTime2(item.day_time)}} {{item.breakfast_name}}
+                </text>
+                <text class="feeSize2">{{item.room_number}} x￥{{item.price}}</text>
+              </view>
+            </block>
+            <!-- <view class="flex-x-between">
                 <text class="feeSize2">发票税点</text>
                 <text class="feeSize2">￥{{feeDetail.detail.tax}}</text>
               </view> -->
-        </view>
-        <view class="feeBody" wx:if="{{equityList.length}}">
-          <view class="feeTitle">积分兑换</view>
-          <view class="flex-x-between" wx:for="{{equityList}}" wx:key="index">
-            <text class="feeSize2">{{item.name}}</text>
-            <text class="feeSize2">-{{item.score}}积分</text>
           </view>
-        </view>
-        <view class="feeBody" wx:if="{{feeDetail.detail.score}}">
-          <view class="feeTitle">离店可获</view>
-          <view class="flex-x-between">
-            <text class="feeSize2">积分</text>
-            <text class="feeSize2">{{feeDetail.detail.score}}</text>
-          </view>
-        </view>
-        <view class="feeBody" style="padding:22rpx 30rpx 16rpx;">
-          <view class="flex-x-between m30">
-            <text class="feeSize1 fs30">房费</text>
-            <text class="feeSize2 fs30">￥{{feeDetail.detail.room_rate}}</text>
-          </view>
-          <view class="flex-x-between m26" wx:if="{{feeDetail.detail.continuous_discount}}">
-            <text class="feeSize1 fs30">连住优惠</text>
-            <text class="feeSize2 fs30">-￥{{feeDetail.detail.continuous_discount}}</text>
-          </view>
-          <view class="flex-x-between m26" wx:if="{{feeDetail.detail.is_discount}}">
-            <view class="feeSize1 fs30">
-              <text>{{filter.level(feeDetail.detail.level)}}</text>
-              <text class='feeSize3'>{{feeDetail.detail.discount}}折</text>
+          <view class="feeBody" wx:if="{{equityList.length}}">
+            <view class="feeTitle">积分兑换</view>
+            <view class="flex-x-between" wx:for="{{equityList}}" wx:key="index">
+              <text class="feeSize2">{{item.name}}</text>
+              <text class="feeSize2">-{{item.score}}积分</text>
             </view>
-            <text class="feeSize2 fs30">-￥{{feeDetail.detail.vip_discount}}</text>
           </view>
-          <view class="flex-x-between m26" wx:if="{{feeDetail.detail.coupon_discount}}">
-            <text class="feeSize1 fs30">优惠券</text>
-            <text class="feeSize2 fs30">-￥{{feeDetail.detail.coupon_discount}}</text>
+          <view class="feeBody" wx:if="{{feeDetail.detail.score}}">
+            <view class="feeTitle">离店可获</view>
+            <view class="flex-x-between">
+              <text class="feeSize2">积分</text>
+              <text class="feeSize2">{{feeDetail.detail.score}}</text>
+            </view>
           </view>
-          <view class="flex-x-between m30">
-            <view class="feeSize1 fs30 flex-y-center" bindtap="toDepositShow" data-show="{{true}}">押金
+          <view class="feeBody" style="padding:22rpx 30rpx 16rpx;">
+            <view class="flex-x-between m30">
+              <text class="feeSize1 fs30">房费</text>
+              <text class="feeSize2 fs30">￥{{feeDetail.detail.room_rate}}</text>
+            </view>
+            <view class="flex-x-between m26" wx:if="{{feeDetail.detail.continuous_discount}}">
+              <text class="feeSize1 fs30">连住优惠</text>
+              <text class="feeSize2 fs30">-￥{{feeDetail.detail.continuous_discount}}</text>
+            </view>
+            <view class="flex-x-between m26" wx:if="{{feeDetail.detail.is_discount}}">
+              <view class="feeSize1 fs30">
+                <text>{{filter.level(feeDetail.detail.level)}}</text>
+                <text class='feeSize3'>{{feeDetail.detail.discount}}折</text>
+              </view>
+              <text class="feeSize2 fs30">-￥{{feeDetail.detail.vip_discount}}</text>
+            </view>
+            <view class="flex-x-between m26" wx:if="{{feeDetail.detail.coupon_discount}}">
+              <text class="feeSize1 fs30">优惠券</text>
+              <text class="feeSize2 fs30">-￥{{feeDetail.detail.coupon_discount}}</text>
+            </view>
+            <view class="flex-x-between m30">
+              <view class="feeSize1 fs30 flex-y-center" bindtap="toDepositShow" data-show="{{true}}">押金
 
-              <image src="/images/hotel_detail_doubt@2x.png" class="feeImage"></image>
+                <image src="/images/hotel_detail_doubt@2x.png" class="feeImage"></image>
+              </view>
+              <text class="feeSize2 fs30">￥{{feeDetail.detail.deposit}}</text>
             </view>
-            <text class="feeSize2 fs30">￥{{feeDetail.detail.deposit}}</text>
-          </view>
-          <view
-            class="flex-x-between feeTotal {{!feeDetail.detail.coupon_discount&&!feeDetail.detail.is_discount&&!feeDetail.detail.continuous_discount?borderNo:''}}">
-            <text class="feeSize2">总计</text>
-            <view class="feeSize4">
-              <text>￥</text>
-              <text class="fs40">{{filter.toFix(feeDetail.detail.pay_money)}}</text>
+            <view
+              class="flex-x-between feeTotal {{!feeDetail.detail.coupon_discount&&!feeDetail.detail.is_discount&&!feeDetail.detail.continuous_discount?borderNo:''}}">
+              <text class="feeSize2">总计</text>
+              <view class="feeSize4">
+                <text>￥</text>
+                <text class="fs40">{{filter.toFix(feeDetail.detail.pay_money)}}</text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
+      </scroll-view>
     </view>
   </van-action-sheet>
   <!--支付-->

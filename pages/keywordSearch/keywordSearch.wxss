@@ -20,6 +20,28 @@
  letter-spacing: 1rpx;
  font-size: 12px;
  font-weight: bold;
+ position: relative;
+}
+.keyWord>.search>.select {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 8rpx;
+    box-shadow: 0rpx 6rpx 12rpx 0rpx rgba(0, 0, 0, 0.09);
+    position: absolute;
+    top: 36px;
+    left: 0;
+    padding: 24rpx 34rpx 28rpx 38rpx;
+    font-size: 26rpx;
+    color: #333333;
+    letter-spacing: 2rpx;
+    overflow: auto;
+    height: 280rpx;
+}
+.keyWord>.search>.select>view {
+  margin-bottom: 34rpx;
+}
+.keyWord>.search>.select>view:last-child {
+  margin-bottom: 0rpx;
 }
  .keyWord>view>image {
   height: 24px;

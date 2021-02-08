@@ -21,7 +21,8 @@ Page({
     isCancleOrderShow:false,
     isdeleteOrderShow:false,
     depositMoney:0,
-    triggered: false
+    triggered: false,
+    userInfo:null
   },
   /**
    * 生命周期函数--监听页面加载
@@ -34,7 +35,8 @@ Page({
     request({url:api.orderDetail.orderLists,data}).then(res=>{
       this.setData({
         orderList:[...orderList,...res.data.rows],
-        total:res.data.total
+        total:res.data.total,
+        userInfo:wx.getStorageSync('user')
       })
       this.isNoData()
     })
@@ -58,15 +60,29 @@ Page({
   },
   cancleOrder(e){
     const {type} = e
+    //cancel代表取消规则 1 为不可取消
     const {id:orderId,status:orderStatus,cancel} = e.currentTarget.dataset
-    if(cancel==1&&orderStatus==1){
+    if(cancel==1&&orderStatus==2){
       return wx.showToast({
         title: '该订单不可取消',
         icon: 'none',
       })
     }
-    type=="confirm"&&wx.navigateTo({
-      url: '/pages/cancleOrder/cancleOrder?id='+this.data.orderId+'&jumpStatus='+this.data.orderStatus,
+    type=="confirm"&&this.data.orderStatus&&wx.navigateTo({
+      url: `/pages/cancleOrder/cancleOrder?id=${this.data.orderId}&orderStatus=${this.data.orderStatus}`,
+    })
+    type=="confirm"&&!this.data.orderStatus&&request({url:api.orderDetail.cancel,data:{
+      order_id:this.data.orderId,
+      cancel_reason:'',
+      cancel_remark:'',
+    }}).then(res=>{
+      if(res.code==200){
+        this.setData({
+          query:{...this.data.query,page:1},
+          orderList:[]
+        })
+        this.getInit()
+      }
     })
     this.setData({
       isCancleOrderShow:type=="tap"?true:false,
@@ -95,15 +111,8 @@ Page({
       orderId:type=="tap"&&orderId
     })
   },
-  toSeebackMoney(e){
-    const {id} = e.currentTarget.dataset
-    wx.navigateTo({
-      url: `/pages/orderDetail/orderDetail?id=${id}`,
-    })
-  },
   appealResult(e){
     const {status,id:orderId,depositMoney,index} = e.currentTarget.dataset
-    console.log(index)
     this.setData({
       orderId,depositMoney,
       [`orderList[${index}].is_read`]:0
@@ -139,9 +148,12 @@ Page({
     }, 3000)
   },
   toReminders(e){
-    const {id:order_id} = e.currentTarget.dataset
+    const {id:order_id,index} = e.currentTarget.dataset
    request({url:api.order.urged,data:{order_id}}).then(res=>{
       if(res.code==200){
+        this.setData({
+          [`orderList[${index}].is_urged`]:1
+        })
         wx.showToast({
           title: '您已催单成功，请耐心等待。',
           icon: 'none',

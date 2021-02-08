@@ -205,3 +205,6 @@ view{
 .wxParse-figure {
   overflow: hidden;
 }
+.wxParse-ul {
+    max-width: 100%;
+}

@@ -21,6 +21,7 @@ Page({
        this.setData({
         mine:res.data.info
        })
+       wx.setStorageSync('user', res.data.info)
     })
   },
   loginOut(){

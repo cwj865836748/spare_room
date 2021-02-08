@@ -24,7 +24,8 @@ Component({
     x: 0,
     y: 0,
     windowWidth:null,
-    windowHeight:null
+    windowHeight:null,
+    userInfo:null
   },
   attached(){
     getSystemInfo().then(res=>{
@@ -32,7 +33,8 @@ Component({
       const x = windowWidth-15
       const y = windowHeight-133
       this.setData({
-        windowWidth,windowHeight,x,y
+        windowWidth,windowHeight,x,y,
+        userInfo:wx.getStorageSync('user')
       })
     })
   },

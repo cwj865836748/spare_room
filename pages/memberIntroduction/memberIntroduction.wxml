@@ -2,7 +2,6 @@
 <import src="../../wxParse/wxParse.wxml"/>
 <navbar title="会员等级介绍">
   <view class="memberContent">
-  <!-- <rich-text nodes="{{dataInfo}}"></rich-text> -->
 <template is="wxParse" data="{{wxParseData:rules.nodes}}"/>
 </view>
 	<serviceCustomer/>

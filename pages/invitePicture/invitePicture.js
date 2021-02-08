@@ -67,9 +67,9 @@ Page({
           ctx.save()
           ctx.setFontSize(14)
           ctx.setFillStyle('#7A21A8')
-          ctx.fillText(`全场${discount}折`, 272, 232 - 0.5);
-          ctx.fillText(`全场${discount}折`, 272 - 0.5, 232);
-          ctx.fillText(`全场${discount}折`, 272, 232);
+          ctx.fillText(`转运`, 290, 232 - 0.5);
+          ctx.fillText(`转运`, 290 - 0.5, 232);
+          ctx.fillText(`转运`, 290, 232);
           //二维码
           ctx.save()
           ctx.drawImage(res.path, 113, 370, 146, 146);
@@ -148,7 +148,7 @@ Page({
     var prevPage = pages[pages.length - 2]; 
     const userId =wx.getStorageSync('userId')?wx.getStorageSync('userId'):'-1'
     return {
-      title: '嘿！送您一张金卡，订高端酒店非常划算，快领取。',
+      title: '嘿！朋友，送您一张转运黄金卡，快快来领取吧！',
       path:`/pages/index/index?parentId=${userId}`,
       imageUrl:prevPage.data.imageUrl 
     }

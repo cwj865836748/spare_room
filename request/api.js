@@ -79,7 +79,8 @@
     hotelFacilities:'/api/hotel/hotel-facilities',
     near:'/api/hotel/near',
     room:'/api/hotel/room',
-    roomFacilities:'/api/hotel/room-facilities'
+    roomFacilities:'/api/hotel/room-facilities',
+    keyWordSearch:'/api/hotel/associate'
    },
    order:{
     reservation:'/api/hotel/reservation',  

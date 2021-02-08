@@ -9,7 +9,7 @@
 	<view class="por">
 		<view class="cardHead flex-y-center {{filter.getCardHead(swiperIndex)}}" wx:if="{{isShowHead}}">
 			<view class="zeng flex-xy-center">赠</view>
-			<view>赠送好友金卡,您可快速升级</view>
+			<view>拜年新姿势，赠给好友转运黄金卡</view>
 			<view class="flex-grow-1 flex-y-center goZeng flex-x-bottom" catchtap="openOrCancelShare" data-show="{{true}}">
 				<text>去赠送</text>
 				<van-icon name="arrow" size="13px" color="#FF8C38" />

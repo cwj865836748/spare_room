@@ -79,14 +79,16 @@
 .orderShow>.orderTitle {
   color: #333333;
   letter-spacing: 1rpx;
-  margin-bottom: 30rpx;
+  /* margin-bottom: 30rpx; */
 }
 
 .orderShow>.orderTitle>view {
   margin-left: 20rpx;
   color: #c12306;
 }
-
+.orderShow>.orderBtn {
+  margin-top: 24rpx;
+}
 .orderShow>.orderBtn>.orderBtn_pay {
   width: 336rpx;
   height: 72rpx;
@@ -141,9 +143,11 @@
   color: #7a0dcb;
   letter-spacing: 1rpx;
   font-size: 28rpx;
-  margin-right: 24rpx;
 }
-
+.orderShow>.orderBtn>.evaluationBtn>button {
+  color: #7a0dcb;
+  font-size: 28rpx;
+}
 .orderShow>.orderBtn>.appealBtn {
   width: 188rpx;
   height: 72rpx;
@@ -178,8 +182,7 @@
   border-radius: 50%;
 }
 
-.orderShow>.orderBtn>view,
-navigator {
+.orderShow>.orderBtn>view{
   margin-right: 24rpx;
 }
 
@@ -187,7 +190,7 @@ navigator {
   margin-right: 0;
 }
 
-.orderShow>.orderBtn>view:nth-child(4) {
+.orderShow>.orderBtn>view:nth-child(n+4) {
   margin-top: 24rpx;
 }
 
@@ -589,7 +592,7 @@ navigator {
 .cancelRule>.rule {
   width: 388rpx;
   text-align: left;
-  font-size: 24rpx;
+  font-size: 22rpx;
   position: relative;
 
 }

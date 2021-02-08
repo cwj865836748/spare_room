@@ -141,9 +141,9 @@
 											<view class="grey detailIcon flex-xy-center" wx:if="{{items.channel==2}}">特殊房源</view>
 											<!-- <view class="{{filter.levelClass(item.level)}} detailIcon flex-xy-center"
 												wx:if="{{items.is_discount}}">{{filter.level(item.level)}}会员{{item.discount}}折</view> -->
-											<view class="{{item.cancel_type==1?'grey':'greenIcon'}} detailIcon flex-xy-center"
-												wx:if="{{item.cancel_type!=3}}">
-												{{filter.cancelRule(item.cancel_type)}}</view>
+											<view class="{{items.cancel_type==1?'grey':'greenIcon'}} detailIcon flex-xy-center"
+												wx:if="{{items.cancel_type!=3}}">
+												{{filter.cancelRule(items.cancel_type)}}</view>
 											<view class="orange detailIcon flex-xy-center" wx:if="{{items.is_gift}}">礼包</view>
 											<view class="orange detailIcon flex-xy-center" wx:if="{{items.is_coupon}}">优惠券</view>
 										</view>

@@ -20,7 +20,10 @@ Page({
     groupList: [],
     groupListIsLong: false,
     isGroupListIsLong: false,
-    defaultKeyWords: ''
+    defaultKeyWords: '',
+    selectListShow: false,
+    loadingShow: false,
+    selectList: []
   },
   /**
    * 生命周期函数--监听页面加载
@@ -110,19 +113,59 @@ Page({
   },
   onChange(e) {
     this.setData({
-      defaultKeyWords: e.detail
+      defaultKeyWords: e.detail,
+      loadingShow: true,
+      selectListShow: true
+    })
+    this.throttle(this.getHotelList, null, 500, e.detail)
+  },
+  // 节流
+  throttle(fn, context, delay, text) {
+    clearTimeout(fn.timeoutId);
+    fn.timeoutId = setTimeout(() => {
+      fn.call(context, text, this);
+    }, delay);
+  },
+  getHotelList(name, _this) {
+    request({
+      url: api.hotel.keyWordSearch,
+      header: {
+        cityid: App.globalData.defaultCity.id
+      },
+      data: {
+        name
+      }
+    }).then(res => {
+      _this.setData({
+        loadingShow: false,
+        selectList: res.data.list
+      })
     })
   },
+  hiddenHotelList() {
+    clearTimeout(this.getHotelList.timeoutId);
+    this.setData({
+      loadingShow: false,
+      selectListShow: false
+    })
+  },
+  doSelect(e) {
+     const {name} =e.currentTarget.dataset
+     this.setData({
+      defaultKeyWords:name
+     })
+     this.confirm()
+  },
   confirm(e) {
-    if (!e.detail) {
+    if (!this.data.defaultKeyWords) {
       return
     }
-    App.globalData.defaultKeyWords = e.detail
-    this.pushHistory(e.detail)
-     //上一页是酒店列表进行搜索
-     let p = getCurrentPages();
-     let pages = p[p.length - 2]
-     pages.route == 'pages/hotelList/hotelList' && pages.keyWordSeach()
+    App.globalData.defaultKeyWords = this.data.defaultKeyWords
+    this.pushHistory(this.data.defaultKeyWords)
+    //上一页是酒店列表进行搜索
+    let p = getCurrentPages();
+    let pages = p[p.length - 2]
+    pages.route == 'pages/hotelList/hotelList' && pages.keyWordSeach()
     wx.navigateBack({
       delta: 1
     })

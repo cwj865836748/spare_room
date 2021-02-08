@@ -5,7 +5,7 @@
 		 <view class="avatr">
 			 <open-data type="userAvatarUrl"></open-data>
 		 </view>
-		 <view class="disCount">全场{{discount}}折</view>
+		 <view class="disCount">转运</view>
 		 <image src="{{qrcode}}" class="codePic"></image>
 	 </view>
 	<view class="recommendInvite flex">
