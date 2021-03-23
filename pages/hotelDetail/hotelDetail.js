@@ -521,7 +521,7 @@ Page({
       shareShow: false
     })
     return {
-      title: `"这旅"-高端酒店，低价预定。`,
+      title: this.data.hotelDetail.name,
       path: `/pages/hotelDetail/hotelDetail?id=${this.data.hotelId}&isHotelInvite=true&isInvite=true`,
       imageUrl: this.data.slideshowList[0],
 

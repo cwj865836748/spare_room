@@ -62,17 +62,20 @@ Page({
       swiperIndex: e.detail.current
     })
   },
-  bindtransition(e) {
-    this.setData({
-      isShowHead: false
-    })
-  },
-  bindanimationfinish(e) {
-
-    this.setData({
-      isShowHead: true
-    })
-  },
+  // bindtransition(e) {
+  //   console.log(321)
+  //   if(!this.data.isShowHead) {
+  //     return
+  //   }
+  //   this.setData({
+  //     isShowHead: false
+  //   })
+  // },
+  // bindanimationfinish(e) {
+  //   this.setData({
+  //     isShowHead: true
+  //   })
+  // },
   openOrCancelShare(e) {
     const {
       show: shareShow

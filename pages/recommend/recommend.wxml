@@ -17,7 +17,7 @@
 		</view>
 
 		<swiper previous-margin="32rpx" next-margin="28rpx" current="{{swiperIndex}}" bindchange="bindchange"
-			class="mySwiper" bindtransition="bindtransition" bindanimationfinish="bindanimationfinish">
+			class="mySwiper">
 			<block wx:for="{{swiperList}}" wx:key="index">
 				<swiper-item>
 					<view class="cardMember">
